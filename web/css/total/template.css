@@ -1,0 +1,111 @@
+body, textarea{
+    color: #333;
+    font: 14px/1.5 'Helvetica Neue', Arial, sans-serif;
+    background: #f0f0f0;
+}
+
+a:focus{outline:1px dotted}
+
+hr{
+    border:0 #ccc solid;
+    border-top-width: 1px;
+    clear: both;
+    height: 0;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+    width: auto !important;
+    color: #fff;
+    font-weight: bold;
+    background: #444;
+    border: 1px solid #ddd;
+    padding: 8px;
+    /*border-bottom-right-radius: 5px;*/
+    /*border-top-left-radius: 5px;*/
+}
+
+input[type="text"] {
+    width: 270px;
+    border: 1px solid #ddd;
+    padding: 4px;
+    /*border-bottom-right-radius: 5px;*/
+    /*border-top-left-radius: 5px;*/
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+.red {
+    color: red;
+}
+
+.bg-green {
+    background: green;
+}
+
+#container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+    margin-top: 10px;
+}
+
+#content-wrp {
+    padding: 5px 10px 10px;
+    /*background: #fff url(../images/gradient.png) repeat-x 0 -12px;*/
+    background: #fff;
+}
+
+.black-overlay{
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index:1001;
+    -moz-opacity: 0.7;
+    opacity:.70;
+    filter: alpha(opacity=70);
+}
+
+#content {
+    position: relative;
+}
+
+#content h2 {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+/*message*/
+.message-wrp {
+    margin: 10px 0;
+}
+
+.message {
+    color: #fff;
+    padding: 4px 8px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-weight: bold;
+}
+
+.error-message {
+    background: #901830;
+}
+
+.success-message {
+    background: green;
+}
+
+
+
+

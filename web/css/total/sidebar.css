@@ -1,0 +1,17 @@
+.sidebar-menu {
+    border: 1px solid #eee;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.sidebar-menu h2 {
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    text-align: center;
+    outline: 0;
+    background: url("../images/box-h2.png") repeat-x bottom center #fff;
+}
+
+.sidebar-menu ul {
+    margin: 10px 10px 10px 25px;
+}

@@ -1,0 +1,15 @@
+#menu-category-wrp {
+    position: absolute;
+    top: 90px;
+    left: -200px;
+    /*background: #fff;*/
+    /*border: 1px solid #000;*/
+}
+
+#menu-category-wrp ul li{
+    margin-top: 3px;
+}
+
+#menu-category-wrp ul li a{
+    color: #000;
+}

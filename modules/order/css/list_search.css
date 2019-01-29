@@ -1,0 +1,14 @@
+#form-search-wrp {
+    position: absolute;
+    top: 10px;
+    left: 500px;
+}
+
+#form-search-wrp input[type="submit"] {
+    padding: 4px 10px 4px 10px;
+}
+
+#form-search-wrp input[type="text"] {
+    width: 200px;
+    margin-left: 15px;
+}
