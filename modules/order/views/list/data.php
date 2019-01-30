@@ -1,4 +1,4 @@
-<table class="list-orders" width="940">
+<table class="list-orders" width="940" style="display: none;">
     <tr>
         <th width="40">
             <input type="checkbox" disabled>

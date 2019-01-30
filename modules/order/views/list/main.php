@@ -7,6 +7,7 @@ require_once ('./modules/order/models/order_state.php');
 
 <!-- css files -->
 <link rel="stylesheet" href="/modules/order/css/list.css">
+<link rel="stylesheet" href="/modules/order/css/form.css">
 
 <div id="content">
     <!-- filters of orders -->
@@ -33,4 +34,6 @@ require_once ('./modules/order/models/order_state.php');
 <script src="/modules/order/js/order_activate.js"></script>
 <script src="/modules/order/js/order_to_work.js"></script>
 <script src="/modules/order/js/show_order_add_form.js"></script>
+<script src="/modules/order/js/order_filters.js"></script>
+<script src="/web/js/datepicker.js"></script>
 

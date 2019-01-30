@@ -5,7 +5,7 @@
 <nav id="main-menu">
     <ul>
         <!-- orders -->
-		<li><a href="/order/list">Заказы</a></li> -->
+		<li><a href="/order/list">Заказы</a></li>
 		
         <!--<li class="drop">
             <a href="#">Заказы</a>

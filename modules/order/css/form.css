@@ -1,93 +1,65 @@
 /*form add*/
-#form-add-wrp {
+#form-order-add-wrp {
     margin-bottom: 15px;
     padding-bottom: 10px;
     position: relative;
     border-bottom: 1px solid #ddd;
 }
 
-.form-add-first-row {
+#form-order-add-wrp h2 {
+    text-align: center;
+}
+
+#form-order-add-wrp input[type="text"] {
+    border-color: #000000;
+    letter-spacing: 1px;
+    font-size: 16px;
+    height: 20px;
+}
+
+.form-box {
     position: relative;
     padding: 10px;
     border: 1px solid #ddd;
 }
 
-.form-number-wrp input{
+#form-order-symbol-wrp input{
     width: 130px;
-    height: 20px;
-    border-color: #000000;
-    letter-spacing: 1px;
-    font-size: 16px;
 }
 
-.form-type-wrp {
+#form-order-type-wrp {
     position: absolute;
     top: 10px;
-    left: 270px;
+    left: 340px;
 }
 
-.form-date-wrp {
-    position: absolute;
-    top: 10px;
-    left: 450px;
-}
-
-.form-state-wrp {
-    position: absolute;
-    top: 10px;
-    left: 710px;
-}
-
-.form-state-wrp select {
-    font-size: 16px;
+#form-order-type-wrp select {
     width: 140px;
-    height: 28px;
+    height: 30px;
 }
 
-.form-type-wrp select {
-    font-size: 16px;
-    width: 80px;
-    height: 28px;
+#form-order-date-wrp {
+    position: absolute;
+    top: 10px;
+    left: 610px;
 }
 
-.form-date-wrp input {
-    width: 100px;
-    height: 20px;
-    border-color: #000000;
-    letter-spacing: 1px;
-    font-size: 16px;
+#form-order-date-wrp input {
+    width: 140px;
 }
 
-/* form add two row */
-#form-add-two-row, #form-add-three-row, #form-add-four-row {
-    position: relative;
+#form-order-description-wrp, #form-note-wrp {
     padding: 10px;
     border: 1px solid #ddd;
-    margin: 10px 0;
+    margin-top: 15px;
+}
+#form-order-description-wrp input {
+    width: 790px;
 }
 
-.form-count-packet-wrp input{
-    width: 70px;
-    height: 20px;
-    border-color: #000000;
-    letter-spacing: 1px;
-    font-size: 16px;
-}
-
-.form-type-packet-wrp {
-    position: absolute;
-    top: 10px;
-    left: 250px;
-}
-
-.form-type-packet-wrp select {
-    font-size: 16px;
-    width: 150px;
-    height: 28px;
-}
-
-#form-add-three-row hr {
-    margin: 5px 0 10px;
+.button-box {
+    padding: 10px;
+    margin-top: 15px;
 }
 
 textarea[name="note"] {
@@ -95,37 +67,10 @@ textarea[name="note"] {
     height: 50px;
 }
 
-textarea[name="letter"] {
-    width: 725px;
-    height: 60px;
+#form-order-add-wrp input[type="submit"] {
+    margin-left: 290px;
 }
 
-#order-form-update-wrp textarea[name="letter"], #order-form-update-wrp textarea[name="note"] {
-    width: 915px;
-    height: 60px;
-}
-
-#parse-letter {
-    margin-left: 10px;
-    color: #000;
-}
-
-#form-add-wrp input[type="submit"] {
-    margin-left: 425px;
-}
-
-#form-add-wrp h2 span {
-    font-size: 13px;
-    margin-left: 15px;
-    color: #000;
-    text-decoration: underline;
-    font-weight: normal;
-}
-
-#form-add-wrp h2 span:hover {
-    cursor: pointer;
-}
-
-input[name="update"] {
-    margin-left: 400px;
+#form-order-add-wrp input[type="button"] {
+    margin-left: 130px;
 }

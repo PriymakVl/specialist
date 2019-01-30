@@ -2,51 +2,10 @@
     margin-left: 15px;
 }
 
-#filter-state, #filter-type {
+#order-filter-state {
     font-size: 16px;
-    width: 130px;
+    width: 180px;
     height: 28px;
-}
-
-.form-progon-wrp {
-    position: absolute;
-    top: 50px;
-    left: 210px;
-    width: 500px;
-    background: #fff;
-    z-index: 2000;
-    padding: 0 10px 0 10px;
-}
-
-.form-progon-wrp table {
-    width: 500px;
-}
-
-.form-progon-wrp table input[type="text"]{
-    width: 100px;
-}
-
-.form-progon-wrp input[type="submit"] {
-    margin: 30px 0 15px 45px;
-}
-
-.form-progon-wrp #not-progon-wrp {
-    position: absolute;
-    top: 5px;
-    right: 85px;
-}
-
-.progon-close, #progon-add {
-    margin-left: 40px;
-    cursor: pointer;
-    width: auto !important;
-    color: #fff;
-    font-weight: bold;
-    background: #444;
-    border: 1px solid #ddd;
-    padding: 8px;
-    border-bottom-right-radius: 5px;
-    border-top-left-radius: 5px;
 }
 
 #order-filters-wrp {

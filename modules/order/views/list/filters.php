@@ -6,7 +6,7 @@
     $selected_all = ($state == OrderState::ALL) ? 'selected' : '';
 ?>
 
-<div id="order-filters-wrp">
+<div id="order-filters-wrp" style="display: none;">
     <span>Заказы:</span>
     <select id="order-filter-state">
         <option value="<?=OrderState::REGISTERED?>" <?=$selected_reg?>>Зарегистрированые</option>
