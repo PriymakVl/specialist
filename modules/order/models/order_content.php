@@ -24,38 +24,22 @@ class OrderContent extends OrderBase {
 	private static function createArrayContent($items)
     {
         $content = [];
-        if (empty($items)) return $products;
+        if (empty($items)) return $content;
         foreach ($items as $item) {
             if ($item->type == self::TYPE_SPECIFIC) $product = SpecificationStatic::getParentProduct($item->id_item);
             else $product = new Product($item->id_item);
             $product->orderQty = $item->quantity;
             $content[] = $product;
         }
-        return $products;
+        return $content;
     }
 	
-	public static function getProducts($id_order)
-	{
-		$content = self::get($id_order);
-		$products = self::getProductsFromContent($content);
-	}
 	
-	private static function getProductsFromContent($content)
-	{
-		$products_specif = getProductsFromSpecification($content);
-		$products = self::getProduct
-	}
 	
-	private static function getProductsFromSpecification($content)
-	{
-		$products = [];
-		foreach ($content as $product) {
-			if ($product->type == self::TYPE_PRODUCT) continue;
-			$products = SpecificationContent::getAllByIdSpecification($product->id_specif);
-			$products = self::countSpecificationProducts($products);
-		}
-		return $arr;
-	}
+	
+
+	
+	
 
 	
 	

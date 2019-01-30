@@ -23,10 +23,10 @@ class Controller_Terminal extends Controller {
 	
 	public function action_products()
     {
-		$id_order = Param::get('id_order');
-		debug($id_order);
+		$order = new Order(Param::get('id_order'));
+		$products = OrderContent::getProducts($order->id);
         //if (isset($_COOKIE['username'])) $this->redirect('order/list');
-        $this->render('terminal/products');
+        $this->render('terminal/products', compact('products', 'order'));
     }
 
     public function action_login()

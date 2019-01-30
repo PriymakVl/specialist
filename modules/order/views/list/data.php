@@ -4,8 +4,8 @@
             <input type="checkbox" disabled>
         </th>
         <th width="120">Обозначение</th>
-        <th width="80">Дата</th>
         <th width="450">Описание</th>
+		<th width="120">Дата выполн.</th>
         <th>Примечание</th>
     </tr>
     <? if ($orders): ?>
@@ -17,8 +17,8 @@
                 <td>
                     <a href="/order?id_order=<?=$order->id?>"><?=$order->symbol?></a>
                 </td>
-                <td><?=$order->date_exec?></td>
                 <td class="left"><?=$order->description?></td>
+				<td><?=$order->date_exec?></td>
                 <td class="left"><?=$order->note?></td>
             </tr>
         <? endforeach; ?>

@@ -1,69 +1,43 @@
-<div id="form-add-wrp" style="display: none;">
-    <h2>Форма для добавления заказа <span id="hide-form-add">скрыть</span></h2>
+<div id="form-order-add-wrp" style="display: none;">
+    <h2>Форма для добавления заказа</h2><span id="hide-form-add">скрыть</span>
     <form action="/order/add" method="post">
         <!-- first row -->
         <div class="form-add-first-row">
-            <!-- number -->
-            <div class="form-number-wrp">
-                <label>Номер заказа:</label>
-                <input type="text" name="number">
+            <!-- order symbol-->
+            <div class="form-order-symbol-wrp">
+                <label>Обозначение заказа:</label>
+                <input type="text" name="symbol">
+            </div>
+
+            <!-- order description -->
+            <div class="form-order-description-wrp">
+                <label>Описание заказа:</label>
+                <input type="text" name="description">
             </div>
 
             <!-- type orders-->
-            <div class="form-type-wrp">
+            <div class="form-order-type-wrp">
                 <label>Тип заказа:</label>
                 <select name="type">
-                    <option value="<?=Order::TYPE_PACKET?>">Пакет</option>
-                    <option value="<?=Order::TYPE_GLASS?>">Стекло</option>
-                    <option value="<?=Order::TYPE_TERM?>">Закалка</option>
+                    <option value="<?=Order::TYPE_CYLINDER?>">Пневмоцилиндры</option>
+                    <option value="<?=Order::TYPE_CAR_NUMBER?>">Автономера</option>
                 </select>
             </div>
 
-            <!-- date -->
-            <div class="form-date-wrp">
+            <!-- date execution-->
+            <div class="form-order-date-wrp">
                 <label>Срок выполнения:</label>
                 <input type="text" name="date_exec" id="datepicker">
             </div>
         </div>
 
-        <!-- two row-->
-        <div id="form-add-two-row">
-            <!-- count packets-->
-            <div class="form-count-packet-wrp">
-                <label>Количество пакетов:</label>
-                <input  type="text" name="count_pack">
-            </div>
-
-            <!-- type packets-->
-            <div class="form-type-packet-wrp">
-                <label>Тип пакета:</label>
-                <select name="type-packet">
-                    <option value="">Без обработки</option>
-                    <option value="">С обработкой</option>
-                </select>
-            </div>
-        </div>
-
         <!-- three row-->
-        <div id="form-add-three-row">
-            <label>чертеж:</label>
-            <input type="checkbox" id="note-dwg">&nbsp;&nbsp;&nbsp;&nbsp;
-            <label>ремонт:</label>
-            <input type="checkbox" id="note-repair">&nbsp;&nbsp;&nbsp;&nbsp;
-            <hr>
+        <div id="form-note-wrp">
             <!-- note -->
             <label>Примечание:</label>
             <textarea name="note"></textarea>
         </div>
 
-        <!-- four row-->
-        <div id="form-add-four-row">
-            <!-- text of letter -->
-            <label>Текст письма:</label>
-            <textarea name="letter" id="text-letter"></textarea>
-            <a href="#" id="parse-letter">Обработать</a>
-        </div>
-
-        <input type="submit" value="Добавить заказ" id="add-order" name="save">
+        <input type="submit" value="Сохранить" id="add-order" name="save">
     </form>
 </div>

@@ -24,9 +24,13 @@ require_once ('./modules/order/models/order_state.php');
     <!-- order list menu -->
     <? include_once('menu.php'); ?>
 
+    <!-- order form add -->
+    <? include_once('./modules/order/views/form/add.php'); ?>
+
 </div><!-- id content -->
 
 <!-- js files -->
 <script src="/modules/order/js/order_activate.js"></script>
 <script src="/modules/order/js/order_to_work.js"></script>
+<script src="/modules/order/js/show_order_add_form.js"></script>
 

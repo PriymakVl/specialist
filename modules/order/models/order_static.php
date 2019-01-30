@@ -3,13 +3,6 @@ require_once('order_base.php');
 
 class OrderStatic extends OrderBase {
 
-//    public static function getByNumber($number)
-//    {
-//        if (empty($number)) return false;
-//        $sql = 'SELECT * FROM `orders` WHERE `number` = ? AND `status` = '.parent::STATUS_ACTIVE;
-//        return self::perform($sql, [$number])->fetch();
-//    }
-
 	public static function getList($params)
 	{
 	    $where = self::bildWhere($params);
@@ -22,23 +15,31 @@ class OrderStatic extends OrderBase {
     {
         return Helper::createArrayOfObject($ids, 'Order');
     }
+	
+	public static function getBySymbol($symbol)
+	{
+	   if (empty($symbol)) return false;
+	   $sql = 'SELECT * FROM `orders` WHERE `symbol` = :symbol AND `status` = :status';
+	   $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
+	   return self::perform($sql, $params)->fetch();
+	}
 
     public static function add($params)
     {
-        $fields = 'number, date_exec, count_pack, letter, type, state, note, date_state';
-        $values = ':number, :date_exec, :count_pack, :letter, :type, :state, :note, :date_state';
-        $sql = 'INSERT INTO orders ('.$fields.') VALUES ('.$values.')';
+        $fields = 'symbol, description, date_exec, type, state, note';
+        $values = ':symbol, :description, :date_exec, :type, :state, :note';
+        $sql = 'INSERT INTO `orders` ('.$fields.') VALUES ('.$values.')';
         self::perform($sql, $params);
         $order_id = parent::getLastId();
-        OrderState::set($order_id, OrderState::PREPARATION);
+        //OrderState::set($order_id, OrderState::PREPARATION);
         return $order_id;
     }
 
-    public static function searchByNumber($number)
+/*     public static function searchByNumber($number)
     {
         $sql = 'SELECT * FROM `orders` WHERE `number` like concat("%", :number, "%") AND `status` = '.self::STATUS_ACTIVE;
         return self::perform($sql, ['number' => $number])->fetchAll();
-    }
+    } */
     
 	
 }

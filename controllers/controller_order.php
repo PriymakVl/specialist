@@ -52,25 +52,26 @@ class Controller_Order extends Controller {
 		$order->toWork();
 		$this->redirectPrevious();
 	}
+	
+	public function action_add()
+    {
+		$params = Param::forAddOrder();
+        $order = Order::getBySymbol($params['symbol']);
+        if ($order) {
+            //Message::setSession('error', 'order', 'already_exist');
+            $this->redirect('order/index?order_id='.$order->id);
+        }
+        else {
+            $id_add = Order::add($params);
+            //Message::setSession('success', 'order', 'success_add');
+            $this->redirect('order/list?state='.OrderState::REGISTERED);
+        }
+    }
 
 
 	
 	
 	/* ниже методы от старого контроллера */
-	
-	public function action_add()
-    {
-        $order = Order::getByNumber(Param::get('number'));
-        if ($order) {
-            Message::setSession('error', 'order', 'already_exist');
-            $this->redirect('order/index?order_id='.$order->id);
-        }
-        else {
-            $add_id = Order::add(Param::forAddOrder());
-            Message::setSession('success', 'order', 'success_add');
-            $this->redirect('order/list?&light_id='.$add_id.'&type='.Param::get('type'));
-        }
-    }
 
     public function action_delete()
     {

@@ -14,10 +14,9 @@ class Param extends ParamBase {
 
     public static function forAddOrder()
     {
-        $params = self::select(['number', 'letter', 'type', 'note']);
-        $params['count_pack'] = self::get('count_pack', 0);
-        $params['state'] = OrderState::PREPARATION;
-        $params['date_state'] = time();
+		$keys = ['symbol', 'description', 'type', 'note', 'state'];
+		$defaults = ['state' => OrderState::REGISTERED];
+        $params = self::getAll($keys, $defaults);
         $params['date_exec'] = Date::convertStringToTime(self::get('date_exec'));
         return $params;
     }

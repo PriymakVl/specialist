@@ -6,7 +6,7 @@ class Product extends ProductStatic {
     public $specifications;
 	public $specifQty; //количество деталей в спецификации
     public $orderQty; //количество деталей в заказе
-	public $idSpecifActive;
+	public $idSpecifActive; //есть если является узлом
 
     public function __construct($user_id)
     {
