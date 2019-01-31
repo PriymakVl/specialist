@@ -28,7 +28,7 @@ class OrderContent extends OrderBase {
         foreach ($items as $item) {
             if ($item->type == self::TYPE_SPECIFIC) $product = SpecificationStatic::getParentProduct($item->id_item);
             else $product = new Product($item->id_item);
-            $product->orderQty = $item->quantity;
+            $product->orderQtyAll = $item->quantity;
             $content[] = $product;
         }
         return $content;

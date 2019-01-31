@@ -31,6 +31,7 @@ class Controller {
     protected function render($template, $data = null)
     {
         return $this->view->render($template, $data, $this->view);
+		exit();
     }
 
     protected function setMessage($key, $type = 'error')

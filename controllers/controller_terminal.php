@@ -17,27 +17,30 @@ class Controller_Terminal extends Controller {
     public function action_orders()
     {
         //if (isset($_COOKIE['username'])) $this->redirect('order/list');
+		$worker = User::getWorker(Session::get('id_worker'));
 		$orders = OrderStatic::getList(['state' => OrderState::WORK, 'status' => Order::STATUS_ACTIVE]);
-        $this->render('terminal/orders', compact('orders'));
+        $this->render('terminal/orders', compact('orders', 'worker'));
     }
 	
 	public function action_products()
     {
+		$worker = User::getWorker(Session::get('id_worker'));
 		$order = new Order(Param::get('id_order'));
-		$products = OrderContent::getProducts($order->id);
-        //if (isset($_COOKIE['username'])) $this->redirect('order/list');
-        $this->render('terminal/products', compact('products', 'order'));
+		$products = OrderProducts::get($order->id);
+        $this->render('terminal/products', compact('products', 'order', 'worker'));
     }
 
     public function action_login()
     {
-        // $password = Param::get('password');
-        // $user = User::getByPassword($password);
-        // if ($user) {
-            // setcookie('username', $user->name);
-            // $this->redirect('order/list');
-        // }
-        // else $this->redirect('terminal');
+		if (Session::get('id_worker')) $this->redirect('/terminal/orders');
+		$params = Param::getAll(['login', 'password']);
+		if (!$params) $this->render('terminal/login');
+		$user = UserStatic::authorisation($params);
+        if ($user) {
+            //setcookie('id_worker', $user->id);
+			Session::set('id_worker', $user->id);
+            $this->redirect('terminal/orders');
+        }
 		$this->render('terminal/login');
     }
 

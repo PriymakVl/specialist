@@ -7,7 +7,7 @@
 <a href="/terminal/login" class="exit-link">Выход</a>
 
 <div id="terminal-wrp">
-	<div class="terminal-info">Логвинов О.</div>
+	<div class="terminal-info"><?=$worker->title?></div>
 	<div class="clock">10:49</div>
 	<div class="terminal-orders-wrp">
 		<? foreach ($orders as $order): ?>

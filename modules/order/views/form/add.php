@@ -1,4 +1,4 @@
-<div id="form-order-add-wrp">
+<div id="form-order-add-wrp" style="display: none;">
     <h2>Форма для добавления заказа</h2>
     <form action="/order/add" method="post">
         <!-- first box -->

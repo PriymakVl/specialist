@@ -10,5 +10,26 @@ class UserStatic extends UserBase {
         if ($id) return new User($id);
         return false;
     }
+	
+	public static function getWorker($id_user)
+	{
+		$user = new User($id_user);
+		return $user;
+	}
+	
+	public static function authorisation($params)
+	{
+		$user = self::getUserByLogin($params['login']);
+		if ($user->password == $params['password']) return new User($user->id);
+		throw new Exception('Неверный пароль');
+	}
+	
+	public static function getUserByLogin($login)
+	{
+		$sql = 'SELECT *  FROM `users` WHERE `login` = :login';
+        $id = self::perform($sql, ['login' => $login])->fetch();
+        if (!$id) throw new Exception('Неверный логин');
+        return $id;
+	}
 
 }

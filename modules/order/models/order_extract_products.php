@@ -5,9 +5,8 @@ require_once ('order_base.php');
 class OrderExtractProducts extends OrderBase
 {
 	
-	public static function get($id_order)
+	public static function get($content)
 	{
-		$content = OrderContent::get($id_order);
 		$products_specif = self::getProductFromSpecification($content);
 		$products_all = array_merge($content, $products_specif);
 		return self::groupProducts($products_all);
@@ -19,7 +18,7 @@ class OrderExtractProducts extends OrderBase
 		foreach ($content as $product) {
 			if (!$product->idSpecifActive) continue;
 			$items = SpecificationContent::getAllByIdSpecification($product->idSpecifActive);
-			$items = self::countOrderQuantity($items, $product->orderQty);
+			$items = self::countOrderQuantity($items, $product->orderQtyAll);
 			$products = array_merge($products, $items);
 			
 		}
@@ -30,7 +29,7 @@ class OrderExtractProducts extends OrderBase
 	private static function countOrderQuantity($products, $order_qty)
 	{
 		foreach ($products as $product) {
-			$product->orderQty = $product->specifQty * $order_qty;
+			$product->orderQtyAll = $product->specifQty * $order_qty;
 		}
 		return $products;
 	}
@@ -50,7 +49,7 @@ class OrderExtractProducts extends OrderBase
 			$same_products = Helper::getObjectsWithSameId($products, $id);
 			$total_qty = self::getTotalQuantity($same_products);
 			$total_product = $same_products[0];
-			$total_product->orderQty = $total_qty;
+			$total_product->orderQtyAll = $total_qty;
 			$products = Helper::deleteObjectsFromArrayById($products, $id);
 			$products[] = $total_product; 
 		}
@@ -61,7 +60,7 @@ class OrderExtractProducts extends OrderBase
 	{
 		$total_qty = 0;
 		foreach ($products as $product) {
-			$total_qty = $total_qty + $product->orderQty;
+			$total_qty = $total_qty + $product->orderQtyAll;
 		}
 		return $total_qty;
 	}

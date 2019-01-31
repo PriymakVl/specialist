@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/web/css/terminal.css">
 
 <!--<H1 class="firmname">Specialist</H1>-->
-<form method="post" action="/terminal/orders" class="login">
+<form method="post" action="/terminal/login" class="login">
 	<p>
 	  <label for="login">Логин:</label>
 	  <input type="text" name="login" id="login" value="">

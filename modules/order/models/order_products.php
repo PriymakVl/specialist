@@ -3,20 +3,40 @@ require_once('order_base.php');
 
 class OrderProducts extends OrderBase {
 
-	public static function add($products)
+	public static function add($products, $order)
 	{
 		foreach ($products as $product) {
-			self::addByOne($product);
+			self::addOne($product, $order);
 		}
 	}
 	
-	public static function addByOne($product)
+	public static function addOne($product, $order)
 	{
-		$params = ['id_order' => $id_order, 'id_item' => $id_item, 'type' => $type, 'quantity' => $qty];
-		$fields = ':id_order, :id_product, qty_all, type_order, kind_work';
-        $sql = "INSERT INTO `order_products` (id_order, id_item, `type`, quantity) VALUES (:id_order, :id_item, :type, :quantity)";
+		$params = self::getParams($product, $order);
+        $sql = "INSERT INTO `order_products` (id_order, id_prod, qty_all, type_order, kind_work, state_work) 
+				VALUES (:id_order, :id_prod, :qty_all, :type_order, :kind_work, :state_work)";
         return self::perform($sql, $params);
 	}
+	
+	private static function getParams($product, $order)
+	{
+		$params['id_order'] = $order->id;
+		$params['id_prod'] = $product->id;
+		$params['qty_all'] = $product->orderQtyAll;
+		$params['type_order'] = $order->type;;
+		$params['kind_work'] = self::getKindOFWork($product->idSpecifActive);
+		$params['state_work'] = self::STATE_WORK_PLANED;
+		return $params;
+	}
+	
+	private static function getKindOFWork($specification) 
+	{
+		if ($specification) return self::KIND_WORK_ASSEMBLY;
+		else return self::KIND_WORK_MAKE;
+	}
+
+	
+	/** section get products from database */
 	
 	public static function get($id_order)
 	{
@@ -31,23 +51,42 @@ class OrderProducts extends OrderBase {
         $products = [];
         if (empty($items)) return $products;
         foreach ($items as $item) {
-			self::setProduct($item);
+			$product = new Product($item->id_prod);
+			$product = self::setDatabaseProperties($product, $item);
             $products[] = $product;
         }
-        return $content;
+        return $products;
     }
 	
-	private static function setProduct($item)
+	//при получении из базы данных
+	private static function setDatabaseProperties($product, $item)
 	{
-		$product = new Product($item->id_product);
 		$product->orderQtyAll = $item->qty_all;
 		$product->orderQtyDone = $item->qty_done;
 		$product->startWork = $item->time_start;
 		$product->endWork = $item->time_end;
-		$product->idWoker = $item->id_woker;
+		$product->idWorker = $item->id_user;
 		$product->typeOrder = $item->type_order;
 		$product->kindWork = $item->kind_work;
+		$product->stateWork = $item->state_work;
+		$product->stateWorkConvert = self::convertStateWork($item->state_work);
+		return $product;
 	}
+	
+	private static function convertStateWork($state)
+	{
+		switch ($state) {
+			case self::STATE_WORK_WAITING : return "Ожидает окончания другой операции";
+			case self::STATE_WORK_PLANED : return "Запланирована";
+			case self::STATE_WORK_PROGRESS : return "В работе";
+			case self::STATE_WORK_STOPPED : return "Остановлена";
+			case self::STATE_WORK_END : return "Выполнена";
+			default: return "Не известное состояние";
+		}
+	}
+	
+	
+	
 	
 	
 	

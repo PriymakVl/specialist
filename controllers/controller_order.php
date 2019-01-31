@@ -3,7 +3,6 @@ require_once('./core/controller.php');
 require_once('./modules/order/models/order.php');
 require_once('./modules/order/models/order_content.php');
 
-
 class Controller_Order extends Controller {
 	
 	private $id_order;
@@ -49,6 +48,7 @@ class Controller_Order extends Controller {
 	public function action_to_work()
 	{
 		$order = new Order($this->id_order);
+		if ($order->state > OrderState::PREPARATION) exit('уже выдано');
 		$order->toWork();
 		$this->redirectPrevious();
 	}
@@ -67,8 +67,7 @@ class Controller_Order extends Controller {
             $this->redirect('order/list?state='.OrderState::REGISTERED);
         }
     }
-
-
+	
 	
 	
 	/* ниже методы от старого контроллера */

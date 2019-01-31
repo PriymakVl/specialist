@@ -23,7 +23,10 @@ class Order extends OrderStatic {
     }
 	
 	public function toWork()
-	{
+	{	
+		$content = OrderContent::get($this->id);
+		$products = OrderExtractProducts::get($content);
+		OrderProducts::add($products, $this);
 		$this->setState(OrderState::WORK);
 		//todo для учета статистики добавить состояние в OrderState
 		//$products = $this->getListOfProduct();
