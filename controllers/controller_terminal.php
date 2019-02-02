@@ -16,15 +16,18 @@ class Controller_Terminal extends Controller {
 
     public function action_orders()
     {
-        //if (isset($_COOKIE['username'])) $this->redirect('order/list');
-		$worker = User::getWorker(Session::get('id_worker'));
+        $id_worker = Session::get('id_worker');
+		if ($id_worker) $worker = User::getWorker($id_worker);
+        else $this->redirect('terminal/login');
 		$orders = OrderStatic::getList(['state' => OrderState::WORK, 'status' => Order::STATUS_ACTIVE]);
         $this->render('terminal/orders', compact('orders', 'worker'));
     }
 	
 	public function action_products()
     {
-		$worker = User::getWorker(Session::get('id_worker'));
+        $id_worker = Session::get('id_worker');
+		if ($id_worker) $worker = User::getWorker($id_worker);
+        else $this->redirect('terminal/login');
 		$order = new Order(Param::get('id_order'));
 		$products = OrderProducts::get($order->id);
         $this->render('terminal/products', compact('products', 'order', 'worker'));

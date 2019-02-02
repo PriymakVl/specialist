@@ -21,3 +21,5 @@
 	</div>
 	
 </div>
+
+<script src="/web/terminal/clock.js"></script>
