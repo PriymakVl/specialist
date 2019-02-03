@@ -1,16 +1,15 @@
 <?php
 
-require_once ('./modules/category/models/category.php');
 
 ?>
 
 <!-- css files -->
-<link rel="stylesheet" href="/modules/category/css/popular.css">
+<link rel="stylesheet" href="/modules/product/css/popular.css">
 <!-- <link rel="stylesheet" href="/modules/order/css/menu.css"> -->
 
 
 <div id="content">
-    <div>Популярные категории</div>
+    <div>Популярные</div>
 
     <!-- popular category list -->
     <? include_once('popular.php'); ?>

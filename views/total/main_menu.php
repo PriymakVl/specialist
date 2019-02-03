@@ -25,12 +25,12 @@
         </li> -->
         <!-- categories -->
         <li class="drop">
-            <a href="#">Категории</a>
+            <a href="#">Производство</a>
             <div class="dropdownContain">
                 <div class="dropOut">
                     <div class="triangle"></div>
                     <ul>
-                        <li><a href="/category/popular">Популярные</a></li>
+                        <li><a href="/product/popular">Популярные</a></li>
                         <li><a href="#">Пневмоцилиндры</a></li>
                         <li><a href="#">Другое</a></li>
                     </ul>

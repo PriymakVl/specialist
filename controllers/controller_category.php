@@ -11,13 +11,6 @@ class Controller_Category extends Controller {
         $this->view->pathFolder = './modules/category/views/';
     }
 
-    public function action_popular()
-    {
-        $primary = Category::getPrimary();
-        $this->view->title = 'Популярные категории';
-        $this->render('popular/main', compact('primary'));
-    }
-
     public function action_index()
 	{
 		$cat = new Category(Param::get('id_cat'));

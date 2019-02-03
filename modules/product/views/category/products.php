@@ -14,10 +14,10 @@
                     <input type="checkbox" name="order" id_prod="<?=$product->id?>">
                 </td>
                 <td>
-                    <a href="/product?id_prod=<?=$product->id?>"><?=$product->symbol?></a>
+                    <a href="../../../../index.php"><?=$product->symbol?></a>
                 </td>
                 <td>
-                    <a href="/product?id_prod=<?=$product->id?>"><?=$product->name?></a>
+                    <a href="../../../../index.php"><?=$product->name?></a>
                 </td>
                 <td class="left"><?=$product->note?></td>
             </tr>

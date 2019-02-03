@@ -20,6 +20,12 @@ class Controller_Product extends Controller {
 		$this->render('index/main', compact('product', 'id_active'));
 	}
 
+	public function action_popular()
+    {
+        $this->view->title = 'Популярные';
+        $this->render('popular/main');
+    }
+
 //	public function action_list()
 //	{
 //	    $params = Param::forOrderList();
