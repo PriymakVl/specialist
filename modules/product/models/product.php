@@ -8,12 +8,17 @@ class Product extends ProductStatic {
         $this->tableName = 'products';
         parent::__construct($user_id);
     }
+	
+	public function getSpecification()
+	{
+		$this->specification = self::getAllByIdParent($this->id);
+	}
 
-    public function getSpecifications()
-    {
-        $this->specifications = Specification::getAllForProduct($this->id);
-        return $this;
-    }
+    // public function getSpecifications()
+    // {
+        // $this->specifications = Specification::getAllForProduct($this->id);
+        // return $this;
+    // }
 
 
 

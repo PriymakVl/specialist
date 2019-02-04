@@ -7,7 +7,7 @@
             <a href="#">Удалить</a>
         </li>
         <li>
-            <a href="#" id="specif-activate">Сделать активной</a>
+            <a href="#" id="specif-activate">Сделать активным</a>
         </li>
 		<li>
             <a href="#" id="add-to-order">Добавить в заказ</a>

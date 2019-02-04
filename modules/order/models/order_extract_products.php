@@ -7,22 +7,21 @@ class OrderExtractProducts extends OrderBase
 	
 	public static function get($content)
 	{
-		$products_specif = self::getProductFromSpecification($content);
-		$products_all = array_merge($content, $products_specif);
-		return self::groupProducts($products_all);
+		$products_specif = self::getProductsFromSpecification($content);
+		$products_all_specif_and_content = array_merge($content, $products_specif);
+		return self::groupProducts($products_all_specif_and_content);
 	}
-	
-	private static function getProductFromSpecification($content)
+
+	private static function getProductsFromSpecification($content)
 	{
-		$products = [];
+		$products_all_specif = [];
 		foreach ($content as $product) {
-			if (!$product->idSpecifActive) continue;
-			$items = SpecificationContent::getAllByIdSpecification($product->idSpecifActive);
-			$items = self::countOrderQuantity($items, $product->orderQtyAll);
-			$products = array_merge($products, $items);
+			if (!$product->specification) continue;
+			$products_specif = self::countOrderQuantity($product->specification, $product->orderQtyAll);
+			$products_all_specif = array_merge($products_all_specif, $products_specif);
 			
 		}
-		return $products;
+		return $products_all_specif;
 	}
 	
 	//считает количество деталей спецификации если заказано несколько изделий

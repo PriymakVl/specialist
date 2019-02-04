@@ -1,9 +1,9 @@
 <li>
     <input type="radio" name="tabs" id="tab-2" checked>
-    <label for="tab-2">Спецификации</label>
+    <label for="tab-2">Спецификация</label>
     <div class="tab-content">
         <table width="900">
-            <? if ($product->specifications): ?>
+            <? if ($product->specification): ?>
                 <tr>
                     <th width="40">
                         <input type="checkbox" disabled>
@@ -13,17 +13,19 @@
                     <th width="100">Трудоем-ть</th>
                     <th>Примечание</th>
                 </tr>
-                <? foreach($product->specifications as $specification): ?>
+                <? foreach($product->specification as $prod): ?>
                     <tr>
-                        <td class="<?=($id_active == $specification->id)?'bg-green':''?>">
-                            <input type="checkbox" name="specif" id_specif="<?=$specification->id?>">
+                        <td class="<?=($id_active == $prod->id)?'bg-green':''?>">
+                            <input type="checkbox" name="specif" id_prod="<?=$prod->id?>">
                         </td>
                         <td>
-                            <a href="/specification/content?id_specif=<?=$specification->id?>"><?=$specification->symbol?></a>
+							<?=$prod->symbol?>
                         </td>
-                        <td><?=$specification->name?></td>
-                        <td><?=$specification->time_production?></td>
-                        <td><?=$specification->note?></td>
+                        <td>
+							<a href="/product?id_prod=<?=$prod->id?>"><?=$prod->name?></a>
+						</td>
+                        <td><?=$prod->timeProduction?></td>
+                        <td><?=$prod->note?></td>
                     </tr>
                 <? endforeach; ?>
             <? else: ?>

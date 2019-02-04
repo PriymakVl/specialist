@@ -6,10 +6,10 @@ class OrderContent extends OrderBase {
     const TYPE_SPECIFIC = 1;
     const TYPE_PRODUCT = 2;
 
-	public static function add($id_order, $id_item, $type, $qty = 1)
+	public static function add($id_order, $id_prod, $qty = 1)
 	{
-		$params = ['id_order' => $id_order, 'id_item' => $id_item, 'type' => $type, 'quantity' => $qty];
-        $sql = "INSERT INTO `order_content` (id_order, id_item, `type`, quantity) VALUES (:id_order, :id_item, :type, :quantity)";
+		$params = ['id_order' => $id_order, 'id_prod' => $id_prod, 'quantity' => $qty];
+        $sql = "INSERT INTO `order_content` (id_order, id_prod, quantity) VALUES (:id_order, :id_prod, :quantity)";
         return self::perform($sql, $params);
 	}
 	
@@ -26,9 +26,9 @@ class OrderContent extends OrderBase {
         $content = [];
         if (empty($items)) return $content;
         foreach ($items as $item) {
-            if ($item->type == self::TYPE_SPECIFIC) $product = SpecificationStatic::getParentProduct($item->id_item);
-            else $product = new Product($item->id_item);
+            $product = new Product($item->id_prod);
             $product->orderQtyAll = $item->quantity;
+			$product->getSpecification();
             $content[] = $product;
         }
         return $content;

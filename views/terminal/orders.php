@@ -8,7 +8,7 @@
 
 <div id="terminal-wrp">
 	<div class="terminal-info"><?=$worker->title?></div>
-	<div class="clock">10:49</div>
+	<div id="clock"></div>
 	<div class="terminal-orders-wrp">
 		<? foreach ($orders as $order): ?>
 			<div class="terminal-order-box" id_order="<?=$order->id?>">
@@ -22,4 +22,5 @@
 	
 </div>
 
-<script src="/web/terminal/clock.js"></script>
+<script src="/web/js/terminal/clock.js"></script>
+<script>startTime();</script>

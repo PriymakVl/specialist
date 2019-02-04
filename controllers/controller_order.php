@@ -37,11 +37,11 @@ class Controller_Order extends Controller {
         $this->redirectPrevious();
     }
 	
-	public function action_add_specification()
+	public function action_add_content()
 	{
 		$id_order = Session::get('order-active');
-		$id_specif = Param::get('id_specif');
-		OrderContent::add($id_order, $id_specif, OrderContent::TYPE_SPECIFIC);
+		$id_prod = (Param::get('id_prod'));
+		OrderContent::add($id_order, $id_prod);
 		$this->redirect('order?id_order='.$id_order);
 	}
 	

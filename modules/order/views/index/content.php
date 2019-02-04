@@ -15,14 +15,10 @@
                     <tr>
 						<td><input type="checkbox"></td>
 						<td>
-							<? if ($product->idSpecifActive): ?>
-								<a href="/specification?id_specif=<?=$product->idSpecifActive?>"><?=$product->symbol?></a>
-							<? else: ?>
-								<?=$product->symbol?>
-							<? endif; ?>
+							<a href="/product?id_prod=<?=$product->id?>"><?=$product->symbol?></a>
 						</td>
 						<td><?=$product->name?></td>
-						<td><?=$product->orderQty?></td>
+						<td><?=$product->orderQtyAll?></td>
 						<td>5 мин</td>
 					</tr>
                 <? endforeach; ?>

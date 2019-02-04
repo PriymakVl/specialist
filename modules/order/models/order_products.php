@@ -24,7 +24,7 @@ class OrderProducts extends OrderBase {
 		$params['id_prod'] = $product->id;
 		$params['qty_all'] = $product->orderQtyAll;
 		$params['type_order'] = $order->type;;
-		$params['kind_work'] = self::getKindOFWork($product->idSpecifActive);
+		$params['kind_work'] = self::getKindOFWork($product->specification);
 		$params['state_work'] = self::STATE_WORK_PLANED;
 		return $params;
 	}
@@ -34,16 +34,45 @@ class OrderProducts extends OrderBase {
 		if ($specification) return self::KIND_WORK_ASSEMBLY;
 		else return self::KIND_WORK_MAKE;
 	}
+	
+	public static function toWork($params)
+	{
+		$sql = 'UPDATE `order_content` SET `state_work` = :state_work, `time_start` = :time_start, `id_worker` = :id_worker` 
+		WHERE `id_order` = :id_order AND : `id_prod` = :id_prod';
+		return self::perform($sql, $params);
+	}
 
 	
 	/** section get products from database */
 	
-	public static function get($id_order)
+	public static function getAllOnOrder($id_order)
 	{
 		$sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status';
         $params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE];
         $items = self::perform($sql, $params)->fetchAll();
-        return self::createArrayProducts($items);
+		if ($items) return self::createArrayProducts($items);
+        return false;
+	}
+	
+	public static function getForWorker($order, $worker) 
+	{
+		$sql = 'SELECT * FROM `order_products` 
+		WHERE `id_order` = :id_order AND `status` = :status AND `type_order` = :type_order AND `kind_work` = :kind_work AND `state_work` < 4';
+        $params = self::getParamsForWorker($order, $worker);
+		$items = self::perform($sql, $params)->fetchAll();
+		if ($items) return self::createArrayProducts($items);
+        return false;
+	}
+	
+	private static function getParamsForWorker($order, $worker)
+	{
+		$worker->defaultTypeOrder = Order::TYPE_CYLINDER;
+		$worker->defaultKindWork = Order::KIND_WORK_MAKE;
+		$params['id_order'] = $order->id; 
+		$params['status'] = self::STATUS_ACTIVE;
+		$params['type_order'] = $worker->defaultTypeOrder;
+		$params['kind_work'] = $worker->defaultKindWork;
+		return $params;
 	}
 	
 	private static function createArrayProducts($items)

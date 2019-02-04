@@ -15,11 +15,11 @@ class OrderBase extends Model
     const TYPE_CYLINDER = 1;
     const TYPE_CAR_NUMBER = 2;
 	
-	const STATE_WORK_WAITING = 1; //ожидает окончание выполнения предыдущей операции
-	const STATE_WORK_PLANED = 2; //работа запланирована
-	const STATE_WORK_PROGRESS = 3; //работа выполняется
-	const STATE_WORK_STOPPED = 4; //работа остановлена по какой то причине
-	const STATE_WORK_END = 5; //работа закончена
+	const STATE_WORK_PLANED = 1; //работа запланирована
+	const STATE_WORK_PROGRESS = 2; //работа выполняется
+	const STATE_WORK_STOPPED = 3; //работа остановлена по какой то причине
+	const STATE_WORK_END = 4; //работа закончена
+	const STATE_WORK_WAITING = 5; //ожидает окончание выполнения предыдущей операции
 	
 	const KIND_WORK_CUTTING = 1; //порезка заготовок
 	const KIND_WORK_MAKE = 2; //изготовление детали

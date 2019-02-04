@@ -11,7 +11,7 @@ body {
 	margin-bottom: 50px;
 }
 
-.clock {
+#clock {
 	font-size: 200px;
 	text-align: center;
 	color: #17D4FE;

@@ -31,8 +31,8 @@
                     <div class="triangle"></div>
                     <ul>
                         <li><a href="/product/popular">Популярные</a></li>
-                        <li><a href="#">Пневмоцилиндры</a></li>
-                        <li><a href="#">Другое</a></li>
+                        <li><a href="#">Готовая продукция</a></li>
+                        <li><a href="#">Узлы и детали</a></li>
                     </ul>
                 </div>
             </div>

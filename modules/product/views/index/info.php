@@ -18,14 +18,9 @@
                 <td>Наименование</th>
                 <td class="left"><?=$product->name?></th>
             </tr>
-            <tr>
-                <td>3</th>
-                <td>Категория</th>
-                <td><?=$product->id_cat?></th>
-            </tr>
             <? if ($product->note): ?>
                 <tr>
-                    <td>4</th>
+                    <td>3</th>
                     <td>Примечание</th>
                     <td class="left red"><?=$product->note?></th>
                 </tr>

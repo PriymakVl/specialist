@@ -13,11 +13,10 @@ class Controller_Product extends Controller {
 
     public function action_index()
 	{
-	    $id_active = Session::get('specif-active');
 		$product = new Product(Param::get('id_prod'));
-		$product->getSpecifications();
-        $this->view->title = 'Изделие';
-		$this->render('index/main', compact('product', 'id_active'));
+		$product->getSpecification();
+        $this->view->title = 'Производство';
+		$this->render('index/main', compact('product'));
 	}
 
 	public function action_popular()
@@ -25,15 +24,6 @@ class Controller_Product extends Controller {
         $this->view->title = 'Популярные';
         $this->render('popular/main');
     }
-
-//	public function action_list()
-//	{
-//	    $params = Param::forOrderList();
-//		$orders = Order::getList($params);
-//        $this->view->title = 'Заказы';
-//		$this->render('list/main', compact('orders', 'params'));
-//	}
-
 
 	public function action_add()
     {

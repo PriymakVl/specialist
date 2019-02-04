@@ -6,16 +6,16 @@
     <tr>
         <td>Пневмоцилиндры</td>
         <td class="popular-content">
-            <a href="/product/category?id_prod=4">Серия SR</a>
-            <a href="/product/category?id_prod=5">Серия SE</a>
-            <a href="/product/category?id_prod=6">Серия SC</a>
+            <a href="/product?id_prod=14&view=category">Серия SR</a>
+            <a href="/product?id_prod=5&view=category">Серия SE</a>
+            <a href="/product?id_prod=6&view=category">Серия SC</a>
             <a href="#">Серия MAL</a>
         </td>
     </tr>
     <tr >
         <td>Штока</td>
         <td class="popular-content">
-            <a href="/product/category?id_prod=11">Серия SR</a>
+            <a href="/product?id_prod=11&view=category">Серия SR</a>
             <a href="#">Серия SE</a>
             <a href="#">Серия SC</a>
             <a href="#">Серия MAL</a>
@@ -23,7 +23,7 @@
     <tr>
         <td>Гильзы</td>
         <td class="popular-content">
-            <a href="/product/category?id_prod=12">Серия SR</a>
+            <a href="/product?id_prod=12&view=category">Серия SR</a>
             <a href="#">Серия SE</a>
             <a href="#">Серия SC</a>
             <a href="#">Серия MAL</a>

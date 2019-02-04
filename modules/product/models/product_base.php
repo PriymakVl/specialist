@@ -9,9 +9,8 @@ require_once('product.php');
 class ProductBase extends Model
 {
 	// specification
-	public $specifications;
-	public $specifQty; //количество деталей в спецификации
-	public $idSpecifActive; //есть если является узлом
+	public $specification;
+	public $timeProduction; //трудоемкость
 	
 	//order
     public $orderQtyAll; //количество деталей в заказе
