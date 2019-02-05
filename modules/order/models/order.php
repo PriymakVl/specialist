@@ -9,6 +9,7 @@ class Order extends OrderStatic {
     {
         $this->tableName = 'orders';
         parent::__construct($order_id);
+        $this->convertDate();
     }
 
     public function getContent()

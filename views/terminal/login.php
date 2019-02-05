@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/web/css/terminal.css">
+<link rel="stylesheet" href="/web/css/terminal/login.css">
 
 <!--<H1 class="firmname">Specialist</H1>-->
 <form method="post" action="/terminal/login" class="login">

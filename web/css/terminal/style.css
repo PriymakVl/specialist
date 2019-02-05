@@ -8,34 +8,6 @@ body {
 	width: 900px;
 	height: 600px;
 	margin: 0 auto;
-	margin-bottom: 50px;
-}
-
-#clock {
-	font-size: 200px;
-	text-align: center;
-	transform: translateX(-50%) translateY(-50%);
-	color: #17D4FE;
-	font-family: Orbitron serif;
-	letter-spacing: 7px;
-}
-
-.orders-wrp, .products-wrp {
-	padding: 50px;
-	margin-top: 80px;
-}
-
-.order-box, .product-box {
-	width: 250px;
-	height: 150px;
-	margin-right: 20px;
-	float: left;
-	position: relative;
-}
-
-.order-box:hover, .product-box:hover {
-	cursor: pointer;
-	border: 1px solid white;
 }
 
 .terminal-info {
@@ -45,6 +17,43 @@ body {
 	color: white;
 	border-bottom: 1px solid black;
 	padding-left: 20px;
+}
+
+#terminal-clock {
+	font-size: 200px;
+	text-align: center;
+	/*transform: translateX(-50%) translateY(-50%);*/
+	color: #17D4FE;
+	font-family: Orbitron serif;
+	letter-spacing: 7px;
+}
+
+#terminal-orders-wrp, #terminal-products-wrp {
+	margin-top: 80px;
+}
+
+#terminal-orders-wrp:after, #terminal-products-wrp:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.terminal-order-box, .terminal-product-box {
+	width: 250px;
+	height: 150px;
+	margin-right: 20px;
+	float: left;
+	position: relative;
+}
+
+.terminal-order-box {
+	background: yellow;
+}
+
+.terminal-order-box:hover, .terminal-product-box:hover {
+	cursor: pointer;
+	border: 1px solid white;
+	background: blue;
 }
 
 .exit-link {

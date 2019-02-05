@@ -18,7 +18,7 @@
                     <a href="/order?id_order=<?=$order->id?>"><?=$order->symbol?></a>
                 </td>
                 <td class="left"><?=$order->description?></td>
-				<td><?=$order->date_exec?></td>
+				<td><?=$order->dateExecution?></td>
                 <td class="left"><?=$order->note?></td>
             </tr>
         <? endforeach; ?>

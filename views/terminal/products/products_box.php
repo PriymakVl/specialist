@@ -1,7 +1,7 @@
 <?
 	$number = 1;
 ?>
-<link rel="stylesheet" href="/web/css/terminal_products.css">
+<link rel="stylesheet" href="/web/css/terminal/products.css">
 
 <a href="/terminal/login" class="exit-link">Выход</a>
 <a href="/terminal/orders" class="orders-link">Заказы</a>
@@ -9,7 +9,7 @@
 <div id="terminal-wrp">
 	<div class="terminal-info"><?=$worker->title?></div>
 	<!-- <div id="clock">10:49</div> -->
-	<div class="terminal-products-wrp">
+	<div id="terminal-products-wrp">
 		<? foreach ($products as $product): ?>
 			<div class="terminal-product-box" style="background:<?=$product->bgTerminalProductBox?>" id_order="<?=$order->id?>" id_prod="<?=$product->id?>" id_worker="<?=$worker->id?>" prod_state="<?=$product->stateWork?>">
 				<div class="info-order">№<?=$number?> заказ: <?=$order->symbol?></div>
@@ -21,5 +21,3 @@
 	</div>
 	
 </div>
-
-<script src="/web/js/terminal/product_actions.js"></script>

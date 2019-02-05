@@ -20,8 +20,9 @@ class UserStatic extends UserBase {
 	public static function authorisation($params)
 	{
 		$user = self::getUserByLogin($params['login']);
+		if (!$user) return false;
 		if ($user->password == $params['password']) return new User($user->id);
-		throw new Exception('Неверный пароль');
+		else throw new Exception('Неверный пароль');
 	}
 	
 	public static function getUserByLogin($login)

@@ -24,11 +24,19 @@ class OrderBase extends Model
 	const KIND_WORK_CUTTING = 1; //порезка заготовок
 	const KIND_WORK_MAKE = 2; //изготовление детали
 	const KIND_WORK_ASSEMBLY = 3; //сборка
-	
-//    public function convertDateExecution()
-//    {
-//        if ($this->date_exec && ctype_digit ( $this->date_exec )) $this->date_exec = date('d.m', $this->date_exec);
-//        return $this;
-//    }
+
+    //date
+    public $dateExecution; //дата выполнения заказа
+    public $dateRegistration; //дата регистрации заказа
+    public $datePreparation; //дата регистрации дата выдачи в подготовку
+    public $dateWork; //дата выдачи в работу
+    public $dateMade; //дата выполнения заказа
+    public $dateShipment; //дата отгрузки заказа
+
+    public function convertDate()
+    {
+        $this->dateExecution = date('d.m.y', $this->date_exec);
+    }
 
 }
+

@@ -2,14 +2,14 @@
 	$number = 1;
 ?>
 
-<link rel="stylesheet" href="/web/css/terminal_products.css">
-
-<a href="/terminal/login" class="exit-link">Выход</a>
+<a href="/terminal/logout" class="exit-link">Выход</a>
 
 <div id="terminal-wrp">
 	<div class="terminal-info"><?=$worker->title?></div>
-	<div id="clock"></div>
-	<div class="terminal-orders-wrp">
+    <!-- clock -->
+	<div id="terminal-clock"></div>
+
+	<div id="terminal-orders-wrp">
 		<? foreach ($orders as $order): ?>
 			<div class="terminal-order-box" id_order="<?=$order->id?>">
 				<div class="info-order">№<?=$number?></div>
@@ -19,8 +19,4 @@
 			<? $number++; ?>
 		<? endforeach; ?>
 	</div>
-	
 </div>
-
-<script src="/web/js/terminal/clock.js"></script>
-<script>startTime();</script>
