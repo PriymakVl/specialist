@@ -24,6 +24,9 @@ class ProductBase extends Model
 	public $stateWork; //выдана, обрабатывается, готова и др.
 	public $stateWorkConvert;
 	public $idWorker;
+	
+	//terminal
+	public $bgTerminalProductBox;
 
 	const TYPE_CATEGORY = 1;
     const TYPE_PRODUCT = 2;

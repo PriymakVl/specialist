@@ -8,9 +8,10 @@ $(document).ready(function() {
 		var id_worker = $(this).attr('id_worker');
 		
 		if (state == 1) {
-			alert('Взят в работу');
+			alert('Взять в работу');
 			location.href = '/terminal/to_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_worker=' + id_worker;
 		}
-		else $('#box_actions_product').show();
+		//else $('#box_actions_product').show();
+		else alert('action box');
 	});
 });

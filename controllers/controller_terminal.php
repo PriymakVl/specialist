@@ -54,9 +54,8 @@ class Controller_Terminal extends Controller {
 	public function action_to_work()
 	{
 		$params = Param::terminalToWork();
-		debug($params);
 		OrderProducts::toWork($params);
-		$this->redirect('terminal/products');
+		$this->redirect('terminal/products?id_order='.$params['id_order']);
 	}
 
 //    public function action_logout()

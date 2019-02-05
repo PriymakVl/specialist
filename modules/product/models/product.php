@@ -13,6 +13,12 @@ class Product extends ProductStatic {
 	{
 		$this->specification = self::getAllByIdParent($this->id);
 	}
+	
+	public function setBgTerminalProductBox()
+	{
+		if ($this->stateWork == Order::STATE_WORK_PROGRESS) $this->bgTerminalProductBox = 'green';
+		else if ($this->stateWork == Order::STATE_WORK_STOPPED) $this->bgTerminalProductBox = 'red';
+	}
 
     // public function getSpecifications()
     // {

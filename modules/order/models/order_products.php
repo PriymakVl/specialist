@@ -37,8 +37,8 @@ class OrderProducts extends OrderBase {
 	
 	public static function toWork($params)
 	{
-		$sql = 'UPDATE `order_content` SET `state_work` = :state_work, `time_start` = :time_start, `id_worker` = :id_worker` 
-		WHERE `id_order` = :id_order AND : `id_prod` = :id_prod';
+		$sql = 'UPDATE `order_products` SET `state_work` = :state_work, `time_start` = :time_start, `id_worker` = :id_worker 
+		WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
 		return self::perform($sql, $params);
 	}
 
@@ -82,6 +82,7 @@ class OrderProducts extends OrderBase {
         foreach ($items as $item) {
 			$product = new Product($item->id_prod);
 			$product = self::setDatabaseProperties($product, $item);
+			$product->setBgTerminalProductBox();
             $products[] = $product;
         }
         return $products;
@@ -94,7 +95,7 @@ class OrderProducts extends OrderBase {
 		$product->orderQtyDone = $item->qty_done;
 		$product->startWork = $item->time_start;
 		$product->endWork = $item->time_end;
-		$product->idWorker = $item->id_user;
+		$product->idWorker = $item->id_worker;
 		$product->typeOrder = $item->type_order;
 		$product->kindWork = $item->kind_work;
 		$product->stateWork = $item->state_work;
