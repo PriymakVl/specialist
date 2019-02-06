@@ -32,5 +32,9 @@ class ProductBase extends Model
     const TYPE_PRODUCT = 2;
     const TYPE_UNIT = 3;
     const TYPE_DETAIL = 4;
+	
+	const BG_TERMINAL_BOX_PLAN = 'yellow';
+	const BG_TERMINAL_BOX_PROGRESS = 'green';
+	const BG_TERMINAL_BOX_STOPPED = 'red';
 
 }

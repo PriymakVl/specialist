@@ -1,0 +1,73 @@
+#actions-box-wrp  #info-product {
+	text-align: center;
+	font-size: 24px;
+	color: white;
+}
+
+#actions-box-wrp h3 {
+	color: white;
+	text-align: center;
+}
+
+#terminal-prod-actions-wrp {
+	width: 430px;
+	margin: 0 auto;
+	color: black;
+}
+
+#terminal-prod-actions-wrp:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+#terminal-prod-actions-wrp div {
+	width: 200px;
+	height: 200px;
+	border: 1px solid white;
+	float: left;
+	position: relative;
+}
+
+#terminal-prod-actions-wrp div:hover {
+	cursor: pointer;
+	border: 1px solid black;
+}
+
+#terminal-prod-actions-wrp div span {
+	font-size: 20px;
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+}
+
+#prod-state-made {
+	margin-right: 20px;
+	background: green;
+}
+
+
+
+#prod-state-stop {
+	background: red;
+}
+
+#exit-actions-box {
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+#full-info-product {
+	background: yellow;
+	margin-top: 20px;
+}
+
+.fa-pause, .fa-sign-out-alt, .fa-check, .fa-question {
+	font-size: 60px;
+	color: white;
+	margin: 65px 0 0 68px;
+}
+
+
+
+

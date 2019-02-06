@@ -16,8 +16,9 @@ class Product extends ProductStatic {
 	
 	public function setBgTerminalProductBox()
 	{
-		if ($this->stateWork == Order::STATE_WORK_PROGRESS) $this->bgTerminalProductBox = 'green';
-		else if ($this->stateWork == Order::STATE_WORK_STOPPED) $this->bgTerminalProductBox = 'red';
+		if ($this->stateWork == Order::STATE_WORK_PROGRESS) $this->bgTerminalProductBox = self::BG_TERMINAL_BOX_PROGRESS;
+		else if ($this->stateWork == Order::STATE_WORK_STOPPED) $this->bgTerminalProductBox =  self::BG_TERMINAL_BOX_STOPPED;
+		else $this->bgTerminalProductBox = self::BG_TERMINAL_BOX_PLAN;
 	}
 
     // public function getSpecifications()

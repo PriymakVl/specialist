@@ -52,8 +52,7 @@ body {
 
 .terminal-order-box:hover, .terminal-product-box:hover {
 	cursor: pointer;
-	border: 1px solid white;
-	background: blue;
+	background: blue!important;
 }
 
 .exit-link {
