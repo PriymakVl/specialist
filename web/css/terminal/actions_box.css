@@ -1,4 +1,4 @@
-#actions-box-wrp  #info-product {
+#actions-info-product {
 	text-align: center;
 	font-size: 24px;
 	color: white;
@@ -36,9 +36,7 @@
 
 #terminal-prod-actions-wrp div span {
 	font-size: 20px;
-	position: absolute;
-	bottom: 5px;
-	left: 5px;
+
 }
 
 #prod-state-made {
@@ -46,10 +44,20 @@
 	background: green;
 }
 
-
+#prod-state-made span {
+	position: absolute;
+	bottom: 5px;
+	left: 16px;
+}
 
 #prod-state-stop {
 	background: red;
+}
+
+#prod-state-stop span {
+	position: absolute;
+	bottom: 5px;
+	left: 15px;
 }
 
 #exit-actions-box {
@@ -57,9 +65,21 @@
 	margin-right: 20px;
 }
 
+#exit-actions-box span {
+	position: absolute;
+	bottom: 5px;
+	left: 70px;
+}
+
 #full-info-product {
 	background: yellow;
 	margin-top: 20px;
+}
+
+#full-info-product span {
+	position: absolute;
+	bottom: 5px;
+	left: 43px;
 }
 
 .fa-pause, .fa-sign-out-alt, .fa-check, .fa-question {

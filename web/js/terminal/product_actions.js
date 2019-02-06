@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-		var state, id_order, id_prod, id_worker, prod_name;
+		var state, id_order, id_prod, id_worker, prod_name, state;
 
 	$('.terminal-product-box').click(function() {
 		
@@ -8,15 +8,11 @@ $(document).ready(function() {
 		id_order = $(this).attr('id_order');
 		id_prod = $(this).attr('id_prod');
 		id_worker = $(this).attr('id_worker');
-		prod_name = $('.info-product').text();
-		console.log(prod_name);
-		return;
+		prod_name = $(this).find('.info-product').text();
 		
 		if (state == 1) {
-			alert('Взять в работу');
 			location.href = '/terminal/to_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_worker=' + id_worker;
 		}
-		//else $('#box_actions_product').show();
 		else {
 			$('#terminal-products-wrp').hide();
 			$('#actions-box-wrp').show();
@@ -29,4 +25,9 @@ $(document).ready(function() {
 		$('#terminal-products-wrp').show();
 		$('#actions-box-wrp').hide();
 	});
+
+    //change state product
+    $('#prod-state-made, #prod-state-made').click(function() {
+        location.href = '/terminal/change_state_work?id_order=' + id_order + '&id_prod=' + id_prod + '&state=' + state;
+    });
 });
