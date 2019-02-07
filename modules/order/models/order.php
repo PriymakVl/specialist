@@ -17,11 +17,6 @@ class Order extends OrderStatic {
         $this->content = OrderContent::get($this->id);
         return $this;
     }
-
-    public function getProducts()
-    {
-        $this->products = OrderContent::getProducts();
-    }
 	
 	public function toWork()
 	{	
@@ -31,6 +26,17 @@ class Order extends OrderStatic {
 		$this->setState(OrderState::WORK);
 		//todo для учета статистики добавить состояние в OrderState
 		//$products = $this->getListOfProduct();
+	}
+	
+	public function checkReadiness()
+	{
+		$products = OrderProducts::getAllOnOrder($this->id);
+		if (!$products) return false;
+		foreach ($products as $prod) {
+			if ($prod->stateWork != self::STATE_WORK_END) $not_ready[]= $prod; 
+		}
+		if (empty($not_ready)) return true;
+		return false;
 	}
 
 

@@ -7,7 +7,24 @@ class User extends UserStatic {
     {
         $this->tableName = 'users';
         parent::__construct($user_id);
+		$this->setProperties();
     }
+	
+	private function setProperties()
+	{
+		$options = UserOptions::get($this->id);
+		if (!$options) return;
+		$this->defaultKindWork = $this->setProperty('default_kind_work', $options);
+		$this->defaultTypeOrder = $this->setProperty('default_type_order', $options);
+	}
+	
+	private function setProperty($name_option, $options)
+	{
+		foreach ($options as $option) {
+			if ($option->name == $name_option) return $option->value;
+		}
+		return null;
+	}
 
 
 

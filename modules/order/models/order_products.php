@@ -35,10 +35,22 @@ class OrderProducts extends OrderBase {
 		else return self::KIND_WORK_MAKE;
 	}
 	
-	public static function toWork($params)
+	public static function startWork($params)
 	{
 		$sql = 'UPDATE `order_products` SET `state_work` = :state_work, `time_start` = :time_start, `id_worker` = :id_worker 
 		WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
+		return self::perform($sql, $params);
+	}
+	
+	public static function endWork($params)
+	{
+		$sql = 'UPDATE `order_products` SET `state_work` = :state_work, `time_end` = :time_end WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
+		return self::perform($sql, $params);
+	}
+	
+	public static function stopWork($params)
+	{
+		$sql = 'UPDATE `order_products` SET `state_work` = :state_work WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
 		return self::perform($sql, $params);
 	}
 

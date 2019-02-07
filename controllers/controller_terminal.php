@@ -19,23 +19,24 @@ class Controller_Terminal extends Controller {
 	
 	private function getWorker() {
 		$id_worker = Session::get('id_worker');
-		if ($id_worker) return User::getWorker($id_worker);
+		if ($id_worker) return new User($id_worker);
         else $this->redirect('terminal/login');
 	}
 
     public function action_orders()
     {
         $worker = $this->getWorker();
-		$orders = OrderStatic::getList(['state' => OrderState::WORK, 'status' => Order::STATUS_ACTIVE]);
+		$orders = OrderStatic::getForWorker($worker);
         $this->render('orders/main', compact('orders', 'worker'));
     }
 	
 	public function action_products()
     {
-        $worker = $this->getWorker();
+		$worker = $this->getWorker();
 		$order = new Order(Param::get('id_order'));
-		$products = OrderProducts::getForWorker($order, $worker);
-        $this->render('products/main', compact('products', 'order', 'worker'));
+        $products = OrderProducts::getForWorker($order, $worker);
+		if ($products) $this->render('products/main', compact('products', 'order', 'worker'));
+		else $this->redirect('terminal/orders');
     }
 
     public function action_login()
@@ -51,17 +52,40 @@ class Controller_Terminal extends Controller {
 		$this->render('login');
     }
 	
-	public function action_to_work()
+	public function action_start_work()
 	{
-		$params = Param::terminalToWork();
-		OrderProducts::toWork($params);
+		$params = Param::terminalStartWork();
+		OrderProducts::startWork($params);
+		$this->redirect('terminal/products?id_order='.$params['id_order']);
+	}
+	
+	public function action_end_work()
+	{
+		$params = Param::terminalEndWork();
+		OrderProducts::endWork($params);
+		$order = new Order(Param::get('id_order'));
+		
+		$ready_order = $order->checkReadiness();//если последняя деталь изменить статус заказа
+		if ($ready_order) $order->setState(OrderState::MADE);//установить статус заказа выполнен
+		
+		$worker = $this->getWorker();
+        $products = OrderProducts::getForWorker($order, $worker);
+		
+		if ($products) $this->redirect('terminal/products?id_order='.$params['id_order']);
+		else $this->redirect('terminal/orders');
+	}
+	
+	public function action_stop_work()
+	{
+		$params = Param::terminalStopWork();
+		OrderProducts::stopWork($params);
 		$this->redirect('terminal/products?id_order='.$params['id_order']);
 	}
 
     public function action_logout()
     {
         Session::delete('id_worker');
-        $this->redirect('login');
+        $this->redirect('terminal/login');
     }
 
 }

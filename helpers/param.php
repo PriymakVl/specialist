@@ -29,7 +29,7 @@ class Param extends ParamBase {
         // return $params;
     // }
 	
-	public static function terminalToWork()
+	public static function terminalStartWork()
 	{
 		$keys = ['id_order', 'id_prod', 'id_worker'];
 		$params = self::getAll($keys);
@@ -37,4 +37,22 @@ class Param extends ParamBase {
 		$params['time_start'] = time();
 		return $params;
 	}
+	
+	public static function terminalEndWork()
+	{
+		$keys = ['id_order', 'id_prod'];
+		$params = self::getAll($keys);
+		$params['state_work'] = Order::STATE_WORK_END;
+		$params['time_end'] = time();
+		return $params;
+	}
+	
+	public static function terminalStopWork()
+	{
+		$keys = ['id_order', 'id_prod'];
+		$params = self::getAll($keys);
+		$params['state_work'] = Order::STATE_WORK_STOPPED;
+		return $params;
+	}
+	
 }

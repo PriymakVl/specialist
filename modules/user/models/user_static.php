@@ -11,10 +11,13 @@ class UserStatic extends UserBase {
         return false;
     }
 	
-	public static function getWorker($id_user)
+	public static function getWorkers()
 	{
-		$user = new User($id_user);
-		return $user;
+		$sql = 'SELECT `id`  FROM `users` WHERE `position` = :position AND `status` = :status';
+		$params =  ['position' => self::POSITION_WORKER, 'status' => self::STATUS_ACTIVE];
+        $ids = self::perform($sql, $params)->fetchAll();
+        if ($ids) return Helper::createArrayOfObject($ids, 'User');
+        return false;
 	}
 	
 	public static function authorisation($params)

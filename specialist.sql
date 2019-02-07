@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 05 2019 г., 17:47
+-- Время создания: Фев 07 2019 г., 17:52
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -127,8 +127,8 @@ CREATE TABLE `order_products` (
 
 INSERT INTO `order_products` (`id`, `id_order`, `id_prod`, `state_work`, `type_order`, `kind_work`, `qty_all`, `qty_done`, `time_start`, `time_end`, `id_worker`, `status`) VALUES
 (1, 1, 1, 1, 1, 3, 3, 0, '', '', 0, '1'),
-(2, 1, 5, 2, 1, 2, 3, 0, '1549375699', '', 2, '1'),
-(3, 1, 7, 1, 1, 2, 3, 0, '', '', 0, '1');
+(2, 1, 5, 4, 1, 2, 3, 0, '1549540485', '1549540495', 2, '1'),
+(3, 1, 7, 4, 1, 2, 3, 0, '1549540504', '1549540687', 2, '1');
 
 -- --------------------------------------------------------
 
@@ -179,6 +179,7 @@ CREATE TABLE `users` (
   `password` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `title` varchar(100) NOT NULL,
+  `position` int(11) NOT NULL COMMENT 'должность',
   `status` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -186,9 +187,31 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `password`, `name`, `title`, `status`) VALUES
-(1, 'Priymak', '123', 'Владимир', 'Приймак В.', '1'),
-(2, 'Logvinov', '12345', 'О', 'Логвинов О.', '1');
+INSERT INTO `users` (`id`, `login`, `password`, `name`, `title`, `position`, `status`) VALUES
+(1, 'Priymak', '123', 'Владимир', 'Приймак В.', 0, '1'),
+(2, 'Logvinov', '12345', 'О', 'Логвинов О.', 1, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_options`
+--
+
+CREATE TABLE `user_options` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `value` varchar(100) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `user_options`
+--
+
+INSERT INTO `user_options` (`id`, `name`, `value`, `id_user`, `status`) VALUES
+(1, 'default_type_order', '1', 2, '1'),
+(2, 'default_kind_work', '2', 2, '1');
 
 --
 -- Индексы сохранённых таблиц
@@ -232,6 +255,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `login` (`login`);
 
 --
+-- Индексы таблицы `user_options`
+--
+ALTER TABLE `user_options`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -264,6 +293,11 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT для таблицы `user_options`
+--
+ALTER TABLE `user_options`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

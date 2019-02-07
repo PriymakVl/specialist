@@ -10,6 +10,16 @@ body {
 	margin: 0 auto;
 }
 
+#terminal-wrp h3 {
+	font-size: 30px;
+	text-align: center;
+	color: white;
+}
+
+#terminal-wrp h3 span {
+	color: black;
+}
+
 .terminal-info {
 	height: 40px;
 	line-height: 40px;
@@ -42,6 +52,7 @@ body {
 	width: 250px;
 	height: 150px;
 	margin-right: 20px;
+	border: 2px solid white;
 	float: left;
 	position: relative;
 }
@@ -52,7 +63,7 @@ body {
 
 .terminal-order-box:hover, .terminal-product-box:hover {
 	cursor: pointer;
-	background: blue!important;
+	border: 2px solid red;
 }
 
 .exit-link {
@@ -85,4 +96,8 @@ body {
 	position:absolute;
 	bottom: 5px;
 	right: 5px;
+}
+
+#actions-info-product {
+	margin: 20px 0 20px 0;
 }

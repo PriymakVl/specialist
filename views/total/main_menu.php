@@ -51,6 +51,6 @@
                 </div>
             </div>
         </li>
-        <!--<li><a href="/category/popular">Разное</a></li> -->
+        <li><a href="/statistics/workers">Статистика</a></li>
     </ul>
 </nav>

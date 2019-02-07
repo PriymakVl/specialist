@@ -10,7 +10,8 @@
 	<div id="terminal-wrp">
 		<div class="terminal-info"><?=$worker->title?></div>
 		<!-- <div id="clock">10:49</div> -->
-
+		<h3><span>Детали по заказу</span> <?=$order->description?></h3>
+		
 		<!-- products box -->
 		<? include_once('products_box.php'); ?>
 

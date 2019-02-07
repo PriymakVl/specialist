@@ -2,7 +2,7 @@
 	<div id="actions-info-product"></div>
 	<h3>Закрытие текущего задания</h3>
 	<div id="terminal-prod-actions-wrp">
-		<div id="prod-state-made" state_work="<?=">
+		<div id="prod-state-made">
 			<i class="fas fa-check"></i>
             <span>Задание выполнено</span>
 		</div>

@@ -23,6 +23,18 @@ class OrderStatic extends OrderBase {
 	   $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
 	   return self::perform($sql, $params)->fetch();
 	}
+	
+	public static function getForWorker($worker)
+	{
+		$params = ['state' => OrderState::WORK, 'status' => Order::STATUS_ACTIVE, 'type' => $worker->defaultTypeOrder];
+		$orders = self::getList($params);
+		$orders_worker = [];
+		foreach ($orders as $order) {
+			$products = OrderProducts::getForWorker($order, $worker);
+			if ($products) $orders_worker[] = $order;
+		}
+		return $orders_worker;
+	}
 
     public static function add($params)
     {
