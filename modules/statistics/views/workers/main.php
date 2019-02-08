@@ -3,11 +3,11 @@
 ?>
 
 <!-- css files -->
-<link rel="stylesheet" href="/modules/specification/css/workers.css">
+<link rel="stylesheet" href="/modules/statistics/css/filters.css">
 
 <div id="content">
-    <!-- filters of orders -->
-    <? //include_once('filters.php'); ?>
+    <!-- filters of statistics -->
+    <? include_once('filters.php'); ?>
 
     <!-- message -->
     <? //include_once('./views/total/message.php'); ?>

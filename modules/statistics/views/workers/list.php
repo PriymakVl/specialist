@@ -3,9 +3,11 @@
         <th width="40">
             <input type="checkbox" disabled>
         </th>
-        <th width="120">ФИО</th>
-        <th width="450">Загрузка</th>
-        <th>Примечание</th>
+        <th width="180">ФИО</th>
+        <th width="180">Загрузка</th>
+        <th width="180">Трудоемкость план</th>
+		<th width="180">Трудоемкость факт</th>
+		<th>Заработал</th>
     </tr>
     <? if ($workers): ?>
         <?foreach ($workers as $worker): ?>
@@ -16,8 +18,10 @@
                 <td>
                     <a href="#"><?=$worker->title?></a>
                 </td>
-                <td class="left">37%</td>
-                <td class="left"><?=$order->note?></td>
+                <td>37%</td>
+                <td></td>
+				<td></td>
+				<td></td>
             </tr>
         <? endforeach; ?>
     <? else: ?>
