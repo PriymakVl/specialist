@@ -5,5 +5,5 @@ require_once ('./helpers/message.php');
 require_once ('./helpers/helper.php');
 
 class StatisticsBase extends Model {
-
+	
 }

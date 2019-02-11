@@ -5,12 +5,16 @@ require_once ('./helpers/message.php');
 require_once ('./helpers/helper.php');
 require_once('./modules/specification/models/specification.php');
 require_once('product.php');
+require_once ('product_time.php');
 
 class ProductBase extends Model
 {
 	// specification
 	public $specification;
-	public $timeProduction; //трудоемкость
+	
+	public $timeManufacturingAll; //timeProduction * quntity + timePreparation
+	public $timeProduction;
+	public $timePreparation;
 	
 	//order
     public $orderQtyAll; //количество деталей в заказе

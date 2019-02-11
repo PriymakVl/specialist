@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 08 2019 г., 17:52
+-- Время создания: Фев 11 2019 г., 17:39
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -128,8 +128,8 @@ CREATE TABLE `order_products` (
 
 INSERT INTO `order_products` (`id`, `id_order`, `id_prod`, `state_work`, `type_order`, `kind_work`, `qty_all`, `qty_done`, `time_start`, `time_end`, `time_plan`, `id_worker`, `status`) VALUES
 (1, 1, 1, 1, 1, 3, 3, 0, '', '', '', 0, '1'),
-(2, 1, 5, 4, 1, 2, 3, 0, '1549540485', '1549540495', '1800', 2, '1'),
-(3, 1, 7, 4, 1, 2, 3, 0, '1549540504', '1549540687', '1080', 2, '1');
+(2, 1, 5, 1, 1, 2, 3, 0, '1549540485', '1549540495', '1800', 2, '1'),
+(3, 1, 7, 1, 1, 2, 3, 0, '1549540504', '1549540687', '1080', 2, '1');
 
 -- --------------------------------------------------------
 
@@ -205,6 +205,14 @@ CREATE TABLE `product_times` (
   `status` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `product_times`
+--
+
+INSERT INTO `product_times` (`id`, `symbol`, `id_action`, `time_prod`, `time_prepar`, `status`) VALUES
+(1, 'SR-ROD-12', 2, '300', '60', '1'),
+(2, 'SR-PIPE-32', 2, '420', '60', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -227,7 +235,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `login`, `password`, `name`, `title`, `position`, `status`) VALUES
 (1, 'Priymak', '123', 'Владимир', 'Приймак В.', 0, '1'),
-(2, 'Logvinov', '12345', 'О', 'Логвинов О.', 1, '1');
+(2, 'Logvinov', '12345', 'О', 'Логвинов О.', 1, '1'),
+(3, 'Kovbasa', '54321', 'Юрий', 'Ковбаса Ю.', 1, '1');
 
 -- --------------------------------------------------------
 
@@ -295,7 +304,8 @@ ALTER TABLE `product_action`
 -- Индексы таблицы `product_times`
 --
 ALTER TABLE `product_times`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `symbol` (`symbol`);
 
 --
 -- Индексы таблицы `users`
@@ -348,12 +358,12 @@ ALTER TABLE `product_action`
 -- AUTO_INCREMENT для таблицы `product_times`
 --
 ALTER TABLE `product_times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT для таблицы `user_options`
 --

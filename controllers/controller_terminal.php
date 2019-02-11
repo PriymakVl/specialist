@@ -19,7 +19,7 @@ class Controller_Terminal extends Controller {
 	
 	private function getWorker() {
 		$id_worker = Session::get('id_worker');
-		if ($id_worker) return new User($id_worker);
+		if ($id_worker) return new Worker($id_worker);
         else $this->redirect('terminal/login');
 	}
 

@@ -95,6 +95,7 @@ class OrderProducts extends OrderBase {
 			$product = new Product($item->id_prod);
 			$product = self::setDatabaseProperties($product, $item);
 			$product->setBgTerminalProductBox();
+			$product->timeManufacturingAll = self::getIimeManufacturingForAll($product);
             $products[] = $product;
         }
         return $products;
@@ -125,6 +126,12 @@ class OrderProducts extends OrderBase {
 			case self::STATE_WORK_END : return "Выполнена";
 			default: return "Не известное состояние";
 		}
+	}
+	
+	private static function getIimeManufacturingForAll($product)
+	{
+		$product->getIimeManufacturing();
+		return ($product->timeProduction * $product->orderQtyAll) + $product->timePreparation;
 	}
 	
 	

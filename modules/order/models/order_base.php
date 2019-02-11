@@ -8,6 +8,7 @@ require_once ('./modules/product/models/product.php');
 require_once ('order_content.php');
 require_once ('order_extract_products.php');
 require_once ('order_products.php');
+require_once ('./modules/statistics/models/statistics.php');
 
 class OrderBase extends Model
 {
@@ -34,6 +35,8 @@ class OrderBase extends Model
     public $dateWork; //дата выдачи в работу
     public $dateMade; //дата выполнения заказа
     public $dateShipment; //дата отгрузки заказа
+	
+	public $timeManufacturingForWorker = 0;
 
     public function convertDate()
     {

@@ -16,12 +16,12 @@
                     <input type="checkbox" name="worker" id_worker="<?=$worker->id?>">
                 </td>
                 <td>
-                    <a href="#"><?=$worker->title?></a>
+                    <a href="/statistics/worker?id_worker=<?=$worker->id?>"><?=$worker->title?></a>
                 </td>
-                <td>37%</td>
-                <td></td>
-				<td></td>
-				<td></td>
+                <td><? if ($worker->workingLoad) echo $worker->workingLoad;?>%</td>
+                <td><? if ($worker->timeManufacturingTotal) echo date('h:i:s', $worker->timeManufacturingTotal);?></td>
+				<td>0</td>
+				<td>350грн</td>
             </tr>
         <? endforeach; ?>
     <? else: ?>

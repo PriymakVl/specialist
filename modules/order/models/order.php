@@ -38,6 +38,12 @@ class Order extends OrderStatic {
 		if (empty($not_ready)) return true;
 		return false;
 	}
+	
+	public function getTimeManufacturingForWorker($worker)
+	{
+		Statistics::getTimeManufacturingOrderForWorker($this, $worker);
+	}
+		
 
 
     public function update()

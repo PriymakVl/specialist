@@ -16,7 +16,7 @@ class UserStatic extends UserBase {
 		$sql = 'SELECT `id`  FROM `users` WHERE `position` = :position AND `status` = :status';
 		$params =  ['position' => self::POSITION_WORKER, 'status' => self::STATUS_ACTIVE];
         $ids = self::perform($sql, $params)->fetchAll();
-        if ($ids) return Helper::createArrayOfObject($ids, 'User');
+        if ($ids) return Helper::createArrayOfObject($ids, 'Worker');
         return false;
 	}
 	
