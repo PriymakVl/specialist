@@ -1,0 +1,30 @@
+form input[type="text"] {
+    border-color: #000000;
+    letter-spacing: 1px;
+    font-size: 16px;
+    height: 20px;
+}
+
+.form-box {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #ddd;
+	margin-bottom: 15px;
+}
+
+textarea[name="note"] {
+    width: 825px;
+    height: 50px;
+}
+
+form input[type="submit"] {
+    margin-left: 290px;
+}
+
+form input[type="button"] {
+    margin-left: 130px;
+}
+
+form select {
+	height: 30px;
+}

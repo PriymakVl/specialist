@@ -2,14 +2,14 @@
 
 class Message {
 
-    public static function setSession($type, $section, $key)
+    public static function set($type, $section, $key)
     {
         $messages = parse_ini_file('./web/files/messages.ini', true);
         $message = $messages[$section][$key];
         $_SESSION[$type] = $message;
     }
 
-    public static function getFromSession()
+    public static function get()
     {
         $message = null;
         if (isset($_SESSION['error'])) {
@@ -25,7 +25,7 @@ class Message {
         return $message;
     }
 
-    public static function get($section, $key)
+    public static function parse($section, $key)
     {
         $messages = parse_ini_file('./web/files/messages.ini', true);
         return $messages[$section][$key];

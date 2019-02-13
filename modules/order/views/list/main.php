@@ -26,14 +26,14 @@ require_once ('./modules/order/models/order_state.php');
     <? include_once('menu.php'); ?>
 
     <!-- order form add -->
-    <? include_once('./modules/order/views/form/add.php'); ?>
+    <? include_once('./modules/order/views/list/form.php'); ?>
 
 </div><!-- id content -->
 
 <!-- js files -->
 <script src="/modules/order/js/order_activate.js"></script>
 <script src="/modules/order/js/order_to_work.js"></script>
-<script src="/modules/order/js/show_order_add_form.js"></script>
+<script src="/modules/order/js/show_order_form.js"></script>
 <script src="/modules/order/js/order_filters.js"></script>
 <script src="/web/js/datepicker.js"></script>
 

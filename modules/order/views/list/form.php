@@ -1,4 +1,4 @@
-<div id="form-order-add-wrp" style="display: none;">
+<div id="form-order-wrp" style="display: none;">
     <h2>Форма для добавления заказа</h2>
     <form action="/order/add" method="post">
         <!-- first box -->
@@ -40,7 +40,7 @@
         <!-- buttons -->
         <div class="button-box">
             <input type="submit" value="Сохранить" id="add-order" name="save">
-            <input type="button" id="hide-form-add" value="Отменить">
+            <input type="button" id="hide-form-order" value="Отменить">
         </div>
     </form>
 </div>

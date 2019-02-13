@@ -10,14 +10,16 @@
                 <th width="150">Состояние</th>
                 <th>Примечание</th>
             </tr>
-            <? foreach ($states as $item): ?>
-                <tr>
-                    <td>1</td>
-                    <td><?=$item->date?></td>
-                    <td><?=$item->stateName?></td>
-                    <td>Какое то примечание</td>
-                </tr>
-            <? endforeach; ?>
+			<? if (isset($states)): ?>
+				<? foreach ($states as $item): ?>
+					<tr>
+						<td>1</td>
+						<td><?=$item->date?></td>
+						<td><?=$item->stateName?></td>
+						<td>Какое то примечание</td>
+					</tr>
+				<? endforeach; ?>
+			<? endif; ?>
         </table>
 
     </div>

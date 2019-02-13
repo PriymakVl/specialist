@@ -10,12 +10,12 @@ class ParamBase {
         return $_REQUEST[$key];
     }
 
-    public static function getAll($keys, $defaults = [])
+    public static function getAll($keys, $defaults = false)
     {
         $params = [];
         foreach ($keys as $key) {
             if (isset($_REQUEST[$key])) $params[$key] = $_REQUEST[$key];
-			else $params = self::isDefaultValue($params, $key, $defaults);
+			else if ($defaults) $params = self::isDefaultValue($params, $key, $defaults);
         }
         return $params;
     }

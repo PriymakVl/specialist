@@ -11,7 +11,7 @@
             <tr>
                 <td>1</th>
                 <td>Обозначение</th>
-                <td><?=$product->symbol?></th>
+                <td class="left"><?=$product->symbol?></th>
             </tr>
             <tr>
                 <td>2</th>

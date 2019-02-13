@@ -41,11 +41,14 @@ class OrderStatic extends OrderBase {
         $fields = 'symbol, description, date_exec, type, state, note';
         $values = ':symbol, :description, :date_exec, :type, :state, :note';
         $sql = 'INSERT INTO `orders` ('.$fields.') VALUES ('.$values.')';
-        self::perform($sql, $params);
-        $order_id = parent::getLastId();
-        //OrderState::set($order_id, OrderState::PREPARATION);
-        return $order_id;
+		self::insert($sql, $params);
     }
+	
+	public static function edit($params)
+	{
+		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `description` = :description, `date_exec` = :date_exec, `type` = :type, `note` = :note WHERE `id` = :id_order';
+		return self::update($sql, $params);
+	}
 
 /*     public static function searchByNumber($number)
     {

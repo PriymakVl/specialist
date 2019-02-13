@@ -4,35 +4,35 @@
     <div class="tab-content">
         <table>
             <tr>
-                <th width="50">№</th>
-                <th width="200">Наименование</th>
-                <th>Значение</th>
+                <th width="50">№</td>
+                <th width="200">Наименование</td>
+                <th>Значение</td>
             </tr>
             <tr>
-                <td>1</th>
-                <td>Обозначение</th>
-                <td><?=$order->symbol?></th>
+                <td>1</td>
+                <td>Обозначение</td>
+                <td><?=$order->symbol?></td>
             </tr>
             <tr>
-                <td>2</th>
-                <td>Описание</th>
-                <td class="left"><?=$order->description?></th>
+                <td>2</td>
+                <td>Описание</td>
+                <td class="left"><?=$order->description?></td>
             </tr>
             <tr>
-                <td>2</th>
+                <td>2</td>
                 <td>Состояние</th>
-                <td><?=$order->state?></th>
+                <td><?=$order->state?></td>
             </tr>
             <tr>
-                <td>3</th>
-                <td>Срок выполнения</th>
-                <td><? if ($order->date_exec) echo date('d.m.y', $order->date_exec); ?></th>
+                <td>3</td>
+                <td>Срок выполнения</td>
+                <td><? if ($order->date_exec) echo date('d.m.y', $order->date_exec); ?></td>
             </tr>
             <? if ($order->note): ?>
                 <tr>
-                    <td>4</th>
-                    <td>Примечание</th>
-                    <td class="left red"><?=$order->note?></th>
+                    <td>4</td>
+                    <td>Примечание</td>
+                    <td class="left red"><?=$order->note?></td>
                 </tr>
             <? endif; ?>
         </table>

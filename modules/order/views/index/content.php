@@ -18,7 +18,7 @@
 							<a href="/product?id_prod=<?=$product->id?>"><?=$product->symbol?></a>
 						</td>
 						<td><?=$product->name?></td>
-						<td><?=$product->orderQtyAll?></td>
+						<td class="product-qty" id_order="<?=$order->id?>" id_prod="<?=$product->id?>"><?=$product->orderQtyAll?></td>
 						<td>5 мин</td>
 					</tr>
                 <? endforeach; ?>

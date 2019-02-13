@@ -1,3 +1,12 @@
 #order-index-wrp table {
     width: 898px;
 }
+
+.product-qty {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.product-qty:hover {
+	text-decoration: none;
+}

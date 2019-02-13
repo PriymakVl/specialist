@@ -12,7 +12,7 @@ class Param extends ParamBase {
         return self::getAll($keys, $defaults);
     }
 
-    public static function forAddOrder()
+    public static function addOrder()
     {
 		$keys = ['symbol', 'description', 'type', 'note', 'state'];
 		$defaults = ['state' => OrderState::REGISTERED];
@@ -21,13 +21,13 @@ class Param extends ParamBase {
         return $params;
     }
 
-    // public static function forUpdateOrder()
-    // {
-        // $params = self::select(['number', 'note', 'state', 'type', 'letter']);
-        // $params['date_exec'] = Date::convertStringToTime(self::get('date_exec'));
-        // $params['count_pack'] = self::get('count_pack', 0);
-        // return $params;
-    // }
+    public static function editOrder()
+    {
+		$keys = ['symbol', 'description', 'type', 'note', 'date_exec', 'id_order'];
+        $params = self::getAll($keys);
+        if ($params['date_exec']) $params['date_exec'] = Date::convertStringToTime($params['date_exec']);
+        return $params;
+    }
 	
 	public static function terminalStartWork()
 	{
@@ -53,6 +53,39 @@ class Param extends ParamBase {
 		$params = self::getAll($keys);
 		$params['state_work'] = Order::STATE_WORK_STOPPED;
 		return $params;
+	}
+	
+	public static function addProduct()
+	{
+		$keys = ['symbol', 'name', 'quantity', 'id_parent', 'type', 'note'];
+		$params = self::getAll($keys);
+		return $params;
+	}
+	
+	public static function editProduct()
+	{
+		$keys = ['symbol', 'name', 'quantity', 'id_parent', 'type', 'note'];
+		$params = self::getAll($keys);
+		$params['status'] = Model::STATUS_ACTIVE;
+		return $params;
+	}
+	
+	public static function copyProduct()
+	{
+		$product = new Product(self::get('id_prod'));
+		$params['symbol'] = $product->symbol;
+		$params['name'] = $product->name;
+		$params['quantity'] = $product->quantity;
+		$params['type'] = $product->type ? $product->type : 4;
+		$params['note'] = $product->note ? $product->note : '';
+		$params['id_parent'] = Session::get('product-active');
+		return $params;
+	}
+	
+	public static function changeQtyProductOrder()
+	{
+		$keys = ['id_order', 'id_prod', 'qty'];
+		return self::getAll($keys);
 	}
 	
 }

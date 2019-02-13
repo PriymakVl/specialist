@@ -34,6 +34,12 @@ class OrderContent extends OrderBase {
         return $content;
     }
 	
+	public static function changeQuantity($params)
+	{
+		$sql = 'UPDATE `order_content` SET `quantity` = :qty WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
+		return self::update($sql, $params);
+	}
+	
 	
 	
 	

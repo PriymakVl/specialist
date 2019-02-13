@@ -25,14 +25,15 @@
         </li> -->
         <!-- categories -->
         <li class="drop">
-            <a href="#">Производство</a>
+            <a href="#">Продукция</a>
             <div class="dropdownContain">
                 <div class="dropOut">
                     <div class="triangle"></div>
                     <ul>
                         <li><a href="/product/popular">Популярные</a></li>
-                        <li><a href="#">Готовая продукция</a></li>
-                        <li><a href="#">Узлы и детали</a></li>
+                        <li><a href="/product?id_prod=10">Готовая продукция</a></li>
+                        <li><a href="/product?id_prod=11">Узлы и детали</a></li>
+						<li><a href="/product/add">Добавить</a></li>
                     </ul>
                 </div>
             </div>

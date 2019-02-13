@@ -31,10 +31,22 @@ class ModelStatic extends PHPDataObject {
         return self::perform($sql)->fetchAll();
     }
 
-    public static function rowCount($sql)
+/*     public static function rowCount($sql)
     {
         return self::perform($sql)->rowCount();
-    }
+    } */
+	
+	public static function update($sql, $params) 
+	{
+		return self::perform($sql, $params)->rowCount();
+	}
+	
+	public static function insert($sql, $params)
+	{
+		self::perform($sql, $params);
+		return self::perform("SELECT LAST_INSERT_ID()")->fetchColumn();
+	}
+		
 
     protected static function bildSelect($params, $table_name, $sql = null)
     {

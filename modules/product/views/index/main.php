@@ -9,8 +9,10 @@ require_once ('./modules/product/models/product.php');
 
 <div id="content">
 
-    <!-- message -->
-    <? //include_once('./views/total/message.php'); ?>
+    <!-- active box info -->
+	<? if ($id_active == $product->id): ?>
+		<div class="message success-message">Активный</div>
+    <? endif; ?>
 
     <div id="product-index-wrp">
         <ul class="tabs">

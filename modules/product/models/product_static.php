@@ -20,4 +20,28 @@ class ProductStatic extends ProductBase {
 		}
 		return $products;
     }
+	
+	public static function add($params)
+	{
+		$fields = 'symbol, name, quantity, type, id_parent, note';
+        $values = ':symbol, :name, :quantity, :type, :id_parent, :note';
+        $sql = 'INSERT INTO `products` ('.$fields.') VALUES ('.$values.')';
+        return self::insert($sql, $params); 
+	}
+	
+	public static function edit($params, $product)
+	{	
+		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `quantity` = :quantity, `type` = :type, `note` = :note, `id_parent` = :id_parent ';
+		if ($product->symbol) {
+			$where = 'WHERE `symbol` = :symbol_old AND `status` = :status';
+			$params['symbol_old'] = $product->symbol;
+		}
+		else {
+			$where = 'WHERE `id` = :id_prod AND `status` =:status';	
+			$params['id_prod'] = $product->id;
+		}
+		$sql = $sql.$where;
+		return self::update($sql, $params);
+	}
+	
 }

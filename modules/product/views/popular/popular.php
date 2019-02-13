@@ -15,7 +15,7 @@
     <tr >
         <td>Штока</td>
         <td class="popular-content">
-            <a href="/product?id_prod=11&view=category">Серия SR</a>
+            <a href="/product?id_prod=16&view=category">Серия SR</a>
             <a href="#">Серия SE</a>
             <a href="#">Серия SC</a>
             <a href="#">Серия MAL</a>
@@ -32,10 +32,10 @@
     <tr>
         <td>Шпильки</td>
         <td class="popular-content">
-            <a href="#">Шпилька М6</a>
-            <a href="#">Шпилька М8</a>
-            <a href="#">Шпилька М10</a>
-            <a href="#">Шпилька М12</a>
+            <a href="/product?id_prod=25">Шпилька М6</a>
+            <a href="/product?id_prod=26">Шпилька М8</a>
+            <a href="/product?id_prod=27">Шпилька М10</a>
+            <a href="/product?id_prod=28">Шпилька М12</a>
         </td>
     </tr>
 </table>
