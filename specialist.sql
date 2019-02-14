@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 13 2019 г., 17:41
+-- Время создания: Фев 14 2019 г., 17:58
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -60,7 +60,7 @@ INSERT INTO `categories` (`id`, `name`, `id_parent`, `status`) VALUES
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `symbol` varchar(50) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `positions` text NOT NULL,
   `state` tinyint(1) NOT NULL,
   `type` tinyint(1) NOT NULL,
   `date_exec` varchar(100) NOT NULL,
@@ -72,13 +72,9 @@ CREATE TABLE `orders` (
 -- Дамп данных таблицы `orders`
 --
 
-INSERT INTO `orders` (`id`, `symbol`, `description`, `state`, `type`, `date_exec`, `note`, `status`) VALUES
-(1, 'SP000000216', 'SC-SR-32x20-S', 3, 1, '', 'note', '1'),
-(2, 'SP000000213', 'SC-SR-PIPE-160x300', 1, 1, '', 'note order 9', '1'),
-(3, '003', 'order новый', 1, 1, '1549021091', 'note order 005', '1'),
-(4, '004', 'descr order 004', 1, 1, '1549786150', 'order note', '1'),
-(5, '005', 'пневмоциил', 1, 1, '1549178148', 'примечание', '1'),
-(6, '0008', 'заказ', 1, 1, '1550403534', 'примечание', '1');
+INSERT INTO `orders` (`id`, `symbol`, `positions`, `state`, `type`, `date_exec`, `note`, `status`) VALUES
+(1, 'SP000000369', 'a:3:{i:1;a:3:{s:6:\"symbol\";s:14:\"SC-SR-63x680-S\";s:3:\"qty\";s:1:\"3\";s:4:\"note\";s:32:\"просьба на завтра\";}i:2;a:3:{s:6:\"symbol\";s:0:\"\";s:3:\"qty\";s:0:\"\";s:4:\"note\";s:0:\"\";}i:3;a:3:{s:6:\"symbol\";s:0:\"\";s:3:\"qty\";s:0:\"\";s:4:\"note\";s:0:\"\";}}', 1, 1, '1550397415', '', '1'),
+(2, 'SP000000485', 'a:3:{i:1;a:3:{s:6:\"symbol\";s:14:\"SC-SR-63x680-S\";s:3:\"qty\";s:1:\"4\";s:4:\"note\";s:0:\"\";}i:2;a:3:{s:6:\"symbol\";s:11:\"SC-MS-20x-S\";s:3:\"qty\";s:1:\"2\";s:4:\"note\";s:20:\"примечание\";}i:3;a:3:{s:6:\"symbol\";s:11:\"SC-MS-20x-S\";s:3:\"qty\";s:1:\"7\";s:4:\"note\";s:22:\"примечание 3\";}}', 1, 1, '1550584695', '', '1');
 
 -- --------------------------------------------------------
 
@@ -93,14 +89,6 @@ CREATE TABLE `order_content` (
   `id_order` int(11) NOT NULL,
   `status` enum('1','2') NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `order_content`
---
-
-INSERT INTO `order_content` (`id`, `id_prod`, `quantity`, `id_order`, `status`) VALUES
-(1, 1, 3, 1, '1'),
-(2, 1, 1, 3, '1');
 
 -- --------------------------------------------------------
 
@@ -123,15 +111,6 @@ CREATE TABLE `order_products` (
   `id_worker` int(11) NOT NULL,
   `status` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `order_products`
---
-
-INSERT INTO `order_products` (`id`, `id_order`, `id_prod`, `state_work`, `type_order`, `kind_work`, `qty_all`, `qty_done`, `time_start`, `time_end`, `time_plan`, `id_worker`, `status`) VALUES
-(1, 1, 1, 1, 1, 3, 3, 0, '', '', '', 0, '1'),
-(2, 1, 5, 1, 1, 2, 3, 0, '1549540485', '1549540495', '1800', 2, '1'),
-(3, 1, 7, 1, 1, 2, 3, 0, '1549540504', '1549540687', '1080', 2, '1');
 
 -- --------------------------------------------------------
 
@@ -352,17 +331,17 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `order_content`
 --
 ALTER TABLE `order_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT для таблицы `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --

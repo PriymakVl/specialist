@@ -1,4 +1,4 @@
-<div id="form-order-wrp" style="display: none;">
+<div id="form-order-wrp">
     <h2>Форма для добавления заказа</h2>
     <form action="/order/add" method="post">
         <!-- first box -->
@@ -25,17 +25,14 @@
             </div>
         </div>
 
-        <!-- order description -->
-        <div id="form-order-description-wrp">
-            <label>Описание заказа:</label>
-            <input type="text" name="description">
-        </div>
-
+		<!-- order position -->
+		<? include_once ('order_position.php'); ?>
+        
         <!-- note -->
-        <div id="form-note-wrp">
+        <!--<div id="form-note-wrp">
             <label>Примечание:</label>
             <textarea name="note"></textarea>
-        </div>
+        </div>-->
 
         <!-- buttons -->
         <div class="button-box">

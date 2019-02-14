@@ -4,6 +4,7 @@ require_once ('order_static.php');
 class Order extends OrderStatic {
 
     public $content;
+	public $positionsTable;
 
     public function __construct($order_id)
     {
@@ -42,6 +43,24 @@ class Order extends OrderStatic {
 	public function getTimeManufacturingForWorker($worker)
 	{
 		Statistics::getTimeManufacturingOrderForWorker($this, $worker);
+	}
+	
+	public function convertPositions()
+	{
+		$this->positions = unserialize($this->positions);
+		return $this;
+	}
+	
+	public function getPositionsTable()
+	{
+		if (!$this->positions) return;
+		$this->positionsTable = '<table>';
+		foreach ($this->positions as $position) {
+			if (!$position['symbol']) break;
+			$this->positionsTable .= '<tr><td>'.$position['symbol'].'</td><td>'.$position['qty'].'шт.</td><td>'.$position['note'].'</td></tr>';
+		}
+		$this->positionsTable .= '</table>';
+		return $this;
 	}
     
 	

@@ -4,9 +4,8 @@
             <input type="checkbox" disabled>
         </th>
         <th width="120">Обозначение</th>
-        <th width="450">Описание</th>
+        <th width="450">Содержание</th>
 		<th width="120">Дата выполн.</th>
-        <th>Примечание</th>
     </tr>
     <? if ($orders): ?>
         <?foreach ($orders as $order): ?>
@@ -17,14 +16,13 @@
                 <td>
                     <a href="/order?id_order=<?=$order->id?>"><?=$order->symbol?></a>
                 </td>
-                <td class="left"><?=$order->description?></td>
+                <td class="order-positions-td"><?=$order->positionsTable?></td>
 				<td><?=$order->dateExecution?></td>
-                <td class="left"><?=$order->note?></td>
             </tr>
         <? endforeach; ?>
     <? else: ?>
         <tr>
-            <td colspan="5" style="color: red;">Заказов нет</td>
+            <td colspan="4" style="color: red;">Заказов нет</td>
         </tr>
     <? endif; ?>
 </table>

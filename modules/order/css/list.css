@@ -18,3 +18,40 @@
     font-size: 16px;
     font-weight: bold;
 }
+
+/* positions order */
+.order-positions-td {
+	padding: 0;
+}
+
+.order-positions-td table {
+	width: 100%;
+}
+
+.order-positions-td td {
+	border: 1px solid white!important;
+}
+
+.order-positions-td td{
+	border-right: 1px solid black!important;
+}
+
+.order-positions-td td:last-child{
+	border-right: 1px solid white!important;
+}
+
+.order-positions-td table td:first-child {
+	width: 210px;
+}
+
+.order-positions-td table td:nth-child(2) {
+	width: 50px;
+}
+
+.order-positions-td table td:nth-child(3) {
+	font-size: 12px;
+	text-align: left;
+}
+
+
+

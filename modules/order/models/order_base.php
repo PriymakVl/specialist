@@ -41,6 +41,17 @@ class OrderBase extends Model
     {
         $this->dateExecution = date('d.m.y', $this->date_exec);
     }
+	
+	public static function serializePositions($positions)
+	{
+		if (!is_array($positions)) return '';
+		foreach ($positions as $position)
+		{
+			if (empty($position['symbol']) continue;
+			$new_array[] = $position;
+		}
+		return serialize($new_array);
+	}
 
 }
 

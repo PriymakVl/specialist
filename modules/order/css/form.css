@@ -1,28 +1,4 @@
 /*form add*/
-#form-order-add-wrp {
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    position: relative;
-    border-bottom: 1px solid #ddd;
-}
-
-#form-order-add-wrp h2 {
-    text-align: center;
-}
-
-#form-order-add-wrp input[type="text"] {
-    border-color: #000000;
-    letter-spacing: 1px;
-    font-size: 16px;
-    height: 20px;
-}
-
-.form-box {
-    position: relative;
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-
 #form-order-symbol-wrp input{
     width: 130px;
 }
@@ -48,29 +24,18 @@
     width: 140px;
 }
 
-#form-order-description-wrp, #form-note-wrp {
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin-top: 15px;
-}
-#form-order-description-wrp input {
-    width: 790px;
-}
-
-.button-box {
-    padding: 10px;
-    margin-top: 15px;
-}
-
-textarea[name="note"] {
-    width: 825px;
-    height: 50px;
-}
-
 #form-order-add-wrp input[type="submit"] {
     margin-left: 290px;
 }
 
 #form-order-add-wrp input[type="button"] {
     margin-left: 130px;
+}
+
+.position-note-wrp {
+	margin-top: 15px;
+}
+
+.position-note-wrp textarea {
+	width: 825px;
 }

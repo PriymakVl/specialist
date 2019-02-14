@@ -1,4 +1,4 @@
-<div id="form-order-wrp" style="display: none;">
+<div id="form-order-wrp">
     <h2>Форма для редактирования заказа</h2>
     <form action="/order/edit?id_order=<?=$order->id?>" method="post">
         <!-- first box -->
@@ -40,7 +40,7 @@
         <!-- buttons -->
         <div class="button-box">
             <input type="submit" value="Сохранить" id="form-order" name="save">
-            <input type="button" id="hide-form-order" value="Отменить">
+            <input type="button" onclick="history.back();" value="Отменить">
         </div>
     </form>
 </div>

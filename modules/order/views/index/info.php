@@ -15,11 +15,6 @@
             </tr>
             <tr>
                 <td>2</td>
-                <td>Описание</td>
-                <td class="left"><?=$order->description?></td>
-            </tr>
-            <tr>
-                <td>2</td>
                 <td>Состояние</th>
                 <td><?=$order->state?></td>
             </tr>
@@ -28,13 +23,10 @@
                 <td>Срок выполнения</td>
                 <td><? if ($order->date_exec) echo date('d.m.y', $order->date_exec); ?></td>
             </tr>
-            <? if ($order->note): ?>
-                <tr>
-                    <td>4</td>
-                    <td>Примечание</td>
-                    <td class="left red"><?=$order->note?></td>
-                </tr>
-            <? endif; ?>
         </table>
+		
+		<!-- table order positions -->
+		<? include_once('order_positions.php'); ?>
+		
     </div>
 </li>

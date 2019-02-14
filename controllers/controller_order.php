@@ -18,7 +18,7 @@ class Controller_Order extends Controller {
 	{;
 		$id_active = Session::get('order-active');
 		$order = new Order($this->id_order);
-		$order->getContent();
+		$order->convertPositions()->getContent();
         $this->view->title = 'Заказ';
 		$this->render('index/main', compact('order', 'id_active'));
 	}
@@ -58,6 +58,7 @@ class Controller_Order extends Controller {
 	public function action_add()
     {
 		$params = Param::addOrder();
+		if (empty($params['symbol'])) return $this->render('add/main');
         $order = Order::getBySymbol($params['symbol']);
         if ($order) {
             //Message::setSession('error', 'order', 'already_exist');
@@ -66,19 +67,17 @@ class Controller_Order extends Controller {
         else {
             $id_add = Order::add($params);
             //Message::setSession('success', 'order', 'success_add');
-            $this->redirect('order/list?state='.OrderState::REGISTERED);
+            $this->redirect('order/list');
         }
     }
 	
 	public function action_edit()
 	{
 		$params = Param::editOrder();
-		$result = Order::edit($params);
-		
-		//if ($result) Message::set('success', 'order', 'update_success');
-		//else Message::set('error', 'order', 'update_error');
-		
-		$this->redirect('order?id_order='.$params['id_order']);
+		$order = new Order($this->id_order);
+		if (empty($params['symbol'])) return $this->render('edit/main', compact('order'));
+		Order::edit($params);
+		$this->redirect('order?id_order='.$this->id_order);
 	}
 	
 	public function action_change_qty_product()
@@ -86,6 +85,13 @@ class Controller_Order extends Controller {
 		$params = Param::changeQtyProductOrder();
 		OrderContent::changeQuantity($params);
 		$this->redirectPrevious();
+	}
+	
+	public function action_delete()
+	{
+		$order = new Order($this->id_order);
+		$order->delete();
+		$this->redirect('order/list');
 	}
     
 

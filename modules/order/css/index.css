@@ -10,3 +10,11 @@
 .product-qty:hover {
 	text-decoration: none;
 }
+
+#table-order-positions {
+	margin-top: 15px;
+}
+
+#table-order-positions caption {
+	font-size: 18px;
+}

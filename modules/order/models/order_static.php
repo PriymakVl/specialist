@@ -13,7 +13,11 @@ class OrderStatic extends OrderBase {
 
 	private static function createArrayOfOrder($ids)
     {
-        return Helper::createArrayOfObject($ids, 'Order');
+        $orders = Helper::createArrayOfObject($ids, 'Order');
+		foreach ($orders as $order) {
+			$order->convertPositions()->getPositionsTable();
+		}
+		return $orders;
     }
 	
 	public static function getBySymbol($symbol)
@@ -38,15 +42,16 @@ class OrderStatic extends OrderBase {
 
     public static function add($params)
     {
-        $fields = 'symbol, description, date_exec, type, state, note';
-        $values = ':symbol, :description, :date_exec, :type, :state, :note';
+        $fields = 'symbol, positions, date_exec, type, state';
+        $values = ':symbol, :positions, :date_exec, :type, :state';
         $sql = 'INSERT INTO `orders` ('.$fields.') VALUES ('.$values.')';
 		self::insert($sql, $params);
     }
 	
 	public static function edit($params)
 	{
-		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `description` = :description, `date_exec` = :date_exec, `type` = :type, `note` = :note WHERE `id` = :id_order';
+		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `description` = :description, `date_exec` = :date_exec, `type` = :type, `note` = :note 
+			WHERE `id` = :id_order';
 		return self::update($sql, $params);
 	}
 

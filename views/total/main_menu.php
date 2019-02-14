@@ -5,20 +5,14 @@
 <nav id="main-menu">
     <ul>
         <!-- orders -->
-		<li><a href="/order/list">Заказы</a></li>
-		
-        <!--<li class="drop">
+        <li class="drop">
             <a href="#">Заказы</a>
             <div class="dropdownContain">
                 <div class="dropOut">
                     <div class="triangle"></div>
                     <ul>
-                        <li><a href="/order/list?state=<?=OrderState::REGISTERED?>">Зарегистрированны</a></li>
-                        <li><a href="/order/list?state=<?=OrderState::PREPARATION?>">В подготовке</a></li>
-                        <li><a href="/order/list?state=<?=OrderState::WORK?>">В работе</a></li>
-                        <li><a href="/order/list?state=<?=OrderState::MADE?>">Готовы</a></li>
-                        <li><a href="/order/list?state=<?=OrderState::SENT?>">Отгружены</a></li>
-                        <li><a href="/order/list?state=<?=OrderState::ALL?>">Все</a></li>
+                        <li><a href="/order/list">Перечень заказов</a></li>
+                        <li><a href="/order/add">Добавить заказ</a></li>
                     </ul>
                 </div>
             </div>
