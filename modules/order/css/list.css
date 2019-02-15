@@ -4,7 +4,7 @@
 
 #order-filter-state {
     font-size: 16px;
-    width: 180px;
+    width: 200px;
     height: 28px;
 }
 
@@ -23,17 +23,28 @@
 .order-positions-td {
 	padding: 0;
 }
+.order-positions-td table td {
+	border: none;
+}
+
+.order-positions-td table tr{
+	border-bottom: 1px solid #C0C0C0;
+}
+
+.order-positions-td table tr:last-child{
+	border-bottom: none;
+}
+
+.order-positions-td table td{
+	border-right: 1px solid #C0C0C0;
+}
+
+.order-positions-td table td:last-child{
+	border-right: none;
+}
 
 .order-positions-td table {
 	width: 100%;
-}
-
-.order-positions-td td {
-	border: 1px solid white!important;
-}
-
-.order-positions-td td{
-	border-right: 1px solid black!important;
 }
 
 .order-positions-td td:last-child{
@@ -52,6 +63,7 @@
 	font-size: 12px;
 	text-align: left;
 }
+
 
 
 

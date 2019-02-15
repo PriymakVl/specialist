@@ -24,15 +24,12 @@
                 <input type="text" name="date_exec" id="datepicker">
             </div>
         </div>
-
-		<!-- order position -->
-		<? include_once ('order_position.php'); ?>
-        
+      
         <!-- note -->
-        <!--<div id="form-note-wrp">
+        <div id="form-order-note-wrp" class="form-box">
             <label>Примечание:</label>
             <textarea name="note"></textarea>
-        </div>-->
+        </div>
 
         <!-- buttons -->
         <div class="button-box">

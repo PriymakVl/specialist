@@ -5,8 +5,11 @@ class OrderStatic extends OrderBase {
 
 	public static function getList($params)
 	{
-	    $where = self::bildWhere($params);
-	    $sql = 'SELECT `id` FROM `orders` '.$where.' ORDER BY date_exec';
+		if ($params['state'] == OrderState::ALL) {
+			$sql = 'SELECT `id` FROM `orders` WHERE `status` = :status ORDER BY date_exec';
+			unset($params['state']);
+		}
+	    else $sql = 'SELECT `id` FROM `orders` WHERE `state` = :state AND `status` = :status ORDER BY date_exec';
         $ids = self::perform($sql, $params)->fetchAll();
 	    return self::createArrayOfOrder($ids);
 	}
@@ -15,7 +18,7 @@ class OrderStatic extends OrderBase {
     {
         $orders = Helper::createArrayOfObject($ids, 'Order');
 		foreach ($orders as $order) {
-			$order->convertPositions()->getPositionsTable();
+			$order->getPositions()->getPositionsTable();
 		}
 		return $orders;
     }
@@ -42,8 +45,8 @@ class OrderStatic extends OrderBase {
 
     public static function add($params)
     {
-        $fields = 'symbol, positions, date_exec, type, state';
-        $values = ':symbol, :positions, :date_exec, :type, :state';
+        $fields = 'symbol, note, date_exec, type, state';
+        $values = ':symbol, :note, :date_exec, :type, :state';
         $sql = 'INSERT INTO `orders` ('.$fields.') VALUES ('.$values.')';
 		self::insert($sql, $params);
     }

@@ -24,6 +24,7 @@ class Product extends ProductStatic {
 	public function getIimeManufacturing()
 	{
 		$result = ProductTime::get($this->symbol);
+		if (empty($result)) return;
 		$this->timeProduction = $result->time_prod;
 		$this->timePreparation = $result->time_prepar;
 		return $this;

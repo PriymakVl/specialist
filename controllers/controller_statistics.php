@@ -14,7 +14,7 @@ class Controller_Statistics extends Controller {
 
     public function action_workers()
 	{
-		$workers = Worker::getWorkersWithProperties();
+		$workers = Worker::getAllWithStatistics();
         $this->view->title = 'Статистика по рабочим';
 		$this->render('workers/main', compact('workers'));
 	}

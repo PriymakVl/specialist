@@ -6,6 +6,7 @@ require_once ('./helpers/helper.php');
 require_once ('./modules/product/models/product.php');
 require_once ('order_content.php');
 require_once ('order_extract_products.php');
+require_once ('order_positions.php');
 require_once ('order_products.php');
 require_once ('./modules/statistics/models/statistics.php');
 
@@ -41,17 +42,6 @@ class OrderBase extends Model
     {
         $this->dateExecution = date('d.m.y', $this->date_exec);
     }
-	
-	public static function serializePositions($positions)
-	{
-		if (!is_array($positions)) return '';
-		foreach ($positions as $position)
-		{
-			if (empty($position['symbol']) continue;
-			$new_array[] = $position;
-		}
-		return serialize($new_array);
-	}
 
 }
 

@@ -5,7 +5,9 @@ require_once ('./modules/order/models/order.php');
 ?>
 
 <!-- css files -->
+<link rel="stylesheet" href="/web/css/total/form.css">
 <link rel="stylesheet" href="/modules/order/css/form.css">
+
 
 <div id="content">
 

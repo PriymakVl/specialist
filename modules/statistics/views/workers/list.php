@@ -18,8 +18,20 @@
                 <td>
                     <a href="/statistics/worker?id_worker=<?=$worker->id?>"><?=$worker->title?></a>
                 </td>
-                <td><? if ($worker->workingLoad) echo $worker->workingLoad;?>%</td>
-                <td><? if ($worker->timeManufacturingTotal) echo date('h:i:s', $worker->timeManufacturingTotal);?></td>
+                <td>
+					<? if ($worker->loadPercent): ?>
+						<span><?=$worker->loadPercent?>%</span>
+					<? else: ?>
+						<span class="red">Простой</span>
+					<? endif; ?>
+				</td>
+                <td>
+					<? if ($worker->loadTimePlan): ?>
+						<span><?=date('h:i:s', $worker->loadTimePlan)?></span>
+					<? else: ?>
+						<span class="red">Простой</span>
+					<? endif; ?>
+				</td>
 				<td>0</td>
 				<td>350грн</td>
             </tr>

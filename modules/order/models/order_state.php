@@ -42,13 +42,13 @@ class OrderState extends OrderBase {
         return $states;
     }
 
-    public static function convertStateToWord($state)
+    public static function convert($state)
     {
         switch($state){
-            case self::REGISTERED: return 'registered';
-            case self::PREPARATION: return 'preparation';
-            case self::WORK: return'work';
-            case self::MADE: return 'made';
+            case self::REGISTERED: return 'Зарегистрирован';
+            case self::PREPARATION: return 'В подготовке';
+            case self::WORK: return'В работе';
+            case self::MADE: return 'Выполнен';
             default: throw new Exception('Состояние заказа указано неверно');
         }
     }

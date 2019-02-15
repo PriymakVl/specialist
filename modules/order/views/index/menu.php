@@ -6,10 +6,12 @@
 		<? if ($id_active != $order->id): ?>
 			<li><a href="/order/activate?id_order=<?=$order->id?>">Сделать активным</a></li>
 		<? endif; ?>
+		<li><a href="/order/add_position?id_order=<?=$order->id?>">Добавить позицию</a></li>
     </ul>
 	
 	<!-- menu order content -->
 	<ul id="menu-order-content" >
         <li><a href="/order/delete?id_order=<?=$order->id?>">Удалить позицию</a></li>
+		<li><a href="/order/to_work?id_order=<?=$order->id?>">Выдать в работу</a></li>
     </ul>
 </div>

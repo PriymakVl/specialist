@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 14 2019 г., 17:58
+-- Время создания: Фев 15 2019 г., 17:48
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -60,7 +60,6 @@ INSERT INTO `categories` (`id`, `name`, `id_parent`, `status`) VALUES
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `symbol` varchar(50) NOT NULL,
-  `positions` text NOT NULL,
   `state` tinyint(1) NOT NULL,
   `type` tinyint(1) NOT NULL,
   `date_exec` varchar(100) NOT NULL,
@@ -72,9 +71,8 @@ CREATE TABLE `orders` (
 -- Дамп данных таблицы `orders`
 --
 
-INSERT INTO `orders` (`id`, `symbol`, `positions`, `state`, `type`, `date_exec`, `note`, `status`) VALUES
-(1, 'SP000000369', 'a:3:{i:1;a:3:{s:6:\"symbol\";s:14:\"SC-SR-63x680-S\";s:3:\"qty\";s:1:\"3\";s:4:\"note\";s:32:\"просьба на завтра\";}i:2;a:3:{s:6:\"symbol\";s:0:\"\";s:3:\"qty\";s:0:\"\";s:4:\"note\";s:0:\"\";}i:3;a:3:{s:6:\"symbol\";s:0:\"\";s:3:\"qty\";s:0:\"\";s:4:\"note\";s:0:\"\";}}', 1, 1, '1550397415', '', '1'),
-(2, 'SP000000485', 'a:3:{i:1;a:3:{s:6:\"symbol\";s:14:\"SC-SR-63x680-S\";s:3:\"qty\";s:1:\"4\";s:4:\"note\";s:0:\"\";}i:2;a:3:{s:6:\"symbol\";s:11:\"SC-MS-20x-S\";s:3:\"qty\";s:1:\"2\";s:4:\"note\";s:20:\"примечание\";}i:3;a:3:{s:6:\"symbol\";s:11:\"SC-MS-20x-S\";s:3:\"qty\";s:1:\"7\";s:4:\"note\";s:22:\"примечание 3\";}}', 1, 1, '1550584695', '', '1');
+INSERT INTO `orders` (`id`, `symbol`, `state`, `type`, `date_exec`, `note`, `status`) VALUES
+(1, 'SP000000485', 3, 1, '1550479090', '', '1');
 
 -- --------------------------------------------------------
 
@@ -89,6 +87,35 @@ CREATE TABLE `order_content` (
   `id_order` int(11) NOT NULL,
   `status` enum('1','2') NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `order_content`
+--
+
+INSERT INTO `order_content` (`id`, `id_prod`, `quantity`, `id_order`, `status`) VALUES
+(1, 33, 4, 1, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `order_positions`
+--
+
+CREATE TABLE `order_positions` (
+  `id` int(11) NOT NULL,
+  `id_order` int(11) NOT NULL,
+  `symbol` varchar(100) NOT NULL,
+  `qty` int(5) NOT NULL COMMENT 'quantity',
+  `note` varchar(255) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `order_positions`
+--
+
+INSERT INTO `order_positions` (`id`, `id_order`, `symbol`, `qty`, `note`, `status`) VALUES
+(1, 1, 'SC-SE-40x200-S', 4, '', '1');
 
 -- --------------------------------------------------------
 
@@ -111,6 +138,15 @@ CREATE TABLE `order_products` (
   `id_worker` int(11) NOT NULL,
   `status` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `order_products`
+--
+
+INSERT INTO `order_products` (`id`, `id_order`, `id_prod`, `state_work`, `type_order`, `kind_work`, `qty_all`, `qty_done`, `time_start`, `time_end`, `time_plan`, `id_worker`, `status`) VALUES
+(1, 1, 33, 1, 1, 3, 4, 0, '1550231966', '1550231970', '5820', 3, '1'),
+(2, 1, 38, 1, 1, 2, 4, 0, '1550230281', '1550230290', '2460', 2, '1'),
+(3, 1, 46, 1, 1, 2, 4, 0, '', '', '1500', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -138,8 +174,8 @@ INSERT INTO `products` (`id`, `symbol`, `name`, `id_parent`, `quantity`, `type`,
 (2, 'SC-SR-40', 'Пневмоцилиндр', 14, 1, 2, '', '1'),
 (3, 'SC-SR-50', 'Пневмоцилиндр', 14, 1, 2, '', '1'),
 (4, 'SC-SR-63', 'Пневмоцилиндр', 14, 1, 2, '', '1'),
-(5, 'SC-SR-ROD-12', 'Шток', 16, 1, 4, 'SE', '1'),
-(6, 'SC-SR-ROD-16', 'Шток', 16, 1, 4, '', '1'),
+(5, 'SC-SR/SE-ROD-12', 'Шток', 16, 1, 4, 'SE', '1'),
+(6, 'SC-SR/SE-ROD-16', 'Шток', 16, 1, 4, '', '1'),
 (7, 'SC-SR-PIPE-32', 'Гильза', 1, 1, 4, '', '1'),
 (8, 'SC-SR-PIPE-40', 'Гильза', 2, 1, 4, '', '1'),
 (9, '', 'Производство', 0, 0, 1, '', '1'),
@@ -148,11 +184,11 @@ INSERT INTO `products` (`id`, `symbol`, `name`, `id_parent`, `quantity`, `type`,
 (12, '', 'Пневмоцилиндры', 10, 0, 1, 'готовая продукция', '1'),
 (13, '', 'Пневмоцилиндры', 11, 0, 1, 'запчасти', '1'),
 (14, '', 'Серия SR', 12, 0, 1, 'пневмоцилиндры', '1'),
-(15, 'SC-SR-ROD-20', 'Шток', 16, 1, 4, '', '1'),
+(15, 'SC-SR/SE-ROD-20', 'Шток', 16, 1, 4, '', '1'),
 (16, '', 'Серия SR', 20, 0, 1, 'запчасти', '1'),
-(17, 'SC-SR-ROD-25', 'Шток', 16, 1, 4, '', '1'),
-(18, 'SC-SR-ROD-32', 'Шток', 16, 1, 4, '', '1'),
-(19, 'SC-SR-ROD-40', 'Шток', 16, 1, 4, '', '1'),
+(17, 'SC-SR/SE-ROD-25', 'Шток', 16, 1, 4, '', '1'),
+(18, 'SC-SR/SE-ROD-32', 'Шток', 16, 1, 4, '', '1'),
+(19, 'SC-SR/SE-ROD-40', 'Шток', 16, 1, 4, '', '1'),
 (20, '', 'Штока', 13, 0, 1, 'запчасти', '1'),
 (21, '', 'Гильзы', 13, 0, 1, '', '1'),
 (22, '', 'Шпильки', 13, 0, 1, '', '1'),
@@ -163,8 +199,23 @@ INSERT INTO `products` (`id`, `symbol`, `name`, `id_parent`, `quantity`, `type`,
 (27, 'SC-TR-H-10', 'Шпилька 10мм', 22, 1, 4, '', '1'),
 (28, 'SC-TR-H-12', 'Шпилька 12мм', 22, 1, 4, '', '1'),
 (29, 'SC-TR-H-16', 'Шпилька 16мм', 22, 1, 4, '', '1'),
-(30, 'SC-SR-ROD-12', 'Шток', 1, 1, 4, 'SE', '1'),
-(31, 'SC-TR-H-6', 'Шпилька 6мм', 1, 4, 4, '', '1');
+(30, 'SC-SR/SE-ROD-12', 'Шток', 16, 1, 4, 'SE', '1'),
+(31, 'SC-TR-H-6', 'Шпилька 6мм', 1, 4, 4, '', '1'),
+(32, 'SC-SE-32', 'Пневмоцилиндр', 23, 1, 2, '', '1'),
+(33, 'SC-SE-40', 'Пневмоцилиндр', 23, 1, 2, '', '1'),
+(34, 'SC-SE-50', 'Пневмоцилиндр', 23, 1, 2, '', '1'),
+(35, 'SC-SE-63', 'Пневмоцилиндр', 23, 1, 2, '', '1'),
+(36, 'SC-SE-80', 'Пневмоцилиндр', 23, 1, 0, '', '1'),
+(37, 'SC-SE-100 ', 'Пневмоцилиндр', 23, 1, 0, '', '1'),
+(38, 'SC-SR/SE-ROD-16', 'Шток', 33, 1, 4, '', '1'),
+(39, '', 'Серия SE', 21, 1, 0, '', '1'),
+(40, 'SC-SE-PIPE-32', 'Гильза', 39, 1, 0, '', '1'),
+(41, 'SC-SE-PIPE-40', 'Гильза', 39, 1, 0, '', '1'),
+(42, 'SC-SE-PIPE-50', 'Гильза', 39, 1, 0, '', '1'),
+(43, 'SC-SE-PIPE-63', 'Гильза', 39, 1, 0, '', '1'),
+(44, 'SC-SE-PIPE-80', 'Гильза', 39, 1, 0, '', '1'),
+(45, 'SC-SE-PIPE-100', 'Гильза', 39, 1, 0, '', '1'),
+(46, 'SC-SE-PIPE-40', 'Гильза', 33, 1, 4, '', '1');
 
 -- --------------------------------------------------------
 
@@ -256,7 +307,9 @@ CREATE TABLE `user_options` (
 
 INSERT INTO `user_options` (`id`, `name`, `value`, `id_user`, `status`) VALUES
 (1, 'default_type_order', '1', 2, '1'),
-(2, 'default_kind_work', '2', 2, '1');
+(2, 'default_kind_work', '2', 2, '1'),
+(3, 'default_type_order', '1', 3, '1'),
+(4, 'default_kind_work', '3', 3, '1');
 
 --
 -- Индексы сохранённых таблиц
@@ -278,6 +331,12 @@ ALTER TABLE `orders`
 -- Индексы таблицы `order_content`
 --
 ALTER TABLE `order_content`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `order_positions`
+--
+ALTER TABLE `order_positions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -331,22 +390,27 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `order_content`
 --
 ALTER TABLE `order_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `order_positions`
+--
+ALTER TABLE `order_positions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT для таблицы `product_action`
 --
@@ -366,7 +430,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `user_options`
 --
 ALTER TABLE `user_options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

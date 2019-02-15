@@ -18,7 +18,7 @@ class Controller_Order extends Controller {
 	{;
 		$id_active = Session::get('order-active');
 		$order = new Order($this->id_order);
-		$order->convertPositions()->getContent();
+		$order->getPositions()->getContent()->convertState();
         $this->view->title = 'Заказ';
 		$this->render('index/main', compact('order', 'id_active'));
 	}
@@ -92,6 +92,14 @@ class Controller_Order extends Controller {
 		$order = new Order($this->id_order);
 		$order->delete();
 		$this->redirect('order/list');
+	}
+	
+	public function action_add_position()
+	{
+		$params = Param::addOrderPosition();
+		if (empty($params['symbol'])) return $this->render('position/add', ['id_order' => $this->id_order]);
+		OrderPositions::add($params);
+		$this->redirect('order?id_order='.$this->id_order);
 	}
     
 

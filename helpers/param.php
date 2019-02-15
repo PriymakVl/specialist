@@ -14,11 +14,10 @@ class Param extends ParamBase {
 
     public static function addOrder()
     {
-		$keys = ['symbol', 'positions', 'type', 'note', 'state'];
+		$keys = ['symbol', 'type', 'note', 'state'];
         $params = self::getAll($keys);
         $params['date_exec'] = Date::convertStringToTime(self::get('date_exec'));
 		$params['state'] = empty($params['state']) ? OrderState::REGISTERED : $params['state'];
-		$params ['positions'] = Order::serializePositions($params['positions']);
         return $params;
     }
 
@@ -88,6 +87,13 @@ class Param extends ParamBase {
 	{
 		$keys = ['id_order', 'id_prod', 'qty'];
 		return self::getAll($keys);
+	}
+	
+	public static function addOrderPosition()
+	{
+		$keys = ['id_order', 'symbol', 'qty', 'note'];
+		$params = self::getAll($keys);
+		return $params;
 	}
 	
 }

@@ -1,4 +1,8 @@
 /*form add*/
+#form-order-wrp h2 {
+	text-align: center;
+}
+
 #form-order-symbol-wrp input{
     width: 130px;
 }
@@ -30,6 +34,10 @@
 
 #form-order-add-wrp input[type="button"] {
     margin-left: 130px;
+}
+
+#form-order-note-wrp textarea {
+	width: 915px;
 }
 
 .position-note-wrp {

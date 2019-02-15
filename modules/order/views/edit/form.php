@@ -25,14 +25,8 @@
             </div>
         </div>
 
-        <!-- order description -->
-        <div id="form-order-description-wrp">
-            <label>Описание заказа:</label>
-            <input type="text" name="description" value="<?=$order->description?>">
-        </div>
-
         <!-- note -->
-        <div id="form-note-wrp">
+        <div id="form-order-note-wrp" class="form-box">
             <label>Примечание:</label>
             <textarea name="note"><?=$order->note?></textarea>
         </div>

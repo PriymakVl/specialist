@@ -66,21 +66,27 @@ class OrderProducts extends OrderBase {
         return false;
 	}
 	
-	public static function getForWorker($order, $worker) 
+	public static function getForWorker($worker, $order = false) 
 	{
-		$sql = 'SELECT * FROM `order_products` 
-		WHERE `id_order` = :id_order AND `status` = :status AND `type_order` = :type_order AND `kind_work` = :kind_work AND `state_work` < 4';
-        $params = self::getParamsForWorker($order, $worker);
+		$sql = self::getSqlForWorker($order);
+        $params = self::getParamsForWorker($worker, $order);
 		$items = self::perform($sql, $params)->fetchAll();
 		if ($items) return self::createArrayProducts($items);
         return false;
 	}
 	
-	private static function getParamsForWorker($order, $worker)
+	private static function getSqlForWorker($order)
 	{
-		$worker->defaultTypeOrder = Order::TYPE_CYLINDER;
-		$worker->defaultKindWork = Order::KIND_WORK_MAKE;
-		$params['id_order'] = $order->id; 
+		$sql = 'SELECT * FROM `order_products` ';
+		if ($order) $where = 'WHERE `id_oder` = :id_order AND ';
+		else $where = 'WHERE ';
+		return $sql.$where.'`status` = :status AND `type_order` = :type_order AND `kind_work` = :kind_work AND `state_work` < 4';
+	}
+
+	
+	private static function getParamsForWorker($worker, $order)
+	{
+		if ($order) $params['id_order'] = $order->id; 
 		$params['status'] = self::STATUS_ACTIVE;
 		$params['type_order'] = $worker->defaultTypeOrder;
 		$params['kind_work'] = $worker->defaultKindWork;
@@ -95,7 +101,6 @@ class OrderProducts extends OrderBase {
 			$product = new Product($item->id_prod);
 			$product = self::setDatabaseProperties($product, $item);
 			$product->setBgTerminalProductBox();
-			$product->timeManufacturingAll = self::getIimeManufacturingForAll($product);
             $products[] = $product;
         }
         return $products;
@@ -113,6 +118,7 @@ class OrderProducts extends OrderBase {
 		$product->kindWork = $item->kind_work;
 		$product->stateWork = $item->state_work;
 		$product->stateWorkConvert = self::convertStateWork($item->state_work);
+		$product->timeManufacturingOrder = $item->time_plan;
 		return $product;
 	}
 	
@@ -128,11 +134,11 @@ class OrderProducts extends OrderBase {
 		}
 	}
 	
-	private static function getIimeManufacturingForAll($product)
-	{
-		$product->getIimeManufacturing();
-		return ($product->timeProduction * $product->orderQtyAll) + $product->timePreparation;
-	}
+	// private static function getIimeManufacturingForAll($product)
+	// {
+		// $product->getIimeManufacturing();
+		// return ($product->timeProduction * $product->orderQtyAll) + $product->timePreparation;
+	// }
 	
 	
 	

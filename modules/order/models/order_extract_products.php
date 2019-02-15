@@ -28,7 +28,7 @@ class OrderExtractProducts extends OrderBase
 	private static function countOrderQuantity($products, $order_qty)
 	{
 		foreach ($products as $product) {
-			$product->orderQtyAll = $product->specifQty * $order_qty;
+			$product->orderQtyAll = $product->quantity * $order_qty;
 		}
 		return $products;
 	}

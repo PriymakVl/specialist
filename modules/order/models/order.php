@@ -5,6 +5,8 @@ class Order extends OrderStatic {
 
     public $content;
 	public $positionsTable;
+	public $positions;
+	public $convertState;
 
     public function __construct($order_id)
     {
@@ -21,8 +23,8 @@ class Order extends OrderStatic {
 	
 	public function toWork()
 	{	
-		$content = OrderContent::get($this->id);
-		$products = OrderExtractProducts::get($content);
+		$this->getContent();
+		$products = OrderExtractProducts::get($this->content);
 		OrderProducts::add($products, $this);
 		$this->setState(OrderState::WORK);
 		//todo для учета статистики добавить состояние в OrderState
@@ -45,9 +47,9 @@ class Order extends OrderStatic {
 		Statistics::getTimeManufacturingOrderForWorker($this, $worker);
 	}
 	
-	public function convertPositions()
+	public function getPositions()
 	{
-		$this->positions = unserialize($this->positions);
+		$this->positions = OrderPositions::get($this->id);
 		return $this;
 	}
 	
@@ -56,10 +58,15 @@ class Order extends OrderStatic {
 		if (!$this->positions) return;
 		$this->positionsTable = '<table>';
 		foreach ($this->positions as $position) {
-			if (!$position['symbol']) break;
-			$this->positionsTable .= '<tr><td>'.$position['symbol'].'</td><td>'.$position['qty'].'шт.</td><td>'.$position['note'].'</td></tr>';
+			$this->positionsTable .= '<tr><td>'.$position->symbol.'</td><td>'.$position->qty.'шт.</td><td>'.$position->note.'</td></tr>';
 		}
 		$this->positionsTable .= '</table>';
+		return $this;
+	}
+	
+	public function convertState()
+	{
+		$this->convertState = OrderState::convert($this->state);
 		return $this;
 	}
     

@@ -31,8 +31,8 @@ class ProductStatic extends ProductBase {
 	
 	public static function edit($params, $product)
 	{	
-		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `quantity` = :quantity, `type` = :type, `note` = :note, `id_parent` = :id_parent ';
-		if ($product->symbol) {
+		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent ';
+		if ($product->symbol && $params['symbol'] == $params['symbol_old']) {
 			$where = 'WHERE `symbol` = :symbol_old AND `status` = :status';
 			$params['symbol_old'] = $product->symbol;
 		}

@@ -4,6 +4,7 @@ require_once('./core/controller.php');
 require_once('./modules/order/models/order_static.php');
 require_once('./modules/order/models/order_state.php');
 require_once('./modules/order/models/order.php');
+require_once('./modules/user/models/worker.php');
 
 class Controller_Terminal extends Controller {
 	
@@ -34,7 +35,7 @@ class Controller_Terminal extends Controller {
     {
 		$worker = $this->getWorker();
 		$order = new Order(Param::get('id_order'));
-        $products = OrderProducts::getForWorker($order, $worker);
+        $products = OrderProducts::getForWorker($worker, $order);
 		if ($products) $this->render('products/main', compact('products', 'order', 'worker'));
 		else $this->redirect('terminal/orders');
     }

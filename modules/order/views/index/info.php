@@ -16,7 +16,7 @@
             <tr>
                 <td>2</td>
                 <td>Состояние</th>
-                <td><?=$order->state?></td>
+                <td><?=$order->convertState?></td>
             </tr>
             <tr>
                 <td>3</td>
