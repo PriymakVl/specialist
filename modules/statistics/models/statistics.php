@@ -16,6 +16,7 @@ class Statistics extends StatisticsBase {
 	public static function getTimeManufacturingPlan($products)
 	{
 		$time_load_worker = 0;
+		if (!$products) return $time_load_worker;
 		foreach ($products as $product) {
 			if ($product->timeManufacturingOrder) $time_load_worker = $time_load_worker + $product->timeManufacturingOrder;
 		}
@@ -25,9 +26,11 @@ class Statistics extends StatisticsBase {
 	//load plan worker in seconds 
 	public static function checkTimeManufacturing($products)
 	{
-		foreach ($products as $product) {
-			if (!$product->timeManufacturingOrder) return false;
-		}
+	    if ($products) {
+            foreach ($products as $product) {
+                if (!$product->timeManufacturingOrder) return false;
+            }
+        }
 		return true;
 	}
 	

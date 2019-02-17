@@ -1,16 +1,17 @@
-<!-- css -->
-<link rel="stylesheet" href="/web/css/login.css">
+<!--<H1 class="firmname">Specialist</H1>-->
+<form method="post" action="/main/login" class="login">
+	<p>
+	  <label for="login">Логин:</label>
+	  <input type="text" name="login" id="login" required>
+	</p>
 
-<div id="login-form">
-    <img src="/web/images/logo.png" id="logo">
-    <h1>Авторизация</h1>
-    <fieldset>
-        <form>
-            <input type="text" id="password"  required value="Пароль" onBlur="if(this.value=='')this.value='Пароль'" onFocus="if(this.value=='Пароль')this.value='' ">
-            <input type="submit" name="submit" value="ВОЙТИ">
-        </form>
-    </fieldset>
-</div>
+	<p>
+	  <label for="password">Пароль:</label>
+	  <input type="password" name="password" id="password" required>
+	</p>
 
-<!-- js files -->
-<script src="/web/js/main/login.js"></script>
+	<p class="login-submit">
+	  <button type="submit" class="login-button">Войти</button>
+	</p>
+
+</form>

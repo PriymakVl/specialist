@@ -8,15 +8,9 @@ class ModelStatic extends PHPDataObject {
     const STATUS_DELETE = 0;
     const STATUS_ACTIVE = 1;
 
-	protected static function getPDO()
-    {
-        if(self::$pdo === null) self::$pdo = parent::getConnectionDatabase();
-        return self::$pdo;
-    }
-
     protected static function perform($sql, $params = null)
     {
-        $pdo = self::getPDO();
+        $pdo = parent::getConnectionDatabase();
         if ($params) {
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);

@@ -6,7 +6,7 @@
             <!-- order symbol-->
             <div id="form-order-symbol-wrp">
                 <label>Обозначение заказа:</label>
-                <input type="text" name="symbol">
+                <input type="text" name="symbol" required>
             </div>
 
             <!-- type orders-->

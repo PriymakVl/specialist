@@ -16,7 +16,7 @@
                     </ul>
                 </div>
             </div>
-        </li> -->
+        </li>
         <!-- categories -->
         <li class="drop">
             <a href="#">Продукция</a>
@@ -33,19 +33,8 @@
             </div>
         </li>
         <!-- terminal -->
-       <li class="drop">
-            <a href="#">Терминал</a>
-            <div class="dropdownContain">
-                <div class="dropOut">
-                    <div class="triangle"></div>
-                    <ul>
-                        <li><a href="/terminal/login">Авторизация</a></li>
-                        <li><a href="/terminal/orders">Заказы</a></li>
-						<li><a href="/terminal/products">Изделия</a></li>
-                    </ul>
-                </div>
-            </div>
-        </li>
         <li><a href="/statistics/workers">Статистика</a></li>
+        <!-- logout -->
+        <li><a href="/main/logout">Выход</a></li>
     </ul>
 </nav>

@@ -1,8 +1,8 @@
 <?php
 
-require_once('./core/controller.php');
+require_once('controller_base.php');
 
-class Controller_Main extends Controller {
+class Controller_Main extends Controller_Base {
 
     public function __construct()
     {
@@ -18,26 +18,29 @@ class Controller_Main extends Controller {
 
     public function action_index()
     {
-        //if (isset($_COOKIE['username'])) $this->redirect('order/list');
-        $this->render('main/login');
+        $id_user = Session::get('id_user');
+        if (empty($id_user)) return $this->redirect('main/login');
+        $user = new User($id_user);
+        if ($user->position == User::POSITION_WORKER) $this->redirect('terminal/products?id_user='.$id_user);
+        else $this->redirect('order/list');
     }
 
     public function action_login()
     {
-        $password = Param::get('password');
-        $user = User::getByPassword($password);
+        $params = Param::getAll(['login', 'password']);
+        if ($params) $user = UserStatic::authorisation($params);
+        else $user = false;
         if ($user) {
-            //setcookie('username', $user->name);
-            $this->redirect('order/list');
+            Session::set('id_user', $user->id);
+            $this->redirect('main/index');
         }
-        else $this->redirect();
+        $this->render('main/login');
     }
 
-//    public function action_logout()
-//    {
-//        unset($_COOKIE['username']);
-//        setcookie('username', "", time()-3600);
-//        $this->redirect('main/login');
-//    }
+    public function action_logout()
+    {
+        Session::delete('id_user');
+        $this->redirect('main/login');
+    }
 
 }

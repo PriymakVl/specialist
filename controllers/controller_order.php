@@ -1,9 +1,7 @@
 <?php
-require_once('./core/controller.php');
-require_once('./modules/order/models/order.php');
-require_once('./modules/order/models/order_content.php');
+require_once('controller_base.php');
 
-class Controller_Order extends Controller {
+class Controller_Order extends Controller_Base {
 	
 	private $id_order;
 
@@ -26,7 +24,7 @@ class Controller_Order extends Controller {
 	public function action_list()
 	{
 		$id_active = Session::get('order-active');
-	    $params = Param::forOrderList();
+	    $params = ParamOrder::getList();
 		$orders = Order::getList($params);
         $this->view->title = 'Заказы';
 		$this->render('list/main', compact('orders', 'params', 'id_active'));
@@ -57,7 +55,8 @@ class Controller_Order extends Controller {
 	
 	public function action_add()
     {
-		$params = Param::addOrder();
+        $this->view->title = 'Добавить заказ';
+		$params = ParamOrder::add();
 		if (empty($params['symbol'])) return $this->render('add/main');
         $order = Order::getBySymbol($params['symbol']);
         if ($order) {
@@ -66,14 +65,15 @@ class Controller_Order extends Controller {
         }
         else {
             $id_add = Order::add($params);
+            Session::set('order-active', $id_add);
             //Message::setSession('success', 'order', 'success_add');
-            $this->redirect('order/list');
+            $this->redirect('order/add_position?id_order='.$id_add);
         }
     }
 	
 	public function action_edit()
 	{
-		$params = Param::editOrder();
+		$params = ParamOrder::edit();
 		$order = new Order($this->id_order);
 		if (empty($params['symbol'])) return $this->render('edit/main', compact('order'));
 		Order::edit($params);
@@ -82,7 +82,7 @@ class Controller_Order extends Controller {
 	
 	public function action_change_qty_product()
 	{
-		$params = Param::changeQtyProductOrder();
+		$params = ParamOrder::changeQtyProduct();
 		OrderContent::changeQuantity($params);
 		$this->redirectPrevious();
 	}
@@ -96,7 +96,7 @@ class Controller_Order extends Controller {
 	
 	public function action_add_position()
 	{
-		$params = Param::addOrderPosition();
+		$params = ParamOrder::addPosition();
 		if (empty($params['symbol'])) return $this->render('position/add', ['id_order' => $this->id_order]);
 		OrderPositions::add($params);
 		$this->redirect('order?id_order='.$this->id_order);

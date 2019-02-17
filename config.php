@@ -10,7 +10,7 @@ define('DB_NAME', 'specialist');
 
 
 define('SITE_URL', 'specialist');
-define('CONTROLLER_DEFAULT', 'Main');
+define('CONTROLLER_DEFAULT', 'main');
 define('ACTION_DEFAULT', 'index');
 
 

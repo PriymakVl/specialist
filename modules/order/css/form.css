@@ -47,3 +47,7 @@
 .position-note-wrp textarea {
 	width: 825px;
 }
+
+#form-order-date-wrp #datepicker {
+    width: 75px;
+}

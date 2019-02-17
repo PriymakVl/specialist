@@ -37,8 +37,7 @@ class OrderProducts extends OrderBase {
 	
 	public static function startWork($params)
 	{
-		$sql = 'UPDATE `order_products` SET `state_work` = :state_work, `time_start` = :time_start, `id_worker` = :id_worker 
-		WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
+		$sql = 'UPDATE `order_products` SET `state_work` = :state_work, `time_start` = :time_start, `id_worker` = :id_worker WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
 		return self::perform($sql, $params);
 	}
 	
@@ -65,6 +64,15 @@ class OrderProducts extends OrderBase {
 		if ($items) return self::createArrayProducts($items);
         return false;
 	}
+
+	public static function getNotReady($id_order)
+    {
+        $sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status AND `state` != :state';
+        $params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE, 'state' => self::STATE_WORK_END];
+        $items = self::perform($sql, $params)->fetchAll();
+        if ($items) return self::createArrayProducts($items);
+        return false;
+    }
 	
 	public static function getForWorker($worker, $order = false) 
 	{
@@ -86,7 +94,7 @@ class OrderProducts extends OrderBase {
 	
 	private static function getParamsForWorker($worker, $order)
 	{
-		if ($order) $params['id_order'] = $order->id; 
+		if ($order) $params['id_order'] = $order->id;
 		$params['status'] = self::STATUS_ACTIVE;
 		$params['type_order'] = $worker->defaultTypeOrder;
 		$params['kind_work'] = $worker->defaultKindWork;
@@ -109,6 +117,7 @@ class OrderProducts extends OrderBase {
 	//при получении из базы данных
 	private static function setDatabaseProperties($product, $item)
 	{
+        $product->order = new Order($item->id_order);
 		$product->orderQtyAll = $item->qty_all;
 		$product->orderQtyDone = $item->qty_done;
 		$product->startWork = $item->time_start;

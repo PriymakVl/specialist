@@ -8,8 +8,8 @@ class Route
 	public static function start()
 	{
 		// контроллер и действие по умолчанию
-		//self::$controller_name = CONTROLLER_DEFAULT;
-		//self::$action_name = ACTION_DEFAULT;
+		self::$controller_name = CONTROLLER_DEFAULT;
+		self::$action_name = ACTION_DEFAULT;
 		
 		//убираем из url get параметры
 		$url = explode('?', $_SERVER['REQUEST_URI'], 2);

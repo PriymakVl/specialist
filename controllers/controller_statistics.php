@@ -1,10 +1,7 @@
 <?php
-require_once('./core/controller.php');
-require_once('./modules/statistics/models/statistics.php');
-require_once('./modules/user/models/worker.php');
+require_once('controller_base.php');
 
-
-class Controller_Statistics extends Controller {
+class Controller_Statistics extends Controller_Base {
 
     public function __construct()
     {

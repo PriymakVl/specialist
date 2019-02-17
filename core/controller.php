@@ -1,8 +1,6 @@
 <?php
 require_once('view.php');
 require_once ('./helpers/message.php');
-require_once ('./helpers/param.php');
-require_once ('./modules/user/models/user.php');
 require_once('./helpers/session.php');
 
 class Controller {

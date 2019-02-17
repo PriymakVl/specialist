@@ -16,6 +16,7 @@ class ProductBase extends Model
 	public $timePreparation;
 	
 	//order
+    public $order;
     public $orderQtyAll; //количество деталей в заказе
 	public $orderQtyDone; //количество деталей сделанных по заказу на данный момент
 	public $typeOrder;
@@ -39,5 +40,6 @@ class ProductBase extends Model
 	const BG_TERMINAL_BOX_PLAN = 'yellow';
 	const BG_TERMINAL_BOX_PROGRESS = 'green';
 	const BG_TERMINAL_BOX_STOPPED = 'red';
+
 
 }

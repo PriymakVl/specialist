@@ -7,7 +7,7 @@ require_once ('./modules/order/models/order_state.php');
 
 <!-- css files -->
 <link rel="stylesheet" href="/web/css/total/form.css">
-<!--<link rel="stylesheet" href="/modules/order/css/form.css">-->
+<link rel="stylesheet" href="/modules/order/css/form.css">
 
 <div id="content">
 
@@ -19,8 +19,10 @@ require_once ('./modules/order/models/order_state.php');
 				<label>Обозначение:</label>
 				<input type="text" name="symbol">
 				<label>Количество:</label>
-				<input type="text" name="qty">
-				<div class="position-note-wrp">
+                <input type="number" name="qty">
+            </div>
+
+				<div class="position-note-wrp" class="form-box">
 					<label>Примечание:</label>
 					<textarea name="note"></textarea>
 				</div>

@@ -1,16 +1,16 @@
 $(document).ready(function() {
-	
-		var state_work, id_order, id_prod, id_worker, prod_name;
 
+		var state_work, id_order, id_prod, id_worker, prod_name;
+		const STATE_WORK_PREPARATION = 1;
+	//деталь взята в работу
 	$('.terminal-product-box').click(function() {
-		
 		state_work = $(this).attr('state_work');
 		id_order = $(this).attr('id_order');
 		id_prod = $(this).attr('id_prod');
 		id_worker = $(this).attr('id_worker');
 		prod_name = $(this).find('.info-product').text();
 		
-		if (state_work == 1) {
+		if (state_work == STATE_WORK_PREPARATION) {
 			location.href = '/terminal/start_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_worker=' + id_worker;
 		}
 		else {

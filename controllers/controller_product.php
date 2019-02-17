@@ -1,9 +1,7 @@
 <?php
-require_once('./core/controller.php');
-require_once('./modules/product/models/product.php');
+require_once('controller_base.php');
 
-
-class Controller_Product extends Controller {
+class Controller_Product extends Controller_Base {
 
     public function __construct()
     {
@@ -28,7 +26,7 @@ class Controller_Product extends Controller {
 
 	public function action_add()
     {
-        $params = Param::addProduct();
+        $params = ParamProduct::add();
 		if (isset($params['name'])) {
 			Product::add($params);
 			$this->redirect('product?id_prod='.$params['id_parent']);
@@ -38,7 +36,7 @@ class Controller_Product extends Controller {
 	
 	public function action_edit()
     {
-        $params = Param::editProduct();
+        $params = ParamProduct::edit();
 		$product = new Product(Param::get('id_prod'));
 		if (isset($params['name'])) {
 			$result = Product::edit($params, $product);
@@ -49,7 +47,7 @@ class Controller_Product extends Controller {
 	
 	public function action_copy()
 	{
-		$params = Param::copyProduct();
+		$params = ParamProduct::copy();
 		if (empty($params['id_parent'])) exit('Нет активного узла');
 		Product::add($params);
 		$this->redirect('product?id_prod='.$params['id_parent']);

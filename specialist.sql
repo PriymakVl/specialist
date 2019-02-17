@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 15 2019 г., 17:48
+-- Время создания: Фев 18 2019 г., 01:21
 -- Версия сервера: 5.5.53
--- Версия PHP: 5.5.38
+-- Версия PHP: 5.6.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -72,7 +72,11 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `symbol`, `state`, `type`, `date_exec`, `note`, `status`) VALUES
-(1, 'SP000000485', 3, 1, '1550479090', '', '1');
+(1, 'SP000000485', 3, 1, '1550479090', '', '1'),
+(2, 'ddddd', 1, 1, '1550514633', '', '1'),
+(3, 'SP000000142', 1, 1, '1550509773', '', '1'),
+(4, 'SP000000143', 1, 1, '1551114923', '', '1'),
+(5, 'SP000000144', 1, 1, '1550510175', '', '1');
 
 -- --------------------------------------------------------
 
@@ -115,7 +119,8 @@ CREATE TABLE `order_positions` (
 --
 
 INSERT INTO `order_positions` (`id`, `id_order`, `symbol`, `qty`, `note`, `status`) VALUES
-(1, 1, 'SC-SE-40x200-S', 4, '', '1');
+(1, 1, 'SC-SE-40x200-S', 4, '', '1'),
+(2, 0, 'SC-SC-RODE', 4, 'mentri', '1');
 
 -- --------------------------------------------------------
 
@@ -145,8 +150,8 @@ CREATE TABLE `order_products` (
 
 INSERT INTO `order_products` (`id`, `id_order`, `id_prod`, `state_work`, `type_order`, `kind_work`, `qty_all`, `qty_done`, `time_start`, `time_end`, `time_plan`, `id_worker`, `status`) VALUES
 (1, 1, 33, 1, 1, 3, 4, 0, '1550231966', '1550231970', '5820', 3, '1'),
-(2, 1, 38, 1, 1, 2, 4, 0, '1550230281', '1550230290', '2460', 2, '1'),
-(3, 1, 46, 1, 1, 2, 4, 0, '', '', '1500', 0, '1');
+(2, 1, 38, 4, 1, 2, 4, 0, '1550328391', '1550330565', '2460', 2, '1'),
+(3, 1, 46, 4, 1, 2, 4, 0, '1550404938', '1550405548', '1500', 2, '1');
 
 -- --------------------------------------------------------
 
@@ -390,7 +395,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `order_content`
 --
@@ -400,7 +405,7 @@ ALTER TABLE `order_content`
 -- AUTO_INCREMENT для таблицы `order_positions`
 --
 ALTER TABLE `order_positions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `order_products`
 --
