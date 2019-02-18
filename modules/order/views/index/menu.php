@@ -11,7 +11,7 @@
 	
 	<!-- menu order content -->
 	<ul id="menu-order-content" >
-        <li><a href="/order/delete?id_order=<?=$order->id?>">Удалить позицию</a></li>
+        <li><a href="#" id="content_delete" id_order="<?=$order->id?>">Удалить позиции</a></li>
 		<li><a href="/order/to_work?id_order=<?=$order->id?>">Выдать в работу</a></li>
     </ul>
 </div>

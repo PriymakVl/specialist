@@ -23,24 +23,23 @@ class ProductStatic extends ProductBase {
 	
 	public static function add($params)
 	{
-		$fields = 'symbol, name, quantity, type, id_parent, note';
-        $values = ':symbol, :name, :quantity, :type, :id_parent, :note';
+		$fields = 'symbol, name, quantity, type, id_parent, note, time_prod, time_prepar';
+        $values = ':symbol, :name, :quantity, :type, :id_parent, :note, :time_prod, :time_prepar';
         $sql = 'INSERT INTO `products` ('.$fields.') VALUES ('.$values.')';
         return self::insert($sql, $params); 
 	}
 	
 	public static function edit($params, $product)
-	{	
-		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent ';
-		if ($product->symbol && $params['symbol'] == $params['symbol_old']) {
-			$where = 'WHERE `symbol` = :symbol_old AND `status` = :status';
-			$params['symbol_old'] = $product->symbol;
+	{
+		if ($product->symbol) {
+			$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent, 
+			`quantity` = :quantity, `time_prod` = :time_prod, `time_prepar` = :time_prepar WHERE `symbol` = "'.$product->symbol.'" AND `status` = :status';
 		}
 		else {
-			$where = 'WHERE `id` = :id_prod AND `status` =:status';	
+			$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent, 
+			`quantity` = :quantity , `time_prod` = :time_prod, `time_prepar` = :time_prepar WHERE `id` = :id_prod AND `status` =:status';
 			$params['id_prod'] = $product->id;
 		}
-		$sql = $sql.$where;
 		return self::update($sql, $params);
 	}
 	

@@ -39,4 +39,5 @@ require_once ('./modules/order/models/order.php');
 <script src="/modules/order/js/change_menu.js"></script>
 <script src="/modules/order/js/change_quantity_content.js"></script>
 <script src="/modules/order/js/order_delete.js"></script>
+<script src="/modules/order/js/content_delete.js"></script>
 

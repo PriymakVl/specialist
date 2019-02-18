@@ -16,6 +16,7 @@
                     <th>Примечание</th>
                 </tr>
                 <? foreach($product->specification as $prod): ?>
+				<? $prod->setTimeManufacturing(); ?>
                     <tr>
                         <td class="<?=($id_active == $prod->id)?'bg-green':''?>">
                             <input type="hidden" name="specif" id_prod="<?=$prod->id?>">
@@ -32,7 +33,7 @@
 							<a href="/product?id_prod=<?=$prod->id?>"><?=$prod->name?></a>
 						</td>
 						<td><?=$prod->quantity?></td>
-                        <td><?=$prod->timeProduction?></td>
+                        <td><?=$prod->timeProduction?> мин.</td>
                         <td><?=$prod->note?></td>
                     </tr>
 					<? $number++; ?>

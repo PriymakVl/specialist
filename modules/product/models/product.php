@@ -12,6 +12,7 @@ class Product extends ProductStatic {
 	public function getSpecification()
 	{
 		$this->specification = self::getAllByIdParent($this->id);
+		return $this;
 	}
 	
 	public function setBgTerminalProductBox()
@@ -21,13 +22,19 @@ class Product extends ProductStatic {
 		else $this->bgTerminalProductBox = self::BG_TERMINAL_BOX_PLAN;
 	}
 	
-	public function getIimeManufacturing()
+	// public function getIimeManufacturing()
+	// {
+		// $result = ProductTime::get($this->symbol);
+		// if (empty($result)) return;
+		// $this->timeProduction = $result->time_prod;
+		// $this->timePreparation = $result->time_prepar;
+		// return $this;
+	// }
+	
+	public function setTimeManufacturing()
 	{
-		$result = ProductTime::get($this->symbol);
-		if (empty($result)) return;
-		$this->timeProduction = $result->time_prod;
-		$this->timePreparation = $result->time_prepar;
-		return $this;
+		$this->timeProduction = date('i', $this->time_prod);
+		$this->timePreparation = date('i', $this->time_prepar);
 	}
     
 	

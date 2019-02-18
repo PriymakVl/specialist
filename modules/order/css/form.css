@@ -1,5 +1,5 @@
 /*form add*/
-#form-order-wrp h2 {
+#form-order-wrp h2, #form-order-position-wrp h2 {
 	text-align: center;
 }
 
@@ -28,11 +28,11 @@
     width: 140px;
 }
 
-#form-order-add-wrp input[type="submit"] {
+#form-order-add-wrp input[type="submit"], #form-order-position-wrp input[type="submit"] {
     margin-left: 290px;
 }
 
-#form-order-add-wrp input[type="button"] {
+#form-order-add-wrp input[type="button"], #form-order-position-wrp input[type="button"] {
     margin-left: 130px;
 }
 
@@ -40,14 +40,22 @@
 	width: 915px;
 }
 
+
+
+#form-order-date-wrp #datepicker {
+    width: 75px;
+}
+
+/* form add position */
+#form-order-position-wrp input[name="symbol"] {
+	margin-right: 50px;
+}
+
 .position-note-wrp {
 	margin-top: 15px;
 }
 
 .position-note-wrp textarea {
-	width: 825px;
+	width: 915px;
 }
 
-#form-order-date-wrp #datepicker {
-    width: 75px;
-}

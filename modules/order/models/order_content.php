@@ -40,6 +40,20 @@ class OrderContent extends OrderBase {
 		return self::update($sql, $params);
 	}
 	
+	public static function deleteAll($id_order, $ids) 
+	{
+		foreach ($ids as $id) {
+			self::deleteOne($id_order, $id);
+		}
+	}
+	
+	public static function deleteOne($id_order, $id_prod)
+	{
+		$sql = 'UPDATE `order_content` SET `status` = :status WHERE `id_prod` = :id_prod AND `id_order` = :id_order';
+		$params = ['id_order' => $id_order, 'id_prod' => $id_prod, 'status' => self::STATUS_DELETE];
+		return self::perform($sql, $params);
+	}
+	
 	
 	
 	

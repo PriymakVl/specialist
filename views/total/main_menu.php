@@ -25,9 +25,7 @@
                     <div class="triangle"></div>
                     <ul>
                         <li><a href="/product/popular">Популярные</a></li>
-                        <li><a href="/product?id_prod=10">Готовая продукция</a></li>
-                        <li><a href="/product?id_prod=11">Узлы и детали</a></li>
-						<li><a href="/product/add">Добавить</a></li>
+                        <li><a href="/product?id_prod=10">Продукция</a></li>
                     </ul>
                 </div>
             </div>

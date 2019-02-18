@@ -1,4 +1,4 @@
-<li>
+<li id="order-content-wrp">
     <input type="radio" name="tabs" id="tab-2" checked>
     <label for="tab-2">Содержание</label>
     <div class="tab-content">
@@ -13,7 +13,7 @@
 				</tr>
                 <? foreach($order->content as $product): ?>
                     <tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id_prod="<?=$product->id?>"></td>
 						<td>
 							<a href="/product?id_prod=<?=$product->id?>"><?=$product->symbol?></a>
 						</td>

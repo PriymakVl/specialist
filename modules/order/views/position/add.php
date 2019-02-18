@@ -11,26 +11,25 @@ require_once ('./modules/order/models/order_state.php');
 
 <div id="content">
 
-    <div id="form-order-wrp">
-		<h2>Форма для добавления позиции заказа</h2>
-		<form action="/order/add_position?id_order=<?=$id_order?>" method="post">
+    <div id="form-order-position-wrp">
+		<h2>Форма для добавления позиции к заказу: <span class="red"><?=$order->symbol?></span></h2>
+		<form action="/order/add_position?id_order=<?=$order->id?>" method="post">
 		
 			<div class="form-box">
 				<label>Обозначение:</label>
 				<input type="text" name="symbol">
 				<label>Количество:</label>
-                <input type="number" name="qty">
+                <input type="number" name="qty" value="1">
             </div>
-
-				<div class="position-note-wrp" class="form-box">
-					<label>Примечание:</label>
-					<textarea name="note"></textarea>
-				</div>
+			
+			<div class="position-note-wrp form-box">
+				<label>Примечание:</label>
+				<textarea name="note"></textarea>
 			</div>
 
 			<!-- buttons -->
 			<div class="button-box">
-				<input type="submit" value="Сохранить" id="add-order" name="save">
+				<input type="submit" value="Сохранить" name="save">
 				<input type="button" onclick="history.back();" value="Отменить">
 			</div>
 		</form>

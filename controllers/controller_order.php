@@ -97,8 +97,16 @@ class Controller_Order extends Controller_Base {
 	public function action_add_position()
 	{
 		$params = ParamOrder::addPosition();
-		if (empty($params['symbol'])) return $this->render('position/add', ['id_order' => $this->id_order]);
+		$order = new Order($this->id_order);
+		if (empty($params['symbol'])) return $this->render('position/add', ['order' => $order]);
 		OrderPositions::add($params);
+		$this->redirect('order?id_order='.$this->id_order);
+	}
+	
+	public function action_delete_content()
+	{
+		$ids = Param::getIds('ids');
+		OrderContent::deleteAll($this->id_order, $ids);
 		$this->redirect('order?id_order='.$this->id_order);
 	}
     
