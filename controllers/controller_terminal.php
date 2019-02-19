@@ -43,8 +43,8 @@ class Controller_Terminal extends Controller_Base
         $order = new Order(Param::get('id_order'));
         $order->setStateMade();
 
-        $worker = $this->getWorker();
-        $products = OrderProducts::getForWorker($worker);
+        //$worker = $this->getWorker();
+        //$products = OrderProducts::getForWorker($worker);
         $this->redirect('terminal/products');
     }
 

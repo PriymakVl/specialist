@@ -21,7 +21,13 @@
             <tr>
                 <td>3</td>
                 <td>Срок выполнения</td>
-                <td><? if ($order->date_exec) echo date('d.m.y', $order->date_exec); ?></td>
+                <td>
+					<? if ($order->date_exec): ?>
+						<?=date('d.m.y', $order->date_exec)?>
+					<? else: ?>
+						<span class="red">Не указан</span>
+					<? endif; ?>
+				</td>
             </tr>
         </table>
 		

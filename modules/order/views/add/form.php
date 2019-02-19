@@ -34,7 +34,7 @@
         <!-- buttons -->
         <div class="button-box">
             <input type="submit" value="Сохранить" id="add-order" name="save">
-            <input type="button" id="hide-form-order" value="Отменить">
+            <input type="button" onclick="history.back();" value="Отменить">
         </div>
     </form>
 </div>

@@ -22,10 +22,10 @@ require_once ('./modules/order/models/order.php');
             <? include_once('info.php'); ?>
 
             <!-- content -->
-            <? include_once('content.php'); ?>
+			<? if ($order->content) include_once('content.php'); ?>
 
             <!-- statistics -->
-            <? include_once('statistics.php'); ?>
+            <? //if ($order->statistics) include_once('statistics.php'); ?>
 			
         </ul>
     </div>

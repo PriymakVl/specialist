@@ -17,8 +17,9 @@
                 </div>
             </div>
         </li>
-        <!-- categories -->
-        <li class="drop">
+		
+        <!-- Products -->
+       <!-- <li class="drop">
             <a href="#">Продукция</a>
             <div class="dropdownContain">
                 <div class="dropOut">
@@ -29,8 +30,9 @@
                     </ul>
                 </div>
             </div>
-        </li>
-        <!-- terminal -->
+        </li> -->
+		<li><a href="/product?id_prod=10">Продукция</a></li>
+        <!-- statistics -->
         <li><a href="/statistics/workers">Статистика</a></li>
         <!-- logout -->
         <li><a href="/main/logout">Выход</a></li>

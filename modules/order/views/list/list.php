@@ -22,7 +22,7 @@
 				<? else: ?>
 					<td class="red">Нет позиций</td>
 				<? endif; ?>
-				<td><?=$order->dateExecution?></td>
+				<td><?=$order->date_exec ? date('d.m.y', $order->data_exec) : 'Нет';?></td>
 				<td><?=$order->note?></td>
             </tr>
         <? endforeach; ?>

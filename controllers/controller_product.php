@@ -11,9 +11,9 @@ class Controller_Product extends Controller_Base {
 
     public function action_index()
 	{
-		$product = new Product(Param::get('id_prod'));
 		$id_active = Session::get('product-active');
-		$product->getSpecification();
+		$product = new Product(Param::get('id_prod'));
+		$product->getSpecification()->getParent();
         $this->view->title = 'Производство';
 		$this->render('index/main', compact('product', 'id_active'));
 	}
@@ -38,11 +38,9 @@ class Controller_Product extends Controller_Base {
     {
         $params = ParamProduct::edit();
 		$product = new Product(Param::get('id_prod'));
-		if (isset($params['name'])) {
-			$result = Product::edit($params, $product);
-			if ($result) $this->redirect('product?id_prod='.$product->id);
-		}
-		$this->render('edit/main', compact('product'));
+		if (empty($params['name'])) return $this->render('edit/main', compact('product'));
+		Product::edit($params, $product);
+		$this->redirect('product?id_prod='.$product->id);
     }
 	
 	public function action_copy()

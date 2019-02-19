@@ -48,11 +48,11 @@
 			</div>
 		</div>
 		
-		<div class="form-box">
-			<label>Подгот. время:</label>
-			<input type="text" name="time_prod" value="<?=$product->time_prod?>">
-			<label>Штучное время:</label>
+		<div class="form-box" id="form-product-time-wrp">
+			<label>Подготовительное время:</label>
 			<input type="text" name="time_prepar" value="<?=$product->time_prepar?>">
+			<label>Штучное время:</label>
+			<input type="text" name="time_prod" value="<?=$product->time_prod?>">
 		</div>
 
 

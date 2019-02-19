@@ -47,6 +47,13 @@ class OrderProducts extends OrderBase {
 		return self::perform($sql, $params);
 	}
 	
+	public static function madeOrder($id_order)
+	{
+		$sql = 'UPDATE `order_products` SET `state_work` = :state_work WHERE `id_order` = :id_order';
+		$params = ['id_order' => $id_order, 'state_work' => self::STATE_WORK_END];
+		return self::perform($sql, $params);
+	}
+	
 	public static function stopWork($params)
 	{
 		$sql = 'UPDATE `order_products` SET `state_work` = :state_work WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
@@ -67,8 +74,8 @@ class OrderProducts extends OrderBase {
 
 	public static function getNotReady($id_order)
     {
-        $sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status AND `state` != :state';
-        $params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE, 'state' => self::STATE_WORK_END];
+        $sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status AND `state_work` != :state_work';
+        $params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE, 'state_work' => self::STATE_WORK_END];
         $items = self::perform($sql, $params)->fetchAll();
         if ($items) return self::createArrayProducts($items);
         return false;

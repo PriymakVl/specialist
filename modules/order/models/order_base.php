@@ -38,10 +38,5 @@ class OrderBase extends Model
 	
 	public $timeManufacturingForWorker = 0;
 
-    public function convertDate()
-    {
-        $this->dateExecution = date('d.m.y', $this->date_exec);
-    }
-
 }
 

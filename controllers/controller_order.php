@@ -45,11 +45,27 @@ class Controller_Order extends Controller_Base {
 		$this->redirect('order?id_order='.$id_order);
 	}
 	
+	public function action_to_preparation()
+	{
+		$order = new Order($this->id_order);
+		if ($order->state > OrderState::REGISTERED) exit('уже выдан');
+		$order->getPositions()->toPreparation();
+		$this->redirectPrevious();
+	}
+	
 	public function action_to_work()
 	{
 		$order = new Order($this->id_order);
-		if ($order->state > OrderState::PREPARATION) exit('уже выдано');
+		if ($order->state > OrderState::PREPARATION) exit('уже выдан');
 		$order->toWork();
+		$this->redirectPrevious();
+	}
+	
+	public function action_to_made()
+	{
+		$order = new Order($this->id_order);
+		if ($order->state > OrderState::WORK) exit('уже сделан');
+		$order->toMade();
 		$this->redirectPrevious();
 	}
 	

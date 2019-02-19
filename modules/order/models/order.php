@@ -12,7 +12,6 @@ class Order extends OrderStatic {
     {
         $this->tableName = 'orders';
         parent::__construct($order_id);
-        $this->convertDate();
     }
 
     public function getContent()
@@ -20,6 +19,13 @@ class Order extends OrderStatic {
         $this->content = OrderContent::get($this->id);
         return $this;
     }
+	
+	public function toPreparation()
+	{
+		if (!$this->positions) return;
+		OrderContent::addByPositionsOrder($this->positions);
+		$this->setState(OrderState::PREPARATION);
+	}
 	
 	public function toWork()
 	{	
@@ -29,6 +35,12 @@ class Order extends OrderStatic {
 		$this->setState(OrderState::WORK);
 		//todo для учета статистики добавить состояние в OrderState
 		//$products = $this->getListOfProduct();
+	}
+	
+	public function toMade()
+	{
+		OrderProducts::madeOrder($this->id);
+		$this->setState(OrderState::MADE);
 	}
 	
 	public function setStateMade()

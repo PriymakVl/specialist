@@ -18,21 +18,22 @@ class Statistics extends StatisticsBase {
 		$time_load_worker = 0;
 		if (!$products) return $time_load_worker;
 		foreach ($products as $product) {
+			$product->countTimeManufacturingOrder();
 			if ($product->timeManufacturingOrder) $time_load_worker = $time_load_worker + $product->timeManufacturingOrder;
 		}
 		return $time_load_worker;
 	}
 	
 	//load plan worker in seconds 
-	public static function checkTimeManufacturing($products)
-	{
-	    if ($products) {
-            foreach ($products as $product) {
-                if (!$product->timeManufacturingOrder) return false;
-            }
-        }
-		return true;
-	}
+	// public static function checkTimeManufacturing($products)
+	// {
+	    // if ($products) {
+            // foreach ($products as $product) {
+                // if (!$product->timeManufacturingOrder) return false;
+            // }
+        // }
+		// return true;
+	// }
 	
 	//load plan worker in percent 
 	public static function getLoadPercentage($load_time)

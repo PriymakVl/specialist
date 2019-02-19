@@ -54,6 +54,19 @@ class OrderContent extends OrderBase {
 		return self::perform($sql, $params);
 	}
 	
+	public static function addByPositionsOrder($positions)
+	{
+		foreach ($positions as $position) {
+			if (!$position->symbol) continue;
+			$symbol = explode('x', $position->symbol)[0];//get symbol product without length cylinder
+			$items = Product::getAllBySymbol($symbol);
+			if (empty($items)) continue;
+			self::add($position->id_order, $items[0]->id, $position->qty);
+		}
+	}
+	
+	
+	
 	
 	
 	

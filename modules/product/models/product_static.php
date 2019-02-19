@@ -43,4 +43,11 @@ class ProductStatic extends ProductBase {
 		return self::update($sql, $params);
 	}
 	
+		public static function getAllBySymbol($symbol)
+	{
+		$sql = 'SELECT * FROM `products` WHERE `symbol` = :symbol AND `status` = :status';
+        $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
+        return self::perform($sql, $params)->fetchAll();
+	}
+	
 }

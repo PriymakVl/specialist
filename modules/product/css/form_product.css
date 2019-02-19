@@ -48,3 +48,8 @@
 #form-product-parent-wrp input {
 	width: 80px;
 }
+
+#form-product-time-wrp input {
+	width: 80px;
+	margin-right: 150px;
+}

@@ -1,17 +1,28 @@
 <div id="menu-order-wrp">
 	<!-- menu order -->
-    <ul id="menu-order" style="display:none;">
+    <ul id="menu-order" <? if ($order->content) echo 'style="display:none;"'?>>
         <li><a href="/order/edit?id_order=<?=$order->id?>">Редактировать</a></li>
         <li><a href="#" id_order="<?=$order->id?>" id="order-delete">Удалить заказ</a></li>
-		<? if ($id_active != $order->id): ?>
+		<? if ($id_active != $order->id && $order->state != OrderState::REGISTERED): ?>
 			<li><a href="/order/activate?id_order=<?=$order->id?>">Сделать активным</a></li>
 		<? endif; ?>
 		<li><a href="/order/add_position?id_order=<?=$order->id?>">Добавить позицию</a></li>
+		
+		<!-- change state order -->
+		<? if ($order->state == OrderState::REGISTERED): ?>
+			<li><a href="/order/to_preparation?id_order=<?=$order->id?>">В подготовку</a></li>
+		<? elseif($order->state == OrderState::PREPARATION): ?>
+			<li><a href="/order/to_work?id_order=<?=$order->id?>">Выдать в работу</a></li>
+		<? elseif ($order->state == OrderState::WORK): ?>
+				<li><a href="/order/to_made?id_order=<?=$order->id?>">Работы выполнены</a></li>
+		<? endif; ?>
+			
     </ul>
 	
 	<!-- menu order content -->
-	<ul id="menu-order-content" >
-        <li><a href="#" id="content_delete" id_order="<?=$order->id?>">Удалить позиции</a></li>
-		<li><a href="/order/to_work?id_order=<?=$order->id?>">Выдать в работу</a></li>
-    </ul>
+	<? if ($order->state == OrderState::PREPARATION && $order->content): ?>
+		<ul id="menu-order-content">
+			<li><a href="#" id="content_delete" id_order="<?=$order->id?>">Удалить позиции</a></li>
+		</ul>
+	<? endif; ?>
 </div>

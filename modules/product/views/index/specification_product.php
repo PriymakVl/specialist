@@ -5,6 +5,7 @@
     <input type="radio" name="tabs" id="tab-2" checked>
     <label for="tab-2">Спецификация</label>
     <div class="tab-content">
+		<h2><?=$product->name?></h2>
         <table width="900">
             <? if ($product->specification): ?>
                 <tr>
@@ -16,7 +17,6 @@
                     <th>Примечание</th>
                 </tr>
                 <? foreach($product->specification as $prod): ?>
-				<? $prod->setTimeManufacturing(); ?>
                     <tr>
                         <td class="<?=($id_active == $prod->id)?'bg-green':''?>">
                             <input type="hidden" name="specif" id_prod="<?=$prod->id?>">
@@ -33,7 +33,12 @@
 							<a href="/product?id_prod=<?=$prod->id?>"><?=$prod->name?></a>
 						</td>
 						<td><?=$prod->quantity?></td>
-                        <td><?=$prod->timeProduction?> мин.</td>
+                        <td>
+							<? if ($prod->time_prod): ?>
+								<?=$prod->time_prod?> мин.</td>
+							<? else: ?>
+								<span class="red">Не указана</span>
+							<? endif; ?>
                         <td><?=$prod->note?></td>
                     </tr>
 					<? $number++; ?>

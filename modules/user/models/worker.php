@@ -15,8 +15,10 @@ class Worker extends User {
 		$workers = self::getWorkers();
 		foreach ($workers as $worker) {
 			$worker->productsDefault = OrderProducts::getForWorker($worker);
-			$worker->loadFullFlage = Statistics::checkTimeManufacturing($worker->productsDefault);
+			debug($worker->productsDefault);
+			//worker->loadFullFlage = Statistics::checkTimeManufacturing($worker->productsDefault);
 			$worker->loadTimePlan = Statistics::getTimeManufacturingPlan($worker->productsDefault);
+			debug($worker->loadTimePlan);
 			$worker->loadPercent = Statistics::getLoadPercentage($worker->loadTimePlan);
 		}
 		return $workers;

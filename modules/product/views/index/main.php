@@ -21,7 +21,11 @@ require_once ('./modules/product/models/product.php');
             <? include_once('info.php'); ?>
 
             <!-- content -->
-            <? include_once('specification.php'); ?>
+			<? if ($product->typeViewSpecification == 'category'): ?>
+				<? include_once('specification_category.php'); ?>
+			<? elseif ($product->specification): ?>
+				<? include_once('specification_product.php'); ?>
+			<? endif; ?>
 
             <!-- statistics -->
             <? //include_once('statistics.php'); ?>
