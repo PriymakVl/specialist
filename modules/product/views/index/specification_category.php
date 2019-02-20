@@ -6,7 +6,7 @@
     <label for="tab-2">Спецификация</label>
     <div class="tab-content">
 		<h2><?=$product->name?></h2>
-        <table width="900">
+        <table width="900" id="product-categories">
             <? if ($product->specification): ?>
                 <tr>
                     <th width="40">№</th>
@@ -21,7 +21,7 @@
                         <td>
 							<a href="/product?id_prod=<?=$category->id?>"><?=$category->name?></a>
                         </td>
-                        <td class="left">
+                        <td class="content-category">
 							<? foreach ($category->specification as $item): ?>
 								<a href="/product?id_prod=<?=$item->id?>" class="category-links"><?=$item->symbol?$item->symbol:$item->name?></a>
 							<? endforeach; ?>

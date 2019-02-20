@@ -12,7 +12,7 @@ class ProductBase extends Model
 	public $specification;
 	
 	public $timeManufacturingOrder; //время на изготовление всего количество деталей одной позиции в заказе
-	public $timeProduction;
+	public $timeProductionTotal; //штучное время для всех деталей в спецификации
 	public $timePreparation;
 	
 	//order

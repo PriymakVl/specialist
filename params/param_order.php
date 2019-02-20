@@ -23,8 +23,8 @@ class ParamOrder extends Param {
     public static function edit()
     {
 		$keys = ['symbol', 'position', 'type', 'note', 'date_exec', 'id_order'];
-		$defaults = ['date_exec' => ''];
-        $params = self::getAll($keys, $defaults);
+        $params = self::getAll($keys);
+		if (empty($params['date_exec'])) $params['date_exec'] = '';
         $params['date_exec'] = Date::convertStringToTime($params['date_exec']);
         return $params;
     }

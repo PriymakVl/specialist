@@ -18,11 +18,16 @@
                 <td>Наименование</th>
                 <td class="left"><?=$product->name?></th>
             </tr>
+			<tr>
+                <td>3</th>
+                <td>Количество</th>
+                <td class="left"><? if ($product->quantity) echo $product->quantity.' шт.'?></th>
+            </tr>
 			
 			<!-- time manufacturing -->
 			<? if ($product->type != Product::TYPE_CATEGORY): ?>
 				<tr>
-					<td>3</td>
+					<td>4</td>
 					<td>Подготовительное время</td>
 					<td class="left">
 						<? if ($product->time_prepar): ?>
@@ -33,7 +38,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>4</td>
+					<td>5</td>
 					<td>Штучное время</td>
 					<td class="left">
 						<? if ($product->time_prod): ?>
@@ -48,7 +53,7 @@
 			<!-- parent -->
 			<? if ($product->parent): ?>
 				<tr>
-                    <td>5</td>
+                    <td>6</td>
                     <td>Родитель</td>
                     <td class="left red">
 						<a href="/product?id_prod=<?=$product->parent->id?>"><?=$product->parent->name?> <span style="font-weight: bold;"><?=$product->parent->symbol?></span></a>

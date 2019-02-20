@@ -45,6 +45,10 @@ input[type="text"] {
     color: red;
 }
 
+.green {
+	color: green;
+}
+
 .bg-green {
     background: green;
 }

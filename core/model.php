@@ -32,7 +32,9 @@ class Model extends ModelStatic {
 
     public function delete()
     {
-        self::perform('UPDATE `'.$this->tableName.'` SET `status` = '.self::STATUS_DELETE.' WHERE id = ?', [$this->id]);
+		$sql = 'UPDATE `'.$this->tableName.'` SET `status` = :status WHERE id = :id';
+		$params = ['status' => self::STATUS_DELETE, 'id' => $this->id];
+		self::perform($sql, $params);
         return $this;
     }
 

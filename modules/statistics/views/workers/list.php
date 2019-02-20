@@ -27,12 +27,12 @@
 				</td>
                 <td>
 					<? if ($worker->loadTimePlan): ?>
-						<span><?=date('h:i:s', $worker->loadTimePlan)?></span>
+						<span><?=date('h:i:s', $worker->loadTimePlan * 60)?></span>
 					<? else: ?>
 						<span class="red">Простой</span>
 					<? endif; ?>
 				</td>
-				<td>0</td>
+				<td><?= $worker->timeMadeToday ? date('h:i:s', $worker->timeMadeToday * 60) : ''; ?></td>
 				<td>350грн</td>
             </tr>
         <? endforeach; ?>

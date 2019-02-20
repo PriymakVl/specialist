@@ -16,7 +16,7 @@ class ProductStatic extends ProductBase {
     {
         $products = Helper::createArrayOfObject($ids, 'Product');
 		foreach ($products as $product) {
-			$product->getSpecification();
+			$product->getSpecification()->countTimeProductionTotal();
 		}
 		return $products;
     }
@@ -31,14 +31,16 @@ class ProductStatic extends ProductBase {
 	
 	public static function edit($params, $product)
 	{
-		if ($product->symbol) {
+		if (empty($params['edit_all'])) {
 			$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent, 
-			`quantity` = :quantity, `time_prod` = :time_prod, `time_prepar` = :time_prepar WHERE `symbol` = "'.$product->symbol.'" AND `status` = :status';
+				`quantity` = :quantity, `time_prod` = :time_prod, `time_prepar` = :time_prepar WHERE `id` = :id_prod';
+			$params['id_prod'] = $product->id;
 		}
 		else {
-			$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent, 
-			`quantity` = :quantity , `time_prod` = :time_prod, `time_prepar` = :time_prepar WHERE `id` = :id_prod AND `status` =:status';
-			$params['id_prod'] = $product->id;
+			$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `time_prod` = :time_prod, 
+				`time_prepar` = :time_prepar WHERE `symbol` = :symbol_old';
+			unset($params['edit_all'], $params['quantity'], $params['id_parent']);
+			$params['symbol_old'] = $product->symbol;
 		}
 		return self::update($sql, $params);
 	}

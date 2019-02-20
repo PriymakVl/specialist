@@ -97,6 +97,15 @@ class OrderProducts extends OrderBase {
 		else $where = 'WHERE ';
 		return $sql.$where.'`status` = :status AND `type_order` = :type_order AND `kind_work` = :kind_work AND `state_work` < 4';
 	}
+	
+	public static function madeWorkerToday($params)
+	{
+		$sql = 'SELECT * FROM `order_products` 
+		WHERE `state_work` = :state_work AND `id_worker` = :id_worker AND `time_end` BETWEEN :start_time_end AND :end_time_end AND `status` = :status';
+		$items = self::perform($sql, $params)->fetchAll();
+		if ($items) return self::createArrayProducts($items);
+        return false;
+	}
 
 	
 	private static function getParamsForWorker($worker, $order)

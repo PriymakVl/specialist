@@ -41,8 +41,7 @@ class OrderStatic extends OrderBase {
 	
 	public static function edit($params)
 	{
-		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `description` = :description, `date_exec` = :date_exec, `type` = :type, `note` = :note 
-			WHERE `id` = :id_order';
+		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note WHERE `id` = :id_order';
 		return self::update($sql, $params);
 	}
 

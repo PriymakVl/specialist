@@ -5,7 +5,7 @@
     <input type="radio" name="tabs" id="tab-2" checked>
     <label for="tab-2">Спецификация</label>
     <div class="tab-content">
-		<h2><?=$product->name?></h2>
+		<h2><?=$product->name?>: <span class="green"><?=$product->symbol?></span></h2>
         <table width="900">
             <? if ($product->specification): ?>
                 <tr>
@@ -34,8 +34,8 @@
 						</td>
 						<td><?=$prod->quantity?></td>
                         <td>
-							<? if ($prod->time_prod): ?>
-								<?=$prod->time_prod?> мин.</td>
+							<? if ($prod->timeProductionTotal): ?>
+								<?=$prod->timeProductionTotal?> мин.</td>
 							<? else: ?>
 								<span class="red">Не указана</span>
 							<? endif; ?>

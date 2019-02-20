@@ -53,7 +53,9 @@
 			<input type="text" name="time_prepar" value="<?=$product->time_prepar?>">
 			<label>Штучное время:</label>
 			<input type="text" name="time_prod" value="<?=$product->time_prod?>">
-		</div>
+			<label>Редактировать все:</label>
+			<input type="checkbox" name="edit_all">
+ 		</div>
 
 
         <div class="form-box">

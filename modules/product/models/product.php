@@ -50,25 +50,19 @@ class Product extends ProductStatic {
 		}
 	}
 	
-	// public function getIimeManufacturing()
-	// {
-		// $result = ProductTime::get($this->symbol);
-		// if (empty($result)) return;
-		// $this->timeProduction = $result->time_prod;
-		// $this->timePreparation = $result->time_prepar;
-		// return $this;
-	// }
-	
-/* 	public function setTimeManufacturing()
-	{
-		$this->timeProduction = date('i', $this->time_prod);
-		$this->timePreparation = date('i', $this->time_prepar);
-	} */
-	
 	public function countTimeManufacturingOrder()
 	{
 		if (!$this->time_prod) return;
 		$this->timeManufacturingOrder = ($this->orderQtyAll * $this->time_prod) + $this->time_prepar;
+		return $this;
+	}
+	
+	//for item specification product
+	public function countTimeProductionTotal()
+	{
+		if (!$this->time_prod) return;
+		$qty = $this->quantity ? $this->quantity : 1;
+		$this->timeProductionTotal = $qty * $this->time_prod;
 		return $this;
 	}
     
