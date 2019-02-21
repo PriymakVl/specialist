@@ -7,22 +7,16 @@ class Controller_Product extends Controller_Base {
     {
         parent::__construct();
         $this->view->pathFolder = './modules/product/views/';
+		$this->view->title = 'Производство';
     }
 
     public function action_index()
 	{
 		$id_active = Session::get('product-active');
 		$product = new Product(Param::get('id_prod'));
-		$product->getSpecification()->getParent();
-        $this->view->title = 'Производство';
+		$product->getSpecification()->getParent()->getActions();
 		$this->render('index/main', compact('product', 'id_active'));
 	}
-
-	public function action_popular()
-    {
-        $this->view->title = 'Популярные';
-        $this->render('popular/main');
-    }
 
 	public function action_add()
     {

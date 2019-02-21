@@ -19,10 +19,11 @@ class ModelStatic extends PHPDataObject {
         return $stmt;
     }
 
-    public static function getAll($tableName)
+    public static function getAll($table_name)
     {
-        $sql = 'SELECT * FROM `'.$tableName.'` WHERE `status`='.self::STATUS_ACTIVE;
-        return self::perform($sql)->fetchAll();
+        $sql = 'SELECT * FROM `'.$table_name.'` WHERE `status`= :status';
+		$params = ['status' => self::STATUS_ACTIVE];
+        return self::perform($sql, $params)->fetchAll();
     }
 
 /*     public static function rowCount($sql)

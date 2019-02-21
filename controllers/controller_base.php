@@ -6,6 +6,7 @@ require_once ('./params/param.php');
 require_once ('./params/param_terminal.php');
 require_once ('./params/param_order.php');
 require_once ('./params/param_product.php');
+require_once ('./params/param_product_action.php');
 
         /* user */
 require_once ('./modules/user/models/user.php');
@@ -18,8 +19,10 @@ require_once('./modules/order/models/order_static.php');
 require_once('./modules/order/models/order_state.php');
 
 require_once('./modules/product/models/product.php');
+require_once('./modules/product/models/product_action.php');
 
 require_once('./modules/statistics/models/statistics.php');
+require_once ('./models/action.php');
 
 
 

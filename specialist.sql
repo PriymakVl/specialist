@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 20 2019 г., 17:57
+-- Время создания: Фев 21 2019 г., 17:50
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -37,7 +37,7 @@ CREATE TABLE `actions` (
 --
 
 INSERT INTO `actions` (`id`, `name`, `status`) VALUES
-(1, 'Порезка заготовок', '1'),
+(1, 'Порезка заготовки', '1'),
 (2, 'Ток. обработка на УН', '1'),
 (3, 'Ток. обработка на ЧПУ', '1'),
 (4, 'Фрезерование', '1'),
@@ -348,34 +348,24 @@ INSERT INTO `products` (`id`, `symbol`, `name`, `id_parent`, `quantity`, `type`,
 
 CREATE TABLE `product_actions` (
   `id` int(11) NOT NULL,
-  `id_prod` int(10) NOT NULL,
+  `symbol` varchar(100) NOT NULL COMMENT 'symbol product',
   `id_action` int(10) NOT NULL,
-  `number` tinyint(5) NOT NULL,
+  `number` tinyint(3) NOT NULL,
+  `time_prod` varchar(100) NOT NULL,
+  `time_prepar` varchar(100) NOT NULL,
   `status` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
--- --------------------------------------------------------
-
 --
--- Структура таблицы `product_times`
+-- Дамп данных таблицы `product_actions`
 --
 
-CREATE TABLE `product_times` (
-  `id` int(11) NOT NULL,
-  `symbol` varchar(100) NOT NULL COMMENT 'product',
-  `id_action` int(11) NOT NULL,
-  `time_prod` varchar(100) NOT NULL COMMENT 'production',
-  `time_prepar` varchar(100) NOT NULL COMMENT 'preparation',
-  `status` enum('0','1') NOT NULL DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `product_times`
---
-
-INSERT INTO `product_times` (`id`, `symbol`, `id_action`, `time_prod`, `time_prepar`, `status`) VALUES
-(1, 'SR-ROD-12', 2, '300', '60', '1'),
-(2, 'SR-PIPE-32', 2, '420', '60', '1');
+INSERT INTO `product_actions` (`id`, `symbol`, `id_action`, `number`, `time_prod`, `time_prepar`, `status`) VALUES
+(1, 'SR/SE-ROD-12', 1, 1, '15', '2', '1'),
+(2, 'SR/SE-ROD-12', 2, 6, '150', '20', '1'),
+(3, 'SR/SE-ROD-12', 1, 0, '12', '2', '0'),
+(4, 'SR/SE-ROD-12', 2, 0, '15', '2', '1'),
+(5, 'SR/SE-ROD-12', 1, 1, '5', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -481,13 +471,6 @@ ALTER TABLE `product_actions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `product_times`
---
-ALTER TABLE `product_times`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `symbol` (`symbol`);
-
---
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
@@ -543,12 +526,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT для таблицы `product_actions`
 --
 ALTER TABLE `product_actions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблицы `product_times`
---
-ALTER TABLE `product_times`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --

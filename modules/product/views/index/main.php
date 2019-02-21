@@ -27,8 +27,8 @@ require_once ('./modules/product/models/product.php');
 				<? include_once('specification_product.php'); ?>
 			<? endif; ?>
 
-            <!-- statistics -->
-            <? //include_once('statistics.php'); ?>
+            <!-- actions -->
+            <? if ($product->actions) include_once('actions.php'); ?>
 
         </ul>
     </div>

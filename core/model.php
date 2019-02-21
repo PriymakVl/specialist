@@ -26,8 +26,9 @@ class Model extends ModelStatic {
 
     public function getData($id)
     {
-        $sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = ? AND `status` = ?';
-        $this->data = self::perform($sql, [$id, self::STATUS_ACTIVE])->fetch(PDO::FETCH_ASSOC);
+        $sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
+		$params = ['id' => $id, 'status' => self::STATUS_ACTIVE];
+        $this->data = self::perform($sql, $params)->fetch(PDO::FETCH_ASSOC);
     }
 
     public function delete()

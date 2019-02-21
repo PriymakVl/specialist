@@ -5,11 +5,12 @@ class Product extends ProductStatic {
 	
 	public $parent;
 	public $typeViewSpecification;
+	public $actions;
 
-    public function __construct($user_id)
+    public function __construct($id_prod)
     {
         $this->tableName = 'products';
-        parent::__construct($user_id);
+        parent::__construct($id_prod);
     }
 	
 	public function getSpecification()
@@ -17,6 +18,12 @@ class Product extends ProductStatic {
 		$this->specification = self::getAllByIdParent($this->id);
 		$this->getTypeViewSpecification();
 		if ($this->typeViewSpecification == 'category') $this->getChildrenSpecification();
+		return $this;
+	}
+	
+	public function getActions()
+	{
+		$this->actions = ProductAction::getAllBySymbol($this->symbol);
 		return $this;
 	}
 	

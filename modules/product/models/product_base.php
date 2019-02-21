@@ -4,7 +4,8 @@ require_once ('./helpers/date.php');
 require_once ('./helpers/message.php');
 require_once ('./helpers/helper.php');
 require_once('product.php');
-require_once ('product_time.php');
+require_once ('product_action.php');
+require_once ('./models/action.php');
 
 class ProductBase extends Model
 {
