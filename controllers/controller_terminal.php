@@ -22,11 +22,14 @@ class Controller_Terminal extends Controller_Base
         else $this->redirect('main/login');
     }
 
-    public function action_products()
+    public function action_actions()
     {
         $worker = $this->getWorker();
-        $products = OrderProducts::getForWorker($worker);
-        $this->render('products/main', compact('products', 'worker'));
+		$params = ParamTerminal::getActions($worker);
+        $prod_actions = OrderProductAction::getForTerminal($params);
+		//debug($prod_actions[0]->convertState);
+		$actions = Action::getAll('actions');
+        $this->render('actions/main', compact('prod_actions', 'worker', 'actions'));
     }
 
     public function action_start_work()

@@ -38,17 +38,17 @@ body {
 	letter-spacing: 7px;
 }
 
-#terminal-orders-wrp, #terminal-products-wrp {
-	margin-top: 80px;
+#terminal-actions-wrp {
+	margin-top: 50px;
 }
 
-#terminal-orders-wrp:after, #terminal-products-wrp:after {
+#terminal-actions-wrp:after {
 	content: "";
 	display: block;
 	clear: both;
 }
 
-.terminal-order-box, .terminal-product-box {
+.terminal-action-box {
 	width: 250px;
 	height: 150px;
 	margin-right: 20px;
@@ -57,11 +57,7 @@ body {
 	position: relative;
 }
 
-.terminal-order-box {
-	background: yellow;
-}
-
-.terminal-order-box:hover, .terminal-product-box:hover {
+.terminal-action-box:hover {
 	cursor: pointer;
 	border: 2px solid red;
 }

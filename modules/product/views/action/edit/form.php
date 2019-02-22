@@ -1,6 +1,6 @@
 <div id="form-add-action-wrp">
     <h2>Форма редактирования операции</h2>
-    <form action="/action/edit?id_prod_action=<?=$prod_action->id?>" method="post">
+    <form action="/prodaction/edit?id_prod_action=<?=$prod_action->id?>&id_prod=<?=$id_prod?>" method="post">
 	
 			<div class="form-box product-action-wrp">
 			

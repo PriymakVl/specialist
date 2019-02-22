@@ -28,7 +28,7 @@ class OrderContent extends OrderBase {
         foreach ($items as $item) {
             $product = new Product($item->id_prod);
             $product->orderQtyAll = $item->quantity;
-			$product->getSpecification();
+			$product->getSpecification()->countTimeManufacturing();
             $content[] = $product;
         }
         return $content;

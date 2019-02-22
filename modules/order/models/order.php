@@ -31,7 +31,8 @@ class Order extends OrderStatic {
 	{	
 		$this->getContent();
 		$products = OrderExtractProducts::get($this->content);
-		OrderProducts::add($products, $this);
+		//OrderProducts::add($products, $this);
+		OrderProductAction::add($products, $this);
 		$this->setState(OrderState::WORK);
 		//todo для учета статистики добавить состояние в OrderState
 		//$products = $this->getListOfProduct();

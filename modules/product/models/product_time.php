@@ -3,18 +3,40 @@ require_once('product_base.php');
 
 class ProductTime extends ProductBase {
 
-
-    public static function get($symbol)
-    {
-        $sql = 'SELECT `time_prod`, `time_prepar` FROM `product_times` WHERE `symbol` = :symbol AND `status` = :status';
-        $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
-        return self::perform($sql, $params)->fetch();
-    }
+	public static function countTimeManufacSpecif($products)
+	{
+		$time_total = 0;
+		foreach ($products as $product) {
+			$time_manuf = self::countTimeManufacturing($product);
+			$time_total = $time_total + $tim_manuf;
+		}
+		return $time_total;
+	}
 	
-	// private static function convertTime($result)
-	// {
-		// $result->time_prod = date('i:s', $result->time_prod);
-		// $result->time_prepar = date('i:s', $result->time_prepar);
-		// return $result;
-	// }
+	public static function countTimeManufacturing($product)
+	{
+		$prod_actions = ProductAction::getAllBySymbol($product->symbol);
+		if (empty($prod_actions)) return 0;
+		$time_production = self::countTotalTimeProductionActions($prod_actions, $product->quantity);
+		$time_preparation = self::countTotalTimePreparationActions($prod_actions);
+		return $time_production + $time_preparation;
+	}
+	
+	private static function countTotalTimeProductionActions($actions, $qty)
+	{
+		$time_total = 0;
+		foreach ($actions as $action) {
+			$time_total = $time_total + ($action->time_prod  * $qty);
+		}
+		return $time_total;
+	}
+	
+	private static function countTotalTimePreparationActions($actions)
+	{
+		$time_total = 0;
+		foreach ($actions as $action) {
+			$time_total = $time_total + $action->time_prepar;
+		}
+		return $time_total;
+	}
 }

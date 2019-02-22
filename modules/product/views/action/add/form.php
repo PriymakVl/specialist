@@ -1,6 +1,6 @@
 <div id="form-add-action-wrp">
     <h2>Форма добавления операции</h2>
-    <form action="/action/add?id_prod=<?=$product->id?>" method="post">
+    <form action="/prodaction/add?id_prod=<?=$product->id?>" method="post">
 	
 			<div class="form-box product-action-wrp">
 			

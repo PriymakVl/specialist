@@ -3,10 +3,10 @@ require_once('action_static.php');
 
 class Action extends ActionStatic {
 
-	public function __construct($id_action)
+	public function __construct($id)
     {
         $this->tableName = 'actions';
-        parent::__construct($id_action);
+        parent::__construct($id);
     }
 	
 }

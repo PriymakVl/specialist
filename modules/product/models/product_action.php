@@ -30,7 +30,7 @@ class ProductAction extends ProductBase {
 	
 	public function setName()
 	{
-		$this->name = Action::getName($this->id);
+		$this->name = Action::getName($this->id_action);
 		return $this;
 	}
 	
@@ -44,8 +44,7 @@ class ProductAction extends ProductBase {
 	
 	public static function edit($params)
 	{
-		debug($params);
-        $sql = 'UPDATE `product_actions` SET `time_prod` = :time_prod, `time_prepar` = :time_prepar, `number` = :number WHERE id = :id';
+        $sql = 'UPDATE `product_actions` SET `time_prod` = :time_prod, `time_prepar` = :time_prepar, `number` = :number WHERE id = :id_prod_action';
 		return self::perform($sql, $params); 
 	}
 	

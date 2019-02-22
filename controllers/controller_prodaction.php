@@ -1,7 +1,7 @@
 <?php
 require_once('controller_base.php');
 //production time
-class Controller_Action extends Controller_Base {
+class Controller_Prodaction extends Controller_Base {
 
     public function __construct()
     {
@@ -22,18 +22,20 @@ class Controller_Action extends Controller_Base {
 	
 	public function action_delete()
 	{
-		ProductAction::deleteOne(Param::get('id_action'));
+		ProductAction::deleteOne(Param::get('id_prod_action'));
 		$this->redirectPrevious();
 	}
 	
 	public function action_edit()
 	{
 		$actions = Action::getAll('actions');
-		$prod_action = new ProductAction(Param::get('id_prod_action'));
+		$params = ParamProductAction::edit();
+		$prod_action = new ProductAction($params['id_prod_action']);
 		$prod_action->setName();
-		if (!Param::get('save')) return $this->render('action/edit/main', compact('actions', 'prod_action'));
-		ProductAction::edit(ParamProductAction::edit());
-		$this->redirect('product?id_prod='.Param::get('id_prod'));
+		$id_prod = Param::get('id_prod');
+		if (!Param::get('save')) return $this->render('action/edit/main', compact('actions', 'prod_action', 'id_prod'));
+		ProductAction::edit($params);
+		$this->redirect('product?id_prod='.$id_prod);
 	}
 	
 	

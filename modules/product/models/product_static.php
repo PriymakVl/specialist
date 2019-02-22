@@ -16,7 +16,7 @@ class ProductStatic extends ProductBase {
     {
         $products = Helper::createArrayOfObject($ids, 'Product');
 		foreach ($products as $product) {
-			$product->getSpecification()->countTimeProductionTotal();
+			$product->getSpecification()->countTimeManufacturing();
 		}
 		return $products;
     }

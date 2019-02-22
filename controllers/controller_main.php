@@ -21,7 +21,7 @@ class Controller_Main extends Controller_Base {
         $id_user = Session::get('id_user');
         if (empty($id_user)) return $this->redirect('main/login');
         $user = new User($id_user);
-        if ($user->position == User::POSITION_WORKER) $this->redirect('terminal/products?id_user='.$id_user);
+        if ($user->position == User::POSITION_WORKER) $this->redirect('terminal/actions');
         else $this->redirect('order/list');
     }
 

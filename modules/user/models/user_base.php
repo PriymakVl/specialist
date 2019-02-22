@@ -13,7 +13,7 @@ class UserBase extends Model
 {
 
 	public $defaultTypeOrder;
-	public $defaultKindWork;
+	public $defaultProductAction;
 	
 	const POSITION_WORKER = 1;
 	

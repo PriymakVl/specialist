@@ -12,16 +12,28 @@
 				<th>Примечание</th>
 				<th width="100">Управление</th>
 			</tr>
-			<? foreach($product->actions as $action): ?>
+			<? foreach($product->actions as $prod_action): ?>
 				<tr>
-					<td><?=$action->number?></td>
-					<td><?=$action->name?></td>
-					<td><?=$action->time_prepar?> мин.</td>
-					<td><?=$action->time_prod?> мин.</td>
+					<td><?=$prod_action->number?></td>
+					<td><?=$prod_action->name?></td>
+					<td>
+						<? if ($prod_action->time_prepar): ?>
+							<?=$prod_action->time_prepar?> мин.
+						<? else: ?>
+							<span class="red">Нет</span>
+						<? endif; ?>
+					</td>
+					<td>
+						<? if ($prod_action->time_prod): ?>
+							<?=$prod_action->time_prod?> мин.
+						<? else: ?>
+							<span class="red">Нет</span>
+						<? endif; ?>
+					</td>
 					<td></td>
 					<td class="action-control-box">
-						<a href="/action/edit?id_action=<?=$action->id?>&id_prod=<?=$product->id?>">Редактировать</a><br>
-						<a href="/action/delete?id_action=<?=$action->id?>">Удалить</a>
+						<a href="/prodaction/edit?id_prod_action=<?=$prod_action->id?>&id_prod=<?=$product->id?>">Редактировать</a><br>
+						<a href="/prodaction/delete?id_prod_action=<?=$prod_action->id?>">Удалить</a>
 					</td>
 				</tr>
 				<? $number++; ?>

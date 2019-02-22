@@ -34,8 +34,8 @@
 						</td>
 						<td><?=$prod->quantity?></td>
                         <td>
-							<? if ($prod->timeProductionTotal): ?>
-								<?=$prod->timeProductionTotal?> мин.</td>
+							<? if ($prod->timeManufacturing): ?>
+								<?=$prod->timeManufacturing?> мин.</td>
 							<? else: ?>
 								<span class="red">Не указана</span>
 							<? endif; ?>

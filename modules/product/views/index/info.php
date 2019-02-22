@@ -28,23 +28,12 @@
 			<? if ($product->type != Product::TYPE_CATEGORY): ?>
 				<tr>
 					<td>4</td>
-					<td>Подготовительное время</td>
+					<td>Трудоемкость</td>
 					<td class="left">
-						<? if ($product->time_prepar): ?>
-							<?=$product->time_prepar?> мин.
+						<? if ($product->timeManufacturing): ?>
+							<?=$product->timeManufacturing?> мин.
 						<? else: ?>
-							<span class="red">Не указано</span>
-						<? endif; ?>
-					</td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td>Штучное время</td>
-					<td class="left">
-						<? if ($product->time_prod): ?>
-							<?=$product->time_prod?> мин.
-						<? else: ?>
-							<span class="left red">Не указано</span>
+							<span class="red">Не указана</span>
 						<? endif; ?>
 					</td>
 				</tr>
@@ -53,7 +42,7 @@
 			<!-- parent -->
 			<? if ($product->parent): ?>
 				<tr>
-                    <td>6</td>
+                    <td>5</td>
                     <td>Родитель</td>
                     <td class="left red">
 						<a href="/product?id_prod=<?=$product->parent->id?>"><?=$product->parent->name?> <span style="font-weight: bold;"><?=$product->parent->symbol?></span></a>

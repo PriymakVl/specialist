@@ -23,7 +23,7 @@
 		<!-- form add product actions -->
 		<? if ($product->type == Product::TYPE_DETAIL || $product->type == Product::TYPE_UNIT || $product->type == Product::TYPE_PRODUCT): ?>
 			<li>
-				<a href="/action/add?id_prod=<?=$product->id?>">Добавить операцию</a>
+				<a href="/prodaction/add?id_prod=<?=$product->id?>">Добавить операцию</a>
 			</li>
 		<? endif; ?>
     </ul>

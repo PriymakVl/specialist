@@ -4,11 +4,13 @@ require_once ('./helpers/date.php');
 require_once ('./helpers/message.php');
 require_once ('./helpers/helper.php');
 require_once ('./modules/product/models/product.php');
+require_once ('./modules/product/models/product_action.php');
 require_once ('order_content.php');
 require_once ('order_extract_products.php');
 require_once ('order_positions.php');
-require_once ('order_products.php');
+require_once ('order_product.php');
 require_once ('./modules/statistics/models/statistics.php');
+require_once ('order_product_action.php');
 
 class OrderBase extends Model
 {
@@ -16,9 +18,9 @@ class OrderBase extends Model
     const TYPE_CYLINDER = 1;
     const TYPE_CAR_NUMBER = 2;
 	
-	const KIND_WORK_CUTTING = 1; //порезка заготовок
-	const KIND_WORK_MAKE = 2; //изготовление детали
-	const KIND_WORK_ASSEMBLY = 3; //сборка
+	//const KIND_WORK_CUTTING = 1; //порезка заготовок
+	//const KIND_WORK_MAKE = 2; //изготовление детали
+	//const KIND_WORK_ASSEMBLY = 3; //сборка
 
     /**состояние для детали, состояние для заказа в классе OrderState **/
     //todo создать класс ProductState

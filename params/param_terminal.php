@@ -30,4 +30,14 @@ class ParamTerminal extends Param {
 		return $params;
 	}
 	
+	public static function getActions($worker)
+	{
+		$id_action = self::get('id_action');
+		$params['type_order'] = $worker->defaultTypeOrder;
+		$params['id_action'] = $id_action ? $id_action : $worker->defaultProductAction;
+		$params['state'] = OrderProductAction::STATE_WORK_END;
+		$params['status'] = Model::STATUS_ACTIVE;
+		return $params;
+	}
+	
 }

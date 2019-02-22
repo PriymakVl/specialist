@@ -14,7 +14,7 @@ class ParamProductAction extends Param {
 	
 	public static function edit()
 	{
-        $keys = ['number', 'time_prod', 'time_prepar'];
+        $keys = ['number', 'time_prod', 'time_prepar', 'id_prod_action'];
 		$params = self::getAll($keys);
 		return $params;
 	}

@@ -14,7 +14,7 @@ class User extends UserStatic {
 	{
 		$options = UserOptions::get($this->id);
 		if (!$options) return;
-		$this->defaultKindWork = $this->setProperty('default_kind_work', $options);
+		$this->defaultProductAction = $this->setProperty('default_product_action', $options);
 		$this->defaultTypeOrder = $this->setProperty('default_type_order', $options);
 	}
 	

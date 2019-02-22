@@ -27,13 +27,6 @@ class Product extends ProductStatic {
 		return $this;
 	}
 	
-	public function setBgTerminalProductBox()
-	{
-		if ($this->stateWork == Order::STATE_WORK_PROGRESS) $this->bgTerminalProductBox = self::BG_TERMINAL_BOX_PROGRESS;
-		else if ($this->stateWork == Order::STATE_WORK_STOPPED) $this->bgTerminalProductBox =  self::BG_TERMINAL_BOX_STOPPED;
-		else $this->bgTerminalProductBox = self::BG_TERMINAL_BOX_PLAN;
-	}
-	
 	public function getParent()
 	{
 		if ($this->id_parent) $this->parent = new Product($this->id_parent);
@@ -64,12 +57,14 @@ class Product extends ProductStatic {
 		return $this;
 	}
 	
-	//for item specification product
-	public function countTimeProductionTotal()
+
+	public function countTimeManufacturing()
 	{
-		if (!$this->time_prod) return;
-		$qty = $this->quantity ? $this->quantity : 1;
-		$this->timeProductionTotal = $qty * $this->time_prod;
+		$this->timeManufacturing = ProductTime::countTimeManufacturing($this);
+		if ($this->specification) {
+			$time_manufac_specif = ProductTime::countTimeManufacSpecif($this->content);
+			$this->timeManufacturing = $this->timeManufacturing + $time_manufac_specif;
+		}
 		return $this;
 	}
     

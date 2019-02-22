@@ -19,7 +19,13 @@
 						</td>
 						<td><?=$product->name?></td>
 						<td class="product-qty" id_order="<?=$order->id?>" id_prod="<?=$product->id?>"><?=$product->orderQtyAll?></td>
-						<td>5 мин</td>
+						<td>
+							<? if ($product->timeManufacturing): ?>
+								<?=$product->timeManufacturing?> мин.
+							<? else: ?>
+								<span class="red">Не указана</span>
+							<? endif; ?>
+						</td>
 					</tr>
                 <? endforeach; ?>
             <? else: ?>
