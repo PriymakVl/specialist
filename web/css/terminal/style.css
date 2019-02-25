@@ -5,7 +5,7 @@ body {
 }
 
 #terminal-wrp {
-	width: 900px;
+	width: 805px;
 	height: 600px;
 	margin: 0 auto;
 }
@@ -27,6 +27,7 @@ body {
 	color: white;
 	border-bottom: 1px solid black;
 	padding-left: 20px;
+	position: relative;
 }
 
 #terminal-clock {
@@ -39,7 +40,7 @@ body {
 }
 
 #terminal-actions-wrp {
-	margin-top: 50px;
+	margin-top: 20px;
 }
 
 #terminal-actions-wrp:after {
@@ -59,15 +60,19 @@ body {
 	color: black;
 }
 
+.terminal-action-box:nth-child(3) {
+	margin-right: 0;
+}
+
 .terminal-action-box:hover {
 	cursor: pointer;
 	border: 2px solid red;
 }
 
 .exit-link {
-	position: fixed;
+	position: absolute;
 	color: white;
-	top: 10px;
+	top: 0;
 	right: 10px;
 }
 
