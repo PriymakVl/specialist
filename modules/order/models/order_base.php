@@ -3,14 +3,18 @@ require_once ('./core/model.php');
 require_once ('./helpers/date.php');
 require_once ('./helpers/message.php');
 require_once ('./helpers/helper.php');
+
 require_once ('./modules/product/models/product.php');
 require_once ('./modules/product/models/product_action.php');
+
+	/*order*/
 require_once ('order_content.php');
-require_once ('order_extract_products.php');
 require_once ('order_positions.php');
-require_once ('order_product.php');
+require_once ('order_action.php');
+require_once ('order_extract_products.php');
+
 require_once ('./modules/statistics/models/statistics.php');
-require_once ('order_product_action.php');
+
 
 class OrderBase extends Model
 {

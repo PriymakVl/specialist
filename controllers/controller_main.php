@@ -28,8 +28,7 @@ class Controller_Main extends Controller_Base {
     public function action_login()
     {
         $params = Param::getAll(['login', 'password']);
-        if ($params) $user = UserStatic::authorisation($params);
-        else $user = false;
+        $user = $params ? UserStatic::authorisation($params) : false;
         if ($user) {
             Session::set('id_user', $user->id);
             $this->redirect('main/index');

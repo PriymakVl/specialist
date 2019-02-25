@@ -56,6 +56,7 @@ body {
 	border: 2px solid white;
 	float: left;
 	position: relative;
+	color: black;
 }
 
 .terminal-action-box:hover {

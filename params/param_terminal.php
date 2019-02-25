@@ -34,7 +34,7 @@ class ParamTerminal extends Param {
 	{
 		$params['type_order'] = $worker->defaultTypeOrder;
 		$params = self::setIdAction($params, $worker);
-		$params['state'] = OrderProductAction::STATE_WORK_END;
+		$params['state'] = OrderAction::STATE_WORK_END;
 		$params['status'] = Model::STATUS_ACTIVE;
 		return $params;
 	}
@@ -47,11 +47,11 @@ class ParamTerminal extends Param {
 		return $params;
 	}
 	
-	public static function checkMadeProduct()
+	public static function getNotReadyActionOrder()
 	{
-		$keys = ['id_prod', 'id_order'];
-		$params = self::getAll($keys);
-		$params['status'] = OrderProductAction::STATUS_ACTIVE;
+		$params['id_order'] = self::get('id_order');
+		$params['status'] = OrderAction::STATUS_ACTIVE;
+		$params['state'] = OrderAction::STATE_WORK_END;
 		return $params;
 	}
 	

@@ -26,9 +26,9 @@ class Controller_Terminal extends Controller_Base
     {
         $worker = $this->getWorker();
 		$params = ParamTerminal::getActions($worker);
-        $prod_actions = OrderAction::getForTerminal($params);
+        $order_actions = OrderAction::getForTerminal($params);
 		$actions = Action::getAll('actions');
-        $this->render('actions/main', compact('prod_actions', 'worker', 'actions', 'params'));
+        $this->render('actions/main', compact('order_actions', 'worker', 'actions', 'params'));
     }
 
     public function action_start_work()
@@ -42,15 +42,11 @@ class Controller_Terminal extends Controller_Base
     {
         $params = ParamTerminal::endWork();
         OrderAction::endWork($params);
-		$result = OrderProductAction::checkMadeOrder(ParamTerminal::checkMadeOrder());
-		if ($result) {
-			//$product = new OrderProduct($params['id_prod']);
-			//$product->setStateMade();
+		$result = OrderAction::getNotReadyActionOrder(ParamTerminal::getNotReadyActionOrder());
+		if (!$result) {
 			$order = new Order(Param::get('id_order'));
 			$order->setStateMade();
 		}
-        //$worker = $this->getWorker();
-        //$products = OrderProducts::getForWorker($worker);
         $this->redirect('terminal/actions?id_action='.$params['id_action']);
     }
 

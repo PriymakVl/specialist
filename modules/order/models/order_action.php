@@ -1,5 +1,5 @@
 <?php
-require_once('order_product_action_static.php');
+require_once('order_action_static.php');
 
 class OrderAction extends OrderActionStatic {
 
@@ -15,7 +15,7 @@ class OrderAction extends OrderActionStatic {
 	
 	public function __construct($id)
     {
-        $this->tableName = 'order_product_actions';
+        $this->tableName = 'order_actions';
         parent::__construct($id);
     }
 	

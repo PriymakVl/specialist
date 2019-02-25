@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 22 2019 г., 17:57
+-- Время создания: Фев 25 2019 г., 17:58
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -47,37 +47,6 @@ INSERT INTO `actions` (`id`, `name`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `categories`
---
-
-CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `id_parent` int(11) NOT NULL DEFAULT '0',
-  `status` enum('0','1') NOT NULL DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `categories`
---
-
-INSERT INTO `categories` (`id`, `name`, `id_parent`, `status`) VALUES
-(1, 'Производство', 0, '1'),
-(2, 'Готовая продукция', 1, '1'),
-(3, 'Пневмоцилиндры', 2, '1'),
-(4, 'Серия SR', 3, '1'),
-(5, 'Серия SE', 3, '1'),
-(6, 'Серия SC', 3, '1'),
-(7, 'Запчасти', 1, '1'),
-(8, 'Штока', 7, '1'),
-(9, 'Гильзы', 7, '1'),
-(10, 'Шпильки', 7, '1'),
-(11, 'Серия SR', 8, '1'),
-(12, 'Серия SR', 9, '1');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `orders`
 --
 
@@ -102,11 +71,46 @@ INSERT INTO `orders` (`id`, `symbol`, `state`, `type`, `date_exec`, `note`, `sta
 (4, 'ddddd', 1, 1, '1550661061', 'vvvvvvvvvvvvv', '0'),
 (5, 'SP000000468', 1, 1, '', '', '1'),
 (6, 'SP000000479', 4, 1, '', '', '1'),
-(7, 'SP000000532', 3, 1, '1550735635', '', '1'),
+(7, 'SP000000532', 1, 1, '1550735635', '', '1'),
 (8, 'SP000000541', 1, 1, '1550735832', '', '1'),
-(9, 'SP000000548', 2, 1, '1550735929', '', '1'),
+(9, 'SP000000548', 1, 1, '1550735929', '', '1'),
 (10, 'SP000000549', 1, 1, '1550736037', '', '1'),
 (11, 'SP-TEST', 3, 1, '1550998423', '', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `order_actions`
+--
+
+CREATE TABLE `order_actions` (
+  `id` int(11) NOT NULL,
+  `id_order` int(11) NOT NULL,
+  `id_prod` int(11) NOT NULL,
+  `id_action` int(11) NOT NULL,
+  `qty` int(5) NOT NULL,
+  `state` int(11) NOT NULL,
+  `type_order` int(11) NOT NULL,
+  `time_start` varchar(100) NOT NULL,
+  `time_end` varchar(100) NOT NULL,
+  `time_manufac` varchar(100) NOT NULL,
+  `id_worker` int(11) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `order_actions`
+--
+
+INSERT INTO `order_actions` (`id`, `id_order`, `id_prod`, `id_action`, `qty`, `state`, `type_order`, `time_start`, `time_end`, `time_manufac`, `id_worker`, `status`) VALUES
+(1, 11, 1, 6, 2, 1, 1, '', '', '38', 0, '1'),
+(2, 11, 102, 1, 2, 2, 1, '1551106452', '', '5', 2, '1'),
+(3, 11, 102, 3, 2, 4, 1, '1551104024', '1551104030', '15', 2, '1'),
+(4, 11, 102, 4, 2, 1, 1, '', '', '11', 0, '1'),
+(5, 11, 103, 1, 8, 1, 1, '', '', '9', 0, '1'),
+(6, 11, 103, 3, 8, 4, 1, '1551105610', '1551106191', '17', 2, '1'),
+(7, 11, 106, 1, 2, 1, 1, '', '', '5', 0, '1'),
+(8, 11, 106, 2, 2, 1, 1, '', '', '21', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -127,14 +131,7 @@ CREATE TABLE `order_content` (
 --
 
 INSERT INTO `order_content` (`id`, `id_prod`, `quantity`, `id_order`, `status`) VALUES
-(1, 33, 4, 1, '1'),
-(2, 5, 1, 3, ''),
-(3, 51, 5, 3, '1'),
-(4, 89, 1, 6, '1'),
-(5, 2, 6, 7, '1'),
-(6, 2, 2, 7, '1'),
-(7, 2, 2, 7, '1'),
-(8, 1, 2, 11, '1');
+(1, 1, 2, 11, '1');
 
 -- --------------------------------------------------------
 
@@ -169,79 +166,6 @@ INSERT INTO `order_positions` (`id`, `id_order`, `symbol`, `qty`, `note`, `statu
 (11, 10, 'SC-MAL-40x120-S', 2, '', '1'),
 (12, 10, 'SC-MA-25x100', 1, '', '1'),
 (13, 11, 'SC-SR-32', 2, '', '1');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `order_products`
---
-
-CREATE TABLE `order_products` (
-  `id` int(11) NOT NULL,
-  `id_order` int(11) NOT NULL,
-  `id_prod` int(11) NOT NULL,
-  `state_work` tinyint(3) NOT NULL,
-  `type_order` int(11) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `status` enum('0','1') NOT NULL DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `order_products`
---
-
-INSERT INTO `order_products` (`id`, `id_order`, `id_prod`, `state_work`, `type_order`, `qty`, `status`) VALUES
-(1, 1, 33, 4, 1, 4, '1'),
-(2, 1, 38, 4, 1, 4, '1'),
-(3, 1, 46, 4, 1, 4, '1'),
-(4, 3, 51, 4, 1, 5, '1'),
-(5, 3, 70, 4, 1, 5, '1'),
-(6, 3, 71, 4, 1, 5, '1'),
-(7, 6, 89, 4, 1, 1, '1'),
-(8, 7, 2, 1, 1, 10, '0'),
-(9, 7, 8, 1, 1, 10, '0'),
-(10, 7, 2, 1, 1, 10, '1'),
-(11, 7, 97, 4, 1, 10, '1'),
-(12, 7, 104, 4, 1, 10, '1'),
-(13, 7, 105, 2, 1, 40, '1'),
-(14, 11, 1, 1, 1, 2, '1'),
-(15, 11, 102, 1, 1, 2, '1'),
-(16, 11, 103, 1, 1, 8, '1'),
-(17, 11, 106, 1, 1, 2, '1');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `order_product_actions`
---
-
-CREATE TABLE `order_product_actions` (
-  `id` int(11) NOT NULL,
-  `id_order` int(11) NOT NULL,
-  `id_prod` int(11) NOT NULL,
-  `id_action` int(11) NOT NULL,
-  `qty` int(5) NOT NULL,
-  `state` int(11) NOT NULL,
-  `type_order` int(11) NOT NULL,
-  `time_start` varchar(100) NOT NULL,
-  `time_end` varchar(100) NOT NULL,
-  `id_worker` int(11) NOT NULL,
-  `status` enum('0','1') NOT NULL DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `order_product_actions`
---
-
-INSERT INTO `order_product_actions` (`id`, `id_order`, `id_prod`, `id_action`, `qty`, `state`, `type_order`, `time_start`, `time_end`, `id_worker`, `status`) VALUES
-(1, 11, 1, 6, 2, 1, 1, '', '', 0, '1'),
-(2, 11, 102, 1, 2, 1, 1, '', '', 0, '1'),
-(3, 11, 102, 3, 2, 1, 1, '', '', 0, '1'),
-(4, 11, 102, 4, 2, 1, 1, '', '', 0, '1'),
-(5, 11, 103, 1, 8, 1, 1, '', '', 0, '1'),
-(6, 11, 103, 3, 8, 1, 1, '', '', 0, '1'),
-(7, 11, 106, 1, 2, 1, 1, '', '', 0, '1'),
-(8, 11, 106, 2, 2, 1, 1, '', '', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -469,15 +393,15 @@ ALTER TABLE `actions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `orders`
 --
 ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `order_actions`
+--
+ALTER TABLE `order_actions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -490,18 +414,6 @@ ALTER TABLE `order_content`
 -- Индексы таблицы `order_positions`
 --
 ALTER TABLE `order_positions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `order_products`
---
-ALTER TABLE `order_products`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `order_product_actions`
---
-ALTER TABLE `order_product_actions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -539,35 +451,25 @@ ALTER TABLE `user_options`
 ALTER TABLE `actions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT для таблицы `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
+-- AUTO_INCREMENT для таблицы `order_actions`
+--
+ALTER TABLE `order_actions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
 -- AUTO_INCREMENT для таблицы `order_content`
 --
 ALTER TABLE `order_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `order_positions`
 --
 ALTER TABLE `order_positions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT для таблицы `order_products`
---
-ALTER TABLE `order_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
---
--- AUTO_INCREMENT для таблицы `order_product_actions`
---
-ALTER TABLE `order_product_actions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --

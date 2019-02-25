@@ -3,7 +3,8 @@ $(document).ready(function() {
 		var state_work, id_order, id_prod, id_worker, prod_name;
 		const STATE_WORK_PREPARATION = 1;
 	//деталь взята в работу
-	$('.terminal-action-box').click(function() {
+	$('.terminal-action-box').click(function(event) {
+		event.preventDefault();
 		state_work = $(this).attr('state');
 		id_order = $(this).attr('id_order');
 		id_prod = $(this).attr('id_prod');

@@ -7,6 +7,7 @@ require_once ('user_options.php');
 require_once ('./modules/order/models/order.php');
 require_once ('./modules/statistics/models/statistics.php');
 require_once('./params/param_worker.php');
+require_once('./modules/order/models/order_action.php');
 
 
 class UserBase extends Model

@@ -14,4 +14,13 @@ class ParamWorker extends Param {
 		return $params;
 	}
 	
+	public static function forMadeWorkers($login)
+	{
+		$id_default_actions_arr = Worker::setDefaultActions($login);
+		$params['id_actions'] = trim(implode(',', $id_default_actions_arr), ',');
+		$params['state'] = OrderAction::STATE_WORK_END;
+		$params['status'] = Worker::STATUS_ACTIVE;
+		return $params;
+	}
+	
 }

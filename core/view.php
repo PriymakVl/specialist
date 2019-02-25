@@ -9,14 +9,10 @@ class View {
 
 	public function render($content, $data, $view)
 	{
-        //ob_start();
         $content = $this->pathFolder.$content.'.php';
         $title = $this->title;
-
         if ($data) extract($data);
-
-        require $this->pathLayout;
-        return ob_get_clean();
+		require ($this->pathLayout);
 	}
 
 	public function renderPart($path, $data = null)

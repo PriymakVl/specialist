@@ -2,9 +2,9 @@
 	$number = 1;
 ?>
 <div id="terminal-actions-wrp">
-    <? if ($prod_actions): ?>
-        <? foreach ($prod_actions as $action): ?>
-            <div class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>"
+    <? if ($order_actions): ?>
+        <? foreach ($order_actions as $action): ?>
+            <a href="#" class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>"
                  prod_name="<?=$action->product->name?>"
                  id_order="<?=$action->id_order?>"
                  id_prod="<?=$action->id_prod?>"
@@ -13,12 +13,12 @@
 				 id_action="<?=$action->id_action?>">
 				 
 
-                <div class="info-order">№<?=$number?> заказ: <?=$action->order->symbol?></div>
-                <div class="info-product"><?=$action->product->symbol?><br>
+                <span class="info-order">№<?=$number?> заказ: <?=$action->order->symbol?></span>
+                <span class="info-product"><?=$action->product->symbol?><br>
                     <?=$action->product->name?> (<?=$action->qty?>шт.)
-                </div>
-                <div class="info-state"><?=$action->action->name?></div>
-            </div>
+                </span>
+                <span class="info-state"><?=$action->action->name?></span>
+            </a>
             <? $number++; ?>
         <? endforeach; ?>
     <? else: ?>
