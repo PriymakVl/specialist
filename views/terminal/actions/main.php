@@ -25,5 +25,6 @@
 </div><!-- id content -->
 
 <!-- js files -->
-<script src="/web/js/terminal/product_actions.js"></script>
+<script src="/web/js/terminal/product_operations.js"></script>
+<script src="/web/js/terminal/change_action.js"></script>
 

@@ -26,35 +26,38 @@ class Controller_Terminal extends Controller_Base
     {
         $worker = $this->getWorker();
 		$params = ParamTerminal::getActions($worker);
-        $prod_actions = OrderProductAction::getForTerminal($params);
-		//debug($prod_actions[0]->convertState);
+        $prod_actions = OrderAction::getForTerminal($params);
 		$actions = Action::getAll('actions');
-        $this->render('actions/main', compact('prod_actions', 'worker', 'actions'));
+        $this->render('actions/main', compact('prod_actions', 'worker', 'actions', 'params'));
     }
 
     public function action_start_work()
     {
         $params = ParamTerminal::startWork();
-        OrderProducts::startWork($params);
-        $this->redirect('terminal/products');
+        OrderAction::startWork($params);
+        $this->redirect('terminal/actions?id_action='.$params['id_action']);
     }
 
     public function action_end_work()
     {
         $params = ParamTerminal::endWork();
-        OrderProducts::endWork($params);
-        $order = new Order(Param::get('id_order'));
-        $order->setStateMade();
-
+        OrderAction::endWork($params);
+		$result = OrderProductAction::checkMadeOrder(ParamTerminal::checkMadeOrder());
+		if ($result) {
+			//$product = new OrderProduct($params['id_prod']);
+			//$product->setStateMade();
+			$order = new Order(Param::get('id_order'));
+			$order->setStateMade();
+		}
         //$worker = $this->getWorker();
         //$products = OrderProducts::getForWorker($worker);
-        $this->redirect('terminal/products');
+        $this->redirect('terminal/actions?id_action='.$params['id_action']);
     }
 
     public function action_stop_work()
     {
         $params = ParamTerminal::stopWork();
-        OrderProducts::stopWork($params);
+        //OrderProducts::stopWork($params);
         $this->redirect('terminal/products?id_order=' . $params['id_order']);
     }
 }

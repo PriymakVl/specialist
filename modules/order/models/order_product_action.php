@@ -1,12 +1,13 @@
 <?php
 require_once('order_product_action_static.php');
 
-class OrderProductAction extends OrderProductActionStatic {
+class OrderAction extends OrderActionStatic {
 
 	public $product;
 	public $order;
 	public $convertState;
 	public $bgTerminalBox;
+	public $action;//объект операции обработки
 	
 	const BG_TERMINAL_BOX_PLAN = 'yellow';
 	const BG_TERMINAL_BOX_PROGRESS = 'green';

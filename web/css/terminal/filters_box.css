@@ -1,4 +1,9 @@
-#current-action {
-	color: white;
-	font-size: 24px;
+#filter-actions-wrp {
+	margin-top: 15px;
+}
+
+#filter-actions-wrp #actions {
+	height: 35px;
+	width: 200px;
+	font-size: 14px;
 }

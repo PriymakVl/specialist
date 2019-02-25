@@ -9,6 +9,12 @@ class OrderProduct extends OrderProductStatic {
         parent::__construct($id);
     }
 	
+	public function setStateMade()
+	{
+		$this->setState(self::STATE_WORK_END);
+		return $this;
+	}
+	
 	
 }
 

@@ -18,8 +18,6 @@ class ParamProductAction extends Param {
 		$params = self::getAll($keys);
 		return $params;
 	}
-	
-	
-	
+
 	
 }

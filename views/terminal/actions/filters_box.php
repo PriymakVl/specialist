@@ -1,10 +1,9 @@
 <div id="filter-actions-wrp">
-	<span id="current-action">Сборочные операции</span>
 	<form action="/terminal/action">
 		<select id="actions">
-			<option>Не выбрана</option>
+			<option value="">Все операции</option>
 			<? foreach ($actions as $item): ?>
-				<option><?=$item->name?></option>
+				<option <? if ($item->id == $params['id_action']) echo 'selected'; ?> value="<?=$item->id?>"><?=$item->name?></option>
 			<? endforeach; ?>
 		</select>
 	</form>

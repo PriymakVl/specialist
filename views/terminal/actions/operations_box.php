@@ -1,6 +1,6 @@
 <div id="actions-box-wrp" style="display:none;">
 	<div id="actions-info-product"></div>
-	<h3>Закрытие текущего задания</h3>
+	<h3>Действия с выбранным заданием</h3>
 	<div id="terminal-prod-actions-wrp">
 		<div id="prod-state-made">
 			<i class="fas fa-check"></i>

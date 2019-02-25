@@ -1,7 +1,7 @@
 <?php
 require_once('order_base.php');
 
-class OrderProductActionStatic extends OrderBase {
+class OrderActionStatic extends OrderBase {
 
 	public static function add($products, $order)
 	{
@@ -39,7 +39,8 @@ class OrderProductActionStatic extends OrderBase {
 	
 	public static function getForTerminal($params)
 	{
-		$ids = self::get($params);
+		if (empty($params['id_action'])) $ids = self::getAllActions($params);
+		else $ids = self::get($params);
 		return self::createArrayActions($ids);
 	}
 	
@@ -47,6 +48,12 @@ class OrderProductActionStatic extends OrderBase {
 	{
 		$sql = 'SELECT `id` FROM `order_product_actions` 
 		WHERE `id_action` = :id_action AND `state` != :state AND `type_order` = :type_order AND `status` = :status';
+		return self::perform($sql, $params)->fetchAll();
+	}
+	
+	public static function getAllActions($params)
+	{
+		$sql = 'SELECT `id` FROM `order_product_actions` WHERE `state` != :state AND `type_order` = :type_order AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
@@ -69,6 +76,36 @@ class OrderProductActionStatic extends OrderBase {
 			case self::STATE_WORK_END : return "Выполнена";
 			default: return "Не известное состояние";
 		}
+	}
+	
+	public static function startWork($params)
+	{
+		$sql = 'UPDATE `order_product_actions` SET `state` = :state, `time_start` = :time_start, `id_worker` = :id_worker 
+		WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `id_action` = :id_action';
+		return self::perform($sql, $params);
+	}
+	
+	public static function endWork($params)
+	{
+		$sql = 'UPDATE `order_product_actions` SET `state` = :state, `time_end` = :time_end 
+		WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `id_action` = :id_action';
+		return self::perform($sql, $params);
+	}
+	
+	public static function checkMadeProduct($params)
+	{
+		$actions = self::getAllForProduct($params);
+		if (empty($actions)) exit('error checkMadeProduct');
+		foreach ($actions as $action) {
+			if ($action->state != self::STATE_WORK_END) return false;
+		}
+		return true;
+	}
+	
+	public static function getAllForProduct($params)
+	{
+		$sql = 'SELECT * FROM `order_product_actions` WHERE `id_prod` = :id_prod AND `id_order` = :id_order AND `status` = :status';
+		return self::perform($sql, $params)->fetchAll();
 	}
 	
 	

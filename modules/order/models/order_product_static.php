@@ -13,8 +13,8 @@ class OrderProductStatic extends OrderBase {
 	public static function addOne($product, $order)
 	{
 		$params = self::getParamsAddProduct($product, $order);
-        $sql = "INSERT INTO `order_products` (id_order, id_prod, qty, type_order, state_work) 
-				VALUES (:id_order, :id_prod, :qty, :type_order, :state_work)";
+        $sql = "INSERT INTO `order_products` (id_order, id_prod, qty, type_order, state) 
+				VALUES (:id_order, :id_prod, :qty, :type_order, :state)";
         return self::perform($sql, $params);
 	}
 	
@@ -24,26 +24,14 @@ class OrderProductStatic extends OrderBase {
 		$params['id_prod'] = $product->id;
 		$params['qty'] = $product->orderQtyAll;
 		$params['type_order'] = $order->type;;
-		$params['state_work'] = self::STATE_WORK_PLANED;
+		$params['state'] = self::STATE_WORK_PLANED;
 		return $params;
 	}
 	
-	/* public static function startWork($params)
-	{
-		$sql = 'UPDATE `order_products` SET `state_work` = :state_work, `time_start` = :time_start, `id_worker` = :id_worker WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
-		return self::perform($sql, $params);
-	} */
-	
-	// public static function endWork($params)
-	// {
-		// $sql = 'UPDATE `order_products` SET `state_work` = :state_work, `time_end` = :time_end WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
-		// return self::perform($sql, $params);
-	// }
-	
 	public static function madeOrder($id_order)
 	{
-		$sql = 'UPDATE `order_products` SET `state_work` = :state_work WHERE `id_order` = :id_order';
-		$params = ['id_order' => $id_order, 'state_work' => self::STATE_WORK_END];
+		$sql = 'UPDATE `order_products` SET `state` = :state WHERE `id_order` = :id_order';
+		$params = ['id_order' => $id_order, 'state' => self::STATE_WORK_END];
 		return self::perform($sql, $params);
 	}
 	
@@ -67,48 +55,20 @@ class OrderProductStatic extends OrderBase {
 
 	public static function getNotReady($id_order)
     {
-        $sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status AND `state_work` != :state_work';
-        $params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE, 'state_work' => self::STATE_WORK_END];
-        $items = self::perform($sql, $params)->fetchAll();
-        if ($items) return self::createArrayProducts($items);
-        return false;
+        $sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status AND `state` != :state';
+        $params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE, 'state' => self::STATE_WORK_END];
+        return self::perform($sql, $params)->fetchAll();
     }
-	
-	// public static function getForWorker($worker, $order = false) 
-	// {
-		// $sql = self::getSqlForWorker($order);
-        // $params = self::getParamsForWorker($worker, $order);
-		// $items = self::perform($sql, $params)->fetchAll();
-		// if ($items) return self::createArrayProducts($items);
-        // return false;
-	// }
-	
-	// private static function getSqlForWorker($order)
-	// {
-		// $sql = 'SELECT * FROM `order_products` ';
-		// if ($order) $where = 'WHERE `id_oder` = :id_order AND ';
-		// else $where = 'WHERE ';
-		// return $sql.$where.'`status` = :status AND `type_order` = :type_order AND `kind_work` = :kind_work AND `state_work` < 4';
-	// }
-	
-/* 	public static function madeWorkerToday($params)
-	{
-		$sql = 'SELECT * FROM `order_products` 
-		WHERE `state_work` = :state_work AND `id_worker` = :id_worker AND `time_end` BETWEEN :start_time_end AND :end_time_end AND `status` = :status';
-		$items = self::perform($sql, $params)->fetchAll();
-		if ($items) return self::createArrayProducts($items);
-        return false;
-	} */
 
 	
-	private static function getParamsForWorker($worker, $order)
-	{
-		if ($order) $params['id_order'] = $order->id;
-		$params['status'] = self::STATUS_ACTIVE;
-		$params['type_order'] = $worker->defaultTypeOrder;
-		$params['kind_work'] = $worker->defaultKindWork;
-		return $params;
-	}
+	// private static function getParamsForWorker($worker, $order)
+	// {
+		// if ($order) $params['id_order'] = $order->id;
+		// $params['status'] = self::STATUS_ACTIVE;
+		// $params['type_order'] = $worker->defaultTypeOrder;
+		// $params['kind_work'] = $worker->defaultKindWork;
+		// return $params;
+	// }
 	
 	private static function createArrayProducts($items)
     {

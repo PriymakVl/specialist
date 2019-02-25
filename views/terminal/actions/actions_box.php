@@ -9,13 +9,15 @@
                  id_order="<?=$action->id_order?>"
                  id_prod="<?=$action->id_prod?>"
                  id_worker="<?=$worker->id?>"
-                 state_work="<?=$action->stateWork?>">
+                 state="<?=$action->state?>"
+				 id_action="<?=$action->id_action?>">
+				 
 
                 <div class="info-order">№<?=$number?> заказ: <?=$action->order->symbol?></div>
                 <div class="info-product"><?=$action->product->symbol?><br>
                     <?=$action->product->name?> (<?=$action->qty?>шт.)
                 </div>
-                <div class="info-state"><?=$action->convertState?></div>
+                <div class="info-state"><?=$action->action->name?></div>
             </div>
             <? $number++; ?>
         <? endforeach; ?>
