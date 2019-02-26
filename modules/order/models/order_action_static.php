@@ -14,21 +14,9 @@ class OrderActionStatic extends OrderBase {
 	private static function addAction($actions, $order, $product)
 	{
 		foreach ($actions as $action) {
-			$params = self::setParamsAdd($action, $order, $product);
+			$params = ParamOrderAction::add($action, $order, $product);
 			self::addOne($params);
 		}
-	}
-	
-	private static function setParamsAdd($action, $order, $product)
-	{
-		$params['id_order'] = $order->id;
-		$params['type_order'] = $order->type;
-		$params['id_prod'] = $product->id;
-		$params['id_action'] = $action->id_action;//id form table actions
-		$params['state'] = self::STATE_WORK_PLANED;
-		$params['qty'] = $product->orderQtyAll;
-		$params['time_manufac'] = self::setTimeManufacturing($action, $product);
-		return $params;
 	}
 	
 	private static function setTimeManufacturing($action, $product)
@@ -46,7 +34,7 @@ class OrderActionStatic extends OrderBase {
 	
 	public static function getForTerminal($params)
 	{
-		if (empty($params['id_action'])) $ids = self::getAllActions($params);
+		if ($params['id_action'] == 'all') $ids = self::getAllNotReadyActions($params);
 		else $ids = self::get($params);
 		return self::createArrayActions($ids);
 	}
@@ -58,8 +46,15 @@ class OrderActionStatic extends OrderBase {
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public static function getAllActions($params)
+	public static function getByIdOrderAndIdProductAndIdAction($params)
 	{
+		$sql = 'SELECT * FROM `order_actions` WHERE `id_action` = :id_action AND `id_order` = :id_order AND `id_prod` = :id_prod';
+		return self::perform($sql, $params)->fetch();
+	}
+	
+	public static function getAllNotReadyActions($params)
+	{
+		unset($params['id_action']);
 		$sql = 'SELECT `id` FROM `order_actions` WHERE `state` != :state AND `type_order` = :type_order AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
@@ -99,6 +94,12 @@ class OrderActionStatic extends OrderBase {
 		return self::perform($sql, $params);
 	}
 	
+	public static function stopWork($params)
+	{
+		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `id_action` = :id_action';
+		return self::perform($sql, $params);
+	}
+	
 	public static function getNotReadyActionOrder($params)
 	{
 		$sql = 'SELECT * FROM `order_actions` WHERE `state` != :state AND `id_order` = :id_order AND `status` = :status';
@@ -107,8 +108,16 @@ class OrderActionStatic extends OrderBase {
 	
 	public static function getByIdActions($params)
 	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_action` IN (:id_actions) AND `state` != :state AND `status` = :status';
+		$sql = 'SELECT * FROM `order_actions` WHERE `id_action` IN ('.$params['id_actions'].') AND `state` != :state AND `status` = :status';
+		unset($params['id_actions']);
 		return self::perform($sql, $params)->fetchAll();
+	}
+	
+	public static function madeWorker($params)
+	{
+		$slq = 'SELECT * FROM `order_actions` 
+		WHERE `id_worker` = :id_worker AND `state` = :state AND `time_end` BETWEEN :start_period AND :end_period AND `status` = :status';
+		return self::perform($slq, $params)->fetchAll();
 	}
 	
 	

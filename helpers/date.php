@@ -1,6 +1,8 @@
 <?php
 
 class Date {
+	
+	const DAY_SECOND = 86400;
 
     public static function convertStringToTime($str)
     {

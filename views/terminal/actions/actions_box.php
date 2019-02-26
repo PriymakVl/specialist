@@ -4,7 +4,7 @@
 <div id="terminal-actions-wrp">
     <? if ($order_actions): ?>
         <? foreach ($order_actions as $action): ?>
-            <a href="#" class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>"
+            <div class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>" onclick="to_work(this);"
                  prod_name="<?=$action->product->name?>"
                  id_order="<?=$action->id_order?>"
                  id_prod="<?=$action->id_prod?>"
@@ -18,7 +18,7 @@
                     <?=$action->product->name?> (<?=$action->qty?>шт.)
                 </span>
                 <span class="info-state"><?=$action->action->name?></span>
-            </a>
+            </div>
             <? $number++; ?>
         <? endforeach; ?>
     <? else: ?>

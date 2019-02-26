@@ -5,7 +5,7 @@ class Worker extends User {
 
  public $productsCut;
  public $loadTimePlan;
- public $timeMadeToday;
+ public $timeMade;
  public $loadPercent;
  public $loadFullFlage; //если указана трудоемкость для всех деталей
  public $defaultActions;
@@ -16,30 +16,33 @@ class Worker extends User {
  const ACTION_ASSEMB = 6; // сборка 
  const ACTION_CUT = 1; //орезка заготовки
  
+ const COST_WORK_MINUTE = '0,85';
+ 
 	public static function getAllWithStatistics()
 	{
 		$workers = self::getWorkers();
 		foreach ($workers as $worker) {
 			$worker = self::setPlanStatistics($worker);
-			//$worker = self::setMadeStatisticsToday($worker);
-			//$worker = self::set
+			self::setMadeStatistics($worker);
+			debug($worker->timeMade, false);
+			$worker->costMade = self::countCostMade($worker->timeMade);
 		}
 		return $workers;
 	}
 	
 	private static function setPlanStatistics($worker)
 	{
-		$actions = OrderAction::getByIdActions(ParamWorker::forMadeWorkers($worker->login));
+		$actions = OrderAction::getByIdActions(ParamWorker::planWorker($worker->login));
 		$worker->loadTimePlan = self::countLoadTimePlan($actions);
 		$worker->loadPercent = Statistics::countLoadPercentage($worker->loadTimePlan);
 		return  $worker;
 	}
 	
-	private static function setMadeStatisticsToday($worker)
+	private static function setMadeStatistics($worker)
 	{
-		$products = OrderProducts::madeWorkerToday(ParamWorker::forMadeWorkerToday($worker->id));
-		$worker->timeMadeToday = Statistics::getTimeManufacturing($products);
-		return $worker;
+		$params = ParamOrderAction::madeWorker($worker->id);
+		$actions = OrderAction::madeWorker($params);
+		$worker->timeMade = Statistics::countTimeMadeWorker($actions);
 	}
 	
 	public static function setDefaultActions($login)
@@ -54,17 +57,18 @@ class Worker extends User {
 	private static function countLoadTimePlan($actions)
 	{
 		$load_time = 0;
-		foreach ($actios as $action) {
-			if ($actions->time_manufac) $load_time = $load_time + $action->time_manufac;
+		foreach ($actions as $action) {
+			if ($action->time_manufac) $load_time = $load_time + $action->time_manufac;
 		}
 		return $load_time;
 	}
-/* 	
-	private static function earnedToday($worker)
+		
+	private static function countCostMade($time)
 	{
-		if (!$worker->timeMadeToday) return;
-		$this->earnedToday = $worker->timeMadeToday * 
-	} */
+		if (!$time) return 0;
+		return round($time * self::COST_WORK_MINUTE, 2);
+	}
+	
 	
 	
 	

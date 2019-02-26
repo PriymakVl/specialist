@@ -28,6 +28,7 @@
 </div><!-- id content -->
 
 <!-- js files -->
-<script src="/web/js/terminal/product_operations.js"></script>
+<script src="/web/js/terminal/function_operations.js"></script>
 <script src="/web/js/terminal/change_action.js"></script>
+<script src="/web/js/get_value_from_request.js"></script>
 

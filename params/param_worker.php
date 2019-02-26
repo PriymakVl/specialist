@@ -14,7 +14,7 @@ class ParamWorker extends Param {
 		return $params;
 	}
 	
-	public static function forMadeWorkers($login)
+	public static function planWorker($login)
 	{
 		$id_default_actions_arr = Worker::setDefaultActions($login);
 		$params['id_actions'] = trim(implode(',', $id_default_actions_arr), ',');

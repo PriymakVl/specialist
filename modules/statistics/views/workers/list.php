@@ -27,13 +27,18 @@
 				</td>
                 <td>
 					<? if ($worker->loadTimePlan): ?>
-						<span><?=date('h:i:s', $worker->loadTimePlan * 60)?></span>
+						<span><?=date('h:i', $worker->loadTimePlan * 60)?></span>
 					<? else: ?>
 						<span class="red">Простой</span>
 					<? endif; ?>
 				</td>
-				<td><?= $worker->timeMadeToday ? date('h:i:s', $worker->timeMadeToday * 60) : ''; ?></td>
-				<td>350грн</td>
+				<td>
+					<? if ($worker->timeMade): ?>
+						<span><?=date('h:i', $worker->timeMade * 60)?></span>
+					<? else: ?>
+						<span class="red">Нет</span>
+					<? endif; ?>
+				<td><?=$worker->costMade ? $worker->costMade : '0'?> грн.</td>
             </tr>
         <? endforeach; ?>
     <? else: ?>

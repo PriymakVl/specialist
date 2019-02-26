@@ -53,7 +53,8 @@ class Controller_Terminal extends Controller_Base
     public function action_stop_work()
     {
         $params = ParamTerminal::stopWork();
-        //OrderProducts::stopWork($params);
-        $this->redirect('terminal/products?id_order=' . $params['id_order']);
+        OrderAction::stopWork($params);
+		$id_action = Param::get('actions') ? 'all' : $params['id_action'];//for return on page all actions;
+        $this->redirect('terminal/actions?id_action=' . $id_action);
     }
 }

@@ -4,7 +4,7 @@ $(document).ready(function() {
 		
 		id_action = $(this).val();
 
-		if (id_action) location.href = '/terminal/actions?id_action=' + id_action;
-		else location.href = '/terminal/actions?all_actions=all';
+		location.href = '/terminal/actions?id_action=' + id_action;
+
 	});
 });

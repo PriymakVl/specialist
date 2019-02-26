@@ -4,5 +4,4 @@ require_once ('./modules/order/models/order_state.php');
 
 class Param extends ParamBase {
 
-
 }

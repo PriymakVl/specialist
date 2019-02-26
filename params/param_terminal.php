@@ -24,26 +24,21 @@ class ParamTerminal extends Param {
 	
 	public static function stopWork()
 	{
-		$keys = ['id_order', 'id_prod'];
+		$keys = ['id_order', 'id_prod', 'id_action'];
 		$params = self::getAll($keys);
-		$params['state_work'] = Order::STATE_WORK_STOPPED;
+		$action = OrderAction::getByIdOrderAndIdProductAndIdAction($params);
+		if ($action->state == OrderAction::STATE_WORK_STOPPED) $params['state'] = OrderAction::STATE_WORK_PROGRESS;
+		else $params['state'] = OrderAction::STATE_WORK_STOPPED;
 		return $params;
 	}
 	
 	public static function getActions($worker)
 	{
-		$params['type_order'] = $worker->defaultTypeOrder;
-		$params = self::setIdAction($params, $worker);
-		$params['state'] = OrderAction::STATE_WORK_END;
-		$params['status'] = Model::STATUS_ACTIVE;
-		return $params;
-	}
-	
-	private static function setIdAction($params, $worker)
-	{
-		if (self::get('all_actions')) return $params;
 		$id_action = self::get('id_action');
 		$params['id_action'] = $id_action ? $id_action : $worker->defaultProductAction;
+		$params['type_order'] = $worker->defaultTypeOrder;
+		$params['state'] = OrderAction::STATE_WORK_END;
+		$params['status'] = Model::STATUS_ACTIVE;
 		return $params;
 	}
 	
