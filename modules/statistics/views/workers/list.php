@@ -27,14 +27,14 @@
 				</td>
                 <td>
 					<? if ($worker->loadTimePlan): ?>
-						<span><?=date('h:i', $worker->loadTimePlan * 60)?></span>
+						<span><?=$worker->loadTimePlan?> мин.</span>
 					<? else: ?>
 						<span class="red">Простой</span>
 					<? endif; ?>
 				</td>
 				<td>
 					<? if ($worker->timeMade): ?>
-						<span><?=date('h:i', $worker->timeMade * 60)?></span>
+						<span><?=$worker->timeMade?> мин.</span>
 					<? else: ?>
 						<span class="red">Нет</span>
 					<? endif; ?>

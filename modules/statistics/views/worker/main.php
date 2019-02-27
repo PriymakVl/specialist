@@ -3,14 +3,14 @@
 ?>
 
 <!-- css files -->
-<!--<link rel="stylesheet" href="/modules/statistics/css/filters.css">-->
+<link rel="stylesheet" href="/modules/statistics/css/filters.css">
 
 <div id="content">
     <!-- info box -->
-    <? include_once('info.php'); ?>
+    <? include_once('filters.php'); ?>
 
-    <!-- order list -->
-    <? include_once('order_list.php'); ?>
+    <!-- action list -->
+    <? include_once('action_list.php'); ?>
 
     <!-- worker list menu -->
     <? //include_once('menu.php'); ?>
@@ -19,5 +19,5 @@
 </div><!-- id content -->
 
 <!-- js files -->
-<!-- <script src="/modules/order/js/order_activate.js"></script> -->
+<script src="/modules/statistics/js/filters_worker.js"></script>
 

@@ -4,7 +4,9 @@ require_once ('./core/controller.php');
         /* params */
 require_once ('./params/param.php');
 require_once ('./params/param_order.php');
+require_once ('./params/param_product.php');
 require_once ('./params/param_product_action.php');
+require_once ('./params/param_statistics.php');
 
 	/*terminal*/
 require_once ('./params/param_terminal.php');

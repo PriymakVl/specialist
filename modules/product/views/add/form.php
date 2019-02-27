@@ -13,10 +13,10 @@
             <div id="form-product-type-wrp">
                 <label>Тип:</label>
                 <select name="type">
-                    <option >Деталь</option>
-                    <option>Узел</option>
-					<option>Изделие</option>
-					<option>Категория</option>
+                    <option value="<?=Product::TYPE_DETAIL?>">Деталь</option>
+                    <option value="<?=Product::TYPE_UNIT?>">Узел</option>
+					<option value="<?=Product::TYPE_PRODUCT?>">Изделие</option>
+					<option value="<?=Product::TYPE_CATEGORY?>">Категория</option>
                 </select>
             </div>
 			

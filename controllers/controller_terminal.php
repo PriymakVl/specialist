@@ -45,7 +45,7 @@ class Controller_Terminal extends Controller_Base
 		$result = OrderAction::getNotReadyActionOrder(ParamTerminal::getNotReadyActionOrder());
 		if (!$result) {
 			$order = new Order(Param::get('id_order'));
-			$order->setStateMade();
+			$order->setState(OrderState::MADE);
 		}
         $this->redirect('terminal/actions?id_action='.$params['id_action']);
     }

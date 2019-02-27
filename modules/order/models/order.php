@@ -44,18 +44,6 @@ class Order extends OrderStatic {
 		$this->setState(OrderState::MADE);
 	}
 	
-	public function setStateMade()
-	{
-		$products = OrderProduct::getNotReady($this->id);
-		if (!$products) $this->setState(OrderState::MADE);
-        return $this;
-	}
-	
-/* 	public function getTimeManufacturingForWorker($worker)
-	{
-		Statistics::getTimeManufacturingOrderForWorker($this, $worker);
-	} */
-	
 	public function getPositions()
 	{
 		$this->positions = OrderPositions::get($this->id);

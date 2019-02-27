@@ -19,7 +19,7 @@ class OrderActionStatic extends OrderBase {
 		}
 	}
 	
-	private static function setTimeManufacturing($action, $product)
+	public static function setTimeManufacturing($action, $product)
 	{
 		if (!$action->time_prod) return '';
 		return ($action->time_prod * $product->orderQtyAll) + $action->time_prepar;
@@ -106,7 +106,7 @@ class OrderActionStatic extends OrderBase {
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public static function getByIdActions($params)
+	public static function planWorker($params)
 	{
 		$sql = 'SELECT * FROM `order_actions` WHERE `id_action` IN ('.$params['id_actions'].') AND `state` != :state AND `status` = :status';
 		unset($params['id_actions']);

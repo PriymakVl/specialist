@@ -1,16 +1,38 @@
-#statistics-period-filter {
+#statistics-period-filter, #state-order-action {
     font-size: 16px;
     width: 120px;
     height: 28px;
+}
+
+#state-order-action {
+	width: 150px;
+} 
+
+#state-order-action-wrp label , .statistics-period-filter-wrp label {
+	font-weight: bold;
 }
 
 #statistics-filters-wrp {
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
     padding: 10px 0;
+	position: relative;
 }
 
 #statistics-filters-wrp span {
     font-size: 16px;
     font-weight: bold;
 }
+
+#state-order-action-wrp {
+	position: absolute;
+	top: 7px;
+	left: 125px;
+}
+
+.statistics-period-filter-wrp {
+	position: absolute;
+	top: 7px;
+	left: 375px;
+}
+

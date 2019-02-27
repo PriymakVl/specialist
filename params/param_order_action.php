@@ -12,9 +12,9 @@ class ParamOrderAction {
 		$params['type_order'] = $order->type;
 		$params['id_prod'] = $product->id;
 		$params['id_action'] = $action->id_action;//id form table actions
-		$params['state'] = self::STATE_WORK_PLANED;
+		$params['state'] = Order::STATE_WORK_PLANED;
 		$params['qty'] = $product->orderQtyAll;
-		$params['time_manufac'] = self::setTimeManufacturing($action, $product);
+		$params['time_manufac'] = OrderAction::setTimeManufacturing($action, $product);
 		return $params;
 	}
 	

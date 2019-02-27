@@ -19,9 +19,11 @@ class Controller_Statistics extends Controller_Base {
 	public function action_worker()
 	{
 		$worker = new Worker(Param::get('id_worker'));
-		$worker->getOrdersPlan();
+		if (Param::get('state') == OrderAction::STATE_WORK_END) $actions = $worker->getActionsMade(ParamWorker::made($worker->id));
+		else $actions = $worker->getActionsPlan(ParamWorker::plan($worker->login));
+		
 		$this->view->title = 'Статистика по рабочему';
-		$this->render('worker/main', compact('worker'));
+		$this->render('worker/main', compact('worker', 'params', 'actions'));
 	}
 	
 	public function action_order()
