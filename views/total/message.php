@@ -1,13 +1,11 @@
 <?php
-
-    require_once ('./helpers/message.php');
     
-    $message = Message::getFromSession();
-    
+    $message = new Message();
+    $message->get();
     ?>
 
-<? if(isset($message)): ?>
+<? if($message->text): ?>
     <div class="message-wrp">
-        <p class="<?=$message['class']?>"><?=$message['text']?></p>
+        <p class="message <?=$message->class?>"><?=$message->text?></p>
     </div>
 <? endif; ?>

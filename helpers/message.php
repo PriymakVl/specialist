@@ -2,33 +2,29 @@
 
 class Message {
 
-    public static function set($type, $section, $key)
+    public $section;
+    public $class;
+    public $text;
+
+    public function set($type, $key)
     {
-        $messages = parse_ini_file('./web/files/messages.ini', true);
-        $message = $messages[$section][$key];
-        $_SESSION[$type] = $message;
+        $text = $this->parse($key);
+        $_SESSION['message']['text'] = $text;
+        $_SESSION['message']['type'] = $type;
     }
 
-    public static function get()
+    public function get()
     {
-        $message = null;
-        if (isset($_SESSION['error'])) {
-            $message['class'] = 'message error-message';
-            $message['text'] = $_SESSION['error'];
-            unset($_SESSION['error']);
-        }
-        else if (isset($_SESSION['success'])) {
-            $message['class'] = 'message success-message';
-            $message['text'] = $_SESSION['success'];
-            unset($_SESSION['success']);
-        }
-        return $message;
+        if (empty($_SESSION['message'])) return;
+        $this->class = 'message-'.$_SESSION['message']['type'];
+        $this->text = $_SESSION['message']['text'];
+        unset($_SESSION['message']);
     }
 
-    public static function parse($section, $key)
+    private function parse($key)
     {
         $messages = parse_ini_file('./web/files/messages.ini', true);
-        return $messages[$section][$key];
+        return $messages[$this->section][$key];
     }
 
 

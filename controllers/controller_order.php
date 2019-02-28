@@ -10,6 +10,7 @@ class Controller_Order extends Controller_Base {
         parent::__construct();
         $this->view->pathFolder = './modules/order/views/';
 		$this->id_order = Param::get('id_order');
+		$this->message->section = 'order';
     }
 
     public function action_index()
@@ -92,7 +93,7 @@ class Controller_Order extends Controller_Base {
 	{
 		$params = ParamOrder::edit();
 		$order = new Order($this->id_order);
-		if (empty($params['symbol'])) return $this->render('edit/main', compact('order'));
+		if (empty($params['save'])) return $this->render('edit/main', compact('order'));
 		Order::edit($params);
 		$this->redirect('order?id_order='.$this->id_order);
 	}
@@ -127,13 +128,16 @@ class Controller_Order extends Controller_Base {
 		$this->redirect('order?id_order='.$this->id_order);
 	}
 	
-	// public function action_search()
-	// {
-		// $orders = Order::search(Param::get('symbol'));
-		// if (count($orders) == 1) return $this->redirect('order?id_order='.$orders[0]->id);
-		// else if (count($orders > 1) return $this->render('search/main');
-		// else $this->redirectPrevious();
-	// }
+	 public function action_search()
+	 {
+		 $orders = Order::searchBySymbol(Param::get('symbol'));
+		 if ($orders) $this->message->set('success', 'found');
+		 else $this->message->set('error', 'not_found');
+
+		 if (count($orders) == 1) return $this->redirect('order?id_order='.$orders[0]->id);
+		 else if (count($orders ) > 1) return $this->render('search/main');
+		 else $this->redirectPrevious();
+	 }
     
 
 	

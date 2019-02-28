@@ -9,6 +9,7 @@ require_once ('./modules/order/models/order_state.php');
 <link rel="stylesheet" href="/modules/order/css/list.css">
 
 <div id="content">
+
     <!-- filters of orders -->
     <? include_once('filters.php'); ?>
 
@@ -16,7 +17,7 @@ require_once ('./modules/order/models/order_state.php');
     <? include_once('search.php'); ?>
 
     <!-- message -->
-    <? //include_once('./views/total/message.php'); ?>
+    <? include_once('./views/total/message.php'); ?>
 
     <!-- order list -->
     <? include_once('list.php'); ?>

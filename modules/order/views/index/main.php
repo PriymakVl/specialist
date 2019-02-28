@@ -15,6 +15,9 @@ require_once ('./modules/order/models/order.php');
 		<div class="message success-message">Активный заказ</div>
     <? endif; ?>
 
+    <!-- message -->
+    <? include_once('./views/total/message.php'); ?>
+
     <div id="order-index-wrp">
         <ul class="tabs">
 

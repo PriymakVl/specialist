@@ -68,7 +68,7 @@
 #form-order-search-wrp {
     position: absolute;
     top: 10px;
-    left: 650px;
+    left: 657px;
 }
 
 #form-order-search-wrp input[type="submit"] {
@@ -77,9 +77,8 @@
 }
 
 #form-order-search-wrp input[type="text"] {
-    width: 200px;
+    width: 205px;
 	height: 20px;
-    margin-left: 15px;
 }
 
 

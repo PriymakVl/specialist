@@ -6,12 +6,13 @@ require_once('./helpers/session.php');
 class Controller {
 	
 	public $view;
-	protected $sectionMessages;
+	public $message;
 	
 	public function __construct()
 	{
         session_start();
 		$this->view = new View();
+		$this->message = new Message();
 	}
 
 	protected function redirect($url = '')
@@ -30,11 +31,6 @@ class Controller {
     {
         return $this->view->render($template, $data, $this->view);
 		exit();
-    }
-
-    protected function setMessage($key, $type = 'error')
-    {
-        Message::setSession($type, $this->sectionMessages, $key);
     }
 	
 

@@ -100,11 +100,11 @@ input[type="text"] {
     font-weight: bold;
 }
 
-.error-message {
+.message-error {
     background: #901830;
 }
 
-.success-message {
+.message-success {
     background: green;
 }
 

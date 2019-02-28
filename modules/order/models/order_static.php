@@ -45,11 +45,12 @@ class OrderStatic extends OrderBase {
 		return self::update($sql, $params);
 	}
 
-/*     public static function searchByNumber($number)
+    public static function searchBySymbol($symbol)
     {
-        $sql = 'SELECT * FROM `orders` WHERE `number` like concat("%", :number, "%") AND `status` = '.self::STATUS_ACTIVE;
-        return self::perform($sql, ['number' => $number])->fetchAll();
-    } */
+        $sql = 'SELECT * FROM `orders` WHERE `symbol` like concat("%", :symbol, "%") AND `status` = :status';
+        $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
+        return self::perform($sql, $params)->fetchAll();
+    }
     
 	
 }
