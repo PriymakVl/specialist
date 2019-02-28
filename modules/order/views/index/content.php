@@ -9,7 +9,7 @@
 					<th width="150">Обозначение</th>
 					<th width="400">Наименование</th>
 					<th width="120">Кол-во</th>
-					<th>Трудоемкось</th>
+					<th>Трудоемкость</th>
 				</tr>
                 <? foreach($order->content as $product): ?>
                     <tr>

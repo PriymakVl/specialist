@@ -8,6 +8,7 @@ class OrderAction extends OrderActionStatic {
 	public $convertState;
 	public $bgTerminalBox;
 	public $action;//объект операции обработки
+	public $bgState;
 	
 	const BG_TERMINAL_BOX_PLAN = 'yellow';
 	const BG_TERMINAL_BOX_PROGRESS = 'green';
@@ -39,7 +40,13 @@ class OrderAction extends OrderActionStatic {
 	
 	public function convertState()
 	{
-		$this->convertState = self::convertStateWork($this->state);
+		$this->convertState = ParamOrderAction::convertStateWork($this->state);
+		return $this;
+	}
+	
+	public function getBgState()
+	{
+		$this->bgState = ParamOrderAction::getBgStateWork($this->state);
 		return $this;
 	}
 	

@@ -57,12 +57,13 @@ input[type="text"] {
     margin-left: auto;
     margin-right: auto;
     width: 960px;
+	background: #fff;
 }
 
 #content-wrp {
     padding: 5px 10px 10px;
-    /*background: #fff url(../images/gradient.png) repeat-x 0 -12px;*/
-    background: #fff;
+    /*background: #fff url(../images/gradient.png) repeat-x 0 -12px;
+    background: #fff; */
 }
 
 /* .black-overlay{

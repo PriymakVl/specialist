@@ -22,3 +22,8 @@
 #change-note-letter:hover, .note-letter {
     text-decoration: none;
 }
+
+#menu-order-actions li:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}

@@ -7,6 +7,7 @@ class Order extends OrderStatic {
 	public $positionsTable;
 	public $positions;
 	public $convertState;
+	public $actions;
 
     public function __construct($order_id)
     {
@@ -31,7 +32,6 @@ class Order extends OrderStatic {
 	{	
 		$this->getContent();
 		$products = OrderExtractProducts::get($this->content);
-		//OrderProducts::add($products, $this);
 		OrderAction::add($products, $this);
 		$this->setState(OrderState::WORK);
 		//todo для учета статистики добавить состояние в OrderState
@@ -65,6 +65,17 @@ class Order extends OrderStatic {
 	{
 		$this->convertState = OrderState::convert($this->state);
 		return $this;
+	}
+	
+	public function getActions()
+	{
+		if ($this->state < OrderState::WORK) return;
+		$items = OrderAction::getIdActionsByIdOrder($this->id);
+		foreach ($items as $item) {
+			$action = new OrderAction($item->id);
+			$action->getProduct()->getAction()->convertState()->getBgState();
+			$this->actions[] = $action;
+		}
 	}
     
 	

@@ -25,4 +25,10 @@
 			<li><a href="#" id="content_delete" id_order="<?=$order->id?>">Удалить позиции</a></li>
 		</ul>
 	<? endif; ?>
+	
+	<!-- menu order actions -->
+	<ul id="menu-order-actions">
+		<li id="order-action-edit">Редактировать</li>
+		<li id="order-action-delete">Удалить операцию</li>
+	</ul>
 </div>

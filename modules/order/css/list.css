@@ -64,6 +64,24 @@
 	text-align: left;
 }
 
+/* form search order */
+#form-order-search-wrp {
+    position: absolute;
+    top: 10px;
+    left: 650px;
+}
+
+#form-order-search-wrp input[type="submit"] {
+    padding: 4px 10px 4px 10px;
+	height: 30px;
+}
+
+#form-order-search-wrp input[type="text"] {
+    width: 200px;
+	height: 20px;
+    margin-left: 15px;
+}
+
 
 
 

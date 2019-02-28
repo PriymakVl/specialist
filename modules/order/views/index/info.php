@@ -4,9 +4,9 @@
     <div class="tab-content">
         <table>
             <tr>
-                <th width="50">№</td>
-                <th width="200">Наименование</td>
-                <th>Значение</td>
+                <th width="50">№</th>
+                <th width="200">Наименование</th>
+                <th>Значение</th>
             </tr>
             <tr>
                 <td>1</td>
@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <td>2</td>
-                <td>Состояние</th>
+                <td>Состояние</td>
                 <td><?=$order->convertState?></td>
             </tr>
             <tr>

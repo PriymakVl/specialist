@@ -1,6 +1,6 @@
 <li>
-    <input type="radio" name="tabs" id="tab-3">
-    <label for="tab-3">Статистика</label>
+    <input type="radio" name="tabs" id="tab-4">
+    <label for="tab-4">Статистика</label>
     <div class="tab-content">
 
         <table>

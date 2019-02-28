@@ -13,7 +13,7 @@ require_once ('./modules/order/models/order_state.php');
     <? include_once('filters.php'); ?>
 
     <!-- order form search -->
-    <? //include_once('form/search.php'); ?>
+    <? include_once('search.php'); ?>
 
     <!-- message -->
     <? //include_once('./views/total/message.php'); ?>

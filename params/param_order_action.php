@@ -1,7 +1,6 @@
 <?php
 
 require_once('param.php');
-require_once('./helpers/date.php');
 
 class ParamOrderAction {
 	 
@@ -18,6 +17,13 @@ class ParamOrderAction {
 		return $params;
 	}
 	
+	public static function edit()
+	{
+		$keys = ['id_action', 'state', 'save'];
+		$params = Param::getAll($keys);
+		return $params;
+	}
+	
 	public static function madeWorker($id_worker = null)
 	{
 		$keys = ['start_period', 'end_period', 'id_worker'];
@@ -28,6 +34,30 @@ class ParamOrderAction {
 		$params['state'] = Order::STATE_WORK_END;
 		$params['status'] = Order::STATUS_ACTIVE;
 		return $params;
+	}
+	
+	public static function convertStateWork($state)
+	{
+		switch ($state) {
+			case OrderAction::STATE_WORK_WAITING : return "Ожидает окончания другой операции";
+			case OrderAction::STATE_WORK_PLANED : return "Запланирована";
+			case OrderAction::STATE_WORK_PROGRESS : return "В работе";
+			case OrderAction::STATE_WORK_STOPPED : return "Остановлена";
+			case OrderAction::STATE_WORK_END : return "Выполнена";
+			default: return "Не известное состояние";
+		}
+	}
+	
+	public static function getBgStateWork($state)
+	{
+		switch ($state) {
+			case OrderAction::STATE_WORK_WAITING : return "orange";
+			case OrderAction::STATE_WORK_PLANED : return "#fff";
+			case OrderAction::STATE_WORK_PROGRESS : return "yellow";
+			case OrderAction::STATE_WORK_STOPPED : return "red";
+			case OrderAction::STATE_WORK_END : return "green";
+			default: return "#fff";
+		}
 	}
 	
 }

@@ -4,7 +4,7 @@
             <input type="checkbox" disabled>
         </th>
         <th width="120">Обозначение</th>
-        <th width="450">Содержание</th>
+        <th width="550">Содержание</th>
 		<th width="80">Дата выполн.</th>
 		<th>Примечание</th>
     </tr>

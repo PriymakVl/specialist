@@ -24,8 +24,8 @@ require_once ('./modules/order/models/order.php');
             <!-- content -->
 			<? if ($order->content) include_once('content.php'); ?>
 
-            <!-- statistics -->
-            <? //if ($order->statistics) include_once('statistics.php'); ?>
+            <!-- actions -->
+            <? if ($order->actions) include_once('actions.php'); ?>
 			
         </ul>
     </div>
@@ -40,4 +40,5 @@ require_once ('./modules/order/models/order.php');
 <script src="/modules/order/js/change_quantity_content.js"></script>
 <script src="/modules/order/js/order_delete.js"></script>
 <script src="/modules/order/js/content_delete.js"></script>
+<script src="/modules/order/js/order_actions_managment.js"></script>
 

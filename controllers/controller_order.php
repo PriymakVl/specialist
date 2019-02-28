@@ -16,7 +16,7 @@ class Controller_Order extends Controller_Base {
 	{;
 		$id_active = Session::get('order-active');
 		$order = new Order($this->id_order);
-		$order->getPositions()->getContent()->convertState();
+		$order->getPositions()->getContent()->convertState()->getActions();
         $this->view->title = 'Заказ';
 		$this->render('index/main', compact('order', 'id_active'));
 	}
@@ -50,6 +50,7 @@ class Controller_Order extends Controller_Base {
 		$order = new Order($this->id_order);
 		if ($order->state > OrderState::REGISTERED) exit('уже выдан');
 		$order->getPositions()->toPreparation();
+		Session::set('order-active', $this->id_order);
 		$this->redirectPrevious();
 	}
 	
@@ -125,6 +126,14 @@ class Controller_Order extends Controller_Base {
 		OrderContent::deleteAll($this->id_order, $ids);
 		$this->redirect('order?id_order='.$this->id_order);
 	}
+	
+	// public function action_search()
+	// {
+		// $orders = Order::search(Param::get('symbol'));
+		// if (count($orders) == 1) return $this->redirect('order?id_order='.$orders[0]->id);
+		// else if (count($orders > 1) return $this->render('search/main');
+		// else $this->redirectPrevious();
+	// }
     
 
 	

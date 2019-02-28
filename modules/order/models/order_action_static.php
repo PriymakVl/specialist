@@ -68,18 +68,6 @@ class OrderActionStatic extends OrderBase {
 		 return $actions;
 	}
 	
-	protected static function convertStateWork($state)
-	{
-		switch ($state) {
-			case self::STATE_WORK_WAITING : return "Ожидает окончания другой операции";
-			case self::STATE_WORK_PLANED : return "Запланирована";
-			case self::STATE_WORK_PROGRESS : return "В работе";
-			case self::STATE_WORK_STOPPED : return "Остановлена";
-			case self::STATE_WORK_END : return "Выполнена";
-			default: return "Не известное состояние";
-		}
-	}
-	
 	public static function startWork($params)
 	{
 		$sql = 'UPDATE `order_actions` SET `state` = :state, `time_start` = :time_start, `id_worker` = :id_worker 
@@ -118,6 +106,20 @@ class OrderActionStatic extends OrderBase {
 		$slq = 'SELECT * FROM `order_actions` 
 		WHERE `id_worker` = :id_worker AND `state` = :state AND `time_end` BETWEEN :start_period AND :end_period AND `status` = :status';
 		return self::perform($slq, $params)->fetchAll();
+	}
+	
+	public static function getIdActionsByIdOrder($id_order)
+	{
+		$slq = 'SELECT * FROM `order_actions` WHERE `id_order` = :id_order AND `status` = :status';
+		$params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE];
+		return self::perform($slq, $params)->fetchAll();
+	}
+	
+	public static function edit($params)
+	{
+		unset($params['save']);
+		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id` = :id_action';
+		return self::perform($sql, $params);
 	}
 	
 	
