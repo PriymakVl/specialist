@@ -42,12 +42,4 @@ class ParamTerminal extends Param {
 		return $params;
 	}
 	
-	public static function getNotReadyActionOrder()
-	{
-		$params['id_order'] = self::get('id_order');
-		$params['status'] = OrderAction::STATUS_ACTIVE;
-		$params['state'] = OrderAction::STATE_WORK_END;
-		return $params;
-	}
-	
 }

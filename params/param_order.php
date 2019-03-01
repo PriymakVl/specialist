@@ -13,7 +13,7 @@ class ParamOrder extends Param {
 
     public static function add()
     {
-		$keys = ['symbol', 'type', 'note', 'state'];
+		$keys = ['symbol', 'type', 'note', 'state', 'save'];
         $params = self::getAll($keys);
         $params['date_exec'] = Date::convertStringToTime(self::get('date_exec'));
 		$params['state'] = empty($params['state']) ? OrderState::REGISTERED : $params['state'];

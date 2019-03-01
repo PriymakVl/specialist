@@ -14,7 +14,7 @@ class OrderStatic extends OrderBase {
 	    return self::createArrayOfOrder($ids);
 	}
 
-	private static function createArrayOfOrder($ids)
+	public static function createArrayOfOrder($ids)
     {
         $orders = Helper::createArrayOfObject($ids, 'Order');
 		foreach ($orders as $order) {
@@ -33,6 +33,7 @@ class OrderStatic extends OrderBase {
 
     public static function add($params)
     {
+		unset($params['save']);
         $fields = 'symbol, note, date_exec, type, state';
         $values = ':symbol, :note, :date_exec, :type, :state';
         $sql = 'INSERT INTO `orders` ('.$fields.') VALUES ('.$values.')';
@@ -41,6 +42,7 @@ class OrderStatic extends OrderBase {
 	
 	public static function edit($params)
 	{
+		unset($params['save']);
 		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note WHERE `id` = :id_order';
 		return self::update($sql, $params);
 	}
@@ -51,6 +53,15 @@ class OrderStatic extends OrderBase {
         $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
+	
+	public static function checkReady()
+	{
+		$params = ParamOrderAction::getNotReadyActionOrder();
+		$order = new Order($params['id_order']);
+		$result = OrderAction::getNotReadyActionOrder($params);
+		if ($result) $order->setState(OrderState::WORK);
+		else $order->setState(OrderState::MADE);
+	}
     
 	
 }

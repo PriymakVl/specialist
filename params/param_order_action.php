@@ -36,6 +36,14 @@ class ParamOrderAction {
 		return $params;
 	}
 	
+	public static function getNotReadyActionOrder()
+	{
+		$params['id_order'] = Param::get('id_order');
+		$params['status'] = OrderAction::STATUS_ACTIVE;
+		$params['state'] = OrderAction::STATE_WORK_END;
+		return $params;
+	}
+	
 	public static function convertStateWork($state)
 	{
 		switch ($state) {

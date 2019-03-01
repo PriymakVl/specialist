@@ -122,6 +122,20 @@ class OrderActionStatic extends OrderBase {
 		return self::perform($sql, $params);
 	}
 	
+	public static function setStateMadeForAllActionsOrder($id_order)
+	{
+		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id_order` = :id_order';
+		$params = ['id_order' => $id_order, 'state' => self::STATE_WORK_END];
+		return self::perform($sql, $params);
+	}
+	
+	public static function getProductsOrder($id_order)
+	{
+		$slq = 'SELECT `id_prod` FROM `order_actions` WHERE `id_order` = :id_order AND `status` = :status GROUP BY `id_prod`';
+		$params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE];
+		return self::perform($slq, $params)->fetchAll();
+	}
+	
 	
 	
 	

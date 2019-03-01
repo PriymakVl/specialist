@@ -14,7 +14,7 @@
 		<? elseif($order->state == OrderState::PREPARATION): ?>
 			<li><a href="/order/to_work?id_order=<?=$order->id?>">Выдать в работу</a></li>
 		<? elseif ($order->state == OrderState::WORK): ?>
-				<li><a href="/order/to_made?id_order=<?=$order->id?>">Работы выполнены</a></li>
+				<li><a href="/order/to_made?id_order=<?=$order->id?>">Заказ выполнен</a></li>
 		<? endif; ?>
 			
     </ul>
@@ -27,8 +27,14 @@
 	<? endif; ?>
 	
 	<!-- menu order actions -->
-	<ul id="menu-order-actions">
-		<li id="order-action-edit">Редактировать</li>
-		<li id="order-action-delete">Удалить операцию</li>
-	</ul>
+		<ul id="menu-order-actions">
+			<? if ($order->actions): ?>
+				<li id="order-action-edit" id_order="<?=$order->id?>">Редактировать</li>
+				<li id="order-action-delete" id_order="<?=$order->id?>">Удалить операцию</li>
+			<? endif; ?>
+			<li id="order-action-add">
+				<a href="/order_action/add_unplan?id_order=<?=$order->id?>">Добавить операцию</a>
+			</li>
+		</ul>
+
 </div>

@@ -28,7 +28,7 @@ require_once ('./modules/order/models/order.php');
 			<? if ($order->content) include_once('content.php'); ?>
 
             <!-- actions -->
-            <? if ($order->actions) include_once('actions.php'); ?>
+            <? if ($order->actions || $order->actionsUnplan) include_once('actions.php'); ?>
 			
         </ul>
     </div>

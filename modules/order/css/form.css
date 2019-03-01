@@ -59,3 +59,48 @@
 	width: 915px;
 }
 
+/*form add action unplan*/
+#form-order-action-unplan-wrp #form-product-symbol-wrp {
+	position: absolute;
+	top: 10px;
+	left: 225px;
+}
+
+#form-order-action-unplan-wrp #form-product-symbol-wrp input {
+	width: 200px;
+}
+
+#form-order-action-unplan-wrp #form-product-name-wrp {
+	position: absolute;
+	top: 10px;
+	left: 540px;
+}
+
+#form-order-action-unplan-wrp #form-action-name-wrp {
+	position: absolute;
+	top: 10px;
+	left: 260px;
+}
+
+#form-order-action-unplan-wrp #form-action-name-wrp input {
+	width: 375px;
+}
+
+#form-order-action-unplan-wrp #form-action-time-wrp {
+	position: absolute;
+	top: 10px;
+	left: 765px;
+}
+
+#form-order-action-unplan-wrp #form-action-time-wrp input {
+	width: 100px;
+}
+
+#form-order-action-unplan-wrp textarea {
+	width: 912px;
+}
+
+#form-order-action-unplan-wrp  select[name="id_action"] {
+	width: 165px;
+}
+

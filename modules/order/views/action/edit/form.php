@@ -6,7 +6,7 @@
 ?>
 <div id="form-add-action-wrp">
     <h2>Форма редактирования операции</h2>
-    <form action="/order_action/edit?id_action=<?=$action->id?>" method="post">
+    <form action="/order_action/edit?id_action=<?=$action->id?>&id_order=<?=$action->id_order?>" method="post">
 	
 			<div class="form-box">
 			

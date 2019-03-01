@@ -42,11 +42,7 @@ class Controller_Terminal extends Controller_Base
     {
         $params = ParamTerminal::endWork();
         OrderAction::endWork($params);
-		$result = OrderAction::getNotReadyActionOrder(ParamTerminal::getNotReadyActionOrder());
-		if (!$result) {
-			$order = new Order(Param::get('id_order'));
-			$order->setState(OrderState::MADE);
-		}
+		Order::checkReady();
         $this->redirect('terminal/actions?id_action='.$params['id_action']);
     }
 

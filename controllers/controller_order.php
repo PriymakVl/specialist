@@ -11,14 +11,14 @@ class Controller_Order extends Controller_Base {
         $this->view->pathFolder = './modules/order/views/';
 		$this->id_order = Param::get('id_order');
 		$this->message->section = 'order';
+		$this->view->title = 'Заказ';
     }
 
     public function action_index()
 	{;
 		$id_active = Session::get('order-active');
 		$order = new Order($this->id_order);
-		$order->getPositions()->getContent()->convertState()->getActions();
-        $this->view->title = 'Заказ';
+		$order->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan();
 		$this->render('index/main', compact('order', 'id_active'));
 	}
 
@@ -66,8 +66,9 @@ class Controller_Order extends Controller_Base {
 	public function action_to_made()
 	{
 		$order = new Order($this->id_order);
-		if ($order->state > OrderState::WORK) exit('уже сделан');
+		//if ($order->state > OrderState::WORK) exit('уже сделан');
 		$order->toMade();
+		$this->message->set('success', 'made');
 		$this->redirectPrevious();
 	}
 	
@@ -75,16 +76,16 @@ class Controller_Order extends Controller_Base {
     {
         $this->view->title = 'Добавить заказ';
 		$params = ParamOrder::add();
-		if (empty($params['symbol'])) return $this->render('add/main');
+		if (empty($params['save'])) return $this->render('add/main');
         $order = Order::getBySymbol($params['symbol']);
         if ($order) {
-            //Message::setSession('error', 'order', 'already_exist');
-            $this->redirect('order/index?order_id='.$order->id);
+            $this->message->set('error', 'exist');
+            $this->redirect('order/index?id_order='.$order->id);
         }
         else {
             $id_add = Order::add($params);
             Session::set('order-active', $id_add);
-            //Message::setSession('success', 'order', 'success_add');
+            $this->message->set('success', 'add');
             $this->redirect('order/add_position?id_order='.$id_add);
         }
     }
@@ -95,6 +96,7 @@ class Controller_Order extends Controller_Base {
 		$order = new Order($this->id_order);
 		if (empty($params['save'])) return $this->render('edit/main', compact('order'));
 		Order::edit($params);
+		$this->message->set('success', 'edit');
 		$this->redirect('order?id_order='.$this->id_order);
 	}
 	
@@ -131,12 +133,20 @@ class Controller_Order extends Controller_Base {
 	 public function action_search()
 	 {
 		 $orders = Order::searchBySymbol(Param::get('symbol'));
-		 if ($orders) $this->message->set('success', 'found');
-		 else $this->message->set('error', 'not_found');
 
-		 if (count($orders) == 1) return $this->redirect('order?id_order='.$orders[0]->id);
-		 else if (count($orders ) > 1) return $this->render('search/main');
-		 else $this->redirectPrevious();
+		 if (count($orders) == 1) {
+			 $this->message->set('success', 'found');
+			 return $this->redirect('order?id_order='.$orders[0]->id);
+		 }
+		 else if (count($orders ) > 1) {
+			$orders = Order::createArrayOfOrder($orders);
+			$this->message->set('success', 'found_next');
+			return $this->render('search/main', compact('orders'));
+		 } 
+		 else {
+			 $this->message->set('error', 'not_found');
+			 $this->redirectPrevious();
+		 }
 	 }
     
 

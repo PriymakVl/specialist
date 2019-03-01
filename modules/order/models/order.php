@@ -8,6 +8,8 @@ class Order extends OrderStatic {
 	public $positions;
 	public $convertState;
 	public $actions;
+	public $actionsUnplan;
+	public $products;
 
     public function __construct($order_id)
     {
@@ -40,7 +42,7 @@ class Order extends OrderStatic {
 	
 	public function toMade()
 	{
-		OrderProducts::madeOrder($this->id);
+		OrderAction::setStateMadeForAllActionsOrder($this->id);
 		$this->setState(OrderState::MADE);
 	}
 	
@@ -76,6 +78,25 @@ class Order extends OrderStatic {
 			$action->getProduct()->getAction()->convertState()->getBgState();
 			$this->actions[] = $action;
 		}
+		return $this;
+	}
+	
+	public function getActionsUnplan()
+	{
+		if ($this->state < OrderState::WORK) return;
+		$this->actionsUnplan = OrderActionUnplan::getByIdOrder($this->id);
+		return $this;
+	}
+	
+	public function getProducts()
+	{
+		$items = OrderAction::getProductsOrder($this->id);
+		if (empty($items)) return;
+		foreach ($items as $item) {
+			$product = new Product($item->id_prod);
+			$this->products[] = $product;
+		}
+		return $this;
 	}
     
 	
