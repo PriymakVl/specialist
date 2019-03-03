@@ -71,7 +71,7 @@ class Order extends OrderStatic {
 	
 	public function getActions()
 	{
-		if ($this->state < OrderState::WORK) return;
+		if ($this->state < OrderState::WORK) return $this;
 		$items = OrderAction::getIdActionsByIdOrder($this->id);
 		foreach ($items as $item) {
 			$action = new OrderAction($item->id);

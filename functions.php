@@ -10,3 +10,10 @@ function debug($array, $exit = true)
     echo '<br><span style="color: red;">end script</span><br>';
     if ($exit) exit();    
 }
+
+// function __autoload($class_name)
+// {
+	// $class_name_arr = explode('_', $class_name);
+	// if ($class_name_arr[0] == 'Controller') $path_file = './controllers/controller_'.strtolower($class_name_arr[1]).'.php';
+	// require_once $path_file;
+// }

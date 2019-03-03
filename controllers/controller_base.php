@@ -14,7 +14,7 @@ require_once ('./params/param_terminal.php');
 
 
         /* user */
-require_once ('./modules/user/models/user.php');
+//require_once ('./modules/user/models/user.php');
 require_once('./modules/user/models/worker.php');
 
         /* order */
