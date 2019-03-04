@@ -12,7 +12,7 @@ require_once ('./modules/order/models/order.php');
 
     <!-- active box info -->
 	<? if ($id_active == $order->id): ?>
-		<div class="message success-message">Активный заказ</div>
+		<div class="message message-success">Активный заказ</div>
     <? endif; ?>
 
     <!-- message -->
@@ -28,8 +28,10 @@ require_once ('./modules/order/models/order.php');
 			<? if ($order->content) include_once('content.php'); ?>
 
             <!-- actions -->
-            <? if ($order->actions || $order->actionsUnplan) include_once('actions.php'); ?>
+            <? if ($order->actions) include_once('actions.php'); ?>
 			
+			<!-- actions unplan -->
+			<? if ($order->actionsUnplan) include_once('actions_unplan.php'); ?>
         </ul>
     </div>
 
@@ -44,4 +46,4 @@ require_once ('./modules/order/models/order.php');
 <script src="/modules/order/js/order_delete.js"></script>
 <script src="/modules/order/js/content_delete.js"></script>
 <script src="/modules/order/js/order_actions_managment.js"></script>
-
+<script src="/modules/order/js/order_action_unplan.js"></script>

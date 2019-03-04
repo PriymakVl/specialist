@@ -6,7 +6,7 @@
 			<i class="fas fa-check"></i>
             <span>Задание выполнено</span>
 		</div>
-		<div id="prod-state-stop" onclick="action_state_stop();">
+		<div id="prod-state-stop" onclick="action_state_stop();" >
 			<!--<i class="fas fa-pause"></i>-->
 			<i class="fas fa-angle-double-right"></i>
 			<span id="text-stop-box"></span><!-- if state == stop Продолжить и наоборот -->

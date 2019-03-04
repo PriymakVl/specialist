@@ -1,6 +1,6 @@
 	//$('.terminal-action-box').unbind('mousenter mouseleave touchend touchstart');
 	
-	var state_work, id_order, id_prod, id_worker, prod_name, text_stop_box;
+	var state_work, id_order, id_prod, id_worker, prod_name, type_action, text_stop_box;
 	const STATE_WORK_PREPARATION = 1;
 	const STATE_WORK_STOP = 3;
 	
@@ -19,13 +19,15 @@
 		id_prod = $(elem).attr('id_prod');
 		id_worker = $(elem).attr('id_worker');
 		id_action = $(elem).attr('id_action');
+		type_action = $(elem).attr('type_action');
 		
 		if (state_work == STATE_WORK_PREPARATION) {
-			location.href = '/terminal/start_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_worker=' + id_worker + '&id_action=' + id_action;
+			location.href = '/terminal/start_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_worker=' + id_worker + '&id_action=' + id_action + '&type_action=' + type_action;
 		}
 		else {
-			$('#terminal-actions-wrp, #filter-actions-wrp').hide();
-			//$('#terminal-wrp h3').hide();
+			if (type_action == 'plan') $('#terminal-actions-wrp, #filter-actions-wrp').hide();
+			else $('#terminal-actions-unplan-wrp, #filter-actions-wrp').hide();
+			
 			$('#operations-box').show();
 			if (state_work == STATE_WORK_STOP) {
 				 text_stop_box = 'Продолжить задание'; 
@@ -51,13 +53,13 @@
 
     //end work
 	function action_state_made() {
-		location.href = '/terminal/end_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_action=' + id_action;
+		location.href = '/terminal/end_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_action=' + id_action + '&type_action=' + type_action;
 		return false;
 	}
 	
 	 //stop work
 	function action_state_stop() {
-		var request = '/terminal/stop_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_action=' + id_action;
+		var request = '/terminal/stop_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_action=' + id_action + '&type_action=' + type_action + '&state=' + state_work;
 		var params = getObjectGetParams();
 		if (params.id_action == 'all') request = request + '&actions=all'; 
 		location.href = request;

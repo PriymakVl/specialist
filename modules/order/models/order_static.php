@@ -59,7 +59,8 @@ class OrderStatic extends OrderBase {
 		$params = ParamOrderAction::getNotReadyActionOrder();
 		$order = new Order($params['id_order']);
 		$result = OrderAction::getNotReadyActionOrder($params);
-		if ($result) $order->setState(OrderState::WORK);
+		$result_unplan = OrderActionUnplan::getNotReadyActionOrder($order->id);
+		if ($result || $result_unplan) $order->setState(OrderState::WORK);
 		else $order->setState(OrderState::MADE);
 	}
     

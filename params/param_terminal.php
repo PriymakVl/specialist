@@ -6,7 +6,7 @@ class ParamTerminal extends Param {
 	
 	public static function startWork()
 	{
-		$keys = ['id_order', 'id_prod', 'id_worker', 'id_action'];
+		$keys = ['id_order', 'id_prod', 'id_worker', 'id_action', 'type_action'];
 		$params = self::getAll($keys);
 		$params['state'] = Order::STATE_WORK_PROGRESS;
 		$params['time_start'] = time();
@@ -15,7 +15,7 @@ class ParamTerminal extends Param {
 	
 	public static function endWork()
 	{
-		$keys = ['id_order', 'id_prod', 'id_action'];
+		$keys = ['id_order', 'id_prod', 'id_action', 'type_action'];
 		$params = self::getAll($keys);
 		$params['state'] = Order::STATE_WORK_END;
 		$params['time_end'] = time();
@@ -24,10 +24,9 @@ class ParamTerminal extends Param {
 	
 	public static function stopWork()
 	{
-		$keys = ['id_order', 'id_prod', 'id_action'];
+		$keys = ['id_order', 'id_prod', 'id_action', 'type_action', 'state'];
 		$params = self::getAll($keys);
-		$action = OrderAction::getByIdOrderAndIdProductAndIdAction($params);
-		if ($action->state == OrderAction::STATE_WORK_STOPPED) $params['state'] = OrderAction::STATE_WORK_PROGRESS;
+		if ($params['state'] == OrderAction::STATE_WORK_STOPPED) $params['state'] = OrderAction::STATE_WORK_PROGRESS;
 		else $params['state'] = OrderAction::STATE_WORK_STOPPED;
 		return $params;
 	}

@@ -19,10 +19,14 @@
 		
 		<!-- <div id="clock">10:49</div> -->
 		
-		<!-- products box -->
-		<? include_once('actions_box.php'); ?>
-
 		<!-- actions box -->
+		<? if ($params['id_action'] == 'unplan'): ?>
+			<? include_once('actions_box_unplan.php'); ?>
+		<? else: ?>
+			<? include_once('actions_box.php'); ?>
+		<? endif; ?>
+
+		<!-- operations box -->
 		<? include_once('operations_box.php'); ?>
 	</div>
 </div><!-- id content -->

@@ -46,6 +46,26 @@ class OrderBase extends Model
     public $dateShipment; //дата отгрузки заказа
 	
 	public $timeManufacturingForWorker = 0;
+	
+	public $bgTerminalBox;
+	
+	const BG_TERMINAL_BOX_PLAN = 'yellow';
+	const BG_TERMINAL_BOX_PROGRESS = 'green';
+	const BG_TERMINAL_BOX_STOPPED = 'red';
+	
+	public function setBgTerminalBox()
+	{
+		if ($this->state == self::STATE_WORK_PROGRESS) $this->bgTerminalBox = self::BG_TERMINAL_BOX_PROGRESS;
+		else if ($this->state == self::STATE_WORK_STOPPED) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_STOPPED;
+		else $this->bgTerminalBox = self::BG_TERMINAL_BOX_PLAN;
+		return $this;
+	}
+	
+	public function getOrder()
+	{
+		$this->order = new Order($this->id_order);
+		return $this;
+	}
 
 }
 

@@ -6,13 +6,8 @@ class OrderAction extends OrderActionStatic {
 	public $product;
 	public $order;
 	public $convertState;
-	public $bgTerminalBox;
 	public $action;//объект операции обработки
 	public $bgState;
-	
-	const BG_TERMINAL_BOX_PLAN = 'yellow';
-	const BG_TERMINAL_BOX_PROGRESS = 'green';
-	const BG_TERMINAL_BOX_STOPPED = 'red';
 	
 	public function __construct($id)
     {
@@ -23,12 +18,6 @@ class OrderAction extends OrderActionStatic {
 	public function getProduct()
 	{
 		$this->product = new Product($this->id_prod);
-		return $this;
-	}
-	
-	public function getOrder()
-	{
-		$this->order = new Order($this->id_order);
 		return $this;
 	}
 	
@@ -50,16 +39,8 @@ class OrderAction extends OrderActionStatic {
 		return $this;
 	}
 	
-	public function setBgTerminalBox()
-	{
-		if ($this->state == self::STATE_WORK_PROGRESS) $this->bgTerminalBox = self::BG_TERMINAL_BOX_PROGRESS;
-		else if ($this->state == self::STATE_WORK_STOPPED) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_STOPPED;
-		else $this->bgTerminalBox = self::BG_TERMINAL_BOX_PLAN;
-		return $this;
-	}
-	
-	
-	
+
+
 	
 	
 }

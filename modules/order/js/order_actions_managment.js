@@ -2,12 +2,11 @@ $(document).ready(function() {
 	//delete order actions
 	$('#order-action-delete').click(function() {
 	var id_action = $('[name="actions"]:checked').attr('id_action');
-	var id_action_unplan = $('[name="actions"]:checked').attr('id_action');
 	
 		if (!id_action) return alert('Вы не выбрали операцию');
 		var agree = confirm('Вы действительно хотите удалить указанную операцию?');
 		var id_order = $(this).attr('id_order');
-		console.log(id_action); return;
+
 		if (agree) location.href = '/order_action/delete?id_action=' + id_action + '&id_order=' + id_order;
 	});
 	

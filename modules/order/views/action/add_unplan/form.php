@@ -4,25 +4,29 @@
         <!-- first box -->
         <div class="form-box">
 			 <!-- order products-->
-            <div id="form-order-products-wrp">
-                <label>Детали:</label>
-                <select name="id_prod">
-					<option value="">Не выбрана</option>
-					<? foreach ($order->products as $product): ?>
-						<option value="<?=$product->id?>" prod_name="<?=$product->name?>" prod_symbol="<?=$product->symbol?>"><?=$product->name.': '.$product->symbol?></option>
-					<? endforeach; ?>
-                </select>
-            </div>
-            <!-- prod symbol-->
-            <div id="form-product-symbol-wrp">
-                <label>Обозначение:</label>
-                <input type="text" name="prod_symbol">
-            </div>
-			<!-- prod name -->
-            <div id="form-product-name-wrp">
-                <label>Наименование:</label>
-                <input type="text" name="prod_name">
-            </div>
+			 <? if ($order->products): ?>
+				<div id="form-order-products-wrp">
+					<label>Выбрать деталь:</label>
+					<select name="id_prod">
+						<option value="">Не выбрана</option>
+						<? foreach ($order->products as $product): ?>
+							<option value="<?=$product->id?>" prod_name="<?=$product->name?>" prod_symbol="<?=$product->symbol?>"><?=$product->name.': '.$product->symbol?></option>
+						<? endforeach; ?>
+					</select>
+				</div>
+			<? endif; ?>
+			<div id="form-product-wrp"
+				<!-- prod symbol-->
+				<div id="form-product-symbol-wrp">
+					<label>Обозначение детали:</label>
+					<input type="text" name="prod_symbol">
+				</div>
+				<!-- prod name -->
+				<div id="form-product-name-wrp">
+					<label>Наименование:</label>
+					<input type="text" name="prod_name">
+				</div>
+			</div>
         </div>
 		
 		<!-- two box -->

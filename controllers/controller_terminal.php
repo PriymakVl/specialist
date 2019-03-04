@@ -26,7 +26,8 @@ class Controller_Terminal extends Controller_Base
     {
         $worker = $this->getWorker();
 		$params = ParamTerminal::getActions($worker);
-        $order_actions = OrderAction::getForTerminal($params);
+		if ($params['id_action'] == 'unplan') $order_actions = OrderActionUnplan::getActions();
+        else $order_actions = OrderAction::getForTerminal($params);
 		$actions = Action::getAll('actions');
         $this->render('actions/main', compact('order_actions', 'worker', 'actions', 'params'));
     }
@@ -34,14 +35,22 @@ class Controller_Terminal extends Controller_Base
     public function action_start_work()
     {
         $params = ParamTerminal::startWork();
-        OrderAction::startWork($params);
-        $this->redirect('terminal/actions?id_action='.$params['id_action']);
+        if ($params['type_action'] == 'plan') {
+			OrderAction::startWork($params); $id_action = $params['id_action'];
+		} else {
+			OrderActionUnplan::startWork($params); $id_action = 'unplan';
+		}
+        $this->redirect('terminal/actions?id_action='.$id_action);
     }
 
     public function action_end_work()
     {
         $params = ParamTerminal::endWork();
-        OrderAction::endWork($params);
+		if ($params['type_action'] == 'plan') OrderAction::endWork($params);
+		else { 
+			OrderActionUnplan::endWork($params);
+			$params['id_action'] = 'unplan';
+		}
 		Order::checkReady();
         $this->redirect('terminal/actions?id_action='.$params['id_action']);
     }
@@ -49,8 +58,12 @@ class Controller_Terminal extends Controller_Base
     public function action_stop_work()
     {
         $params = ParamTerminal::stopWork();
-        OrderAction::stopWork($params);
-		$id_action = Param::get('actions') ? 'all' : $params['id_action'];//for return on page all actions;
+	if ($params['type_action'] == 'plan') {
+			OrderAction::stopWork($params); 
+			$id_action = Param::get('actions') ? 'all' : $params['id_action'];//for return on page all actions;
+		} else {
+			OrderActionUnplan::stopWork($params); $id_action = 'unplan';
+		}
         $this->redirect('terminal/actions?id_action=' . $id_action);
     }
 }

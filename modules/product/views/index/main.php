@@ -11,7 +11,7 @@ require_once ('./modules/product/models/product.php');
 
     <!-- active box info -->
 	<? if ($id_active == $product->id): ?>
-		<div class="message success-message">Активный</div>
+		<div class="message message-success">Активный</div>
     <? endif; ?>
 
     <div id="product-index-wrp">

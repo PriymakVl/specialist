@@ -70,6 +70,7 @@ class OrderActionStatic extends OrderBase {
 	
 	public static function startWork($params)
 	{
+		unset($params['type_action']);
 		$sql = 'UPDATE `order_actions` SET `state` = :state, `time_start` = :time_start, `id_worker` = :id_worker 
 		WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `id_action` = :id_action';
 		return self::perform($sql, $params);
@@ -77,6 +78,7 @@ class OrderActionStatic extends OrderBase {
 	
 	public static function endWork($params)
 	{
+		unset($params['type_action']);
 		$sql = 'UPDATE `order_actions` SET `state` = :state, `time_end` = :time_end 
 		WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `id_action` = :id_action';
 		return self::perform($sql, $params);
@@ -84,6 +86,7 @@ class OrderActionStatic extends OrderBase {
 	
 	public static function stopWork($params)
 	{
+		unset($params['type_action']);
 		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `id_action` = :id_action';
 		return self::perform($sql, $params);
 	}

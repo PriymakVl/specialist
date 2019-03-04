@@ -22,9 +22,22 @@ class Controller_Order_Action extends Controller_Base {
 		$this->redirect('order?id_order='.$action->id_order);
 	}
 	
+/* 	public function action_edit_unplan()
+	{
+		$params = ParamOrderActionUnplan::edit();
+		$action = new OrderActionUnplan($params['id_action_unplan']);
+		if (empty($params['save'])) return $this->render('action/edit_unplan/main', compact('action'));
+		OrderAction::edit($params);
+		$this->message->set('success', 'edit');
+		Order::checkReady();
+		$this->redirect('order?id_order='.$action->id_order);
+	} */
+	
 	public function action_delete()
 	{
-		$action = new OrderAction(Param::get('id_action'));
+		$id_action = Param::get('id_action');
+		if ($id_aciton) $action = new OrderAction($id_action);
+		else $action = new OrderActionUnplan(Param::get('id_action_unplan'));
 		$action->delete();
 		$this->message->set('success', 'delete');
 		$this->redirectPrevious();
