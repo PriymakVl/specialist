@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 01 2019 г., 18:04
+-- Время создания: Мар 04 2019 г., 17:57
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -105,10 +105,10 @@ CREATE TABLE `order_actions` (
 --
 
 INSERT INTO `order_actions` (`id`, `id_order`, `id_prod`, `id_action`, `qty`, `state`, `type_order`, `time_start`, `time_end`, `time_manufac`, `id_worker`, `status`) VALUES
-(1, 1, 50, 6, 2, 1, 1, '', '', '38', 0, '1'),
+(1, 1, 50, 6, 2, 2, 1, '1551703997', '', '38', 2, '1'),
 (2, 1, 138, 1, 2, 1, 1, '', '', '7', 0, '1'),
-(3, 1, 138, 2, 2, 1, 1, '', '', '41', 0, '1'),
-(4, 1, 138, 4, 2, 4, 1, '1551334602', '1551334615', '11', 3, '1'),
+(3, 1, 138, 2, 2, 2, 1, '1551703879', '', '41', 2, '1'),
+(4, 1, 138, 4, 2, 2, 1, '1551703665', '1551334615', '11', 2, '1'),
 (5, 1, 139, 1, 2, 4, 1, '1551334675', '1551334679', '7', 2, '1'),
 (6, 1, 139, 2, 2, 1, 1, '', '', '61', 0, '1'),
 (7, 1, 139, 5, 2, 1, 1, '', '', '40', 0, '1'),
@@ -117,7 +117,7 @@ INSERT INTO `order_actions` (`id`, `id_order`, `id_prod`, `id_action`, `qty`, `s
 (10, 2, 170, 3, 2, 1, 1, '', '', '15', 0, '1'),
 (11, 2, 170, 2, 2, 1, 1, '', '', '29', 0, '0'),
 (12, 2, 170, 4, 2, 2, 1, '1551335625', '1551335647', '13', 3, '1'),
-(13, 2, 171, 1, 2, 1, 1, '', '', '7', 0, '1'),
+(13, 2, 171, 1, 2, 3, 1, '1551707879', '', '7', 2, '1'),
 (14, 2, 171, 2, 2, 4, 1, '1551335996', '1551336913', '37', 2, '1'),
 (15, 2, 171, 5, 2, 2, 1, '1551344501', '', '48', 3, '1'),
 (16, 4, 172, 6, 1, 4, 1, '', '', '19', 0, '1'),
@@ -132,7 +132,7 @@ INSERT INTO `order_actions` (`id`, `id_order`, `id_prod`, `id_action`, `qty`, `s
 (25, 6, 178, 1, 3, 4, 1, '1551340503', '1551340598', '10', 3, '1'),
 (26, 6, 178, 3, 3, 1, 1, '', '', '19', 0, '1'),
 (27, 6, 178, 2, 3, 1, 1, '', '', '22', 0, '1'),
-(28, 6, 178, 4, 3, 1, 1, '', '', '16', 0, '1'),
+(28, 6, 178, 4, 3, 2, 1, '1551707639', '', '16', 2, '1'),
 (29, 6, 179, 1, 3, 1, 1, '', '', '10', 0, '1'),
 (30, 6, 179, 2, 3, 1, 1, '', '', '46', 0, '1'),
 (31, 6, 179, 5, 3, 1, 1, '', '', '60', 0, '1'),
@@ -186,7 +186,7 @@ INSERT INTO `order_actions` (`id`, `id_order`, `id_prod`, `id_action`, `qty`, `s
 (79, 11, 90, 6, 2, 2, 1, '', '', '44', 0, '0'),
 (80, 11, 90, 6, 2, 1, 1, '', '', '44', 0, '1'),
 (81, 11, 198, 1, 1, 4, 1, '1551344343', '1551344393', '4', 3, '1'),
-(82, 11, 198, 2, 1, 1, 1, '', '', '13', 0, '1'),
+(82, 11, 198, 2, 1, 2, 1, '', '', '13', 0, '1'),
 (83, 11, 75, 1, 1, 1, 1, '', '', '4', 0, '1'),
 (84, 11, 75, 3, 1, 1, 1, '', '', '9', 0, '1'),
 (85, 11, 75, 2, 1, 1, 1, '', '', '13', 0, '1'),
@@ -208,6 +208,20 @@ INSERT INTO `order_actions` (`id`, `id_order`, `id_prod`, `id_action`, `qty`, `s
 (101, 11, 197, 1, 8, 4, 1, '1551344367', '1551344404', '17', 3, '1'),
 (102, 11, 197, 3, 8, 1, 1, '', '', '21', 0, '1'),
 (103, 12, 199, 6, 1, 1, 1, '', '', '10', 0, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `order_action_states`
+--
+
+CREATE TABLE `order_action_states` (
+  `id` int(11) NOT NULL,
+  `id_action` int(11) NOT NULL COMMENT 'order action',
+  `state` tinyint(3) NOT NULL,
+  `time` varchar(100) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -238,8 +252,7 @@ CREATE TABLE `order_action_unplan` (
 --
 
 INSERT INTO `order_action_unplan` (`id`, `id_order`, `id_prod`, `id_action`, `qty`, `state`, `prod_symbol`, `prod_name`, `action_name`, `time_start`, `time_end`, `time_manufac`, `id_worker`, `note`, `status`) VALUES
-(4, 2, 170, 4, 2, 1, 'Шток', 'ADV-ROD-12', 'Фрезерование', '', '', '12', 0, '', '1'),
-(3, 2, 0, 0, 2, 1, 'ffffff', 'gggggggggg', 'bbbbbbbbbbbbbb', '', '', '34', 0, 'gggggggg', '1');
+(1, 12, 199, 0, 2, 2, 'SA-CU', 'Блок подготовки воздуха', 'Проверка блока', '1551706434', '1551705921', '15', 2, '', '1');
 
 -- --------------------------------------------------------
 
@@ -735,6 +748,12 @@ ALTER TABLE `order_actions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `order_action_states`
+--
+ALTER TABLE `order_action_states`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `order_action_unplan`
 --
 ALTER TABLE `order_action_unplan`
@@ -797,10 +816,15 @@ ALTER TABLE `orders`
 ALTER TABLE `order_actions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 --
+-- AUTO_INCREMENT для таблицы `order_action_states`
+--
+ALTER TABLE `order_action_states`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT для таблицы `order_action_unplan`
 --
 ALTER TABLE `order_action_unplan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `order_content`
 --
