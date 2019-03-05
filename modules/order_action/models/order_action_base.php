@@ -1,7 +1,7 @@
 <?php
-require_once('order_base.php');
+require_once('./core/model.php');
 
-class OrderActionBase extends OrderBase {
+class OrderActionBase extends Model {
 
 	public $product;
 	public $order;

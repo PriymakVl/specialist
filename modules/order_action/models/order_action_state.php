@@ -1,7 +1,7 @@
 <?php
-require_once('order_base.php');
+require_once('order_action_base.php');
 
-class OrderActionState extends OrderBase {
+class OrderActionState extends OrderActionBase {
 	
     const PLANED = 1; //работа запланирована
     const PROGRESS = 2; //работа выполняется

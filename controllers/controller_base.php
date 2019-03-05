@@ -22,8 +22,10 @@ require_once('./modules/order/models/order.php');
 require_once('./modules/order/models/order_content.php');
 require_once('./modules/order/models/order_static.php');
 require_once('./modules/order/models/order_state.php');
-require_once('./modules/order/models/order_action.php');
-require_once('./modules/order/models/order_action_unplan.php');
+
+    /* order action */
+require_once('./modules/order_action/models/order_action.php');
+require_once('./modules/order_action/models/order_action_unplan.php');
 
 	/*product*/
 require_once('./modules/product/models/product.php');

@@ -36,7 +36,7 @@ class Controller_Order_Action extends Controller_Base {
 	public function action_delete()
 	{
 		$id_action = Param::get('id_action');
-		if ($id_aciton) $action = new OrderAction($id_action);
+		if ($id_action) $action = new OrderAction($id_action);
 		else $action = new OrderActionUnplan(Param::get('id_action_unplan'));
 		$action->delete();
 		$this->message->set('success', 'delete');
@@ -58,7 +58,7 @@ class Controller_Order_Action extends Controller_Base {
 	public function action_state()
 	{
 		$params = ParamOrderAction::state();
-		if ($params['type'] == 'plan'] {
+		if ($params['type'] == 'plan') {
 			$action = new OrderAction($params['id_action']); /**/ $action->getWorker()->getStates($params);
 			return $this->render('action/state/plan/main', $action);
 		} else {
