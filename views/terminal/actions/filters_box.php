@@ -1,11 +1,11 @@
 <div id="filter-actions-wrp">
 	<form action="/terminal/action">
 		<select id="actions">
-			<option value="all">Все операции</option>
+			<option value="all">Все операции без дополн.</option>
 			<? foreach ($actions as $item): ?>
-				<option <? if ($item->id == $params['id_action']) echo 'selected'; ?> value="<?=$item->id?>"><?=$item->name?></option>
+				<option <? if ($item->id == $params['action']) echo 'selected'; ?> value="<?=$item->id?>"><?=$item->name?></option>
 			<? endforeach; ?>
-			<option value="unplan" <? if ($params['id_action'] == 'unplan') echo 'selected';?>>Дополнительные</option>
+			<option value="unplan" <? if ($params['action'] == 'unplan') echo 'selected';?>>Дополнительные операц.</option>
 		</select>
 	</form>
 </div>

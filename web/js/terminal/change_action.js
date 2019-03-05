@@ -1,10 +1,10 @@
 $(document).ready(function() {
 	$('#filter-actions-wrp #actions').change(function() {
-		var id_action;
-		
-		id_action = $(this).val();
+		var action;
 
-		location.href = '/terminal/actions?id_action=' + id_action;
+		action = $(this).val();
+
+		location.href = '/terminal/actions?action=' + action;
 
 	});
 });

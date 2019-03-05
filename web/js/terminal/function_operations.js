@@ -1,35 +1,25 @@
-	//$('.terminal-action-box').unbind('mousenter mouseleave touchend touchstart');
 	
-	var state_work, id_order, id_prod, id_worker, prod_name, type_action, text_stop_box;
-	const STATE_WORK_PREPARATION = 1;
-	const STATE_WORK_STOP = 3;
-	
-/* 	$(document).ready(function() {
-		$('.terminal-action-box').on('mousedown touchstart', function () {
-			var elem = $(this);
-			to_work(elem);
-		});
-	}); */
+	var state, id_item, action, id_worker, prod_name, text_stop_box;
+	const STATE_ACTION_PREPARATION = 1;
+	const STATE_ACTION_STOPED = 3;
 	
 	
 	//деталь взята в работу
 	function to_work(elem) {
-		state_work = $(elem).attr('state');;
-		id_order = $(elem).attr('id_order');
-		id_prod = $(elem).attr('id_prod');
+		state = $(elem).attr('state');
 		id_worker = $(elem).attr('id_worker');
-		id_action = $(elem).attr('id_action');
-		type_action = $(elem).attr('type_action');
+		id_item = $(elem).attr('id_item');
+		action = $(elem).attr('id_action');
 		
-		if (state_work == STATE_WORK_PREPARATION) {
-			location.href = '/terminal/start_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_worker=' + id_worker + '&id_action=' + id_action + '&type_action=' + type_action;
+		if (state == STATE_ACTION_PREPARATION) {
+			location.href = '/terminal/start_work?id_worker=' + id_worker + '&id=' + id_item + '&action=' + action ;
 		}
 		else {
-			if (type_action == 'plan') $('#terminal-actions-wrp, #filter-actions-wrp').hide();
-			else $('#terminal-actions-unplan-wrp, #filter-actions-wrp').hide();
+			if (action == 'unplan') $('#terminal-actions-unplan-wrp, #filter-actions-wrp').hide();
+			else $('#terminal-actions-wrp, #filter-actions-wrp').hide();
 			
 			$('#operations-box').show();
-			if (state_work == STATE_WORK_STOP) {
+			if (state == STATE_ACTION_STOPED) {
 				 text_stop_box = 'Продолжить задание'; 
 				 $('#prod-state-stop i').removeClass('fa-pause').addClass('fa-angle-double-right');
 			}
@@ -53,15 +43,24 @@
 
     //end work
 	function action_state_made() {
-		location.href = '/terminal/end_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_action=' + id_action + '&type_action=' + type_action;
+		if (state == STATE_ACTION_STOPED) {
+			alert('Сначала нужно продолжить задание');
+			return;
+		}
+		var params = getObjectGetParams();
+		var request = '/terminal/end_work?id=' + id_item + '&id_worker=' + id_worker;
+		action = params.action ? params.action : action; //если загружен 1 раз берет значение не с get запроса а с атрибута
+		request = request + '&action=' + action; 
+		location.href = request;
 		return false;
 	}
 	
 	 //stop work
 	function action_state_stop() {
-		var request = '/terminal/stop_work?id_order=' + id_order + '&id_prod=' + id_prod + '&id_action=' + id_action + '&type_action=' + type_action + '&state=' + state_work;
 		var params = getObjectGetParams();
-		if (params.id_action == 'all') request = request + '&actions=all'; 
+		var request = '/terminal/stop_work?id=' + id_item + '&state=' + state + '&id_worker=' + id_worker;
+		action = params.action ? params.action : action; //если загружен 1 раз берет значение не с get запроса а с атрибута
+		request = request + '&action=' + action; 
 		location.href = request;
 		return false;
 	}

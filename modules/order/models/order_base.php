@@ -24,18 +24,6 @@ class OrderBase extends Model
 
     const TYPE_CYLINDER = 1;
     const TYPE_CAR_NUMBER = 2;
-	
-	//const KIND_WORK_CUTTING = 1; //порезка заготовок
-	//const KIND_WORK_MAKE = 2; //изготовление детали
-	//const KIND_WORK_ASSEMBLY = 3; //сборка
-
-    /**состояние для детали, состояние для заказа в классе OrderState **/
-    //todo создать класс ProductState
-    const STATE_WORK_PLANED = 1; //работа запланирована
-    const STATE_WORK_PROGRESS = 2; //работа выполняется
-    const STATE_WORK_STOPPED = 3; //работа остановлена по какой то причине
-    const STATE_WORK_END = 4; //работа закончена
-    const STATE_WORK_WAITING = 5; //ожидает окончание выполнения предыдущей операции
 
     //date
     public $dateExecution; //дата выполнения заказа
@@ -55,8 +43,8 @@ class OrderBase extends Model
 	
 	public function setBgTerminalBox()
 	{
-		if ($this->state == self::STATE_WORK_PROGRESS) $this->bgTerminalBox = self::BG_TERMINAL_BOX_PROGRESS;
-		else if ($this->state == self::STATE_WORK_STOPPED) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_STOPPED;
+		if ($this->state == OrderActionState::PROGRESS) $this->bgTerminalBox = self::BG_TERMINAL_BOX_PROGRESS;
+		else if ($this->state == OrderActionState::STOPPED) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_STOPPED;
 		else $this->bgTerminalBox = self::BG_TERMINAL_BOX_PLAN;
 		return $this;
 	}

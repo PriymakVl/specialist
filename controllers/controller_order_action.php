@@ -54,6 +54,18 @@ class Controller_Order_Action extends Controller_Base {
 		$this->message->set('success', 'add_unplan');
 		$this->redirect('order?id_order='.$order->id);
 	}
+	
+	public function action_state()
+	{
+		$params = ParamOrderAction::state();
+		if ($params['type'] == 'plan'] {
+			$action = new OrderAction($params['id_action']); /**/ $action->getWorker()->getStates($params);
+			return $this->render('action/state/plan/main', $action);
+		} else {
+			$action = new OrderActionUnplan($params['id_action']); /**/ $action->getWorker()->getStates($params);
+			return $this->render('action/state/unplan/main', $action);
+		}
+	}
 
 	
 }

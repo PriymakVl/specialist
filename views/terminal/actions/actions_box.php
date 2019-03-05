@@ -6,13 +6,11 @@
         <? foreach ($order_actions as $action): ?>
             <div class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>" onclick="to_work(this);"
                  prod_name="<?=$action->product->name?>"
-                 id_order="<?=$action->id_order?>"
-                 id_prod="<?=$action->id_prod?>"
                  id_worker="<?=$worker->id?>"
                  state="<?=$action->state?>"
+				 id_item="<?=$action->id?>"
 				 id_action="<?=$action->id_action?>"
-				 type_action="plan"
-				 >
+			>
 				 
 
                 <span class="info-order">№<?=$number?> заказ: <?=$action->order->symbol?></span>

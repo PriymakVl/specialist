@@ -42,7 +42,8 @@ class Order extends OrderStatic {
 	
 	public function toMade()
 	{
-		OrderAction::setStateMadeForAllActionsOrder($this->id);
+		OrderAction::setStateEndedForAllActionsOrder($this->id);
+		OrderActionUnplan::setStateEndedForAllActionsOrder($this->id);
 		$this->setState(OrderState::MADE);
 	}
 	
@@ -75,7 +76,7 @@ class Order extends OrderStatic {
 		$items = OrderAction::getIdActionsByIdOrder($this->id);
 		foreach ($items as $item) {
 			$action = new OrderAction($item->id);
-			$action->getProduct()->getAction()->convertState()->getBgState();
+			$action->getProduct()->getAction()->convertState()->setBgState();
 			$this->actions[] = $action;
 		}
 		return $this;
@@ -84,7 +85,12 @@ class Order extends OrderStatic {
 	public function getActionsUnplan()
 	{
 		if ($this->state < OrderState::WORK) return;
-		$this->actionsUnplan = OrderActionUnplan::getByIdOrder($this->id);
+		$items = OrderActionUnplan::getByIdOrder($this->id);
+		foreach ($items as $item) {
+			$action_unplan = new OrderActionUnplan($item->id);
+			$action_unplan->convertState()->setBgState();
+			$this->actionsUnplan[] = $action_unplan;
+		}
 		return $this;
 	}
 	

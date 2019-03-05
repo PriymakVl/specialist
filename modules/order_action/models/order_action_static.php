@@ -1,7 +1,7 @@
 <?php
-require_once('order_base.php');
+require_once('order_action_base.php');
 
-class OrderActionStatic extends OrderBase {
+class OrderActionStatic extends OrderActionBase {
 
 	public static function add($products, $order)
 	{
@@ -34,7 +34,7 @@ class OrderActionStatic extends OrderBase {
 	
 	public static function getForTerminal($params)
 	{
-		if ($params['id_action'] == 'all') $ids = self::getAllNotReadyActions($params);
+		if ($params['action'] == 'all') $ids = self::getAllNotReadyActions($params);
 		else $ids = self::get($params);
 		return self::createArrayActions($ids);
 	}
@@ -42,7 +42,7 @@ class OrderActionStatic extends OrderBase {
 	public static function get($params)
 	{
 		$sql = 'SELECT `id` FROM `order_actions` 
-		WHERE `id_action` = :id_action AND `state` != :state AND `type_order` = :type_order AND `status` = :status';
+		WHERE `id_action` = :action AND `state` != :state AND `type_order` = :type_order AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
@@ -54,7 +54,7 @@ class OrderActionStatic extends OrderBase {
 	
 	public static function getAllNotReadyActions($params)
 	{
-		unset($params['id_action']);
+		unset($params['action']);
 		$sql = 'SELECT `id` FROM `order_actions` WHERE `state` != :state AND `type_order` = :type_order AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
@@ -68,26 +68,24 @@ class OrderActionStatic extends OrderBase {
 		 return $actions;
 	}
 	
-	public static function startWork($params)
+	public static function setStateStartWork($params)
 	{
-		unset($params['type_action']);
-		$sql = 'UPDATE `order_actions` SET `state` = :state, `time_start` = :time_start, `id_worker` = :id_worker 
-		WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `id_action` = :id_action';
+		unset($params['action']);
+		$sql = 'UPDATE `order_actions` SET `state` = :state, `time_start` = :time, `id_worker` = :id_worker WHERE `id` = :id';
 		return self::perform($sql, $params);
 	}
 	
-	public static function endWork($params)
+	public static function setStateEndWork($params)
 	{
-		unset($params['type_action']);
-		$sql = 'UPDATE `order_actions` SET `state` = :state, `time_end` = :time_end 
-		WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `id_action` = :id_action';
+		unset($params['action'], $params['id_worker']);
+		$sql = 'UPDATE `order_actions` SET `state` = :state, `time_end` = :time WHERE `id` = :id';
 		return self::perform($sql, $params);
 	}
 	
-	public static function stopWork($params)
+	public static function setStateStopWork($params)
 	{
-		unset($params['type_action']);
-		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `id_action` = :id_action';
+		unset($params['action'], $params['id_worker'], $params['time']);
+		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id` = :id';
 		return self::perform($sql, $params);
 	}
 	
@@ -125,10 +123,10 @@ class OrderActionStatic extends OrderBase {
 		return self::perform($sql, $params);
 	}
 	
-	public static function setStateMadeForAllActionsOrder($id_order)
+	public static function setStateEndedForAllActionsOrder($id_order)
 	{
 		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id_order` = :id_order';
-		$params = ['id_order' => $id_order, 'state' => self::STATE_WORK_END];
+		$params = ['id_order' => $id_order, 'state' => OrderActionState::ENDED];
 		return self::perform($sql, $params);
 	}
 	

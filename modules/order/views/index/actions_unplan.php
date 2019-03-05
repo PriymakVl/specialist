@@ -20,7 +20,13 @@
 							<td><?=$action->prod_name?></td>
 							<td><?=$action->qty?></td>
 							<td><?=$action->action_name?></td>
-							<td style="background:<?=$action->bgState?>"><?=$action->convertState?></td>
+							<td style="background:<?=$action->bgState?>">
+								<? if ($action->state > OrderActionState::PLANED): ?>
+									<a href="/order_action/state?id_action=<?=$action->id?>&type=unplan"><?=$action->convertState?></a>
+								<? else: ?>
+									<?=$action->convertState?>
+								<? endif; ?>
+							</td>
 						</tr>
 					<? endforeach; ?>
 			</table>

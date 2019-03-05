@@ -11,7 +11,7 @@ class ParamOrderAction {
 		$params['type_order'] = $order->type;
 		$params['id_prod'] = $product->id;
 		$params['id_action'] = $action->id_action;//id form table actions
-		$params['state'] = Order::STATE_WORK_PLANED;
+		$params['state'] = OrderActionState::PLANED;
 		$params['qty'] = $product->orderQtyAll;
 		$params['time_manufac'] = OrderAction::setTimeManufacturing($action, $product);
 		return $params;
@@ -31,7 +31,7 @@ class ParamOrderAction {
 		if (empty($params['start_period'])) $params['start_period'] = mktime(0,0,0);
 		if (empty($params['end_period'])) $params['end_period'] = $params['start_period'] + Date::DAY_SECOND;
 		$params['id_worker'] = $id_worker ? $id_worker : $params['id_worker'];
-		$params['state'] = Order::STATE_WORK_END;
+		$params['state'] = OrderActionState::ENDED;
 		$params['status'] = Order::STATUS_ACTIVE;
 		return $params;
 	}
@@ -40,18 +40,18 @@ class ParamOrderAction {
 	{
 		$params['id_order'] = Param::get('id_order');
 		$params['status'] = OrderAction::STATUS_ACTIVE;
-		$params['state'] = OrderAction::STATE_WORK_END;
+		$params['state'] = OrderActionState::ENDED;
 		return $params;
 	}
 	
 	public static function convertStateWork($state)
 	{
 		switch ($state) {
-			case OrderAction::STATE_WORK_WAITING : return "Ожидает окончания другой операции";
-			case OrderAction::STATE_WORK_PLANED : return "Запланирована";
-			case OrderAction::STATE_WORK_PROGRESS : return "В работе";
-			case OrderAction::STATE_WORK_STOPPED : return "Остановлена";
-			case OrderAction::STATE_WORK_END : return "Выполнена";
+			case OrderActionState::WAITING : return "Ожидает окончания другой операции";
+			case OrderActionState::PLANED : return "Запланирована";
+			case OrderActionState::PROGRESS : return "В работе";
+			case OrderActionState::STOPPED : return "Остановлена";
+			case OrderActionState::ENDED : return "Выполнена";
 			default: return "Не известное состояние";
 		}
 	}
@@ -59,13 +59,21 @@ class ParamOrderAction {
 	public static function getBgStateWork($state)
 	{
 		switch ($state) {
-			case OrderAction::STATE_WORK_WAITING : return "orange";
-			case OrderAction::STATE_WORK_PLANED : return "#fff";
-			case OrderAction::STATE_WORK_PROGRESS : return "yellow";
-			case OrderAction::STATE_WORK_STOPPED : return "red";
-			case OrderAction::STATE_WORK_END : return "green";
-			default: return "#fff";
+			case OrderActionState::WAITING : return "orange";
+			case OrderActionState::PLANED : return "#fff";
+			case OrderActionState::PROGRESS : return "yellow";
+			case OrderActionState::STOPPED : return "red";
+			case OrderActionState::ENDED : return "green";
+			default: return "#000";
 		}
+	}
+	
+	public static function state()
+	{
+		$keys = ['id_action', 'type'];
+		$params = Param::getAll($keys);
+		$params['status'] = Model::STATUS_ACTIVE;
+		return $params;
 	}
 	
 }

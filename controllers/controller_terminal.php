@@ -26,8 +26,9 @@ class Controller_Terminal extends Controller_Base
     {
         $worker = $this->getWorker();
 		$params = ParamTerminal::getActions($worker);
-		if ($params['id_action'] == 'unplan') $order_actions = OrderActionUnplan::getActions();
+		if ($params['action'] == 'unplan') $order_actions = OrderActionUnplan::getActions();
         else $order_actions = OrderAction::getForTerminal($params);
+		
 		$actions = Action::getAll('actions');
         $this->render('actions/main', compact('order_actions', 'worker', 'actions', 'params'));
     }
@@ -35,35 +36,34 @@ class Controller_Terminal extends Controller_Base
     public function action_start_work()
     {
         $params = ParamTerminal::startWork();
-        if ($params['type_action'] == 'plan') {
-			OrderAction::startWork($params); $id_action = $params['id_action'];
+        if ($params['action'] == 'unplan') {
+			$action = new OrderActionUnplan($params['id']); $action->startWork($params);
 		} else {
-			OrderActionUnplan::startWork($params); $id_action = 'unplan';
+			 $action = new OrderAction($params['id']); $action->startWork($params); $id_action = $action->id_action;
 		}
-        $this->redirect('terminal/actions?id_action='.$id_action);
+        $this->redirect('terminal/actions?action='.$params['action']);
     }
 
     public function action_end_work()
     {
         $params = ParamTerminal::endWork();
-		if ($params['type_action'] == 'plan') OrderAction::endWork($params);
-		else { 
-			OrderActionUnplan::endWork($params);
-			$params['id_action'] = 'unplan';
+		if ($params['action'] == 'unplan') {
+			$action = new OrderActionUnplan($params['id']); $action->endWork($params);
+		} else {
+			$action = new OrderAction($params['id']); $action->endWork($params);
 		}
 		Order::checkReady();
-        $this->redirect('terminal/actions?id_action='.$params['id_action']);
+        $this->redirect('terminal/actions?action='.$params['action']);
     }
 
     public function action_stop_work()
     {
         $params = ParamTerminal::stopWork();
-	if ($params['type_action'] == 'plan') {
-			OrderAction::stopWork($params); 
-			$id_action = Param::get('actions') ? 'all' : $params['id_action'];//for return on page all actions;
+		if ($params['action'] == 'unplan') {
+			$action = new OrderActionUnplan($params['id']); $action->stopWork($params);	
 		} else {
-			OrderActionUnplan::stopWork($params); $id_action = 'unplan';
+			$action = new OrderAction($params['id']); $action->stopWork($params);
 		}
-        $this->redirect('terminal/actions?id_action=' . $id_action);
+        $this->redirect('terminal/actions?action=' . $params['action']);
     }
 }
