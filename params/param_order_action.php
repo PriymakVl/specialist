@@ -17,13 +17,6 @@ class ParamOrderAction {
 		return $params;
 	}
 	
-	public static function edit()
-	{
-		$keys = ['id_action', 'state', 'save'];
-		$params = Param::getAll($keys);
-		return $params;
-	}
-	
 	public static function madeWorker($id_worker = null)
 	{
 		$keys = ['start_period', 'end_period', 'id_worker'];
@@ -68,7 +61,16 @@ class ParamOrderAction {
 		}
 	}
 	
-	public static function state()
+	public static function editState()
+	{
+		$keys = ['id', 'save', 'state'];
+		$params = Param::getAll($keys);
+		$params['id_worker'] = Session::get('id_user');
+		$params['time'] = time();
+		return $params;
+	}
+	
+	public static function stateList()
 	{
 		$keys = ['id_action', 'type'];
 		$params = Param::getAll($keys);

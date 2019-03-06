@@ -2,6 +2,7 @@
     <input type="radio" name="tabs" id="tab-2" checked>
     <label for="tab-2">Содержание</label>
     <div class="tab-content">
+		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>
         <table width="940">
             <? if ($order->content): ?>
 				<tr>

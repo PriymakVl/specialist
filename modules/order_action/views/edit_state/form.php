@@ -1,12 +1,12 @@
 <?php
-	$planed = OrderAction::STATE_WORK_PLANED;
-	$progress = OrderAction::STATE_WORK_PROGRESS;
-	$stopped = OrderAction::STATE_WORK_STOPPED;
-	$end = OrderAction::STATE_WORK_END;
+	$planed = OrderActionState::PLANED;
+	$progress = OrderActionState::PROGRESS;
+	$stopped = OrderActionState::STOPPED;
+	$end = OrderActionState::ENDED;
 ?>
 <div id="form-add-action-wrp">
-    <h2>Форма редактирования операции</h2>
-    <form action="/order_action/edit?id_action=<?=$action->id?>&id_order=<?=$action->id_order?>" method="post">
+    <h2>Форма редактирования состояния операции</h2>
+    <form action="/order_action/edit_state?id=<?=$action->id?>" method="post">
 	
 			<div class="form-box">
 			

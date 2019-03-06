@@ -3,38 +3,50 @@ require_once('worker_static.php');
 
 class Worker extends WorkerStatic {
 
-	 public $productsCut;
-	 public $loadTimePlan;
-	 public $timeMade;
-	 public $loadPercent;
-	 public $loadFullFlage; //если указана трудоемкость для всех деталей
-	 public $defaultActions;
-	 public $costMade; //сколько заработал
+	 //public $productsCut;
+	 //public $loadTimePlan;
+	 //public $timeMade;
+	 //public $loadPercent;
+	 //public $loadFullFlage; //если указана трудоемкость для всех деталей
+	 //public $defaultActions;
+	 //public $costMade; //сколько заработал
+	 public $actions;
+	 public $actions_unplan;
 	 
  
-	public function getActionsPlan()
-	{
-		$params = ParamWorker::plan($this->login);
-		$items = OrderAction::planWorker($params);
-		return $this->getActionsWithProperties($items);
-	}
+	// public function getActionsPlan()
+	// {
+		// $params = ParamWorker::plan($this->login);
+		// $items = OrderAction::planWorker($params);
+		// return $this->getActionsWithProperties($items);
+	// }
 	
-	public function getActionsMade()
+	public function getActionsMade($params)
 	{
-		$params = ParamWorker::made($this->id);
 		$items = OrderAction::madeWorker($params);
-		return $this->getActionsWithProperties($items);
+		debug($items);
+		foreach ($items as $item) {
+			$action = new OrderAction($item->id);
+			$action->getProduct()->getAction()->getOrder();
+			$this->actions[] = $action;
+		}
+		return $this;
 	}
 	
-	private function getActionsWithProperties($items)
+	// private function getActionsWithProperties($items)
+	// {
+		// if (empty($items)) return false;
+		// foreach ($items as $item) {
+			// $order_action = new OrderAction($item->id);
+			// $order_action->getProduct()->getAction()->getOrder();
+			// $order_actions[] = $order_action;
+		// }
+		// return $order_actions;
+	// }
+	
+	public function getActionsUnplan($params)
 	{
-		if (empty($items)) return false;
-		foreach ($items as $item) {
-			$order_action = new OrderAction($item->id);
-			$order_action->getProduct()->getAction()->getOrder();
-			$order_actions[] = $order_action;
-		}
-		return $order_actions;
+		//$actions = OrderActions
 	}
 	
 	

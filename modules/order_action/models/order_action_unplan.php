@@ -10,6 +10,27 @@ class OrderActionUnplan extends OrderActionUnplanStatic {
         parent::__construct($id);
     }
 	
+	public function startWork($params)
+	{
+		OrderActionState::add($params);
+		self::setStateStartWork($params);
+		return $this;
+	}
+	
+	public function stopWork($params)
+	{
+		OrderActionState::add($params);
+		self::setStateStopWork($params);
+		return $this;
+	}
+	
+	public function endWork($params)
+	{
+		OrderActionState::add($params);
+		self::setStateEndWork($params);
+		return $this;
+	}
+	
 }
 
 

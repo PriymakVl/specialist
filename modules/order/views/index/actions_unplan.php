@@ -2,7 +2,7 @@
     <input type="radio" name="tabs" id="tab-4" checked>
     <label for="tab-4">Дополн. операции</label>
     <div class="tab-content">
-		
+		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>
 		<!-- unplan actions -->
 			<table width="940">
 					<tr>

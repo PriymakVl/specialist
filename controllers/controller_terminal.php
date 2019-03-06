@@ -26,11 +26,11 @@ class Controller_Terminal extends Controller_Base
     {
         $worker = $this->getWorker();
 		$params = ParamTerminal::getActions($worker);
-		if ($params['action'] == 'unplan') $order_actions = OrderActionUnplan::getActions();
-        else $order_actions = OrderAction::getForTerminal($params);
+		if ($params['action'] == 'unplan') $actions = OrderActionUnplan::getActions();
+        else $actions = OrderAction::getForTerminal($params);
 		
-		$actions = Action::getAll('actions');
-        $this->render('actions/main', compact('order_actions', 'worker', 'actions', 'params'));
+		$operations = Action::getAll('actions');
+        $this->render('actions/main', compact('actions', 'worker', 'operations', 'params'));
     }
 
     public function action_start_work()

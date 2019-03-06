@@ -8,6 +8,11 @@ class OrderActionBase extends Model {
 	public $convertState;
 	public $action;//объект операции обработки
 	public $bgState;
+	public $bgTerminalBox;
+	
+	const BG_TERMINAL_BOX_PLAN = 'yellow';
+	const BG_TERMINAL_BOX_PROGRESS = 'green';
+	const BG_TERMINAL_BOX_STOPPED = 'red';
 	
 	public function convertState()
 	{
@@ -21,26 +26,20 @@ class OrderActionBase extends Model {
 		return $this;
 	}
 	
-	public function startWork($params)
+	public function setBgTerminalBox()
 	{
-		OrderActionState::add($params);
-		self::setStateStartWork($params);
+		if ($this->state == OrderActionState::PROGRESS) $this->bgTerminalBox = self::BG_TERMINAL_BOX_PROGRESS;
+		else if ($this->state == OrderActionState::STOPPED) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_STOPPED;
+		else $this->bgTerminalBox = self::BG_TERMINAL_BOX_PLAN;
 		return $this;
 	}
 	
-	public function stopWork($params)
+	public function getOrder()
 	{
-		OrderActionState::add($params);
-		self::setStateStopWork($params);
+		$this->order = new Order($this->id_order);
 		return $this;
 	}
-	
-	public function endWork($params)
-	{
-		OrderActionState::add($params);
-		self::setStateEndWork($params);
-		return $this;
-	}
+
 	
 
 

@@ -16,14 +16,13 @@ class Controller_Statistics extends Controller_Base {
 		$this->render('workers/main', compact('workers'));
 	}
 	
-	public function action_worker()
+	public function action_worker_made()
 	{
-		$worker = new Worker(Param::get('id_worker'));
-		if (Param::get('state') == OrderAction::STATE_WORK_END) $actions = $worker->getActionsMade(ParamWorker::made($worker->id));
-		else $actions = $worker->getActionsPlan(ParamWorker::plan($worker->login));
-		
+		$params = ParamWorker::made();
+		$worker = new Worker($params['id_worker']);
+		$worker->getActionsMade($params);
 		$this->view->title = 'Статистика по рабочему';
-		$this->render('worker/main', compact('worker', 'params', 'actions'));
+		$this->render('worker/main', compact('worker', 'params'));
 	}
 	
 	public function action_order()

@@ -36,3 +36,9 @@
 	left: 375px;
 }
 
+.statistics-period-filter-wrp [name="period-start"],  .statistics-period-filter-wrp [name="period-end"] {
+	width: 70px;
+	height: 20px;
+	font-size: 16px;
+}
+

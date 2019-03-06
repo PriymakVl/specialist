@@ -7,31 +7,19 @@ class Controller_Order_Action extends Controller_Base {
     {
         parent::__construct();
 		$this->view->title = 'Заказ';
-        $this->view->pathFolder = './modules/order/views/';
+        $this->view->pathFolder = './modules/order_action/views/';
 		$this->message->section = 'order_action';
     }
 	
-	public function action_edit()
+	public function action_edit_state()
 	{
-		$params = ParamOrderAction::edit();
-		$action = new OrderAction($params['id_action']);
-		if (empty($params['save'])) return $this->render('action/edit/main', compact('action'));
-		OrderAction::edit($params);
-		$this->message->set('success', 'edit');
+		$params = ParamOrderAction::editState();
+		$action = new OrderAction($params['id']);
+		if (empty($params['save'])) return $this->render('edit_state/main', compact('action'));
+		$action->editState($params)->setMessage('success', 'edit_state');
 		Order::checkReady();
 		$this->redirect('order?id_order='.$action->id_order);
 	}
-	
-/* 	public function action_edit_unplan()
-	{
-		$params = ParamOrderActionUnplan::edit();
-		$action = new OrderActionUnplan($params['id_action_unplan']);
-		if (empty($params['save'])) return $this->render('action/edit_unplan/main', compact('action'));
-		OrderAction::edit($params);
-		$this->message->set('success', 'edit');
-		Order::checkReady();
-		$this->redirect('order?id_order='.$action->id_order);
-	} */
 	
 	public function action_delete()
 	{
@@ -46,24 +34,23 @@ class Controller_Order_Action extends Controller_Base {
 	public function action_add_unplan()
 	{
 		$params = ParamOrderActionUnplan::add();
-		$order = new Order($params['id_order']);
-		$order->getProducts();
+		$order = new Order($params['id_order']); /***/ $order->getProducts();
 		$actions = Action::getAll('actions');
-		if (empty($params['save'])) return $this->render('action/add_unplan/main', compact('order', 'actions'));
+		if (empty($params['save'])) return $this->render('add_unplan/main', compact('order', 'actions'));
 		OrderActionUnplan::add($params);
 		$this->message->set('success', 'add_unplan');
 		$this->redirect('order?id_order='.$order->id);
 	}
 	
-	public function action_state()
+	public function action_state_list()
 	{
-		$params = ParamOrderAction::state();
+		$params = ParamOrderAction::stateList();
 		if ($params['type'] == 'plan') {
-			$action = new OrderAction($params['id_action']); /**/ $action->getWorker()->getStates($params);
-			return $this->render('action/state/plan/main', $action);
+			$action = new OrderAction($params['id_action']); /***/ $action->getAllStates($params)->getAction()->getProduct();
+			return $this->render('states_plan/main', compact('action'));
 		} else {
-			$action = new OrderActionUnplan($params['id_action']); /**/ $action->getWorker()->getStates($params);
-			return $this->render('action/state/unplan/main', $action);
+			$action = new OrderActionUnplan($params['id']); /***/ $action->getWorker()->getStates($params);
+			return $this->render('states_unplan/main', compact('action'));
 		}
 	}
 

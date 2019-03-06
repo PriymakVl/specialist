@@ -2,8 +2,8 @@
 	$number = 1;
 ?>
 <div id="terminal-actions-wrp">
-    <? if ($order_actions): ?>
-        <? foreach ($order_actions as $action): ?>
+    <? if ($actions): ?>
+        <? foreach ($actions as $action): ?>
             <div class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>" onclick="to_work(this);"
                  prod_name="<?=$action->product->name?>"
                  id_worker="<?=$worker->id?>"

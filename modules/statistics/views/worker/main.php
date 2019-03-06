@@ -9,8 +9,8 @@
     <!-- info box -->
     <? include_once('filters.php'); ?>
 
-    <!-- action list -->
-    <? include_once('action_list.php'); ?>
+    <!-- actions made -->
+    <? include_once('actions_made.php'); ?>
 
     <!-- worker list menu -->
     <? //include_once('menu.php'); ?>
@@ -20,4 +20,5 @@
 
 <!-- js files -->
 <script src="/modules/statistics/js/filters_worker.js"></script>
+<script src="/web/js/datepicker.js"></script>
 

@@ -88,6 +88,13 @@ class OrderActionStatic extends OrderActionBase {
 		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id` = :id';
 		return self::perform($sql, $params);
 	}
+	//когда изменяется не из терминала
+	public static function updateState($params)
+	{
+		unset($params['save'], $params['id_worker'], $params['time']);
+		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id` = :id';
+		return self::perform($sql, $params);
+	}
 	
 	public static function getNotReadyActionOrder($params)
 	{
@@ -105,7 +112,7 @@ class OrderActionStatic extends OrderActionBase {
 	public static function madeWorker($params)
 	{
 		$slq = 'SELECT * FROM `order_actions` 
-		WHERE `id_worker` = :id_worker AND `state` = :state AND `time_end` BETWEEN :start_period AND :end_period AND `status` = :status';
+		WHERE `id_worker` = :id_worker AND `state` = :state AND `time_end` BETWEEN :period_start AND :period_end AND `status` = :status';
 		return self::perform($slq, $params)->fetchAll();
 	}
 	
@@ -116,12 +123,6 @@ class OrderActionStatic extends OrderActionBase {
 		return self::perform($slq, $params)->fetchAll();
 	}
 	
-	public static function edit($params)
-	{
-		unset($params['save']);
-		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id` = :id_action';
-		return self::perform($sql, $params);
-	}
 	
 	public static function setStateEndedForAllActionsOrder($id_order)
 	{

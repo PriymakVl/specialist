@@ -7,11 +7,12 @@ class Model extends ModelStatic {
 	protected $stmt;
 	public $data;
 	protected $tableName;
+	public $message;
 	
 	public function __construct($id = null)
 	{
 		if ($id) $this->getData($id);
-		//$this->messages = parse_ini_file('/messages.ini', true);
+		$this->message = new Message();
 	}
 
 	public function __set($name, $value) 
@@ -56,5 +57,11 @@ class Model extends ModelStatic {
         self::perform('UPDATE `'.$this->tableName.'` SET `type` = ? WHERE id = ?', [$type, $this->id]);
         return $this;
     }
+	
+	public function setMessage($type, $key)
+	{
+		if (!$this->message->section) exit('В классе не указан раздел сообщений');
+		$this->message->set($type, $key);
+	}
 	
 }

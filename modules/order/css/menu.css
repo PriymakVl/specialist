@@ -8,10 +8,21 @@
 
 #menu-order-wrp ul li{
     margin-top: 3px;
+	cursor: pointer;
+	color: #000;
+	text-decoration: underline;
+}
+
+#menu-order-wrp ul li:hover {
+	text-decoration: none;
 }
 
 #menu-order-wrp ul li a{
     color: #000;
+}
+
+#menu-order-wrp ul li a:hover {
+	text-decoration: none;
 }
 
 #change-note-letter, .note-letter {

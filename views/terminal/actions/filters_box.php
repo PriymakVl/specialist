@@ -2,7 +2,7 @@
 	<form action="/terminal/action">
 		<select id="actions">
 			<option value="all">Все операции без дополн.</option>
-			<? foreach ($actions as $item): ?>
+			<? foreach ($operations as $item): ?>
 				<option <? if ($item->id == $params['action']) echo 'selected'; ?> value="<?=$item->id?>"><?=$item->name?></option>
 			<? endforeach; ?>
 			<option value="unplan" <? if ($params['action'] == 'unplan') echo 'selected';?>>Дополнительные операц.</option>
