@@ -1,18 +1,16 @@
-	
-	var state, id_item, action, id_worker, prod_name, text_stop_box;
+ 	var state, id_item, action, prod_name, text_stop_box;
 	const STATE_ACTION_PREPARATION = 1;
 	const STATE_ACTION_STOPED = 3;
-	
-	
+
 	//деталь взята в работу
 	function to_work(elem) {
 		state = $(elem).attr('state');
-		id_worker = $(elem).attr('id_worker');
 		id_item = $(elem).attr('id_item');
-		action = $(elem).attr('id_action');
+		action = $(elem).attr('order_action');
+		console.log(elem.attributes); return;
 		
 		if (state == STATE_ACTION_PREPARATION) {
-			location.href = '/terminal/start_work?id_worker=' + id_worker + '&id=' + id_item + '&action=' + action ;
+			location.href = '/terminal/start_work?id=' + id_item + '&action=' + action ;
 		}
 		else {
 			if (action == 'unplan') $('#terminal-actions-unplan-wrp, #filter-actions-wrp').hide();
@@ -48,7 +46,7 @@
 			return;
 		}
 		var params = getObjectGetParams();
-		var request = '/terminal/end_work?id=' + id_item + '&id_worker=' + id_worker;
+		var request = '/terminal/end_work?id=' + id_item;
 		action = params.action ? params.action : action; //если загружен 1 раз берет значение не с get запроса а с атрибута
 		request = request + '&action=' + action; 
 		location.href = request;
@@ -58,7 +56,7 @@
 	 //stop work
 	function action_state_stop() {
 		var params = getObjectGetParams();
-		var request = '/terminal/stop_work?id=' + id_item + '&state=' + state + '&id_worker=' + id_worker;
+		var request = '/terminal/stop_work?id=' + id_item + '&state=' + state;
 		action = params.action ? params.action : action; //если загружен 1 раз берет значение не с get запроса а с атрибута
 		request = request + '&action=' + action; 
 		location.href = request;

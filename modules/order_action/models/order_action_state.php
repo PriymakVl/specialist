@@ -26,7 +26,6 @@ class OrderActionState extends OrderActionBase {
 		$params['id_action'] = $params['id'];
 		$params['type_action'] = ($params['action'] == 'unplan') ? 'unplan' : 'plan';
 		unset($params['id'], $params['action'], $params['save']);
-		
 		$sql = "INSERT INTO `order_action_states` (id_action, time, state, id_worker, type_action) 
 		VALUES (:id_action, :time, :state, :id_worker, :type_action)";
         return self::perform($sql, $params);

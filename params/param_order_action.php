@@ -10,7 +10,7 @@ class ParamOrderAction {
 		$params['id_order'] = $order->id;
 		$params['type_order'] = $order->type;
 		$params['id_prod'] = $product->id;
-		$params['id_action'] = $action->id_action;//id form table actions
+		$params['id_operation'] = $action->id_operation;//id form table actions
 		$params['state'] = OrderActionState::PLANED;
 		$params['qty'] = $product->orderQtyAll;
 		$params['time_manufac'] = OrderAction::setTimeManufacturing($action, $product);

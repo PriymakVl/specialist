@@ -28,18 +28,18 @@ class Controller_Terminal extends Controller_Base
 		$params = ParamTerminal::getActions($worker);
 		if ($params['action'] == 'unplan') $actions = OrderActionUnplan::getActions();
         else $actions = OrderAction::getForTerminal($params);
-		
-		$operations = Action::getAll('actions');
+		$operations = Operation::getAll('operations');
         $this->render('actions/main', compact('actions', 'worker', 'operations', 'params'));
     }
 
     public function action_start_work()
     {
         $params = ParamTerminal::startWork();
+        debug($params);
         if ($params['action'] == 'unplan') {
-			$action = new OrderActionUnplan($params['id']); $action->startWork($params);
+			$action = new OrderActionUnplan($params['id']); /***/ $action->startWork($params);
 		} else {
-			 $action = new OrderAction($params['id']); $action->startWork($params); $id_action = $action->id_action;
+			 $action = new OrderAction($params['id']); /***/ $action->startWork($params);
 		}
         $this->redirect('terminal/actions?action='.$params['action']);
     }

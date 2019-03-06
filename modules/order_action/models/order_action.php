@@ -18,9 +18,9 @@ class OrderAction extends OrderActionStatic {
 		return $this;
 	}
 	
-	public function getAction()
+	public function getOperation()
 	{
-		$this->action = new Action($this->id_action);
+		$this->operation = new Operation($this->id_operation);
 		return $this;
 	}
 	

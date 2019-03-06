@@ -27,8 +27,8 @@ class OrderActionStatic extends OrderActionBase {
 	
 	private static function addOne($params)
 	{
-        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, id_action, state, type_order, time_manufac) 
-		VALUES (:id_order, :id_prod, :qty, :id_action, :state, :type_order, :time_manufac)";
+        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, id_operation, state, type_order, time_manufac) 
+		VALUES (:id_order, :id_prod, :qty, :id_operation, :state, :type_order, :time_manufac)";
         return self::perform($sql, $params);
 	}
 	
@@ -48,7 +48,7 @@ class OrderActionStatic extends OrderActionBase {
 	
 	public static function getByIdOrderAndIdProductAndIdAction($params)
 	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_action` = :id_action AND `id_order` = :id_order AND `id_prod` = :id_prod';
+		$sql = 'SELECT * FROM `order_actions` WHERE `id_operation` = :id_operation AND `id_order` = :id_order AND `id_prod` = :id_prod';
 		return self::perform($sql, $params)->fetch();
 	}
 	
@@ -63,7 +63,7 @@ class OrderActionStatic extends OrderActionBase {
 	{
 		 $actions = Helper::createArrayOfObject($ids, 'OrderAction');
 		 foreach ($actions as $action) {
-			$action->getProduct()->getOrder()->getAction()->setBgTerminalBox()->convertState();
+			$action->getProduct()->getOrder()->getOperation()->setBgTerminalBox()->convertState();
 		 }
 		 return $actions;
 	}

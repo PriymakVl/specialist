@@ -20,7 +20,7 @@
 		<!-- <div id="clock">10:49</div> -->
 		
 		<!-- actions box -->
-		<? if ($params['id_action'] == 'unplan'): ?>
+		<? if ($params['action'] == 'unplan'): ?>
 			<? include_once('actions_box_unplan.php'); ?>
 		<? else: ?>
 			<? include_once('actions_box.php'); ?>

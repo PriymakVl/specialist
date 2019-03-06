@@ -6,10 +6,9 @@
         <? foreach ($actions as $action): ?>
             <div class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>" onclick="to_work(this);"
                  prod_name="<?=$action->product->name?>"
-                 id_worker="<?=$worker->id?>"
                  state="<?=$action->state?>"
 				 id_item="<?=$action->id?>"
-				 id_action="<?=$action->id_action?>"
+				 action="<?=$action->id_action?>"
 			>
 				 
 

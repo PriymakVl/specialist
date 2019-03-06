@@ -36,7 +36,6 @@ class OrderActionUnplanStatic extends OrderActionBase {
 	
 	public static function createArrayActionsUnplan($actions_arr)
 	{
-		
 		$actions = Helper::createArrayOfObject($actions_arr, 'OrderActionUnplan');
 		foreach ($actions as $action) {
 			$action->getOrder()->setBgTerminalBox();

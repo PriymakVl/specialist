@@ -6,9 +6,10 @@ class ParamTerminal extends Param {
 	
 	public static function startWork()
 	{
-		$keys = ['id_worker', 'id', 'action'];
+		$keys = ['id', 'action'];
 		$params = self::getAll($keys);
 		$params['state'] = OrderActionState::PROGRESS;
+		$params['id_worker'] = Session::get('id_user');
 		$params['time'] = time();
 		return $params;
 	}
