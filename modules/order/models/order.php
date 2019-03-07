@@ -76,7 +76,7 @@ class Order extends OrderStatic {
 		$items = OrderAction::getIdActionsByIdOrder($this->id);
 		foreach ($items as $item) {
 			$action = new OrderAction($item->id);
-			$action->getProduct()->getAction()->convertState()->setBgState();
+			$action->getProduct()->convertState()->setBgState()->isStates();
 			$this->actions[] = $action;
 		}
 		return $this;

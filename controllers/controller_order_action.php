@@ -46,7 +46,7 @@ class Controller_Order_Action extends Controller_Base {
 	{
 		$params = ParamOrderAction::stateList();
 		if ($params['type'] == 'plan') {
-			$action = new OrderAction($params['id_action']); /***/ $action->getAllStates($params)->getAction()->getProduct();
+			$action = new OrderAction($params['id_action']); /***/ $action->getAllStates($params)->getProduct();
 			return $this->render('states_plan/main', compact('action'));
 		} else {
 			$action = new OrderActionUnplan($params['id']); /***/ $action->getWorker()->getStates($params);

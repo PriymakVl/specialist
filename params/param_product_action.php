@@ -6,7 +6,7 @@ class ParamProductAction extends Param {
     
 	public static function add($symbol_prod)
 	{
-        $keys = ['number', 'id_action', 'time_prod', 'time_prepar'];
+        $keys = ['save', 'number', 'id_data', 'time_prod', 'time_prepar', 'id_prod'];
 		$params = self::getAll($keys);
 		$params['symbol'] = $symbol_prod;
 		return $params;
@@ -14,7 +14,7 @@ class ParamProductAction extends Param {
 	
 	public static function edit()
 	{
-        $keys = ['number', 'time_prod', 'time_prepar', 'id_prod_action'];
+        $keys = ['number', 'time_prod', 'time_prepar', 'id', 'save', 'id_data', 'id_prod'];
 		$params = self::getAll($keys);
 		return $params;
 	}

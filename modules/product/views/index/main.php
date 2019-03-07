@@ -39,6 +39,6 @@ require_once ('./modules/product/models/product.php');
 </div><!-- id content -->
 
 <!-- js files -->
-<script src="/modules/product/js/specif_activate.js"></script>
 <script src="/modules/product/js/add_to_order.js"></script>
+<script src="/modules/product/js/delete_action.js"></script>
 

@@ -7,9 +7,8 @@
 	<div id="state-order-action-wrp">
 		<label>Состояние: </label>
 		<select id="state-order-action">
-			<option value="<?=OrderActionState::PLANED?>" <? if ($state == OrderActionState::PLANED) echo 'selected'; ?> >Запланированы</option>
 			<option value="<?=OrderActionState::ENDED?>" <? if ($state == OrderActionState::ENDED) echo 'selected'; ?>>Выполнены</option>
-			<option value="all">Все</option>
+			<option value="<?=OrderActionState::PLANED?>" <? if ($state == OrderActionState::PLANED) echo 'selected'; ?> >Запланированы</option>
 		</select>
 	</div>
 	<!-- period -->
@@ -19,4 +18,5 @@
 		<label>До: </label>
 		<input type="text" name="period-end" class="datepicker" value="<?=date('d.m.y');?>">
 	</div>
+	<input type="submit" value="Показать" id="show-statistics-worker">
 </div>

@@ -29,22 +29,22 @@ class ProductStatic extends ProductBase {
         return self::insert($sql, $params); 
 	}
 	
-	public static function edit($params, $product)
+	public static function editOne($params) 
 	{
-		if (empty($params['edit_all'])) {
-			$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent, 
-				`quantity` = :quantity WHERE `id` = :id_prod';
-			$params['id_prod'] = $product->id;
-		}
-		else {
-			$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note WHERE `symbol` = :symbol_old';
-			unset($params['edit_all'], $params['quantity'], $params['id_parent']);
-			$params['symbol_old'] = $product->symbol;
-		}
+		unset($params['save'], $params['symbol_old']);
+		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent, 
+				`quantity` = :quantity WHERE `id` = :id';
 		return self::update($sql, $params);
 	}
 	
-		public static function getAllBySymbol($symbol)
+	public static function editAll($params)
+	{
+		unset($params['edit_all'], $params['quantity'], $params['id_parent'], $params['save'], $params['id']);
+		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note WHERE `symbol` = :symbol_old';
+		return self::update($sql, $params);
+	}
+	
+	public static function getAllBySymbol($symbol)
 	{
 		$sql = 'SELECT * FROM `products` WHERE `symbol` = :symbol AND `status` = :status';
         $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];

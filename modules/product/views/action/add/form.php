@@ -1,14 +1,14 @@
 <div id="form-add-action-wrp">
     <h2>Форма добавления операции</h2>
-    <form action="/prodaction/add?id_prod=<?=$product->id?>" method="post">
+    <form action="/product_action/add?id_prod=<?=$product->id?>" method="post">
 	
 			<div class="form-box product-action-wrp">
 			
 				<label>Наименование:</label>
-				<select name="id_action">
+				<select name="id_data">
 					<option>Не выбрана</option>
-					<? foreach ($actions as $action): ?>
-						<option  value="<?=$action->id?>"><?=$action->name?></option>
+					<? foreach ($data_actions as $item): ?>
+						<option  value="<?=$item->id?>"><?=$item->name?></option>
 					<? endforeach; ?>
 				</select>
 				<label>Номер:</label>

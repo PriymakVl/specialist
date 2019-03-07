@@ -22,10 +22,11 @@ class ParamOrder extends Param {
 
     public static function edit()
     {
-		$keys = ['symbol', 'position', 'type', 'note', 'date_exec', 'id_order', 'save'];
+		$keys = ['symbol', 'position', 'type', 'note', 'date_exec', 'id_order', 'save', 'edit_all'];
         $params = self::getAll($keys);
 		if (empty($params['date_exec'])) $params['date_exec'] = '';
         $params['date_exec'] = Date::convertStringToTime($params['date_exec']);
+		$params['symbol_old'] = $product->symbol;
         return $params;
     }
 	

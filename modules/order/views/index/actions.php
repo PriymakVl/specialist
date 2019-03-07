@@ -19,9 +19,9 @@
 							<td><?=$action->product->symbol?></td>
 							<td><?=$action->product->name?></td>
 							<td><?=$action->qty?></td>
-							<td><?=$action->action->name?></td>
+							<td><?=$action->name?></td>
 							<td style="background:<?=$action->bgState?>">
-							<? if ($action->state == OrderActionSTATE::PLANED): ?>
+							<? if (!$action->states): ?>
 								<?=$action->convertState?>
 							<? else: ?>
 								<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->convertState?></a>

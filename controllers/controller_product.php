@@ -30,10 +30,11 @@ class Controller_Product extends Controller_Base {
 	
 	public function action_edit()
     {
-        $params = ParamProduct::edit();
-		$product = new Product(Param::get('id_prod'));
-		if (empty($params['name'])) return $this->render('edit/main', compact('product'));
-		Product::edit($params, $product);
+		$product = new Product(Param::get('id'));
+		$params = ParamProduct::edit($product);
+		if (empty($params['save'])) return $this->render('edit/main', compact('product'));
+		if (empty($params['edit_all'])) Product::editOne($params);
+		else Product::editAll($params);
 		$this->redirect('product?id_prod='.$product->id);
     }
 	
@@ -54,8 +55,7 @@ class Controller_Product extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$id_prod = Param::get('id_prod');
-		$product = new Product($id_prod);
+		$product = new Product(Param::get('id'));
 		$product->delete();
 		$this->redirect('product?id_prod='.$product->id_parent);
 	}

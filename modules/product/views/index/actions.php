@@ -12,28 +12,28 @@
 				<th>Примечание</th>
 				<th width="100">Управление</th>
 			</tr>
-			<? foreach($product->actions as $prod_action): ?>
+			<? foreach($product->actions as $action): ?>
 				<tr>
-					<td><?=$prod_action->number?></td>
-					<td><?=$prod_action->name?></td>
+					<td><?=$action->number?></td>
+					<td><?=$action->name?></td>
 					<td>
-						<? if ($prod_action->time_prepar): ?>
-							<?=$prod_action->time_prepar?> мин.
+						<? if ($action->time_prepar): ?>
+							<?=$action->time_prepar?> мин.
 						<? else: ?>
 							<span class="red">Нет</span>
 						<? endif; ?>
 					</td>
 					<td>
-						<? if ($prod_action->time_prod): ?>
-							<?=$prod_action->time_prod?> мин.
+						<? if ($action->time_prod): ?>
+							<?=$action->time_prod?> мин.
 						<? else: ?>
 							<span class="red">Нет</span>
 						<? endif; ?>
 					</td>
-					<td></td>
+					<td><?=$action->note?></td>
 					<td class="action-control-box">
-						<a href="/prodaction/edit?id_prod_action=<?=$prod_action->id?>&id_prod=<?=$product->id?>">Редактировать</a><br>
-						<a href="/prodaction/delete?id_prod_action=<?=$prod_action->id?>">Удалить</a>
+						<a href="/product_action/edit?id=<?=$action->id?>&id_prod=<?=$product->id?>">Редактировать</a><br>
+						<a href="#" class="product-action-delete" id_action="<?=$action->id?>">Удалить</a>
 					</td>
 				</tr>
 				<? $number++; ?>

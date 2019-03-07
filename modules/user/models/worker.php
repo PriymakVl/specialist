@@ -24,10 +24,9 @@ class Worker extends WorkerStatic {
 	public function getActionsMade($params)
 	{
 		$items = OrderAction::madeWorker($params);
-		debug($items);
 		foreach ($items as $item) {
 			$action = new OrderAction($item->id);
-			$action->getProduct()->getAction()->getOrder();
+			$action->getProduct()->getOrder()->countFactTimeManufact();
 			$this->actions[] = $action;
 		}
 		return $this;

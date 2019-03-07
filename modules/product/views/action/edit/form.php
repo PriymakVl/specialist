@@ -1,16 +1,22 @@
 <div id="form-add-action-wrp">
     <h2>Форма редактирования операции</h2>
-    <form action="/prodaction/edit?id_prod_action=<?=$prod_action->id?>&id_prod=<?=$id_prod?>" method="post">
+    <form action="/product_action/edit?id=<?=$action->id?>&id_prod=<?=$params['id_prod']?>" method="post">
 	
 			<div class="form-box product-action-wrp">
-			
-				Наименование: <span class="green"><?=$prod_action->name?></span>
+				<label>Наименование:</label>
+				<select name="id_data">
+					<option>Не выбрана</option>
+					<? foreach ($data_actions as $item): ?>
+						<option  value="<?=$item->id?>" <? if ($item->id == $action->id_data) echo "selected";?>><?=$item->name?></option>
+					<? endforeach; ?>
+				</select>
+				
 				<label>Номер:</label>
-				<input type="number" name="number" value="<?=$prod_action->number?>">
+				<input type="number" name="number" value="<?=$action->number?>">
 				<label>Подгот-ное время:</label>
-				<input type="text" name="time_prepar" value="<?=$prod_action->time_prepar?>">
+				<input type="text" name="time_prepar" value="<?=$action->time_prepar?>">
 				<label>Штучное время:</label>
-				<input type="text" name="time_prod" required value="<?=$prod_action->time_prod?>">
+				<input type="text" name="time_prod" required value="<?=$action->time_prod?>">
 				
 			</div>
 

@@ -3,22 +3,17 @@ require_once('user.php');
 
 class WorkerStatic extends User {
  
- const ACTION_CHPU = 2; //побработка на чпу
- const ACTION_UNIVER = 3; //обработка на универ
- const ACTION_FREZ = 4; //фрезерование
- const ACTION_ASSEMB = 6; // сборка 
- const ACTION_CUT = 1; //орезка заготовки
  
  const COST_WORK_MINUTE = '0.85';
  
 	public static function getAllWithStatistics()
 	{
 		$workers = self::getWorkers();
-		foreach ($workers as $worker) {
-			$worker = self::setPlanStatistics($worker);
-			self::setMadeStatistics($worker);
-			$worker->costMade = self::countCostMade($worker->timeMade);
-		}
+		// foreach ($workers as $worker) {
+			// $worker = self::setPlanStatistics($worker);
+			// self::setMadeStatistics($worker);
+			// $worker->costMade = self::countCostMade($worker->timeMade);
+		// }
 		return $workers;
 	}
 	

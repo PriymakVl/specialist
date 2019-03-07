@@ -9,19 +9,19 @@
                 <th>Значение</th>
             </tr>
             <tr>
-                <td>1</th>
-                <td>Обозначение</th>
-                <td class="left"><?=$product->symbol?></th>
+                <td>1</td>
+                <td>Обозначение</td>
+                <td class="left"><?=$product->symbol?></td>
             </tr>
             <tr>
-                <td>2</th>
-                <td>Наименование</th>
-                <td class="left"><?=$product->name?></th>
+                <td>2</td>
+                <td>Наименование</td>
+                <td class="left"><?=$product->name?></td>
             </tr>
 			<tr>
-                <td>3</th>
-                <td>Количество</th>
-                <td class="left"><? if ($product->quantity) echo $product->quantity.' шт.'?></th>
+                <td>3</td>
+                <td>Количество</td>
+                <td class="left"><? if ($product->quantity) echo $product->quantity.' шт.'?></td>
             </tr>
 			
 			<!-- time manufacturing -->

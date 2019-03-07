@@ -31,8 +31,9 @@
 	width: 80px;
 }
 
-#form-product-name-wrp input {
-	width: 800px;
+#form-product-name-wrp input[type='text'] {
+	width: 580px;
+	margin-right: 50px;
 }
 
 #form-product-note-wrp textarea {

@@ -8,7 +8,7 @@
                  prod_name="<?=$action->product->name?>"
                  state="<?=$action->state?>"
 				 id_item="<?=$action->id?>"
-				 action="<?=$action->id_action?>"
+				 action="<?=$action->id_data?>"
 			>
 				 
 
@@ -16,7 +16,7 @@
                 <span class="info-product"><?=$action->product->symbol?><br>
                     <?=$action->product->name?> (<?=$action->qty?>шт.)
                 </span>
-                <span class="info-state"><?=$action->action->name?></span>
+                <span class="info-state"><?=$action->name?></span>
             </div>
             <? $number++; ?>
         <? endforeach; ?>

@@ -4,10 +4,10 @@
             <a href="/product/add?id_parent=<?=$product->id?>">Добавить</a>
         </li>
         <li>
-            <a href="/product/edit?id_prod=<?=$product->id?>">Редактировать</a>
+            <a href="/product/edit?id=<?=$product->id?>">Редактировать</a>
         </li>
         <li>
-            <a href="/product/delete?id_prod=<?=$product->id?>">Удалить</a>
+            <a href="/product/delete?id=<?=$product->id?>">Удалить</a>
         </li>
 		<? if ($product->type != Product::TYPE_DETAIL): ?>
 			<li>
@@ -23,7 +23,7 @@
 		<!-- form add product actions -->
 		<? if ($product->type == Product::TYPE_DETAIL || $product->type == Product::TYPE_UNIT || $product->type == Product::TYPE_PRODUCT): ?>
 			<li>
-				<a href="/prodaction/add?id_prod=<?=$product->id?>">Добавить операцию</a>
+				<a href="/product_action/add?id_prod=<?=$product->id?>">Добавить операцию</a>
 			</li>
 		<? endif; ?>
     </ul>

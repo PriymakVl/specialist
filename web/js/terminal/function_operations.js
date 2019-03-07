@@ -6,8 +6,7 @@
 	function to_work(elem) {
 		state = $(elem).attr('state');
 		id_item = $(elem).attr('id_item');
-		action = $(elem).attr('order_action');
-		console.log(elem.attributes); return;
+		action = $(elem).attr('action');
 		
 		if (state == STATE_ACTION_PREPARATION) {
 			location.href = '/terminal/start_work?id=' + id_item + '&action=' + action ;

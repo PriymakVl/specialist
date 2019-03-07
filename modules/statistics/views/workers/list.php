@@ -16,7 +16,7 @@
                     <input type="checkbox" name="worker" id_worker="<?=$worker->id?>">
                 </td>
                 <td>
-                    <a href="/statistics/worker?id_worker=<?=$worker->id?>"><?=$worker->title?></a>
+                    <a href="/statistics/worker_made?id_worker=<?=$worker->id?>"><?=$worker->title?></a>
                 </td>
                 <td>
 					<? if ($worker->loadPercent): ?>

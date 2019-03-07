@@ -1,7 +1,7 @@
 <?php
 require_once('controller_base.php');
 //production time
-class Controller_Prodaction extends Controller_Base {
+class Controller_Product_Action extends Controller_Base {
 
     public function __construct()
     {
@@ -14,28 +14,27 @@ class Controller_Prodaction extends Controller_Base {
 	{
 		$product = new Product(Param::get('id_prod'));
 		$params = ParamProductAction::add($product->symbol);
-		$actions = Action::getAll('actions');
-		if (empty($params['id_action'])) return $this->render('action/add/main', compact('product', 'actions'));
+		$data_actions = DataAction::getAll('data_actions');
+		if (empty($params['save'])) return $this->render('action/add/main', compact('product', 'data_actions'));
 		ProductAction::add($params);
 		$this->redirect('product?id_prod='.$product->id);
 	}
 	
 	public function action_delete()
 	{
-		ProductAction::deleteOne(Param::get('id_prod_action'));
+		$action = new ProductAction(Param::get('id'));
+		$action->delete();
 		$this->redirectPrevious();
 	}
 	
 	public function action_edit()
 	{
-		$actions = Action::getAll('actions');
+		$data_actions = DataAction::getAll('data_actions');
 		$params = ParamProductAction::edit();
-		$prod_action = new ProductAction($params['id_prod_action']);
-		$prod_action->setName();
-		$id_prod = Param::get('id_prod');
-		if (!Param::get('save')) return $this->render('action/edit/main', compact('actions', 'prod_action', 'id_prod'));
+		$action = new ProductAction($params['id']);
+		if (!Param::get('save')) return $this->render('action/edit/main', compact('data_actions', 'action', 'params'));
 		ProductAction::edit($params);
-		$this->redirect('product?id_prod='.$id_prod);
+		$this->redirect('product?id_prod='.$params['id_prod']);
 	}
 	
 	

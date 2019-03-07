@@ -12,11 +12,12 @@ class ParamProduct extends Param {
 		return $params;
 	}
 	
-	public static function edit()
+	public static function edit($product)
 	{
-		$keys = ['symbol', 'name', 'quantity', 'id_parent', 'type', 'note', 'edit_all'];
+		$keys = ['symbol', 'name', 'quantity', 'id_parent', 'type', 'note', 'edit_all', 'save', 'id', 'edit_all'];
 		$params = self::getAll($keys);
 		if (empty($params['quantity'])) $params['quantity'] = 0;
+		$params['symbol_old'] = $product->symbol;
 		return $params;
 	}
 	

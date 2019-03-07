@@ -4,12 +4,16 @@ require_once('order_action_static.php');
 class OrderAction extends OrderActionStatic {
 	
 	public $states;
+	public $name;
+	public $price;
+	public $timeMade;
 	
 	public function __construct($id)
     {
         $this->tableName = 'order_actions';
         parent::__construct($id);
 		$this->message->section = 'order_action';
+		$this->getProperties();
     }
 	
 	public function getProduct()
@@ -18,10 +22,11 @@ class OrderAction extends OrderActionStatic {
 		return $this;
 	}
 	
-	public function getOperation()
+	public function getProperties()
 	{
-		$this->operation = new Operation($this->id_operation);
-		return $this;
+		$item = new DataAction($this->id_data);
+		$this->name = $item->name;
+		$this->price = $item->price;
 	}
 	
 	public function editState($params)
@@ -63,13 +68,33 @@ class OrderAction extends OrderActionStatic {
 		return $this;
 	}
 	
-	// public function isStates()
-	// {
-		// $params = ['id_action' => $this->id, 'type_action' => 'plan', 'status' => self::STATUS_ACTIVE];
-		// $items = OrderActionState::getAllByIdAction($params);
-		// if ($items) $this->states = true;
-		// return $this;
-	// }
+	public function isStates()
+	{
+		$params = ['id_action' => $this->id, 'type' => 'plan', 'status' => self::STATUS_ACTIVE];
+		$items = OrderActionState::getAllByIdAction($params);
+		if ($items) $this->states = true;
+		return $this;
+	}
+	
+	public function countFactTimeManufact()
+	{
+		$params = ['id_action' => $this->id, 'status' => self::STATUS_ACTIVE, 'type' => 'plan'];
+		$states = OrderActionState::getAllByIdAction($params);
+		if (count($states) > 1) $this->timeMade = $this->countTimeManufactByTimeStates($states);
+		else if ($this->time_end) {
+			$this->timeMade = Date::convertTimeToMinutes($this->time_end - $this->time_start);
+		}
+		return $this;
+	}
+	
+	private function countTimeManufactByTimeStates($states)
+	{
+		for ($i = 0; $i < count($states); $i++) {
+			if (empty($states[$i + 1])) break;
+			$time = $time + ($states[$i + 1]->time - $states[$i]->time);
+		}
+		return Date::convertTimeToMinutes($time);
+	}
 	
 	
 }

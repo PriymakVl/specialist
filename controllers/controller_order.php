@@ -40,9 +40,12 @@ class Controller_Order extends Controller_Base {
 	public function action_add_content()
 	{
 		$id_order = Session::get('order-active');
-		if (!$id_order) exit('нет активного заказа');
+		if (!$id_order) {
+			$this->message->set('error', 'not-active'); /***/ $this->redirectPrevious();
+		}
 		$id_prod = (Param::get('id_prod'));
 		OrderContent::add($id_order, $id_prod);
+		$this->message->set('success', 'add-content');
 		$this->redirect('order?id_order='.$id_order);
 	}
 	

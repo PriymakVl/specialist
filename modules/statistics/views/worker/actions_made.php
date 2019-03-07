@@ -15,10 +15,10 @@
             <tr>
                 <td><?=$number?></td>
                 <td><?=$action->order->symbol?></td>
-                <td><?=$action->product->symbol?> <?=$action->product->name?> (<?=$order_action->qty?> шт.)</td>
-				<td><?=$action->action->name?></td>
+                <td><?=$action->product->symbol?> <?=$action->product->name?> (<?=$action->qty?> шт.)</td>
+				<td><?=$action->name?></td>
 				<td><?=$action->time_manufac?> мин.</td>
-				<td>факт трудоем</td>
+				<td><?=$action->timeMade ? $action->timeMade.'мин.' : '<span class="red">Нет</span>'?></td>
             </tr>
 			<? $number++; ?>
         <? endforeach; ?>

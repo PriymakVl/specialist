@@ -27,8 +27,8 @@ class OrderActionStatic extends OrderActionBase {
 	
 	private static function addOne($params)
 	{
-        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, id_operation, state, type_order, time_manufac) 
-		VALUES (:id_order, :id_prod, :qty, :id_operation, :state, :type_order, :time_manufac)";
+        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, id_data, state, type_order, time_manufac) 
+		VALUES (:id_order, :id_prod, :qty, :id_data, :state, :type_order, :time_manufac)";
         return self::perform($sql, $params);
 	}
 	
@@ -42,13 +42,13 @@ class OrderActionStatic extends OrderActionBase {
 	public static function get($params)
 	{
 		$sql = 'SELECT `id` FROM `order_actions` 
-		WHERE `id_action` = :action AND `state` != :state AND `type_order` = :type_order AND `status` = :status';
+		WHERE `id_data` = :action AND `state` != :state AND `type_order` = :type_order AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
 	public static function getByIdOrderAndIdProductAndIdAction($params)
 	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_operation` = :id_operation AND `id_order` = :id_order AND `id_prod` = :id_prod';
+		$sql = 'SELECT * FROM `order_actions` WHERE `id_data` = :id_data AND `id_order` = :id_order AND `id_prod` = :id_prod';
 		return self::perform($sql, $params)->fetch();
 	}
 	
@@ -63,7 +63,7 @@ class OrderActionStatic extends OrderActionBase {
 	{
 		 $actions = Helper::createArrayOfObject($ids, 'OrderAction');
 		 foreach ($actions as $action) {
-			$action->getProduct()->getOrder()->getOperation()->setBgTerminalBox()->convertState();
+			$action->getProduct()->getOrder()->setBgTerminalBox()->convertState();
 		 }
 		 return $actions;
 	}
@@ -104,8 +104,8 @@ class OrderActionStatic extends OrderActionBase {
 	
 	public static function planWorker($params)
 	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_action` IN ('.$params['id_actions'].') AND `state` != :state AND `status` = :status';
-		unset($params['id_actions']);
+		$sql = 'SELECT * FROM `order_actions` WHERE `id_data` IN ('.$params['data'].') AND `state` != :state AND `status` = :status';
+		unset($params['data']);
 		return self::perform($sql, $params)->fetchAll();
 	}
 	

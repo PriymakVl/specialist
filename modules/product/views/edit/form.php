@@ -1,6 +1,6 @@
 <div id="form-product-wrp">
     <h2>Форма для редактирования продукции</h2>
-    <form action="/product/edit?id_prod=<?=$product->id?>" method="post">
+    <form action="/product/edit?id=<?=$product->id?>" method="post">
         <!-- first box -->
         <div class="form-box">
             <!-- product symbol-->
@@ -45,18 +45,10 @@
 			<div id="form-product-name-wrp">
 				<label>Наименование:</label>
 				<input type="text" name="name" value="<?=$product->name?>">
+				<label>Редактировать все:</label>
+				<input type="checkbox" name="edit_all">
 			</div>
 		</div>
-		
-		<div class="form-box" id="form-product-time-wrp">
-			<label>Подготовительное время:</label>
-			<input type="text" name="time_prepar" value="<?=$product->time_prepar?>">
-			<label>Штучное время:</label>
-			<input type="text" name="time_prod" value="<?=$product->time_prod?>">
-			<label>Редактировать все:</label>
-			<input type="checkbox" name="edit_all">
- 		</div>
-
 
         <div class="form-box">
 			<!-- note -->
