@@ -35,7 +35,7 @@ class Controller_Order_Action extends Controller_Base {
 	{
 		$params = ParamOrderActionUnplan::add();
 		$order = new Order($params['id_order']); /***/ $order->getProducts();
-		$actions = Action::getAll('actions');
+		$actions = DataAction::getAll('data_actions');
 		if (empty($params['save'])) return $this->render('add_unplan/main', compact('order', 'actions'));
 		OrderActionUnplan::add($params);
 		$this->message->set('success', 'add_unplan');

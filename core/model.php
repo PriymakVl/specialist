@@ -62,6 +62,7 @@ class Model extends ModelStatic {
 	{
 		if (!$this->message->section) exit('В классе не указан раздел сообщений');
 		$this->message->set($type, $key);
+		return $this;
 	}
 	
 }

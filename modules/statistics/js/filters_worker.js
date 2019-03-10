@@ -5,10 +5,11 @@ $(document).ready(function() {
 	
 	$('#state-order-action').change(function() {
 		var state = $(this).val();
-		var now = new Date();
-
-		console.log(now.toLocaleDateString()); return;
-		if (state == ACTION_STATE_PLANED) $('input[name="period_start"], input[name="period_end"]').val();
+		if (state == ACTION_STATE_ENDED) {
+			$('#period-plan-action').hide(); /***/ $('#period-fact-action').show();
+		} else {
+			$('#period-fact-action').hide(); /***/ $('#period-plan-action').show();
+		}
 	});
 	
 	$().click(function() {

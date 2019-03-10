@@ -52,8 +52,7 @@ class Controller_Order extends Controller_Base {
 	public function action_to_preparation()
 	{
 		$order = new Order($this->id_order);
-		if ($order->state > OrderState::REGISTERED) exit('уже выдан');
-		$order->getPositions()->toPreparation();
+		$order->getPositions()->toPreparation()->setState(OrderState::PREPARATION)->setMessage('success', 'preparation');
 		Session::set('order-active', $this->id_order);
 		$this->redirectPrevious();
 	}
@@ -61,17 +60,14 @@ class Controller_Order extends Controller_Base {
 	public function action_to_work()
 	{
 		$order = new Order($this->id_order);
-		if ($order->state > OrderState::PREPARATION) exit('уже выдан');
-		$order->toWork();
+		$order->toWork()->setState(OrderState::WORK)->setMessage('success', 'work');
 		$this->redirectPrevious();
 	}
 	
 	public function action_to_made()
 	{
 		$order = new Order($this->id_order);
-		//if ($order->state > OrderState::WORK) exit('уже сделан');
-		$order->toMade();
-		$this->message->set('success', 'made');
+		$order->toMade()->setState(OrderState::MADE)->setMessage('success', 'made');
 		$this->redirectPrevious();
 	}
 	
