@@ -19,7 +19,7 @@
 							<a href="/product?id_prod=<?=$product->id?>"><?=$product->symbol?></a>
 						</td>
 						<td><?=$product->name?></td>
-						<td class="product-qty" id_order="<?=$order->id?>" id_prod="<?=$product->id?>"><?=$product->orderQtyAll?></td>
+						<td class="product-qty" id_item="<?=$product->id_item?>"><?=$product->orderQtyAll?></td>
 						<td>
 							<? if ($product->timeManufacturing): ?>
 								<?=$product->timeManufacturing?> мин.

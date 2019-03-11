@@ -1,7 +1,3 @@
-переименовать actions в data_actions
-добавить в data_actions колонку price
-id_actions в id_data order_actions
-удалить id_prod и id_action из order_action_unplan
-добавить note в product_actions
-создать order_action_states
-изменить id_action на id_data table product_actions
+note in order_actions
+rating in order_actions
+date_reg in order_actions

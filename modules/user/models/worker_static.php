@@ -5,15 +5,17 @@ class WorkerStatic extends User {
  
  
  const COST_WORK_MINUTE = '0.85';
+ const ACTION_UNIVER = 2;
+ const ACTION_CHPU = 3;
+ const ACTION_FREZ = 4;
+ const ACTION_ASSEMB = 6;
  
 	public static function getAllWithStatistics()
 	{
 		$workers = self::getWorkers();
-		// foreach ($workers as $worker) {
-			// $worker = self::setPlanStatistics($worker);
-			// self::setMadeStatistics($worker);
-			// $worker->costMade = self::countCostMade($worker->timeMade);
-		// }
+		foreach ($workers as $worker) {
+			$worker->countTimePlan()->countLoad()->countTimeMade()->costMade();
+		}
 		return $workers;
 	}
 	

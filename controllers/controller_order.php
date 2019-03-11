@@ -103,6 +103,7 @@ class Controller_Order extends Controller_Base {
 	{
 		$params = ParamOrder::changeQtyProduct();
 		OrderContent::changeQuantity($params);
+		$this->message->set('success', 'edit_qty');
 		$this->redirectPrevious();
 	}
 	

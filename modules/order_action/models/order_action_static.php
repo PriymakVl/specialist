@@ -104,8 +104,8 @@ class OrderActionStatic extends OrderActionBase {
 	
 	public static function planWorker($params)
 	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_data` IN ('.$params['data'].') AND `state` != :state AND `status` = :status';
-		unset($params['data']);
+		$sql = 'SELECT * FROM `order_actions` WHERE `id_data` IN ('.$params['default_actions'].') AND `state` != :state AND `status` = :status';
+		unset($params['default_actions']);
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
@@ -136,6 +136,13 @@ class OrderActionStatic extends OrderActionBase {
 		$slq = 'SELECT `id_prod` FROM `order_actions` WHERE `id_order` = :id_order AND `status` = :status GROUP BY `id_prod`';
 		$params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE];
 		return self::perform($slq, $params)->fetchAll();
+	}
+	
+	public static function addNote($params)
+	{
+		unset($params['action']);
+		$sql = 'UPDATE `order_actions` SET `note` = :note WHERE `id` = :id';
+		return self::perform($sql, $params);
 	}
 	
 	

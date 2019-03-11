@@ -11,18 +11,16 @@ class ParamWorker extends Param {
 		$params['id_worker'] = $id_worker ? $id_worker : $params['id_worker'];
 		$params['status'] = Model::STATUS_ACTIVE;
 		$params['state'] = OrderActionState::ENDED;
-		$params['period_start'] = empty($params['period_start']) ? mktime(0,0,0) : $params['period_start'];
-		$params['period_end'] = empty($params['period_end']) ? time() : $params['period_end'];
+		$params['period_start'] = empty($params['period_start']) ? mktime(0,0,0) : Date::convertStringToTime($params['period_start']);
+		$params['period_end'] = empty($params['period_end']) ? time() : Date::convertStringToTime($params['period_end']);
 		return $params;
 	}
 	
 	public static function plan($login)
 	{
-		$keys = ['state', 'start_period', 'end_period'];
-		$params = self::getAll();
-		$params['state'] = empty($params['state']) ? OrderActionState::ENDED : OrderActionState::PLANED;
-		$id_default_actions_arr = Worker::setDefaultActions($login);
-		$params['id_actions'] = trim(implode(',', $id_default_actions_arr), ',');
+		$params['state'] = OrderActionState::ENDED;
+		$default_actions_arr = Worker::setDefaultActions($login);
+		$params['default_actions'] = trim(implode(',', $default_actions_arr), ',');
 		$params['status'] = Model::STATUS_ACTIVE;
 		return $params;
 	}

@@ -25,6 +25,15 @@ class Controller_Statistics extends Controller_Base {
 		$this->render('worker/main', compact('worker', 'params'));
 	}
 	
+	public function action_worker_plan()
+	{
+		$worker = new Worker(Param::get('id_worker'));
+		$params = ParamWorker::plan($worker->login);
+		$worker->getActionsPlan($params);
+		$this->view->title = 'Статистика по рабочему';
+		$this->render('worker/main', compact('worker', 'params'));
+	}
+	
 	public function action_order()
 	{
 		$order = new Order(Param::get('id_order'));

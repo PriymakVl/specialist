@@ -71,21 +71,29 @@
 	left: 70px;
 }
 
-#full-info-product {
+#action-order-note-box {
 	background: yellow;
 	margin-top: 20px;
 }
 
-#full-info-product span {
+#action-order-note-box span {
 	position: absolute;
 	bottom: 5px;
 	left: 43px;
 }
 
-.fa-pause, .fa-sign-out-alt, .fa-check, .fa-question , .fa-angle-double-right{
+.fa-pause, .fa-sign-out-alt, .fa-check, .fa-comment-alt , .fa-angle-double-right{
 	font-size: 60px;
 	color: white;
 	margin: 65px 0 0 68px;
+}
+
+#text-action-note {
+	position: absolute;
+	top: 5px!important;
+	left: 12px!important;
+	font-size: 14px!important;
+	text-align: left!important;
 }
 
 

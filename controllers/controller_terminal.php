@@ -65,4 +65,11 @@ class Controller_Terminal extends Controller_Base
 		}
         $this->redirect('terminal/actions?action=' . $params['action']);
     }
+	
+	public function action_add_note()
+	{
+		$params = ParamTerminal::addNote();
+		OrderAction::addNote($params);
+		$this->redirect('terminal/actions?action=' . $params['action']);
+	}
 }

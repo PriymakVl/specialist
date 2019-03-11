@@ -46,4 +46,11 @@ class ParamTerminal extends Param {
 		return $params;
 	}
 	
+	public static function addNote()
+	{
+		$keys = ['id', 'note', 'action'];
+		$params = self::getAll($keys);
+		return $params;
+	}
+	
 }

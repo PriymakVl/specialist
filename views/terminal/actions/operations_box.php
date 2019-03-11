@@ -15,9 +15,10 @@
 			<i class="fas fa-sign-out-alt"></i>
 			<span>Отмена</span>
 		</div>
-		<div id="full-info-product">
-			<i class="fas fa-question"></i>
-			<span>Информация</span>
+		<div id="action-order-note-box" onclick="action_note_add();">
+			<i class="far fa-comment-alt" style="display:none;"></i>
+			<span id="text-action-note"></span>
+			<span>Примечание</span>
 		</div>
 	</div>
 </div>

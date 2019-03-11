@@ -29,6 +29,7 @@ class OrderContent extends OrderBase {
             $product = new Product($item->id_prod);
             $product->orderQtyAll = $item->quantity;
 			$product->getSpecification()->countTimeManufacturing();
+			$product->id_item = $item->id;
             $content[] = $product;
         }
         return $content;
@@ -36,7 +37,7 @@ class OrderContent extends OrderBase {
 	
 	public static function changeQuantity($params)
 	{
-		$sql = 'UPDATE `order_content` SET `quantity` = :qty WHERE `id_order` = :id_order AND `id_prod` = :id_prod';
+		$sql = 'UPDATE `order_content` SET `quantity` = :qty WHERE `id` = :id_item';
 		return self::update($sql, $params);
 	}
 	

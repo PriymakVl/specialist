@@ -9,6 +9,7 @@
                  state="<?=$action->state?>"
 				 id_item="<?=$action->id?>"
 				 action="<?=$action->id_data?>"
+				 note="<?=$action->note?>"
 			>
 				 
 

@@ -10,7 +10,11 @@
     <? include_once('filters.php'); ?>
 
     <!-- actions made -->
-    <? include_once('actions_made.php'); ?>
+	<? if (empty($params['period_start'])): ?>
+		<? include_once('actions_plan.php'); ?>
+	<? else: ?>
+		<? include_once('actions_made.php'); ?>
+	<? endif; ?>
 
     <!-- worker list menu -->
     <? //include_once('menu.php'); ?>

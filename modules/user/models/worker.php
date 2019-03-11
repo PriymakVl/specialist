@@ -4,26 +4,32 @@ require_once('worker_static.php');
 class Worker extends WorkerStatic {
 
 	 //public $productsCut;
-	 //public $loadTimePlan;
-	 //public $timeMade;
-	 //public $loadPercent;
+	 public $timePlan = 0;
+	 public $timeMade = 0;
+	 public $loadPercent = 0;
 	 //public $loadFullFlage; //если указана трудоемкость для всех деталей
 	 //public $defaultActions;
-	 //public $costMade; //сколько заработал
+	 public $costMade; //сколько заработал
 	 public $actions;
 	 public $actions_unplan;
 	 
  
-	// public function getActionsPlan()
-	// {
-		// $params = ParamWorker::plan($this->login);
-		// $items = OrderAction::planWorker($params);
-		// return $this->getActionsWithProperties($items);
-	// }
+	public function getActionsPlan($params)
+	{
+		$items = OrderAction::planWorker($params);
+		if (empty($items)) return $this;
+		foreach ($items as $item) {
+			$action = new OrderAction($item->id);
+			$action->getProduct()->getOrder();
+			$this->actions[] = $action;
+		}
+		return $this;
+	}
 	
 	public function getActionsMade($params)
 	{
 		$items = OrderAction::madeWorker($params);
+		if (empty($items)) return $this;
 		foreach ($items as $item) {
 			$action = new OrderAction($item->id);
 			$action->getProduct()->getOrder()->countFactTimeManufact();
@@ -32,20 +38,46 @@ class Worker extends WorkerStatic {
 		return $this;
 	}
 	
-	// private function getActionsWithProperties($items)
-	// {
-		// if (empty($items)) return false;
-		// foreach ($items as $item) {
-			// $order_action = new OrderAction($item->id);
-			// $order_action->getProduct()->getAction()->getOrder();
-			// $order_actions[] = $order_action;
-		// }
-		// return $order_actions;
-	// }
-	
-	public function getActionsUnplan($params)
+	public function countTimePlan()
 	{
-		//$actions = OrderActions
+		$params = ParamWorker::plan($this->login);
+		$items = OrderAction::planWorker($params);
+		if (empty($items)) return $this;
+		foreach ($items as $item) {
+			if ($item->time_manufac) { $this->timePlan = $this->timePlan + $item->time_manufac; }
+		}
+		$this->timePlan = round($this->timePlan);
+		return $this;
+	}
+	
+	public function countTimeMade()
+	{
+		$params = ParamWorker::made($this->id);
+		$worker = $this->getActionsMade($params);
+		if (!$worker->actions) return $this;
+		foreach ($worker->actions as $action) {
+			if($action->timeMade) $this->timeMade = $this->timeMade + $action->timeMade;
+		}
+		$this->timeMade = round($this->timeMade);
+		return $this;
+	}
+	
+	public function countLoad()
+	{
+		$this->loadPercent = Statistics::countLoadPercentage($this->timePlan);
+		return $this;
+	}
+	
+	public function costMade()
+	{
+		$params = ParamWorker::made($this->id);
+		$worker = $this->getActionsMade($params);
+		if (empty($worker->actions)) return $this;
+		foreach ($worker->actions as $action) {
+			if ($action->price && $action->time_manufac) $this->costMade = $this->costMade + ($action->time_manufac * $action->price);
+		}
+		$this->costMade = round($this->costMade, 2);
+		return $this;
 	}
 	
 	

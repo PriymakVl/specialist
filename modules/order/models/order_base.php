@@ -26,6 +26,10 @@ class OrderBase extends Model
 
     const TYPE_CYLINDER = 1;
     const TYPE_CAR_NUMBER = 2;
+	
+	const RATING_REGULAR = 1;
+	const RATING_IMPORTANT = 2;
+	const RATING_PRIORITY = 3;
 
     //date
     public $dateExecution; //дата выполнения заказа

@@ -10,6 +10,7 @@ class Order extends OrderStatic {
 	public $actions;
 	public $actionsUnplan;
 	public $products;
+	public $convertRating;
 
     public function __construct($order_id)
     {
@@ -102,6 +103,12 @@ class Order extends OrderStatic {
 			$product = new Product($item->id_prod);
 			$this->products[] = $product;
 		}
+		return $this;
+	}
+	
+	public function convertRating()
+	{
+		$this->convertRating = ParamOrder::convertRating($this->rating);
 		return $this;
 	}
     

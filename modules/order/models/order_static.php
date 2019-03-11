@@ -6,10 +6,10 @@ class OrderStatic extends OrderBase {
 	public static function getList($params)
 	{
 		if ($params['state'] == OrderState::ALL) {
-			$sql = 'SELECT `id` FROM `orders` WHERE `status` = :status ORDER BY date_exec';
+			$sql = 'SELECT `id` FROM `orders` WHERE `status` = :status ORDER BY rating DESC, date_exec ASC';
 			unset($params['state']);
 		}
-	    else $sql = 'SELECT `id` FROM `orders` WHERE `state` = :state AND `status` = :status ORDER BY date_exec';
+	    else $sql = 'SELECT `id` FROM `orders` WHERE `state` = :state AND `status` = :status ORDER BY rating DESC, date_exec ASC';
         $ids = self::perform($sql, $params)->fetchAll();
 	    return self::createArrayOfOrder($ids);
 	}
@@ -34,8 +34,8 @@ class OrderStatic extends OrderBase {
     public static function add($params)
     {
 		unset($params['save']);
-        $fields = 'symbol, note, date_exec, type, state';
-        $values = ':symbol, :note, :date_exec, :type, :state';
+        $fields = 'symbol, note, date_exec, type, state, rating, date_reg';
+        $values = ':symbol, :note, :date_exec, :type, :state :rating, :date_reg';
         $sql = 'INSERT INTO `orders` ('.$fields.') VALUES ('.$values.')';
 		return self::insert($sql, $params);
     }
@@ -43,7 +43,8 @@ class OrderStatic extends OrderBase {
 	public static function edit($params)
 	{
 		unset($params['save']);
-		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note WHERE `id` = :id_order';
+		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note, `rating` = :rating
+		WHERE `id` = :id_order';
 		return self::update($sql, $params);
 	}
 
@@ -54,9 +55,10 @@ class OrderStatic extends OrderBase {
         return self::perform($sql, $params)->fetchAll();
     }
 	
-	public static function checkReady()
+	public static function checkReady($id_order = null)
 	{
 		$params = ParamOrderAction::getNotReadyActionOrder();
+		$params['id_order'] = empty($params['id_order']) ? $id_order : $params['id_order'];
 		$order = new Order($params['id_order']);
 		$result = OrderAction::getNotReadyActionOrder($params);
 		$result_unplan = OrderActionUnplan::getNotReadyActionOrder($order->id);

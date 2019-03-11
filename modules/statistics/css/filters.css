@@ -36,7 +36,7 @@
 	left: 375px;
 }
 
-.statistics-period-filter-wrp [name="period-start"],  .statistics-period-filter-wrp [name="period-end"], .statistics-period-filter-wrp [name="today"] {
+.statistics-period-filter-wrp [name="period_start"],  .statistics-period-filter-wrp [name="period_end"], .statistics-period-filter-wrp [name="today"] {
 	width: 70px;
 	height: 20px;
 	font-size: 16px;

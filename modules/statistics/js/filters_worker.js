@@ -5,10 +5,15 @@ $(document).ready(function() {
 	
 	$('#state-order-action').change(function() {
 		var state = $(this).val();
+		var params = getObjectGetParams();
 		if (state == ACTION_STATE_ENDED) {
-			$('#period-plan-action').hide(); /***/ $('#period-fact-action').show();
+			$('#period-plan-action').hide(); 
+			$('#period-fact-action').show(); 
+			$('#statistics-filters-wrp form').attr('action', '/statistics/worker_made?id_worker=' + params.id_worker);
 		} else {
-			$('#period-fact-action').hide(); /***/ $('#period-plan-action').show();
+			$('#period-fact-action').hide(); 
+			$('#period-plan-action').show();
+			$('#statistics-filters-wrp form').attr('action', '/statistics/worker_plan?id_worker=' + params.id_worker);
 		}
 	});
 	

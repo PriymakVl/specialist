@@ -26,8 +26,8 @@
 					<? endif; ?>
 				</td>
                 <td>
-					<? if ($worker->loadTimePlan): ?>
-						<span><?=$worker->loadTimePlan?> мин.</span>
+					<? if ($worker->timePlan): ?>
+						<span><?=$worker->timePlan?> мин.</span>
 					<? else: ?>
 						<span class="red">Простой</span>
 					<? endif; ?>

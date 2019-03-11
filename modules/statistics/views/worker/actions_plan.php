@@ -5,10 +5,9 @@
     <tr>
         <th width="50">№</th>
         <th width="100">Заказ</th>
-        <th width="250">Деталь</th>
-		<th width="180">Операция</th>
-		<th width="100">Труд. планов</th>
-		<th width="100">Труд. фактич</th>
+        <th width="400">Деталь</th>
+		<th width="200">Операция</th>
+		<th >Труд. планов</th>
     </tr>
     <? if ($worker->actions): ?>
         <?foreach ($worker->actions as $action): ?>
@@ -18,7 +17,6 @@
                 <td><?=$action->product->symbol?> <?=$action->product->name?> (<?=$action->qty?> шт.)</td>
 				<td><?=$action->name?></td>
 				<td><?=$action->time_manufac?> мин.</td>
-				<td><?=$action->timeMade ? $action->timeMade.'мин.' : '<span class="red">Нет</span>'?></td>
             </tr>
 			<? $number++; ?>
         <? endforeach; ?>

@@ -18,6 +18,11 @@
                 <td>Состояние</td>
                 <td><?=$order->convertState?></td>
             </tr>
+			<tr>
+				<td>3</td>
+				<td>Приоритет заказа</td>
+				<td><?=$order->convertRating?></td>
+			</tr>
             <tr>
                 <td>3</td>
                 <td>Срок выполнения</td>
@@ -26,6 +31,17 @@
 						<?=date('d.m.y', $order->date_exec)?>
 					<? else: ?>
 						<span class="red">Не указан</span>
+					<? endif; ?>
+				</td>
+            </tr>
+			<tr>
+                <td>3</td>
+                <td>Дата регистрации</td>
+                <td>
+					<? if ($order->date_reg): ?>
+						<?=date('d.m.y', $order->date_reg)?>
+					<? else: ?>
+						<span class="red">Не указана</span>
 					<? endif; ?>
 				</td>
             </tr>

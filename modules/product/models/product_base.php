@@ -30,6 +30,8 @@ class ProductBase extends Model
 	public $stateWork; //выдана, обрабатывается, готова и др.
 	public $stateWorkConvert;
 	public $idWorker;
+	
+	public $id_item; //для редактирования количества в заказе (контент)
 
 	const TYPE_CATEGORY = 1;
     const TYPE_PRODUCT = 2;

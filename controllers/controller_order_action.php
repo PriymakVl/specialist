@@ -17,7 +17,7 @@ class Controller_Order_Action extends Controller_Base {
 		$action = new OrderAction($params['id']);
 		if (empty($params['save'])) return $this->render('edit_state/main', compact('action'));
 		$action->editState($params)->setMessage('success', 'edit_state');
-		Order::checkReady();
+		Order::checkReady($action->id_order);
 		$this->redirect('order?id_order='.$action->id_order);
 	}
 	
