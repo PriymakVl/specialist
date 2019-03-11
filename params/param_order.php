@@ -46,7 +46,7 @@ class ParamOrder extends Param {
 	public static function convertRating($rating)
 	{
 		switch($rating) {
-			case Order::RATING_ORDINARY: return 'Обычный';
+			case Order::RATING_REGULAR: return 'Обычный';
 			case Order::RATING_IMPORTANT: return 'Важный';
 			case Order::RATING_PRIORITY: return 'Первоочередной';
 		}

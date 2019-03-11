@@ -35,7 +35,7 @@ class OrderStatic extends OrderBase {
     {
 		unset($params['save']);
         $fields = 'symbol, note, date_exec, type, state, rating, date_reg';
-        $values = ':symbol, :note, :date_exec, :type, :state :rating, :date_reg';
+        $values = ':symbol, :note, :date_exec, :type, :state, :rating, :date_reg';
         $sql = 'INSERT INTO `orders` ('.$fields.') VALUES ('.$values.')';
 		return self::insert($sql, $params);
     }
