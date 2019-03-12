@@ -85,8 +85,8 @@ class Order extends OrderStatic {
 	
 	public function getActionsUnplan()
 	{
-		if ($this->state < OrderState::WORK) return;
-		$items = OrderActionUnplan::getByIdOrder($this->id);
+		if ($this->state < OrderState::WORK) return $this;
+		$items = OrderActionUnplan::getByIdOrder($this->id); /***/ if (empty($items)) return $this;
 		foreach ($items as $item) {
 			$action_unplan = new OrderActionUnplan($item->id);
 			$action_unplan->convertState()->setBgState();

@@ -14,7 +14,8 @@ class Controller_Product extends Controller_Base {
 	{
 		$id_active = Session::get('product-active');
 		$product = new Product(Param::get('id_prod'));
-		$product->getSpecification()->getParent()->getActions()->countTimeManufacturing();
+		$product->getSpecification()->getParent()->getActions()->countTimeManufacturing()->getStatistics();
+		debug($product->statistics);
 		$this->render('index/main', compact('product', 'id_active'));
 	}
 

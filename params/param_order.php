@@ -6,9 +6,10 @@ class ParamOrder extends Param {
 
     public static function getList()
     {
-        $keys = ['type', 'state', 'status'];
-        $defaults = ['status' => Model::STATUS_ACTIVE, 'state' => OrderState::REGISTERED];
-        return self::getAll($keys, $defaults);
+        $params['state'] = self::get('state');
+		if (empty($params['state'])) $params['state'] = OrderState::WORK;
+		$params['status'] = Model::STATUS_ACTIVE;
+		return $params;
     }
 
     public static function add()
@@ -46,7 +47,7 @@ class ParamOrder extends Param {
 	public static function convertRating($rating)
 	{
 		switch($rating) {
-			case Order::RATING_ORDINARY: return 'Обычный';
+			case Order::RATING_REGULAR: return 'Обычный';
 			case Order::RATING_IMPORTANT: return 'Важный';
 			case Order::RATING_PRIORITY: return 'Первоочередной';
 		}

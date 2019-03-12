@@ -28,8 +28,7 @@ class Controller_Terminal extends Controller_Base
 		$params = ParamTerminal::getActions($worker);
 		if ($params['action'] == 'unplan') $actions = OrderActionUnplan::getActions();
         else $actions = OrderAction::getForTerminal($params);
-		$data_actions = DataAction::getAll('data_actions');
-        $this->render('actions/main', compact('actions', 'worker', 'data_actions', 'params'));
+        $this->render('actions/main', compact('actions', 'worker', 'params'));
     }
 
     public function action_start_work()

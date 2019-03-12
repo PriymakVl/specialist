@@ -34,15 +34,29 @@ class OrderActionStatic extends OrderActionBase {
 	
 	public static function getForTerminal($params)
 	{
-		if ($params['action'] == 'all') $ids = self::getAllNotReadyActions($params);
-		else $ids = self::get($params);
+		if ($params['action'] == 'all' && $params['order'] == 'all') $ids = self::getAllNotReadyActions($params);
+		else if ($params['action'] != 'all' && $params['order'] == 'all' )$ids = self::getForAllOrders($params);
+		else $ids = self::getForOneOrder($params);
 		return self::createArrayActions($ids);
 	}
 	
-	public static function get($params)
+	public static function getForAllOrders($params)
 	{
+		unset($params['order']);
 		$sql = 'SELECT `id` FROM `order_actions` 
 		WHERE `id_data` = :action AND `state` != :state AND `type_order` = :type_order AND `status` = :status ORDER BY `rating` DESC';
+		return self::perform($sql, $params)->fetchAll();
+	}
+	
+	public static function getForOneOrder($params)
+	{
+		unset($params['type_order']);
+		if ($params['action'] == 'all') {
+			$where = 'WHERE `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC'; 
+			unset($params['action']);
+		}
+		else $where = 'WHERE `id_data` = :action AND `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC';
+		$sql = 'SELECT `id` FROM `order_actions` '.$where;
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
@@ -54,7 +68,7 @@ class OrderActionStatic extends OrderActionBase {
 	
 	public static function getAllNotReadyActions($params)
 	{
-		unset($params['action']);
+		unset($params['action'], $params['order']);
 		$sql = 'SELECT `id` FROM `order_actions` WHERE `state` != :state AND `type_order` = :type_order AND `status` = :status ORDER BY `rating` DESC';
 		return self::perform($sql, $params)->fetchAll();
 	}
@@ -150,6 +164,33 @@ class OrderActionStatic extends OrderActionBase {
 		$sql = 'UPDATE `order_actions` SET `rating` = :rating WHERE `id_order` = :id_order';
 		$params = ['rating' => $rating, 'id_order' => $id_order];
 		return self::perform($sql, $params);
+	}
+	
+	public static function getOrdersForTerminal()
+	{
+		$orders = [];
+		$slq = 'SELECT `id_order` FROM `order_actions` WHERE `state` != :state AND `status` = :status GROUP BY `id_order`';
+		$params = ['state' => OrderActionState::ENDED, 'status' => self::STATUS_ACTIVE];
+		$items = self::perform($slq, $params)->fetchAll();
+		if (empty($items)) return $orders;
+		foreach ($items as $item) {
+			$orders[] = new Order($item->id_order);
+		}
+		return $orders;
+	}
+	
+	public static function getAllOrdersByIdProduct($id_prod)
+	{
+		$slq = 'SELECT `id_order` FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status GROUP BY `id_order`';
+		$params = ['id_prod' => $id_prod, 'status' => self::STATUS_ACTIVE];
+		return self::perform($slq, $params)->fetchAll();
+	}
+	
+	public static function getActionsProductInOrder($id_order, $id_prod)
+	{
+		$slq = 'SELECT `id` FROM `order_actions` WHERE `id_prod` = :id_prod AND `id_order` = :id_order AND `status` = :status';
+		$params = ['id_prod' => $id_prod, 'status' => self::STATUS_ACTIVE, 'id_order' => $id_order];
+		return self::perform($slq, $params)->fetchAll();
 	}
 	
 	

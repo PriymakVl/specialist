@@ -5,7 +5,6 @@
 			<div class="form-box product-action-wrp">
 				<label>Наименование:</label>
 				<select name="id_data">
-					<option>Не выбрана</option>
 					<? foreach ($data_actions as $item): ?>
 						<option  value="<?=$item->id?>" <? if ($item->id == $action->id_data) echo "selected";?>><?=$item->name?></option>
 					<? endforeach; ?>

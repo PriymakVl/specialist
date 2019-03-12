@@ -10,11 +10,12 @@
     </tr>
     <? if ($orders): ?>
         <?foreach ($orders as $order): ?>
+			<? $bg_priority = ($order->rating == Order::RATING_PRIORITY || $order->rating == Order::RATING_IMPORTANT) ? 'Aqua' : ''; ?>
             <tr>
                 <td class="<?=($id_active == $order->id)?'bg-green':''?>">
                     <input type="checkbox" name="order" id_order="<?=$order->id?>">
                 </td>
-                <td>
+                <td style="background:<?=$bg_priority?>;">
                     <a href="/order?id_order=<?=$order->id?>"><?=$order->symbol?></a>
                 </td>
 				<? if ($order->positions): ?>

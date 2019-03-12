@@ -6,6 +6,7 @@ class Product extends ProductStatic {
 	public $parent;
 	public $typeViewSpecification;
 	public $actions;
+	public $statistics;
 
     public function __construct($id_prod)
     {
@@ -57,13 +58,22 @@ class Product extends ProductStatic {
 		return $this;
 	}
 	
-
 	public function countTimeManufacturing()
 	{
 		$this->timeManufacturing = ProductTime::countTimeManufacturing($this);
 		if ($this->specification) {
 			$time_manufac_specif = ProductTime::countTimeManufacSpecif($this->content);
 			$this->timeManufacturing = $this->timeManufacturing + $time_manufac_specif;
+		}
+		return $this;
+	}
+	
+	public function getStatistics()
+	{
+		$items = OrderAction::getAllOrdersByIdProduct($this->id);
+		foreach ($items as $item) {
+				$this->statistics[]['order'] = new Order($item->id_order);
+				$this->statistics[]['time'] = Statistics::countTimeFactMadeProductInOrder($item->id_order, $this->id);
 		}
 		return $this;
 	}

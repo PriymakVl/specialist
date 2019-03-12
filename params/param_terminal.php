@@ -37,10 +37,11 @@ class ParamTerminal extends Param {
 	
 	public static function getActions($worker)
 	{
-		$action = self::get('action');
-		$type_order = self::get('type_order');
-		$params['action'] = $action ? $action : $worker->defaultProductAction;
-		$params['type_order'] = $type_order ? $type_order : $worker->defaultTypeOrder;
+		$keys = ['action', 'type_order', 'order'];
+		$params = self::getAll($keys);
+		$params['action'] = empty($params['action']) ? $worker->defaultProductAction : $params['action'];
+		$params['type_order'] = empty($params['type_order']) ? $worker->defaultTypeOrder : $params['type_order'];
+		if (empty($params['order'])) $params['order'] = 'all';
 		$params['state'] = OrderActionState::ENDED;
 		$params['status'] = Model::STATUS_ACTIVE;
 		return $params;

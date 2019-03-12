@@ -13,6 +13,7 @@ class OrderActionBase extends Model {
 	const BG_TERMINAL_BOX_PLAN = 'yellow';
 	const BG_TERMINAL_BOX_PROGRESS = 'green';
 	const BG_TERMINAL_BOX_STOPPED = 'red';
+	const BG_TERMINAL_BOX_PRIORITY = 'Aqua';
 	
 	public function convertState()
 	{
@@ -30,6 +31,7 @@ class OrderActionBase extends Model {
 	{
 		if ($this->state == OrderActionState::PROGRESS) $this->bgTerminalBox = self::BG_TERMINAL_BOX_PROGRESS;
 		else if ($this->state == OrderActionState::STOPPED) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_STOPPED;
+		else if ($this->rating == Order::RATING_IMPORTANT || $this->rating == Order::RATING_PRIORITY) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_PRIORITY;
 		else $this->bgTerminalBox = self::BG_TERMINAL_BOX_PLAN;
 		return $this;
 	}

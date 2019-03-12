@@ -6,13 +6,12 @@
 			
 				<label>Наименование:</label>
 				<select name="id_data">
-					<option>Не выбрана</option>
 					<? foreach ($data_actions as $item): ?>
 						<option  value="<?=$item->id?>"><?=$item->name?></option>
 					<? endforeach; ?>
 				</select>
 				<label>Номер:</label>
-				<input type="number" name="number">
+				<input type="number" name="number" value="1">
 				<label>Подгот-ное время:</label>
 				<input type="text" name="time_prepar">
 				<label>Штучное время:</label>

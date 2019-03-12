@@ -14,7 +14,7 @@
 		}
 		else {
 			if (action == 'unplan') $('#terminal-actions-unplan-wrp, #filter-actions-wrp').hide();
-			else $('#terminal-actions-wrp, #filter-actions-wrp').hide();
+			else $('#terminal-actions-wrp, #filters-wrp').hide();
 			
 			$('#operations-box').show();
 			if (state == STATE_ACTION_STOPED) {
@@ -42,7 +42,7 @@
 	
 	//exit operation box
 	function exit_operations_box() {
-		$('#terminal-actions-wrp, #filter-actions-wrp').show();
+		$('#terminal-actions-wrp, #filters-wrp').show();
 		$('#operations-box').hide();
 		return false;
 	}

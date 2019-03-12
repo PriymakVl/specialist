@@ -24,7 +24,7 @@
 				<td><?=$order->convertRating?></td>
 			</tr>
             <tr>
-                <td>3</td>
+                <td>4</td>
                 <td>Срок выполнения</td>
                 <td>
 					<? if ($order->date_exec): ?>
@@ -35,7 +35,7 @@
 				</td>
             </tr>
 			<tr>
-                <td>3</td>
+                <td>5</td>
                 <td>Дата регистрации</td>
                 <td>
 					<? if ($order->date_reg): ?>

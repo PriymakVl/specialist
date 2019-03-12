@@ -32,6 +32,9 @@
 					<? else: ?>
 						<span class="red">Нет</span>
 					<? endif; ?>
+					<? if ($action->note): ?>
+						<a href="#" class="show-action-note" note="<?=$action->note?>">Примечание</a>
+					<? endif; ?>
 				</td>
             </tr>
 			<? $number++; ?>

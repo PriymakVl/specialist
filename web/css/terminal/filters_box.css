@@ -1,10 +1,23 @@
+#filters-wrp {
+	position: relative;
+}
+
 #filter-actions-wrp {
 	margin-top: 15px;
 }
 
-#filter-actions-wrp #actions {
+#filters-wrp #filter-actions {
 	height: 35px;
 	width: 200px;
 	font-size: 14px;
 	margin-left: 20px;
+}
+
+#filters-wrp #filter-orders {
+	height: 35px;
+	width: 200px;
+	font-size: 14px;
+	position: absolute;
+	top: 0;
+	left: 255px;
 }
