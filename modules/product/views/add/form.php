@@ -47,13 +47,6 @@
 				<input type="text" name="name">
 			</div>
 		</div>
-		
-		<div class="form-box">
-			<label>Подгот. время:</label>
-			<input type="text" name="time_prod">
-			<label>Штучное время:</label>
-			<input type="text" name="time_prepar">
-		</div>
 
         <div class="form-box">
 			<!-- note -->
