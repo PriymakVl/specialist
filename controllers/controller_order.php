@@ -18,7 +18,8 @@ class Controller_Order extends Controller_Base {
 	{;
 		$id_active = Session::get('order-active');
 		$order = new Order($this->id_order);
-		$order->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan();
+		$order->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
+		debug($order->converRating);
 		$this->render('index/main', compact('order', 'id_active'));
 	}
 
@@ -95,6 +96,7 @@ class Controller_Order extends Controller_Base {
 		$order = new Order($this->id_order);
 		if (empty($params['save'])) return $this->render('edit/main', compact('order'));
 		Order::edit($params);
+		OrderAction::updateRating($order->id, $params['rating']);
 		$this->message->set('success', 'edit');
 		$this->redirect('order?id_order='.$this->id_order);
 	}

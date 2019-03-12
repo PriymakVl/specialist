@@ -4,14 +4,14 @@
 ?>
 
 <!-- css files -->
-<!--<link rel="stylesheet" href="/modules/order/css/list.css">-->
+<link rel="stylesheet" href="/modules/order_action/css/states.css">
 
 <div id="content">
 	
 	<h3>
 		Деталь: <span class="green"><?=$action->product->name.' '.$action->product->symbol?></span> 
-		Операция: <span class="green"><?=$action->action->name?></span>
-		<a href="/order?id_order=<?=$action->id_order?>">Вернуться назад</a>
+		Операция: <span class="green"><?=$action->name?></span>
+		<a href="#" onclick="history.back(); return false;" class="back-link">Вернуться назад</a>
 	</h3>
 		
     <!-- order list -->

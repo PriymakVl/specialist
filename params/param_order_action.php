@@ -14,6 +14,7 @@ class ParamOrderAction {
 		$params['state'] = OrderActionState::PLANED;
 		$params['qty'] = $product->orderQtyAll;
 		$params['time_manufac'] = OrderAction::setTimeManufacturing($action, $product);
+		$params['rating'] = $order->rating;
 		return $params;
 	}
 	

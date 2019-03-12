@@ -27,8 +27,8 @@ class OrderActionStatic extends OrderActionBase {
 	
 	private static function addOne($params)
 	{
-        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, id_data, state, type_order, time_manufac) 
-		VALUES (:id_order, :id_prod, :qty, :id_data, :state, :type_order, :time_manufac)";
+        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, id_data, state, type_order, time_manufac, rating) 
+		VALUES (:id_order, :id_prod, :qty, :id_data, :state, :type_order, :time_manufac, :rating)";
         return self::perform($sql, $params);
 	}
 	
@@ -42,7 +42,7 @@ class OrderActionStatic extends OrderActionBase {
 	public static function get($params)
 	{
 		$sql = 'SELECT `id` FROM `order_actions` 
-		WHERE `id_data` = :action AND `state` != :state AND `type_order` = :type_order AND `status` = :status';
+		WHERE `id_data` = :action AND `state` != :state AND `type_order` = :type_order AND `status` = :status ORDER BY `rating` DESC';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
@@ -55,7 +55,7 @@ class OrderActionStatic extends OrderActionBase {
 	public static function getAllNotReadyActions($params)
 	{
 		unset($params['action']);
-		$sql = 'SELECT `id` FROM `order_actions` WHERE `state` != :state AND `type_order` = :type_order AND `status` = :status';
+		$sql = 'SELECT `id` FROM `order_actions` WHERE `state` != :state AND `type_order` = :type_order AND `status` = :status ORDER BY `rating` DESC';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
@@ -142,6 +142,13 @@ class OrderActionStatic extends OrderActionBase {
 	{
 		unset($params['action']);
 		$sql = 'UPDATE `order_actions` SET `note` = :note WHERE `id` = :id';
+		return self::perform($sql, $params);
+	}
+	
+	public static function updateRating($id_order, $rating)
+	{
+		$sql = 'UPDATE `order_actions` SET `rating` = :rating WHERE `id_order` = :id_order';
+		$params = ['rating' => $rating, 'id_order' => $id_order];
 		return self::perform($sql, $params);
 	}
 	

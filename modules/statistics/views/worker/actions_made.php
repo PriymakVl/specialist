@@ -14,11 +14,25 @@
         <?foreach ($worker->actions as $action): ?>
             <tr>
                 <td><?=$number?></td>
-                <td><?=$action->order->symbol?></td>
-                <td><?=$action->product->symbol?> <?=$action->product->name?> (<?=$action->qty?> шт.)</td>
+                <td>
+					<a href="/order?id_order=<?=$action->order->id?>"><?=$action->order->symbol?></a>
+				</td>
+                <td>
+					<a href="/product?id_prod=<?=$action->product->id?>"><?=$action->product->symbol?></a> 
+					<?=$action->product->name?> 
+					(<?=$action->qty?> шт.)
+				</td>
 				<td><?=$action->name?></td>
 				<td><?=$action->time_manufac?> мин.</td>
-				<td><?=$action->timeMade ? $action->timeMade.'мин.' : '<span class="red">Нет</span>'?></td>
+				<td>
+					<? if ($action->timeMade): ?>
+						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->timeMade.'мин.'?></a>
+					<? elseif ($actions->states): ?>
+						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan">Меньше минуты</a>
+					<? else: ?>
+						<span class="red">Нет</span>
+					<? endif; ?>
+				</td>
             </tr>
 			<? $number++; ?>
         <? endforeach; ?>
