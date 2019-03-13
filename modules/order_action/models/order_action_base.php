@@ -5,6 +5,7 @@ class OrderActionBase extends Model {
 
 	public $product;
 	public $order;
+	public $states;
 	public $convertState;
 	public $action;//объект операции обработки
 	public $bgState;
@@ -39,6 +40,17 @@ class OrderActionBase extends Model {
 	public function getOrder()
 	{
 		$this->order = new Order($this->id_order);
+		return $this;
+	}
+	
+	public function getAllStates($params)
+	{
+		$items = OrderActionState::getAllByIdAction($params);
+		foreach ($items as $item) {
+			$state = new OrderActionState($item->id);
+			$state->setDuration($items)->getWorker()->setName()->setBg();
+			$this->states[] = $state;
+		}
 		return $this;
 	}
 

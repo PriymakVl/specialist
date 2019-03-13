@@ -59,54 +59,5 @@
 	width: 915px;
 }
 
-/*form add action unplan*/
-#form-order-action-unplan-wrp #form-order-products-wrp {
-	margin-bottom: 15px;
-}
 
-#form-order-action-unplan-wrp #form-product-wrp {
-	position: relative;
-}
-
-#form-order-action-unplan-wrp #form-product-name-wrp {
-	position: absolute;
-	top: 0;
-	left: 440px;
-}
-
-#form-order-action-unplan-wrp #form-product-symbol-wrp input {
-	width: 250px;
-}
-
-#form-order-action-unplan-wrp #form-product-name-wrp input {
-	width: 360px;
-}
-
-#form-order-action-unplan-wrp #form-action-name-wrp {
-	position: absolute;
-	top: 10px;
-	left: 260px;
-}
-
-#form-order-action-unplan-wrp #form-action-name-wrp input {
-	width: 375px;
-}
-
-#form-order-action-unplan-wrp #form-action-time-wrp {
-	position: absolute;
-	top: 10px;
-	left: 765px;
-}
-
-#form-order-action-unplan-wrp #form-action-time-wrp input {
-	width: 100px;
-}
-
-#form-order-action-unplan-wrp textarea {
-	width: 912px;
-}
-
-#form-order-action-unplan-wrp  select[name="id_action"] {
-	width: 165px;
-}
 

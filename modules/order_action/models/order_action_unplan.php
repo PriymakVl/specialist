@@ -8,6 +8,7 @@ class OrderActionUnplan extends OrderActionUnplanStatic {
     {
         $this->tableName = 'order_action_unplan';
         parent::__construct($id);
+		$this->message->section = 'order_action_unplan';
     }
 	
 	public function startWork($params)
@@ -28,6 +29,13 @@ class OrderActionUnplan extends OrderActionUnplanStatic {
 	{
 		OrderActionState::add($params);
 		self::setStateEndWork($params);
+		return $this;
+	}
+	
+	public function edit($params)
+	{
+		self::updateById($params);
+		OrderActionState::add($params);
 		return $this;
 	}
 	

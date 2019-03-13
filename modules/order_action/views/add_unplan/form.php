@@ -7,10 +7,12 @@
 			 <? if ($order->products): ?>
 				<div id="form-order-products-wrp">
 					<label>Выбрать деталь:</label>
-					<select name="id_prod">
+					<select name="product">
 						<option value="">Не выбрана</option>
 						<? foreach ($order->products as $product): ?>
-							<option value="<?=$product->id?>" prod_name="<?=$product->name?>" prod_symbol="<?=$product->symbol?>"><?=$product->name.': '.$product->symbol?></option>
+							<option value="<?=$product->id?>" prod_name="<?=$product->name?>" prod_symbol="<?=$product->symbol?>">
+								<?=$product->name.': '.$product->symbol?>
+							</option>
 						<? endforeach; ?>
 					</select>
 				</div>
@@ -24,7 +26,7 @@
 				<!-- prod name -->
 				<div id="form-product-name-wrp">
 					<label>Наименование:</label>
-					<input type="text" name="prod_name">
+					<input type="text" name="prod_name" required>
 				</div>
 			</div>
         </div>
@@ -34,7 +36,7 @@
 			 <!-- actions-->
             <div id="form-order-actions-wrp">
                 <label>Операции:</label>
-                <select name="id_action">
+                <select name="action">
 					<option value="">Не выбрана</option>
 					<? foreach ($actions as $action): ?>
 						<option value="<?=$action->id?>" action_name="<?=$action->name?>"><?=$action->name?></option>
@@ -44,19 +46,19 @@
 			<!-- action name-->
             <div id="form-action-name-wrp">
                 <label>Наименование:</label>
-                <input type="text" name="action_name">
+                <input type="text" name="action_name" required>
             </div>
 			<!-- action time manufacturing-->
             <div id="form-action-time-wrp">
                 <label>Время:</label>
-                <input type="text" name="time_manufac">
+                <input type="text" name="time_manufac" required placeholder="В минутах">
             </div>
         </div>
 		
 		<!-- three box -->
 		<div class="form-box">
 			<label>Количество:</label>
-			<input type="number" name="qty">
+			<input type="number" name="qty" value="1" required>
 		</div>
       
         <!-- note -->

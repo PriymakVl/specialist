@@ -19,6 +19,8 @@
 				<td>
 					<? if ($state->duration): ?>
 						<?=$state->duration.'мин.'?>
+					<? elseif ($state->duration === false): ?>
+						<span>Работа закончена</span>
 					<? else: ?>
 						<span>Меньше минуты</span>
 					<? endif; ?>

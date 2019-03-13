@@ -71,6 +71,14 @@ class OrderActionUnplanStatic extends OrderActionBase {
 		return self::perform($sql, $params);
 	}
 	
+	public static function updateById($params)
+	{
+		unset($params['save'], $params['id_order'], $params['action'], $params['id_worker'], $params['time']);
+		$sql = 'UPDATE `order_action_unplan` SET `state` = :state, `prod_name` = :prod_name, `prod_symbol` = :prod_symbol, `action_name` = :action_name,
+			`qty` = :qty, `time_manufac` = :time_manufac, `note` = :note WHERE `id` = :id';
+		return self::perform($sql, $params);
+	}
+	
 }
 
 

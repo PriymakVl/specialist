@@ -46,4 +46,5 @@ require_once ('./modules/order/models/order.php');
 <script src="/modules/order/js/order_delete.js"></script>
 <script src="/modules/order/js/content_delete.js"></script>
 <script src="/modules/order/js/order_actions_managment.js"></script>
-<script src="/modules/order/js/order_action_unplan.js"></script>
+<script src="/modules/order/js/delete_action_unplan.js"></script>
+<script src="/modules/order/js/edit_action_unplan.js"></script>

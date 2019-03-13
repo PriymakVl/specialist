@@ -2,7 +2,10 @@
     <input type="radio" name="tabs" id="tab-4" checked>
     <label for="tab-4">Дополн. операции</label>
     <div class="tab-content">
-		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>
+		<h3>
+			Заказ: <span class="red"><?=$order->symbol?></span>
+			<span class="green" style="margin-left: 20px;">Дополнительные операции</span>
+		</h3>
 		<!-- unplan actions -->
 			<table width="940">
 					<tr>
@@ -22,7 +25,7 @@
 							<td><?=$action->action_name?></td>
 							<td style="background:<?=$action->bgState?>">
 								<? if ($action->state > OrderActionState::PLANED): ?>
-									<a href="/order_action/state?id_action=<?=$action->id?>&type=unplan"><?=$action->convertState?></a>
+									<a href="/order_action/state_list?id_action=<?=$action->id?>&type=unplan"><?=$action->convertState?></a>
 								<? else: ?>
 									<?=$action->convertState?>
 								<? endif; ?>

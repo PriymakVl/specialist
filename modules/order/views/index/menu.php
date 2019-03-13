@@ -16,9 +16,11 @@
 		<? elseif ($order->state == OrderState::WORK): ?>
 				<li><a href="/order/to_made?id_order=<?=$order->id?>">Заказ выполнен</a></li>
 		<? endif; ?>
-		<li>
-			<a href="/order_action/add_unplan?id_order=<?=$order->id?>">Доб. дополн. операцию</a>
-		</li>		
+		<? if (!$order->actionsUnplan): ?>
+			<li>
+				<a href="/order_action/add_unplan?id_order=<?=$order->id?>">Доб. дополн. операц</a>
+			</li>
+		<? endif; ?>
     </ul>
 	
 	<!-- menu order content -->
@@ -39,7 +41,10 @@
 	<!-- actions unplan -->
 	<? if ($order->actionsUnplan): ?>
 		<ul id="menu-order-actions-unplan">
-			<!-- <li id="order-action-unplan-edit" id_order="<?//=$order->id?>">Ред. внепл. операц</li> -->
+			<li>
+				<a href="/order_action/add_unplan?id_order=<?=$order->id?>">Доб. доп. операцию</a>
+			</li>
+			<li id="order-action-unplan-edit" id_order="<?=$order->id?>">Ред. внепл. операц</li> 
 			<li id="order-action-unplan-delete" id_order="<?=$order->id?>">Удал. дополн. операц</li>
 		</ul>
 	<? endif; ?>

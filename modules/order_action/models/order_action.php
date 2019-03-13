@@ -3,7 +3,6 @@ require_once('order_action_static.php');
 
 class OrderAction extends OrderActionStatic {
 	
-	public $states;
 	public $name;
 	public $price;
 	public $timeMade;
@@ -33,17 +32,6 @@ class OrderAction extends OrderActionStatic {
 	{
 		OrderActionState::add($params);
 		self::updateState($params);
-		return $this;
-	}
-	
-	public function getAllStates($params)
-	{
-		$items = OrderActionState::getAllByIdAction($params);
-		foreach ($items as $item) {
-			$state = new OrderActionState($item->id);
-			$state->setDuration($items)->getWorker()->setName()->setBg();
-			$this->states[] = $state;
-		}
 		return $this;
 	}
 	

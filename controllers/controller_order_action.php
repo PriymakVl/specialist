@@ -42,16 +42,25 @@ class Controller_Order_Action extends Controller_Base {
 		$this->redirect('order?id_order='.$order->id);
 	}
 	
+	public function action_edit_unplan()
+	{
+		$params = ParamOrderActionUnplan::edit();
+		$order = new Order($params['id_order']);
+		$action = new OrderActionUnplan($params['id']);
+		if (empty($params['save'])) return $this->render('edit_unplan/main', compact('action', 'order'));
+		$action->edit($params)->setMessage('success', 'edit');
+		$this->redirect('order?id_order='.$order->id);
+	}
+	
 	public function action_state_list()
 	{
 		$params = ParamOrderAction::stateList();
 		if ($params['type'] == 'plan') {
-			$action = new OrderAction($params['id_action']); /***/ $action->getAllStates($params)->getProduct();
-			return $this->render('states_plan/main', compact('action'));
+			$action = new OrderAction($params['id_action']); /***/ $action->getAllStates($params)->getProduct();;
 		} else {
-			$action = new OrderActionUnplan($params['id']); /***/ $action->getWorker()->getStates($params);
-			return $this->render('states_unplan/main', compact('action'));
+			$action = new OrderActionUnplan($params['id']); /***/ $action->getAllStates($params);
 		}
+		return $this->render('states/main', compact('action'));
 	}
 
 	

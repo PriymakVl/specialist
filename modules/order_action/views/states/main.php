@@ -14,7 +14,7 @@
 		<a href="#" onclick="history.back(); return false;" class="back-link">Вернуться назад</a>
 	</h3>
 		
-    <!-- order list -->
+    <!-- action state list -->
     <? include_once('list.php'); ?>
 
 
