@@ -32,12 +32,6 @@
 				<input type="text" name="id_parent" value="<?=$params['id_parent']?>">
 			</div>
 
-
-            <!-- product parent -->
-            <!--<div id="form-product-parent-wrp">
-                <label>Родитель:</label>
-                <input type="text" name="id_parent" value="<?//=$id_parent?>">
-            </div>-->
         </div>
 		
 		<div class="form-box">

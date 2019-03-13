@@ -67,21 +67,23 @@ class OrderAction extends OrderActionStatic {
 	public function countFactTimeManufact()
 	{
 		$params = ['id_action' => $this->id, 'status' => self::STATUS_ACTIVE, 'type' => 'plan'];
-		$states = OrderActionState::getAllByIdAction($params);
-		if (count($states) > 1) $this->timeMade = $this->countTimeManufactByTimeStates($states);
-		else if ($this->time_end) {
-			$this->timeMade = Date::convertTimeToMinutes($this->time_end - $this->time_start);
-		}
+		$this->states = OrderActionState::getAllByIdAction($params);
+		$this->timeMade = $this->countTimeManufactByTimeStates();
 		return $this;
 	}
 	
-	private function countTimeManufactByTimeStates($states)
+	private function countTimeManufactByTimeStates()
 	{
-		for ($i = 0; $i < count($states); $i++) {
-			if (empty($states[$i + 1])) break;
-			$time = $time + ($states[$i + 1]->time - $states[$i]->time);
+		$time = 0;
+		if (empty($this->states) || count($this->states) == 1) return $time + 1;
+		for ($i = 0; $i < count($this->states); $i++) {
+			if ($this->states[$i]->state == OrderActionState::PROGRESS && isset($this->states[$i + 1])) {
+				$time = $time + ($this->states[$i + 1]->time - $this->states[$i]->time);
+			}
 		}
-		return Date::convertTimeToMinutes($time);
+		$time = Date::convertTimeToMinutes($time);
+		if ($time) return $time;
+		else return 1;
 	}
 	
 	
