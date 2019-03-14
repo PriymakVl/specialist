@@ -16,6 +16,8 @@
                     <option value="<?=Product::TYPE_DETAIL?>">Деталь</option>
                     <option value="<?=Product::TYPE_UNIT?>">Узел</option>
 					<option value="<?=Product::TYPE_PRODUCT?>">Изделие</option>
+					<option value="<?=Product::TYPE_STANDARD?>">Стандартное изделие</option>
+					<option value="<?=Product::TYPE_OTHER?>">Прочее</option>
 					<option value="<?=Product::TYPE_CATEGORY?>">Категория</option>
                 </select>
             </div>
@@ -31,13 +33,6 @@
 				<label>ID Parent:</label>
 				<input type="text" name="id_parent" value="<?=$params['id_parent']?>">
 			</div>
-
-
-            <!-- product parent -->
-            <!--<div id="form-product-parent-wrp">
-                <label>Родитель:</label>
-                <input type="text" name="id_parent" value="<?//=$id_parent?>">
-            </div>-->
         </div>
 		
 		<div class="form-box">
@@ -45,6 +40,11 @@
 			<div id="form-product-name-wrp">
 				<label>Наименование:</label>
 				<input type="text" name="name">
+			</div>
+			<!-- number -->
+			<div id="form-product-number-wrp">
+				<label>Номер:</label>
+				<input type="number" name="number" value="1">
 			</div>
 		</div>
 

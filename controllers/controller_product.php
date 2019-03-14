@@ -21,11 +21,9 @@ class Controller_Product extends Controller_Base {
 	public function action_add()
     {
         $params = ParamProduct::add();
-		if (isset($params['name'])) {
-			Product::add($params);
-			$this->redirect('product?id_prod='.$params['id_parent']);
-		}
-		$this->render('add/main', compact('params'));
+		if (empty($params['save'])) return $this->render('add/main', compact('params'));
+		Product::add($params);
+		$this->redirect('product?id_prod='.$params['id_parent']);
     }
 	
 	public function action_edit()

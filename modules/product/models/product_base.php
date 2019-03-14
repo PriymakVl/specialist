@@ -38,6 +38,8 @@ class ProductBase extends Model
     const TYPE_PRODUCT = 2;
     const TYPE_UNIT = 3;
     const TYPE_DETAIL = 4;
+	const TYPE_STANDARD = 5;
+	const TYPE_OTHER = 6;
 	
 
 

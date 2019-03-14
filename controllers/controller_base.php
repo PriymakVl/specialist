@@ -8,6 +8,7 @@ require_once ('./params/param_product.php');
 require_once ('./params/param_product_action.php');
 require_once ('./params/param_statistics.php');
 require_once ('./params/param_order_action_unplan.php');
+require_once ('./params/param_drawing.php');
 
 	/*terminal*/
 require_once ('./params/param_terminal.php');
@@ -33,6 +34,7 @@ require_once('./modules/product/models/product_action.php');
 
 require_once('./modules/statistics/models/statistics.php');
 require_once ('./models/data_action.php');
+require_once('/modules/drawing/models/drawing.php');
 
 
 

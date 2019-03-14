@@ -16,6 +16,8 @@
                     <option value="<?=Product::TYPE_DETAIL?>" <? if ($product->type == Product::TYPE_DETAIL) echo 'selected'; ?>>Деталь</option>
                     <option value="<?=Product::TYPE_UNIT?>" <? if ($product->type == Product::TYPE_UNIT) echo 'selected'; ?>>Узел</option>
 					<option value="<?=Product::TYPE_PRODUCT?>" <? if ($product->type == Product::TYPE_PRODUCT) echo 'selected'; ?>>Изделие</option>
+					<option value="<?=Product::TYPE_STANDARD?>" <? if ($product->type == Product::TYPE_STANDARD) echo 'selected'; ?>>Стандартное изделие</option>
+					<option value="<?=Product::TYPE_OTHER?>" <? if ($product->type == Product::TYPE_OTHER) echo 'selected'; ?>>Прочее</option>
 					<option value="<?=Product::TYPE_CATEGORY?>" <? if ($product->type == Product::TYPE_CATEGORY) echo 'selected'; ?>>Категория</option>
                 </select>
             </div>
@@ -32,12 +34,6 @@
 				<input type="text" name="id_parent" value="<?=$product->id_parent?>">
 			</div>
 
-
-            <!-- product parent -->
-            <!--<div id="form-product-parent-wrp">
-                <label>Родитель:</label>
-                <input type="text" name="id_parent" value="<?//=$id_parent?>">
-            </div>-->
         </div>
 		
 		<div class="form-box">
@@ -48,6 +44,12 @@
 				<label>Редактировать все:</label>
 				<input type="checkbox" name="edit_all">
 			</div>
+		</div>
+		
+		<div class="form-box">
+			<!-- number -->
+			<label>Номер:</label>
+			<input type="number" name="number" value="<?=$product->number?>">
 		</div>
 
         <div class="form-box">

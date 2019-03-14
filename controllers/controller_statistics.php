@@ -20,7 +20,7 @@ class Controller_Statistics extends Controller_Base {
 	{
 		$params = ParamWorker::made();
 		$worker = new Worker($params['id_worker']);
-		$worker->getActionsMade($params);
+		$worker->getActionsMade($params)->countTotalTimeForPeriod()->costMade();
 		$this->view->title = 'Статистика по рабочему';
 		$this->render('worker/main', compact('worker', 'params'));
 	}

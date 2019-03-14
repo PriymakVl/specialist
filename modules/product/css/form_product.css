@@ -57,3 +57,9 @@
 #form-product-time-wrp input[type="text"] {
 	width: 80px;
 }
+
+#form-product-number-wrp  {
+	position: absolute;
+	top: 10px;
+	left: 750px;
+}

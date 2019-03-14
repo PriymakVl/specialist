@@ -7,6 +7,8 @@ class Product extends ProductStatic {
 	public $typeViewSpecification;
 	public $actions;
 	public $statistics;
+	public $specificationGroup;//divided on group detail, unit and other
+	public $drawings;
 
     public function __construct($id_prod)
     {
@@ -19,6 +21,7 @@ class Product extends ProductStatic {
 		$this->specification = self::getAllByIdParent($this->id);
 		$this->getTypeViewSpecification();
 		if ($this->typeViewSpecification == 'category') $this->getChildrenSpecification();
+		else $this->dividedOnGroupsByType();
 		return $this;
 	}
 	
@@ -71,10 +74,28 @@ class Product extends ProductStatic {
 	public function getStatistics()
 	{
 		$items = OrderAction::getAllOrdersByIdProduct($this->id);
-		foreach ($items as $item) {
-				$this->statistics[]['order'] = new Order($item->id_order);
-				$this->statistics[]['time'] = Statistics::countTimeFactMadeProductInOrder($item->id_order, $this->id);
+		if (empty($items)) return $this;
+		for ($i = 0; $i < count($items); $i++) {
+				$this->statistics[$i]['order'] = new Order($items[$i]->id_order);
+				$this->statistics[$i]['time'] = Statistics::countTimeFactMadeProductInOrder($items[$i]->id_order, $this->id);
 		}
+		return $this;
+	}
+	
+	public function dividedOnGroupsByType()
+	{
+		foreach ($this->specification as $item) {
+			if($item->type == self::TYPE_UNIT) $this->specificationGroup['unit'][] = $item;
+			else if ($item->type == self::TYPE_DETAIL)  $this->specificationGroup['detail'][] = $item;
+			else if ($item->type == self::TYPE_STANDARD)  $this->specificationGroup['standard'][] = $item;
+			else if ($item->type == self::TYPE_OTHER)  $this->specificationGroup['other'][] = $item;
+		}
+		return $this;
+	}
+	
+	public function getDrawings()
+	{
+		$this->drawings = Drawing::getAllByIdProduct($this->id);
 		return $this;
 	}
     

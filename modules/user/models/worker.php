@@ -6,6 +6,8 @@ class Worker extends WorkerStatic {
 	 //public $productsCut;
 	 public $timePlan = 0;
 	 public $timeMade = 0;
+	 public $totalTimeMade = 0;
+	 public $totalTimePlan = 0;
 	 public $loadPercent = 0;
 	 //public $loadFullFlage; //если указана трудоемкость для всех деталей
 	 //public $defaultActions;
@@ -34,6 +36,15 @@ class Worker extends WorkerStatic {
 			$action = new OrderAction($item->id);
 			$action->getProduct()->getOrder()->countFactTimeManufact();
 			$this->actions[] = $action;
+		}
+		return $this;
+	}
+	
+	public function countTotalTimeForPeriod()
+	{
+		foreach ($this->actions as $action) {
+			if ($action->timeMade) $this->totalTimeMade = $this->totalTimeMade + $action->timeMade;
+			$this->totalIimePlan = $this->totalTimePlan + $action->time_manufac;
 		}
 		return $this;
 	}
@@ -70,10 +81,8 @@ class Worker extends WorkerStatic {
 	
 	public function costMade()
 	{
-		$params = ParamWorker::made($this->id);
-		$worker = $this->getActionsMade($params);
-		if (empty($worker->actions)) return $this;
-		foreach ($worker->actions as $action) {
+		if (empty($this->actions)) return $this;
+		foreach ($this->actions as $action) {
 			if ($action->price && $action->time_manufac) $this->costMade = $this->costMade + ($action->time_manufac * $action->price);
 		}
 		$this->costMade = round($this->costMade, 2);

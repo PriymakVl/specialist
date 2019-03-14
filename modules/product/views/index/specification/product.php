@@ -1,6 +1,3 @@
-<?php
-	$number = 1;
-?>
 <li>
     <input type="radio" name="tabs" id="tab-2" checked>
     <label for="tab-2">Спецификация</label>
@@ -20,7 +17,7 @@
                     <tr>
                         <td class="<?=($id_active == $prod->id)?'bg-green':''?>">
                             <input type="hidden" name="specif" id_prod="<?=$prod->id?>">
-							<?=$number?>
+							<?=$prod->number?>
                         </td>
                         <td>
 							<? if ($prod->type == Product::TYPE_CATEGORY): ?>

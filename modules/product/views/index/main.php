@@ -22,14 +22,18 @@ require_once ('./modules/product/models/product.php');
 
             <!-- content -->
 			<? if ($product->typeViewSpecification == 'category'): ?>
-				<? include_once('specification_category.php'); ?>
+				<? include_once('specification/category.php'); ?>
+			<? elseif ($product->specificationGroup): ?>
+				<? include_once('specification/groups.php'); ?>
 			<? elseif ($product->specification): ?>
-				<? include_once('specification_product.php'); ?>
+				<? include_once('specification/product.php'); ?>
 			<? endif; ?>
 
             <!-- actions -->
             <? if ($product->actions) include_once('actions.php'); ?>
-
+			
+			<!-- statistics -->
+			<? if ($product->statistics) include_once('statistics.php'); ?>
         </ul>
     </div>
 

@@ -1,5 +1,5 @@
 <li>
-    <input type="radio" name="tabs" id="tab-3" checked>
+    <input type="radio" name="tabs" id="tab-3">
     <label for="tab-3">Операции</label>
     <div class="tab-content">
 		<h2><?=$product->name?>: <span class="green"><?=$product->symbol?></span></h2>

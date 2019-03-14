@@ -6,17 +6,19 @@ class ParamProduct extends Param {
     
 	public static function add()
 	{
-		$keys = ['symbol', 'name', 'quantity', 'id_parent', 'type', 'note'];
+		$keys = ['symbol', 'name', 'quantity', 'id_parent', 'type', 'note', 'number', 'save'];
 		$params = self::getAll($keys);
-		if (empty($params['quantity'])) $params['quantity'] = 0;
+		if (empty($params['quantity'])) $params['quantity'] = 1;
+		if (empty($params['number'])) $params['number'] = 1;
 		return $params;
 	}
 	
 	public static function edit($product)
 	{
-		$keys = ['symbol', 'name', 'quantity', 'id_parent', 'type', 'note', 'edit_all', 'save', 'id', 'edit_all'];
+		$keys = ['symbol', 'name', 'quantity', 'id_parent', 'type', 'note', 'edit_all', 'save', 'id', 'edit_all', 'number'];
 		$params = self::getAll($keys);
-		if (empty($params['quantity'])) $params['quantity'] = 0;
+		if (empty($params['quantity'])) $params['quantity'] = 1;
+		if (empty($params['number'])) $params['number'] = 1;
 		$params['symbol_old'] = $product->symbol;
 		return $params;
 	}

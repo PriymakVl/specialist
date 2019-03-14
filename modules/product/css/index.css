@@ -10,3 +10,12 @@
 #product-categories a:hover {
 	text-decoration: none;
 }
+
+.product-group-name {
+	font-weight:bold;
+	font-size: 16px;
+}
+
+.tab-content h2 {
+	margin-top: -15px;
+}

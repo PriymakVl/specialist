@@ -1,6 +1,24 @@
 <?php 
 	$number = 1;
 ?>
+<!-- total time -->
+<? if ($worker->actions): ?>
+	<table width="940">
+		<tr>
+			<th width="300">Общая трудоемкость плановая</th>
+			<th width="300">Общая трудоемкость фактическая</th>
+			<th>Заработал</th>
+		</tr>
+		<tr>
+			<td><?=$worker->totalTimePlan?></td>
+			<td><?=$worker->totalTimeMade?></td>
+			<td><?=$worker->costMade?></td>
+		<tr>
+	<table>
+	<br>
+<? endif; ?>
+
+<!-- list actions -->
 <table class="action-list" width="940">
     <tr>
         <th width="50">№</th>

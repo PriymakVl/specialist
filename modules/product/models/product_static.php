@@ -6,7 +6,7 @@ class ProductStatic extends ProductBase {
 
     public static function getAllByIdParent($id_parent)
     {
-        $sql = 'SELECT `id` FROM `products` WHERE `id_parent` = :id_parent AND `status` = :status';
+        $sql = 'SELECT `id` FROM `products` WHERE `id_parent` = :id_parent AND `status` = :status ORDER BY `number`';
         $params = ['id_parent' => $id_parent, 'status' => self::STATUS_ACTIVE];
         $ids = self::perform($sql, $params)->fetchAll();
         return self::createArrayOfProduct($ids);
@@ -23,8 +23,9 @@ class ProductStatic extends ProductBase {
 	
 	public static function add($params)
 	{
-		$fields = 'symbol, name, quantity, type, id_parent, note';
-        $values = ':symbol, :name, :quantity, :type, :id_parent, :note';
+		unset($params['save']);
+		$fields = 'symbol, name, quantity, type, id_parent, note, number';
+        $values = ':symbol, :name, :quantity, :type, :id_parent, :note, :number';
         $sql = 'INSERT INTO `products` ('.$fields.') VALUES ('.$values.')';
         return self::insert($sql, $params); 
 	}
@@ -33,7 +34,7 @@ class ProductStatic extends ProductBase {
 	{
 		unset($params['save'], $params['symbol_old']);
 		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent, 
-				`quantity` = :quantity WHERE `id` = :id';
+				`quantity` = :quantity, `number` = :number WHERE `id` = :id';
 		return self::update($sql, $params);
 	}
 	

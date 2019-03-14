@@ -63,9 +63,15 @@ class ModelStatic extends PHPDataObject {
         return rtrim($where, ' AND ');
     }
 
-    public static function getLastId()
+    public static function getLastInsertId()
     {
         return self::perform("SELECT LAST_INSERT_ID()")->fetchColumn();
     }
+	
+	public static function getLastId($table)
+	{
+		$sql = 'SELECT MAX(id) AS id FROM '.$table;
+		return self::perform($sql)->fetchColumn();
+	}
 	
 }

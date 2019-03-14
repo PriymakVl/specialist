@@ -9,11 +9,19 @@
         <li>
             <a href="/product/delete?id=<?=$product->id?>">Удалить</a>
         </li>
+		<br><hr>
+		
 		<? if ($product->type != Product::TYPE_DETAIL): ?>
 			<li>
 				<a href="/product/activate?id_prod=<?=$product->id?>">Сделать активным</a>
 			</li>
 		<? endif; ?>
+		<li>
+			<a href="drawing/add?id_prod=<?=$product->id?>">Добавить чертеж</a>
+		</li>
+		<br><hr>
+		
+		
 		<li>
             <a href="/order/add_content?id_prod=<?=$product->id?>">Добавить в заказ</a>
         </li>
