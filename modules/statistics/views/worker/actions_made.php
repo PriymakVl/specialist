@@ -43,9 +43,9 @@
 				<td><?=$action->name?></td>
 				<td><?=$action->time_manufac?> мин.</td>
 				<td>
-					<? if ($action->timeMade): ?>
+					<? if ($action->timeMade && $action->states): ?>
 						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->timeMade.'мин.'?></a>
-					<? elseif ($actions->states): ?>
+					<? elseif ($action->states): ?>
 						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan">Меньше минуты</a>
 					<? else: ?>
 						<span class="red">Нет</span>

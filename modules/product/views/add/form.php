@@ -33,6 +33,10 @@
 				<label>ID Parent:</label>
 				<input type="text" name="id_parent" value="<?=$params['id_parent']?>">
 			</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> f8ce43c687689d5054ce60a15bfc6c7267efcce4
         </div>
 		
 		<div class="form-box">
