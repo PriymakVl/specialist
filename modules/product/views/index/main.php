@@ -16,6 +16,9 @@ require_once ('./modules/product/models/product.php');
 
     <div id="product-index-wrp">
         <ul class="tabs">
+		
+			<!-- message -->
+			<? include './views/total/message.php'; ?>
 
             <!-- order  info -->
             <? include_once('info.php'); ?>
@@ -25,8 +28,8 @@ require_once ('./modules/product/models/product.php');
 				<? include_once('specification/category.php'); ?>
 			<? elseif ($product->specificationGroup): ?>
 				<? include_once('specification/groups.php'); ?>
-			<? elseif ($product->specification): ?>
-				<? include_once('specification/product.php'); ?>
+			<? //elseif ($product->specification): ?>
+				<? //include_once('specification/product.php'); ?>
 			<? endif; ?>
 
             <!-- actions -->
@@ -34,6 +37,9 @@ require_once ('./modules/product/models/product.php');
 			
 			<!-- statistics -->
 			<? if ($product->statistics) include_once('statistics.php'); ?>
+			
+			<!-- drawings -->
+			<? if ($product->drawings) include_once('drawings.php'); ?>
         </ul>
     </div>
 

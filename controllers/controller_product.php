@@ -8,13 +8,14 @@ class Controller_Product extends Controller_Base {
         parent::__construct();
         $this->view->pathFolder = './modules/product/views/';
 		$this->view->title = 'Производство';
+		$this->message->section = 'product';
     }
 
     public function action_index()
 	{
 		$id_active = Session::get('product-active');
 		$product = new Product(Param::get('id_prod'));
-		$product->getSpecification()->getParent()->getActions()->countTimeManufacturing()->getStatistics();
+		$product->getSpecification()->getParent()->getActions()->countTimeManufacturing()->getStatistics()->getDrawings();
 		$this->render('index/main', compact('product', 'id_active'));
 	}
 
@@ -39,8 +40,11 @@ class Controller_Product extends Controller_Base {
 	public function action_copy()
 	{
 		$params = ParamProduct::copy();
-		if (empty($params['id_parent'])) exit('Нет активного узла');
+		if (empty($params['id_parent'])) { 
+			$this->message->set('error', 'copy-not-parent'); /***/ return $this->redirectPrevious(); 
+		}
 		Product::add($params);
+		$this->message->set('success', 'copy');
 		$this->redirect('product?id_prod='.$params['id_parent']);
 	}
 	

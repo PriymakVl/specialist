@@ -18,20 +18,20 @@
             </div>
         </li>
 		
-        <!-- Products -->
-       <!-- <li class="drop">
+        <!-- products -->
+		<li class="drop">
             <a href="#">Продукция</a>
             <div class="dropdownContain">
                 <div class="dropOut">
                     <div class="triangle"></div>
                     <ul>
-                        <li><a href="/product/popular">Популярные</a></li>
-                        <li><a href="/product?id_prod=10">Продукция</a></li>
+                        <li><a href="/product?id_prod=10">Пневмо</a></li>
+                        <li><a href="/product?id_prod=11">Пресса и накатки</a></li>
                     </ul>
                 </div>
             </div>
-        </li> -->
-		<li><a href="/product?id_prod=10">Продукция</a></li>
+        </li>
+		
         <!-- statistics -->
         <li><a href="/statistics/workers">Статистика</a></li>
         <!-- logout -->

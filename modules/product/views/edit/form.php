@@ -40,7 +40,7 @@
 			<!-- product name -->
 			<div id="form-product-name-wrp">
 				<label>Наименование:</label>
-				<input type="text" name="name" value="<?=$product->name?>">
+				<input type="text" name="name" value="<?=$product->name?>" required>
 				<label>Редактировать все:</label>
 				<input type="checkbox" name="edit_all">
 			</div>

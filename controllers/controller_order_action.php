@@ -48,6 +48,7 @@ class Controller_Order_Action extends Controller_Base {
 		$order = new Order($params['id_order']);
 		$action = new OrderActionUnplan($params['id']);
 		if (empty($params['save'])) return $this->render('edit_unplan/main', compact('action', 'order'));
+		Order::checkReady($action->id_order);
 		$action->edit($params)->setMessage('success', 'edit');
 		$this->redirect('order?id_order='.$order->id);
 	}

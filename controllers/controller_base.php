@@ -34,7 +34,7 @@ require_once('./modules/product/models/product_action.php');
 
 require_once('./modules/statistics/models/statistics.php');
 require_once ('./models/data_action.php');
-require_once('/modules/drawing/models/drawing.php');
+require_once('./modules/drawing/models/drawing.php');
 
 
 

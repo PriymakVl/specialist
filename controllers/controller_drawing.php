@@ -26,14 +26,23 @@ class Controller_Drawing extends Controller_Base {
 		$result = Drawing::add($params);
 		if ($result) $this->message->set('success', 'add');
 		else $this->message->set('error', 'add-error');
-		$this->redirect('product?id_prod='.$params['id_prod']);
+		$this->redirect('product?tab=5&id_prod='.$params['id_prod']);
     }
 	
 	public function action_delete()
 	{
 		$dwg = new Drawing(Param::get('id_dwg'));
 		$dwg->delete()->setMessage('success', 'delete');
-		$this->redirect('product?id_prod='.$dwg->id_prod);
+		$this->redirect('product?tab=5&id_prod='.$dwg->id_prod);
+	}
+	
+	public function action_edit_note()
+	{
+		$params = ParamDrawing::note();
+		$dwg = new Drawing($params['id_dwg']);
+		if (empty($params['save'])) return $this->render('edit_note/main', compact('dwg'));
+		$dwg->editNote()->setMessage('success', 'edit-note');
+		$this->redirect('product?tab=5&id_prod='.$dwg->id_prod);
 	}
 
     

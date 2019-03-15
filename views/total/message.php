@@ -1,8 +1,7 @@
 <?php
-    
     $message = new Message();
     $message->get();
-    ?>
+ ?>
 
 <? if($message->text): ?>
     <div class="message-wrp">

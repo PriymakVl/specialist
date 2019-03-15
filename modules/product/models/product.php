@@ -14,6 +14,7 @@ class Product extends ProductStatic {
     {
         $this->tableName = 'products';
         parent::__construct($id_prod);
+		$this->message->section = 'product';
     }
 	
 	public function getSpecification()

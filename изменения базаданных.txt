@@ -1,3 +1,2 @@
 добавить rating in order_actions
-добавить номер в products
 добавить таблицу чертежей

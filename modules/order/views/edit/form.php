@@ -21,7 +21,7 @@
             <!-- date execution-->
             <div id="form-order-date-wrp">
                 <label>Срок выполнения:</label>
-                <input type="text" name="date_exec" class="datepicker" value="<?if ($order->date_exec) echo date('d.m.y', $order->date_exec);?>">
+                <input type="text" name="date_exec" class="datepicker" value="<?if ($order->date_exec) echo date('d.m.y', $order->date_exec);?>" autocomplete="off">
             </div>
         </div>
 		

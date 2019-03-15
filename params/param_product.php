@@ -32,6 +32,7 @@ class ParamProduct extends Param {
 		$params['type'] = $product->type ? $product->type : Product::TYPE_DETAIL;
 		$params['note'] = $product->note ? $product->note : '';
 		$params['id_parent'] = Session::get('product-active');
+		$params['number'] = 1;
 		return $params;
 	}
 	

@@ -3,7 +3,7 @@
 <tr>
 <? foreach($product->specificationGroup['detail'] as $detail): ?>
 	<tr>
-		<td class="<?=($id_active == $product->id)?'bg-green':''?>">
+		<td class="<?=($id_active == $detail->id)?'bg-green':''?>">
 			<?=$detail->number?>
 		</td>
 		<td>

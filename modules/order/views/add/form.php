@@ -21,7 +21,7 @@
             <!-- date execution-->
             <div id="form-order-date-wrp">
                 <label>Срок выполнения:</label>
-                <input type="text" name="date_exec" class="datepicker">
+                <input type="text" name="date_exec" class="datepicker" autocomplete="off">
             </div>
         </div>
 		

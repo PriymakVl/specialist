@@ -33,17 +33,13 @@
 				<label>ID Parent:</label>
 				<input type="text" name="id_parent" value="<?=$params['id_parent']?>">
 			</div>
-<<<<<<< HEAD
-=======
-
->>>>>>> f8ce43c687689d5054ce60a15bfc6c7267efcce4
         </div>
 		
 		<div class="form-box">
 			<!-- product name -->
 			<div id="form-product-name-wrp">
 				<label>Наименование:</label>
-				<input type="text" name="name">
+				<input type="text" name="name" required>
 			</div>
 			<!-- number -->
 			<div id="form-product-number-wrp">
