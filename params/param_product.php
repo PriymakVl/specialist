@@ -10,6 +10,8 @@ class ParamProduct extends Param {
 		$params = self::getAll($keys);
 		if (empty($params['quantity'])) $params['quantity'] = 1;
 		if (empty($params['number'])) $params['number'] = 1;
+		if (isset($params['symbol'])) $params['symbol'] = trim($params['symbol']);
+		if (isset($params['name'])) $params['name'] = trim($params['name']);
 		return $params;
 	}
 	
@@ -19,6 +21,8 @@ class ParamProduct extends Param {
 		$params = self::getAll($keys);
 		if (empty($params['quantity'])) $params['quantity'] = 1;
 		if (empty($params['number'])) $params['number'] = 1;
+		if (isset($params['symbol'])) $params['symbol'] = trim($params['symbol']);
+		if (isset($params['name'])) $params['name'] = trim($params['name']);
 		$params['symbol_old'] = $product->symbol;
 		return $params;
 	}

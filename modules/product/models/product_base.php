@@ -15,7 +15,9 @@ class ProductBase extends Model
 	// specification
 	public $specification;
 	
-	public $timeManufacturing; //трудоемкость изготовления детали(узла, изделия);
+	public $timeActions; //трудоемкость операциц детали(узла);
+	public $timeSpecifications; //трудоемкость деталий узла
+	public $timeManufacturing; //общее время на изготовление специфик + операции
 	public $timeManufacturingOrder; //время на изготовление всего количество деталей одной позиции в заказеn;
 	
 	//order

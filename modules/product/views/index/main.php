@@ -23,14 +23,9 @@ require_once ('./modules/product/models/product.php');
             <!-- order  info -->
             <? include_once('info.php'); ?>
 
-            <!-- content -->
-			<? if ($product->typeViewSpecification == 'category'): ?>
-				<? include_once('specification/category.php'); ?>
-			<? elseif ($product->specificationGroup): ?>
-				<? include_once('specification/groups.php'); ?>
-			<? //elseif ($product->specification): ?>
-				<? //include_once('specification/product.php'); ?>
-			<? endif; ?>
+            <!-- specifications -->
+			<? if ($product->id == ID_CATEGORY_CYLINDER) include_once('specification/category.php'); ?>
+			<? if ($product->specificationGroup)  include_once('specification/groups.php'); ?>
 
             <!-- actions -->
             <? if ($product->actions) include_once('actions.php'); ?>

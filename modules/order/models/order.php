@@ -108,7 +108,7 @@ class Order extends OrderStatic {
 	
 	public function convertRating()
 	{
-		$this->convertRating = ParamOrder::convertRating($this->rating);
+		$this->convertRating = self::convertRatingStatic($this->rating);
 		return $this;
 	}
     

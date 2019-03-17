@@ -19,6 +19,7 @@ class ParamOrder extends Param {
         $params['date_exec'] = Date::convertStringToTime(self::get('date_exec'));
 		$params['state'] = empty($params['state']) ? OrderState::REGISTERED : $params['state'];
 		$params['date_reg'] = time();
+		if (isset($params['symbol'])) $params['symbol'] = trim($params['symbol']);
         return $params;
     }
 
@@ -28,6 +29,7 @@ class ParamOrder extends Param {
         $params = self::getAll($keys);
 		if (empty($params['date_exec'])) $params['date_exec'] = '';
         $params['date_exec'] = Date::convertStringToTime($params['date_exec']);
+		if (isset($params['symbol'])) $params['symbol'] = trim($params['symbol']);
         return $params;
     }
 	
@@ -44,13 +46,5 @@ class ParamOrder extends Param {
 		return $params;
 	}
 	
-	public static function convertRating($rating)
-	{
-		switch($rating) {
-			case Order::RATING_REGULAR: return 'Обычный';
-			case Order::RATING_IMPORTANT: return 'Важный';
-			case Order::RATING_PRIORITY: return 'Первоочередной';
-		}
-	}
 	
 }

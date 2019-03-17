@@ -19,10 +19,7 @@ class Product extends ProductStatic {
 	
 	public function getSpecification()
 	{
-		$this->specification = self::getAllByIdParent($this->id);
-		$this->getTypeViewSpecification();
-		if ($this->typeViewSpecification == 'category') $this->getChildrenSpecification();
-		else $this->dividedOnGroupsByType();
+		$this->specification = self::getSpecificationStatic($this->id_parent);
 		return $this;
 	}
 	
@@ -38,37 +35,23 @@ class Product extends ProductStatic {
 		return $this;
 	}
 	
-	private function getTypeViewSpecification()
+	public function countTimeManufacturing()
 	{
-		foreach ($this->specification as $item) {
-			if ($item->type == self::TYPE_CATEGORY) {
-				$this->typeViewSpecification = 'category';
-				break;
-			}
-		}
-	}
-	
-	private function getChildrenSpecification()
-	{
-		foreach($this->specification as $item) {
-			$item->getSpecification();
-		}
-	}
-	
-	public function countTimeManufacturingOrder()
-	{
-		if (!$this->time_prod) return;
-		$this->timeManufacturingOrder = ($this->orderQtyAll * $this->time_prod) + $this->time_prepar;
+		$this->countTimeActions();
+		$this->countTimeSpecification();
+		$this->timeManufacturing = $this->timeActions + $this->timeSpecification;
 		return $this;
 	}
 	
-	public function countTimeManufacturing()
+	public function countTimeActions()
 	{
-		$this->timeManufacturing = ProductTime::countTimeManufacturing($this);
-		if ($this->specification) {
-			$time_manufac_specif = ProductTime::countTimeManufacSpecif($this->content);
-			$this->timeManufacturing = $this->timeManufacturing + $time_manufac_specif;
-		}
+		if ($this->actions) $this->timeActions = ProductTime::countTimeProductActions($this);
+		return $this;
+	}
+	
+	private function countTimeSpecification()
+	{
+		if ($this->specification) $this->timeSpecification = ProductTime::countTimeProductSpecification($this);
 		return $this;
 	}
 	
@@ -83,14 +66,10 @@ class Product extends ProductStatic {
 		return $this;
 	}
 	
-	public function dividedOnGroupsByType()
+	public function getSpecificationGroup()
 	{
-		foreach ($this->specification as $item) {
-			if($item->type == self::TYPE_UNIT) $this->specificationGroup['unit'][] = $item;
-			else if ($item->type == self::TYPE_DETAIL)  $this->specificationGroup['detail'][] = $item;
-			else if ($item->type == self::TYPE_STANDARD)  $this->specificationGroup['standard'][] = $item;
-			else if ($item->type == self::TYPE_OTHER)  $this->specificationGroup['other'][] = $item;
-		}
+		if (empty($this->specification)) return $this;
+		$this->specificationGroup = self::getSpecificationGroupStatic($this->specification);
 		return $this;
 	}
 	

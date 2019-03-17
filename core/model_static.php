@@ -1,16 +1,14 @@
 <?php
-require_once('pdo.php');
+require_once('db.php');
 
-class ModelStatic extends PHPDataObject {
-	
-	protected static $pdo;
+class ModelStatic extends DB {
 
     const STATUS_DELETE = 0;
     const STATUS_ACTIVE = 1;
 
     protected static function perform($sql, $params = null)
     {
-        $pdo = parent::getConnectionDatabase();
+        $pdo = parent::getInstance();
         if ($params) {
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);
@@ -25,11 +23,6 @@ class ModelStatic extends PHPDataObject {
 		$params = ['status' => self::STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
-
-/*     public static function rowCount($sql)
-    {
-        return self::perform($sql)->rowCount();
-    } */
 	
 	public static function update($sql, $params) 
 	{

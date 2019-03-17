@@ -7,8 +7,49 @@ class OrderStatic extends OrderModel {
 	{
 		if ($params['state'] == OrderState::ALL) $ids = self::getStateAll($params);
 		else $ids = self::getStateOne($params);
-        if (empty($ids) return false;
+        if (empty($ids)) return false;
 	    return self::createArrayOfOrder($ids);
+	}
+	
+	protected static function createArrayOfOrder($ids)
+    {
+        $orders = Helper::createArrayOfObject($ids, 'Order');
+		foreach ($orders as $order) {
+			$order->getPositions()->getPositionsTable();
+		}
+		return $orders;
+    }
+	
+	public static function checkReady()
+	{
+		$params = ParamOrderAction::getNotReadyActionOrder();
+		$order = new Order($params['id_order']);
+		$result = OrderAction::getNotReadyActionOrder($params);
+		$result_unplan = OrderActionUnplan::getNotReadyActionOrder($order->id);
+		if ($result || $result_unplan) $order->setState(OrderState::WORK);
+		else $order->setState(OrderState::MADE);
+	}
+	
+	public static function convertRatingStatic($rating)
+	{
+		switch($rating) {
+			case self::RATING_REGULAR: return 'Обычный';
+			case self::RATING_IMPORTANT: return 'Важный';
+			case self::RATING_PRIORITY: return 'Первоочередной';
+		}
+	}
+	
+	public function countTimeManufacturingOrder()
+	{
+		if (!$this->time_prod) return $this;
+		$this->timeManufacturingOrder = ProductTime::manufacturingOrder($this);
+		return $this;
+	}
+	
+	public static function manufacturingOrder($product)
+	{
+		$time_prepar = $product->time_prepar ? $product->time_prepar : 0;
+		return ($product->orderQtyAll * $product->time_prod) + $time_prepar;
 	}
 	
 

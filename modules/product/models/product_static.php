@@ -1,55 +1,33 @@
 <?php
-require_once('product_base.php');
+require_once('product_model.php');
 
-class ProductStatic extends ProductBase {
+class ProductStatic extends ProductModel {
 
 
-    public static function getAllByIdParent($id_parent)
+    public static function getSpecificationStatic($id_parent)
     {
-        $sql = 'SELECT `id` FROM `products` WHERE `id_parent` = :id_parent AND `status` = :status ORDER BY `number`';
-        $params = ['id_parent' => $id_parent, 'status' => self::STATUS_ACTIVE];
-        $ids = self::perform($sql, $params)->fetchAll();
-        return self::createArrayOfProduct($ids);
-    }
-
-    private static function createArrayOfProduct($ids)
-    {
+		$ids = self::getAllByIdParent($id_parent);
+		if (empty($ids)) return false;
         $products = Helper::createArrayOfObject($ids, 'Product');
 		foreach ($products as $product) {
-			$product->getSpecification()->countTimeManufacturing();
+			$product->countTimeActions();
 		}
 		return $products;
     }
 	
-	public static function add($params)
+	public static function getSpecificationGroupStatic($specification)
 	{
-		unset($params['save']);
-		$fields = 'symbol, name, quantity, type, id_parent, note, number';
-        $values = ':symbol, :name, :quantity, :type, :id_parent, :note, :number';
-        $sql = 'INSERT INTO `products` ('.$fields.') VALUES ('.$values.')';
-        return self::insert($sql, $params); 
+		foreach ($specification as $item) {
+			if($item->type == self::TYPE_PRODUCT) $specification_group['product'][] = $item;
+			else if($item->type == self::TYPE_UNIT) $specification_group['unit'][] = $item;
+			else if ($item->type == self::TYPE_DETAIL)  $specification_group['detail'][] = $item;
+			else if ($item->type == self::TYPE_STANDARD)  $specification_group['standard'][] = $item;
+			else if ($item->type == self::TYPE_OTHER)  $specification_group['other'][] = $item;
+		}
+		return $specification_group;
 	}
 	
-	public static function editOne($params) 
-	{
-		unset($params['save'], $params['symbol_old']);
-		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent, 
-				`quantity` = :quantity, `number` = :number WHERE `id` = :id';
-		return self::update($sql, $params);
-	}
-	
-	public static function editAll($params)
-	{
-		unset($params['edit_all'], $params['quantity'], $params['id_parent'], $params['save'], $params['id']);
-		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note WHERE `symbol` = :symbol_old';
-		return self::update($sql, $params);
-	}
-	
-	public static function getAllBySymbol($symbol)
-	{
-		$sql = 'SELECT * FROM `products` WHERE `symbol` = :symbol AND `status` = :status';
-        $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
-        return self::perform($sql, $params)->fetchAll();
-	}
+
+
 	
 }
