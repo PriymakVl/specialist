@@ -36,7 +36,6 @@
 						<a href="#" class="product-action-delete" id_action="<?=$action->id?>">Удалить</a>
 					</td>
 				</tr>
-				<? $number++; ?>
 			<? endforeach; ?>
         </table>
     </div>

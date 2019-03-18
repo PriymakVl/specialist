@@ -24,8 +24,10 @@ require_once ('./modules/product/models/product.php');
             <? include_once('info.php'); ?>
 
             <!-- specifications -->
-			<? if ($product->id == ID_CATEGORY_CYLINDER) include_once('specification/category.php'); ?>
-			<? if ($product->specificationGroup)  include_once('specification/groups.php'); ?>
+			<? 
+				if ($product->id == ID_CATEGORY_CYLINDER || $product->id == ID_CATEGORY_PRESS || $product->id == ID_CATEGORY_PRODUCTS) include_once('specification/category.php'); 
+				else if ($product->specificationGroup)  include_once('specification/groups.php');  
+			?>
 
             <!-- actions -->
             <? if ($product->actions) include_once('actions.php'); ?>

@@ -13,7 +13,9 @@ define('SITE_URL', 'specialist');
 define('CONTROLLER_DEFAULT', 'main');
 define('ACTION_DEFAULT', 'index');
 
-define('ID_CATEGORY_CYLINDER', '10'); //для показа вида категории только на цилиндрах
+define('ID_CATEGORY_PRODUCTS', 9); //для показа вида категории только на цилиндрах
+define('ID_CATEGORY_CYLINDER', 10);
+define('ID_CATEGORY_PRESS', 11);
 
 
 

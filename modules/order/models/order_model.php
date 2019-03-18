@@ -33,10 +33,10 @@ class OrderModel extends OrderBase {
 		return self::insert($sql, $params);
     }
 	
-	public static function edit($params)
+	public static function editModel($params)
 	{
 		unset($params['save']);
-		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note, `rating` = :rating
+		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note, `rating` = :rating, `state` = :state
 		WHERE `id` = :id_order';
 		return self::update($sql, $params);
 	}

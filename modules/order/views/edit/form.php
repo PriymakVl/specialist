@@ -25,14 +25,27 @@
             </div>
         </div>
 		
-		<!-- rating order -->
 		<div class="form-box">
-			<label>Приоритет:</label>
-			<select name="rating">
-				<option value="<?=Order::RATING_REGULAR?>" <? if ($order->rating == Order::RATING_REGULAR) echo 'selected';?>>Обычный</option>
-				<option value="<?=Order::RATING_IMPORTANT?>" <? if ($order->rating == Order::RATING_IMPORTANT) echo 'selected';?>>Важный</option>
-				<option value="<?=Order::RATING_PRIORITY?>" <? if ($order->rating == Order::RATING_PRIORITY) echo 'selected';?>>Первоочередной</option>
-			</select>
+			<!-- rating order -->
+			<div>
+				<label>Приоритет:</label>
+				<select name="rating">
+					<option value="<?=Order::RATING_REGULAR?>" <? if ($order->rating == Order::RATING_REGULAR) echo 'selected';?>>Обычный</option>
+					<option value="<?=Order::RATING_IMPORTANT?>" <? if ($order->rating == Order::RATING_IMPORTANT) echo 'selected';?>>Важный</option>
+					<option value="<?=Order::RATING_PRIORITY?>" <? if ($order->rating == Order::RATING_PRIORITY) echo 'selected';?>>Первоочередной</option>
+				</select>
+			</div>
+			<!-- state order -->
+			<div id="form-order-state-wrp">
+				<label>Состояние:</label>
+				<select name="state">
+					<option value="<?=OrderState::REGISTERED?>" <? if ($order->state == OrderState::REGISTERED) echo 'selected';?>>Зарегистрирован</option>
+					<option value="<?=OrderState::PREPARATION?>" <? if ($order->state == OrderState::PREPARATION) echo 'selected';?>>В подготовке</option>
+					<option value="<?=OrderState::WORK?>" <? if ($order->state == OrderState::WORK) echo 'selected';?>>В работе</option>
+					<option value="<?=OrderState::MADE?>" <? if ($order->state == OrderState::MADE) echo 'selected';?>>Выполнен</option>
+				</select>
+			</div>
+			
 		</div>
 
         <!-- note -->

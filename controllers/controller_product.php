@@ -15,7 +15,7 @@ class Controller_Product extends Controller_Base {
 	{
 		$id_active = Session::get('product-active');
 		$product = new Product(Param::get('id_prod'));
-		$product->getSpecification()->getParent()->getActions()->countTimeManufacturing()->getStatistics()->getDrawings();
+		$product->getSpecification()->getSpecificationChildren()->getSpecificationGroup()->getParent()->getActions()->countTimeManufacturing()->getStatistics()->getDrawings();
 		$this->render('index/main', compact('product', 'id_active'));
 	}
 
@@ -23,7 +23,9 @@ class Controller_Product extends Controller_Base {
     {
         $params = ParamProduct::add();
 		if (empty($params['save'])) return $this->render('add/main', compact('params'));
-		Product::add($params);
+		$id_add = Product::add($params);
+		$this->message->set('success', 'add');
+		Session::set('product-active', $id_add);
 		$this->redirect('product?id_prod='.$params['id_parent']);
     }
 	

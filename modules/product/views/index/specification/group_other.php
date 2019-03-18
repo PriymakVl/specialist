@@ -13,12 +13,7 @@
 			<a href="/product?id_prod=<?=$other->id?>"><?=$other->name?></a>
 		</td>
 		<td><?=$other->quantity?></td>
-		<td>
-			<? if ($other->timeManufacturing): ?>
-				<?=$other->timeManufacturing?> мин.</td>
-			<? else: ?>
-				<span class="red">Не указана</span>
-			<? endif; ?>
+		<td class="red">Не изготав.</td>
 		<td><?=$other->note?></td>
 	</tr>
 <? endforeach; ?>

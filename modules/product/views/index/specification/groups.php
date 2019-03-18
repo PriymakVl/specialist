@@ -12,15 +12,17 @@
 				<th width="100">Трудоем-ть</th>
 				<th>Примечание</th>
 			</tr>
-					
+			
+			<!-- group product -->
+			<? if (isset($product->specificationGroup['product'])) include 'group_product.php'; ?>			
 			<!-- group unit -->
-			<? if ($product->specificationGroup['unit']) include 'group_unit.php'; ?>
+			<? if (isset($product->specificationGroup['unit'])) include 'group_unit.php'; ?>
 			<!-- group detail -->
-			<? if ($product->specificationGroup['detail']) include 'group_detail.php'; ?>
+			<? if (isset($product->specificationGroup['detail'])) include 'group_detail.php'; ?>
 			<!-- group standard -->
-			<? if ($product->specificationGroup['standard']) include 'group_standard.php'; ?>
+			<? if (isset($product->specificationGroup['standard'])) include 'group_standard.php'; ?>
 			<!-- group other -->
-			<? if ($product->specificationGroup['other']) include 'group_other.php'; ?>
+			<? if (isset($product->specificationGroup['other'])) include 'group_other.php'; ?>
 			
         </table>
     </div>

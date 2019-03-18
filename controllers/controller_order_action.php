@@ -16,8 +16,7 @@ class Controller_Order_Action extends Controller_Base {
 		$params = ParamOrderAction::editState();
 		$action = new OrderAction($params['id']);
 		if (empty($params['save'])) return $this->render('edit_state/main', compact('action'));
-		$action->editState($params)->setMessage('success', 'edit_state');
-		Order::checkReady($action->id_order);
+		$action->editState($params)->setMessage('success', 'edit_state')->checkReadyOrder();
 		$this->redirect('order?id_order='.$action->id_order);
 	}
 	
@@ -39,7 +38,7 @@ class Controller_Order_Action extends Controller_Base {
 		if (empty($params['save'])) return $this->render('add_unplan/main', compact('order', 'actions'));
 		OrderActionUnplan::add($params);
 		$this->message->set('success', 'add_unplan');
-		$this->redirect('order?id_order='.$order->id);
+		$this->redirect('order?tab=4&id_order='.$order->id);
 	}
 	
 	public function action_edit_unplan()
@@ -48,20 +47,19 @@ class Controller_Order_Action extends Controller_Base {
 		$order = new Order($params['id_order']);
 		$action = new OrderActionUnplan($params['id']);
 		if (empty($params['save'])) return $this->render('edit_unplan/main', compact('action', 'order'));
-		Order::checkReady($action->id_order);
-		$action->edit($params)->setMessage('success', 'edit');
-		$this->redirect('order?id_order='.$order->id);
+		$action->edit($params)->setMessage('success', 'edit')->checkReadyOrder();
+		$this->redirect('order?tab=4&id_order='.$order->id);
 	}
 	
 	public function action_state_list()
 	{
 		$params = ParamOrderAction::stateList();
 		if ($params['type'] == 'plan') {
-			$action = new OrderAction($params['id_action']); /***/ $action->getAllStates($params)->getProduct();;
+			$action = new OrderAction($params['id_action']); /***/ $action->getAllStates($params)->getProduct();
 		} else {
-			$action = new OrderActionUnplan($params['id']); /***/ $action->getAllStates($params);
+			$action = new OrderActionUnplan($params['id_action']); /***/ $action->getAllStates($params);
 		}
-		return $this->render('states/main', compact('action'));
+		return $this->render('states/main', compact('action', 'params'));
 	}
 
 	

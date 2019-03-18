@@ -52,10 +52,10 @@ class OrderActionStatic extends OrderActionBase {
 	{
 		unset($params['type_order']);
 		if ($params['action'] == 'all') {
-			$where = 'WHERE `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC'; 
+			$where = 'WHERE `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC'; 
 			unset($params['action']);
 		}
-		else $where = 'WHERE `id_data` = :action AND `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC';
+		else $where = 'WHERE `id_data` = :action AND `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC';
 		$sql = 'SELECT `id` FROM `order_actions` '.$where;
 		return self::perform($sql, $params)->fetchAll();
 	}
@@ -69,7 +69,7 @@ class OrderActionStatic extends OrderActionBase {
 	public static function getAllNotReadyActions($params)
 	{
 		unset($params['action'], $params['order']);
-		$sql = 'SELECT `id` FROM `order_actions` WHERE `state` != :state AND `type_order` = :type_order AND `status` = :status ORDER BY `rating` DESC';
+		$sql = 'SELECT `id` FROM `order_actions` WHERE `state` != :state AND `type_order` = :type_order AND `status` = :status ORDER BY `rating` DESC, `state` DESC';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
@@ -105,8 +105,8 @@ class OrderActionStatic extends OrderActionBase {
 	//когда изменяется не из терминала
 	public static function updateState($params)
 	{
-		unset($params['save'], $params['id_worker'], $params['time']);
-		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id` = :id';
+		unset($params['save'], $params['time'], $params['action']);
+		$sql = 'UPDATE `order_actions` SET `state` = :state, `id_worker` = :id_worker WHERE `id` = :id';
 		return self::perform($sql, $params);
 	}
 	

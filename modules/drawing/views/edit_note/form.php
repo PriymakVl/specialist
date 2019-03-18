@@ -1,11 +1,11 @@
 <div id="form-drawing-wrp">
-    <h2>Форма для редактирования чертежа</h2>
-    <form action="/drawing/add?id_prod=<?=$params['id_prod']?>" method="post" enctype="multipart/form-data">
+    <h2>Форма для редактирования примечания чертежа</h2>
+    <form action="/drawing/edit_note?id_dwg=<?=$dwg->id?>" method="post">
       
         <!-- note -->
         <div class="form-box">
             <label>Примечание:</label>
-            <textarea name="note"><?</textarea>
+            <textarea name="note"><?=$dwg->note?></textarea>
         </div>
 
         <!-- buttons -->

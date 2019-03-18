@@ -14,7 +14,7 @@
                 <label>Тип заказа:</label>
                 <select name="type">
                     <option value="<?=Order::TYPE_CYLINDER?>">Пневмоцилиндры</option>
-                    <option value="<?=Order::TYPE_CAR_NUMBER?>">Автономера</option>
+                    <option value="<?=Order::TYPE_CAR_NUMBER?>">Пресса и накатки</option>
                 </select>
             </div>
 
@@ -29,9 +29,9 @@
 		<div id="rating-order-wrp" class="form-box">
 			<label>Приоритет:</label>
 			<select name="rating">
-				<option value="<?=Order::RATING_REGULAR?>" <? if ($order->rating == Order::RATING_REGULAR) echo 'selected';?>>Обычный</option>
-				<option value="<?=Order::RATING_IMPORTANT?>" <? if ($order->rating == Order::RATING_IMPORTANT) echo 'selected';?>>Важный</option>
-				<option value="<?=Order::RATING_PRIORITY?>" <? if ($order->rating == Order::RATING_PRIORITY) echo 'selected';?>>Первоочередной</option>
+				<option value="<?=Order::RATING_REGULAR?>">Обычный</option>
+				<option value="<?=Order::RATING_IMPORTANT?>">Важный</option>
+				<option value="<?=Order::RATING_PRIORITY?>">Первоочередной</option>
 			</select>
 		</div>
       

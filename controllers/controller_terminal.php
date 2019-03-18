@@ -35,9 +35,9 @@ class Controller_Terminal extends Controller_Base
     {
         $params = ParamTerminal::startWork();
         if ($params['action'] == 'unplan') {
-			$action = new OrderActionUnplan($params['id']); /***/ $action->startWork($params);
+			$action = new OrderActionUnplan($params['id']); /***/ $action->startWork($params)->checkReadyOrder();
 		} else {
-			 $action = new OrderAction($params['id']); /***/ $action->startWork($params);
+			 $action = new OrderAction($params['id']); /***/ $action->startWork($params)->checkReadyOrder();
 		}
         $this->redirect('terminal/actions?action='.$params['action']);
     }
@@ -46,11 +46,10 @@ class Controller_Terminal extends Controller_Base
     {
         $params = ParamTerminal::endWork();
 		if ($params['action'] == 'unplan') {
-			$action = new OrderActionUnplan($params['id']); $action->endWork($params);
+			$action = new OrderActionUnplan($params['id']); $action->endWork($params)->checkReadyOrder();
 		} else {
-			$action = new OrderAction($params['id']); $action->endWork($params);
+			$action = new OrderAction($params['id']); $action->endWork($params)->checkReadyOrder();
 		}
-		Order::checkReady();
         $this->redirect('terminal/actions?action='.$params['action']);
     }
 
@@ -58,9 +57,9 @@ class Controller_Terminal extends Controller_Base
     {
         $params = ParamTerminal::stopWork();
 		if ($params['action'] == 'unplan') {
-			$action = new OrderActionUnplan($params['id']); $action->stopWork($params);	
+			$action = new OrderActionUnplan($params['id']); $action->stopWork($params)->checkReadyOrder();	
 		} else {
-			$action = new OrderAction($params['id']); $action->stopWork($params);
+			$action = new OrderAction($params['id']); $action->stopWork($params)->checkReadyOrder();
 		}
         $this->redirect('terminal/actions?action=' . $params['action']);
     }

@@ -41,7 +41,7 @@ class Controller_Drawing extends Controller_Base {
 		$params = ParamDrawing::note();
 		$dwg = new Drawing($params['id_dwg']);
 		if (empty($params['save'])) return $this->render('edit_note/main', compact('dwg'));
-		$dwg->editNote()->setMessage('success', 'edit-note');
+		$dwg->editNote($params)->setMessage('success', 'edit-note');
 		$this->redirect('product?tab=5&id_prod='.$dwg->id_prod);
 	}
 

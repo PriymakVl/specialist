@@ -19,6 +19,7 @@ class Controller_Order extends Controller_Base {
 		$id_active = Session::get('order-active');
 		$order = new Order($this->id_order);
 		$order->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
+		debug($order->state, false);
 		$this->render('index/main', compact('order', 'id_active'));
 	}
 
@@ -39,14 +40,13 @@ class Controller_Order extends Controller_Base {
 	
 	public function action_add_content()
 	{
-		$id_order = Session::get('order-active');
-		if (!$id_order) {
+		$params = ParamOrder::addContent();
+		if (empty($params['id_order'])) {
 			$this->message->set('error', 'not-active'); /***/ $this->redirectPrevious();
 		}
-		$id_prod = (Param::get('id_prod'));
-		OrderContent::add($id_order, $id_prod);
-		$this->message->set('success', 'add-content');
-		$this->redirect('order?id_order='.$id_order);
+		$order = new Order($params['id_order']); 
+		$order->addContent($params)->setMessage('success', 'add-content')->setState(OrderState::PREPARATION);
+		$this->redirect('order?id_order='.$order->id);
 	}
 	
 	public function action_to_preparation()
@@ -94,9 +94,7 @@ class Controller_Order extends Controller_Base {
 		$params = ParamOrder::edit();
 		$order = new Order($this->id_order);
 		if (empty($params['save'])) return $this->render('edit/main', compact('order'));
-		Order::edit($params);
-		OrderAction::updateRating($order->id, $params['rating']);
-		$this->message->set('success', 'edit');
+		$order->edit($params)->setMessage('success', 'edit')->checkReady();
 		$this->redirect('order?id_order='.$this->id_order);
 	}
 	

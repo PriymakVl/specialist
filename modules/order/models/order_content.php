@@ -3,12 +3,11 @@ require_once('order_base.php');
 
 class OrderContent extends OrderBase {
 
-    const TYPE_SPECIFIC = 1;
-    const TYPE_PRODUCT = 2;
+    //const TYPE_SPECIFIC = 1;
+    //const TYPE_PRODUCT = 2;
 
-	public static function add($id_order, $id_prod, $qty = 1)
+	public static function add($params)
 	{
-		$params = ['id_order' => $id_order, 'id_prod' => $id_prod, 'quantity' => $qty];
         $sql = "INSERT INTO `order_content` (id_order, id_prod, quantity) VALUES (:id_order, :id_prod, :quantity)";
         return self::perform($sql, $params);
 	}

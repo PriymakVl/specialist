@@ -25,7 +25,7 @@ class ParamOrder extends Param {
 
     public static function edit()
     {
-		$keys = ['symbol', 'position', 'type', 'note', 'date_exec', 'id_order', 'save', 'edit_all', 'rating'];
+		$keys = ['symbol', 'position', 'type', 'note', 'date_exec', 'id_order', 'save', 'edit_all', 'rating', 'state'];
         $params = self::getAll($keys);
 		if (empty($params['date_exec'])) $params['date_exec'] = '';
         $params['date_exec'] = Date::convertStringToTime($params['date_exec']);
@@ -43,6 +43,14 @@ class ParamOrder extends Param {
 	{
 		$keys = ['id_order', 'symbol', 'qty', 'note'];
 		$params = self::getAll($keys);
+		return $params;
+	}
+	
+	public static function addContent()
+	{
+		$params['id_prod'] = (Param::get('id_prod'));
+		$params['id_order'] = Session::get('order-active');
+		$params['quantity'] = 1;
 		return $params;
 	}
 	

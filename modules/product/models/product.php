@@ -19,7 +19,15 @@ class Product extends ProductStatic {
 	
 	public function getSpecification()
 	{
-		$this->specification = self::getSpecificationStatic($this->id_parent);
+		$this->specification = self::getSpecificationStatic($this->id);
+		return $this;
+	}
+	//чтобы показывать в виде категории
+	public function getSpecificationChildren()
+	{
+		if ($this->id == ID_CATEGORY_PRODUCTS || $this->id == ID_CATEGORY_CYLINDER || $this->id == ID_CATEGORY_PRESS) {
+			self::getSpecificationChildrenStatic($this->specification);
+		}
 		return $this;
 	}
 	
@@ -45,7 +53,7 @@ class Product extends ProductStatic {
 	
 	public function countTimeActions()
 	{
-		if ($this->actions) $this->timeActions = ProductTime::countTimeProductActions($this);
+		if ($this->actions) $this->timeActions = ProductTime::countTimeProductActions($this->actions, $this->quantity);
 		return $this;
 	}
 	

@@ -68,6 +68,7 @@ class ParamOrderAction {
 		$params = Param::getAll($keys);
 		$params['id_worker'] = Session::get('id_user');
 		$params['time'] = time();
+		$params['action'] = 'plan';
 		return $params;
 	}
 	

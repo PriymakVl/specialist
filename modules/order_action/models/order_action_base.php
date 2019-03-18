@@ -32,8 +32,11 @@ class OrderActionBase extends Model {
 	{
 		if ($this->state == OrderActionState::PROGRESS) $this->bgTerminalBox = self::BG_TERMINAL_BOX_PROGRESS;
 		else if ($this->state == OrderActionState::STOPPED) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_STOPPED;
-		else if ($this->rating == Order::RATING_IMPORTANT || $this->rating == Order::RATING_PRIORITY) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_PRIORITY;
 		else $this->bgTerminalBox = self::BG_TERMINAL_BOX_PLAN;
+		//only plan actions
+		if (get_class($this) == 'OrderAction' && $this->state == OrderActionState::PLANED) {
+			if ($this->rating == Order::RATING_IMPORTANT || $this->rating == Order::RATING_PRIORITY) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_PRIORITY;
+		}
 		return $this;
 	}
 	
@@ -51,6 +54,12 @@ class OrderActionBase extends Model {
 			$state->setDuration($items)->getWorker()->setName()->setBg();
 			$this->states[] = $state;
 		}
+		return $this;
+	}
+	
+	public function checkReadyOrder()
+	{
+		Order::CheckReadyStatic($this->id_order);
 		return $this;
 	}
 

@@ -25,7 +25,7 @@
 			<!-- product quantity -->
 			<div id="form-product-quantity-wrp">
 				<label>Количество:</label>
-				<input type="text" name="quantity" value="1">
+				<input type="number" name="quantity" value="1">
 			</div>
 			
 			<!-- product parent -->

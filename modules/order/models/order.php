@@ -25,6 +25,19 @@ class Order extends OrderStatic {
         return $this;
     }
 	
+	public function addContent($params)
+	{
+		OrderContent::add($params);
+		return $this;
+	}
+	
+	public function edit($params)
+	{
+		Order::editModel($params);
+		OrderAction::updateRating($this->id, $params['rating']);
+		return $this;
+	}
+	
 	public function toPreparation()
 	{
 		if ($this->positions) OrderContent::addByPositionsOrder($this->positions);
@@ -109,6 +122,12 @@ class Order extends OrderStatic {
 	public function convertRating()
 	{
 		$this->convertRating = self::convertRatingStatic($this->rating);
+		return $this;
+	}
+	
+	public function checkReady()
+	{
+		self::checkReadyStatic($this->id);
 		return $this;
 	}
     

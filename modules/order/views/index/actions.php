@@ -1,5 +1,9 @@
+<? 
+	$tab_active_actions = true;
+	if  (Param::get('tab') && Param::get('tab') != 3) $tab_active_actions = false;
+?>
 <li id="order-actions-wrp">
-    <input type="radio" name="tabs" id="tab-3" checked>
+    <input type="radio" name="tabs" id="tab-3" <? if ($tab_active_actions) echo 'checked'; ?>>
     <label for="tab-3">Операциии</label>
     <div class="tab-content">
 		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>

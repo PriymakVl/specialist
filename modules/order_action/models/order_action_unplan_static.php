@@ -28,7 +28,7 @@ class OrderActionUnplanStatic extends OrderActionBase {
 	
 	public static function getActions()
 	{
-		$sql = 'SELECT * FROM `order_action_unplan` WHERE `state` != :state AND `status` = :status';
+		$sql = 'SELECT * FROM `order_action_unplan` WHERE `state` != :state AND `status` = :status ORDER BY	`state` DESC';
 		$params = ['state' => OrderActionState::ENDED, 'status' => self::STATUS_ACTIVE];
 		$actions = self::perform($sql, $params)->fetchAll();
 		if($actions) return self::createArrayActionsUnplan($actions);

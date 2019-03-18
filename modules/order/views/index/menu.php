@@ -32,7 +32,7 @@
 	
 	<!-- menu order actions -->
 	<? if ($order->actions): ?>
-		<ul id="menu-order-actions" <? if ($order->actionsUnplan) echo 'style="display:none;"';?>>
+		<ul id="menu-order-actions">
 			<li id="order-action-edit-state">Редакт. состояние</li>
 			<li id="order-action-delete" id_order="<?=$order->id?>">Удалить операцию</li>
 		</ul>
@@ -40,7 +40,7 @@
 	
 	<!-- actions unplan -->
 	<? if ($order->actionsUnplan): ?>
-		<ul id="menu-order-actions-unplan">
+		<ul id="menu-order-actions-unplan" style="display:none;">
 			<li>
 				<a href="/order_action/add_unplan?id_order=<?=$order->id?>">Доб. доп. операцию</a>
 			</li>
