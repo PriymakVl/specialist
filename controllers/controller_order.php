@@ -19,7 +19,6 @@ class Controller_Order extends Controller_Base {
 		$id_active = Session::get('order-active');
 		$order = new Order($this->id_order);
 		$order->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
-		debug($order->state, false);
 		$this->render('index/main', compact('order', 'id_active'));
 	}
 

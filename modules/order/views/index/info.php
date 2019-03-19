@@ -2,6 +2,7 @@
     <input type="radio" name="tabs" id="tab-1" checked>
     <label for="tab-1">Информация</label>
     <div class="tab-content">
+		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>
         <table>
             <tr>
                 <th width="50">№</th>
@@ -10,21 +11,16 @@
             </tr>
             <tr>
                 <td>1</td>
-                <td>Обозначение</td>
-                <td><?=$order->symbol?></td>
-            </tr>
-            <tr>
-                <td>2</td>
                 <td>Состояние</td>
                 <td><?=$order->convertState?></td>
             </tr>
 			<tr>
-				<td>3</td>
+				<td>2</td>
 				<td>Приоритет заказа</td>
 				<td><?=$order->convertRating?></td>
 			</tr>
             <tr>
-                <td>4</td>
+                <td>3</td>
                 <td>Срок выполнения</td>
                 <td>
 					<? if ($order->date_exec): ?>
@@ -35,7 +31,7 @@
 				</td>
             </tr>
 			<tr>
-                <td>5</td>
+                <td>4</td>
                 <td>Дата регистрации</td>
                 <td>
 					<? if ($order->date_reg): ?>

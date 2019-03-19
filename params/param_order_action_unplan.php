@@ -15,7 +15,7 @@ class ParamOrderActionUnplan extends Param {
 	
 	public static function edit()
 	{
-		$keys = ['save', 'prod_symbol', 'prod_name', 'action_name', 'time', 'qty', 'note', 'id', 'state', 'id_order', 'time_manufac'];
+		$keys = ['save', 'prod_symbol', 'prod_name', 'action_name', 'time', 'qty', 'note', 'id_action', 'state', 'id_order', 'time_manufac'];
 		$params = self::getAll($keys);
 		$params['qty'] = empty($params['qty']) ? 1 : $params['qty'];
 		$params['action'] = 'unplan';

@@ -10,23 +10,16 @@
 }
 
 #terminal-operations-wrp {
-	width: 430px;
+	width: 700px;
 	margin: 0 auto;
 	color: black;
-}
-
-#terminal-operations-wrp:after {
-	content: "";
-	display: block;
-	clear: both;
+	position: relative;
 }
 
 #terminal-operations-wrp div {
 	width: 200px;
 	height: 200px;
 	border: 1px solid white;
-	float: left;
-	position: relative;
 }
 
 #terminal-operations-wrp div:hover {
@@ -39,30 +32,47 @@
 
 }
 
-#prod-state-made {
-	margin-right: 20px;
-	background: green;
+#action-state-work {
+	background: #00FFFF;
+	position: relative;
 }
 
-#prod-state-made span {
+#action-state-work span {
+	position: absolute;
+	bottom: 5px;
+	left: 30px;
+}
+
+#action-state-made {
+	background: green;
+	position: absolute;
+	top: 0px;
+	left: 232px;
+}
+
+#action-state-made span {
 	position: absolute;
 	bottom: 5px;
 	left: 16px;
 }
 
-#prod-state-stop {
+#action-state-stop {
 	background: red;
+	position: absolute;
+	top: 0px;
+	left: 464px;
 }
 
-#prod-state-stop span {
+#action-state-stop span {
 	position: absolute;
 	bottom: 5px;
 	left: 15px;
 }
 
 #exit-operations-box {
-	margin-top: 20px;
+	margin-top: 30px;
 	margin-right: 20px;
+	position: relative;
 }
 
 #exit-operations-box span {
@@ -73,7 +83,9 @@
 
 #action-order-note-box {
 	background: yellow;
-	margin-top: 20px;
+	position: absolute;
+	top: 232px;
+	left: 232px;
 }
 
 #action-order-note-box span {
@@ -82,7 +94,7 @@
 	left: 43px;
 }
 
-.fa-pause, .fa-sign-out-alt, .fa-check, .fa-comment-alt , .fa-angle-double-right{
+.fa-pause, .fa-sign-out-alt, .fa-check, .fa-comment-alt , .fa-angle-double-right, .fa-play {
 	font-size: 60px;
 	color: white;
 	margin: 65px 0 0 68px;

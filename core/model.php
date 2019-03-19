@@ -40,11 +40,11 @@ class Model extends ModelStatic {
         return $this;
     }
 
-    public function setState($state)
-    {
-        self::perform('UPDATE `'.$this->tableName.'` SET `state` = ? WHERE id = ?', [$state, $this->id]);
-        return $this;
-    }
+    // public function setState($state)
+    // {
+        // self::perform('UPDATE `'.$this->tableName.'` SET `state` = ? WHERE id = ?', [$state, $this->id]);
+        // return $this;
+    // }
 
     public function setKind($kind)
     {

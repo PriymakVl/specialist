@@ -20,14 +20,13 @@ class OrderStatic extends OrderModel {
 		return $orders;
     }
 	
-	public static function checkReadyStatic()
+	public static function checkReadyStatic($id_order)
 	{
-		$params = ParamOrderAction::getNotReadyActionOrder();
-		$order = new Order($params['id_order']);
-		$result = OrderAction::getNotReadyActionOrder($params);
-		$result_unplan = OrderActionUnplan::getNotReadyActionOrder($order->id);
-		if (empty($result) && empty($result_unplan)) $order->setState(OrderState::MADE);
-		if ($result || $result_unplan) $order->setState(OrderState::WORK);
+		$order = new Order($id_order);
+		$result = OrderAction::getNotReadyActionOrder($id_order);
+		$result_unplan = OrderActionUnplan::getNotReadyActionOrder($id_order);
+		if (empty($result) && empty($result_unplan)) $order->editState(OrderState::MADE);
+		if ($result || $result_unplan) $order->editState(OrderState::WORK);
 	}
 	
 	public static function convertRatingStatic($rating)

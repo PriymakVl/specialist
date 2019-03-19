@@ -47,6 +47,12 @@ class OrderModel extends OrderBase {
         $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
+	
+	public static function setState($params)
+	{
+		$sql = 'UPDATE `orders` SET `state` = :state WHERE `id` = :id_order';
+		return self::update($sql, $params);
+	}
     
 }
 

@@ -4,7 +4,6 @@ require_once('controller_base.php');
 
 class Controller_Terminal extends Controller_Base
 {
-
     public $worker;
 
     public function __construct()
@@ -15,54 +14,37 @@ class Controller_Terminal extends Controller_Base
         $this->view->title = 'Терминал';
     }
 
-    private function getWorker()
-    {
-        $id_worker = Session::get('id_user');
-        if ($id_worker) return new Worker($id_worker);
-        else $this->redirect('main/login');
-    }
-
     public function action_actions()
     {
-        $worker = $this->getWorker();
+		$worker = $this->getWorker();
 		$params = ParamTerminal::getActions($worker);
-		if ($params['action'] == 'unplan') $actions = OrderActionUnplan::getActions();
-        else $actions = OrderAction::getForTerminal($params);
+		$actions = OrderAction::getForTerminal($params);
         $this->render('actions/main', compact('actions', 'worker', 'params'));
     }
+	
+	public function action_actions_unplan()
+	{
+		$worker = $this->getWorker();
+		$params = ParamTerminal::getActionsUnplan($worker);
+		$actions = OrderActionUnplan::getActions();
+		$this->render('actions/main', compact('actions', 'worker', 'params'));
+	}
 
-    public function action_start_work()
+    public function action_edit_state()
     {
-        $params = ParamTerminal::startWork();
-        if ($params['action'] == 'unplan') {
-			$action = new OrderActionUnplan($params['id']); /***/ $action->startWork($params)->checkReadyOrder();
-		} else {
-			 $action = new OrderAction($params['id']); /***/ $action->startWork($params)->checkReadyOrder();
-		}
+        $params = ParamTerminal::editState();
+		$action = new OrderAction($params['id_action']);
+		$action->editState($params)->checkReadyOrder();
         $this->redirect('terminal/actions?action='.$params['action']);
     }
-
-    public function action_end_work()
-    {
-        $params = ParamTerminal::endWork();
-		if ($params['action'] == 'unplan') {
-			$action = new OrderActionUnplan($params['id']); $action->endWork($params)->checkReadyOrder();
-		} else {
-			$action = new OrderAction($params['id']); $action->endWork($params)->checkReadyOrder();
-		}
-        $this->redirect('terminal/actions?action='.$params['action']);
-    }
-
-    public function action_stop_work()
-    {
-        $params = ParamTerminal::stopWork();
-		if ($params['action'] == 'unplan') {
-			$action = new OrderActionUnplan($params['id']); $action->stopWork($params)->checkReadyOrder();	
-		} else {
-			$action = new OrderAction($params['id']); $action->stopWork($params)->checkReadyOrder();
-		}
-        $this->redirect('terminal/actions?action=' . $params['action']);
-    }
+	
+	public function action_edit_state_unplan()
+	{
+		$params = ParamTerminal::editStateUnplan();
+		$action = new OrderActionUnplan($params['id_action']);
+		$action->editState($params)->checkReadyOrder();
+		$this->redirect('terminal/actions?action=unplan');
+	}
 	
 	public function action_add_note()
 	{
@@ -70,4 +52,11 @@ class Controller_Terminal extends Controller_Base
 		OrderAction::addNote($params);
 		$this->redirect('terminal/actions?action=' . $params['action']);
 	}
+	
+	private function getWorker()
+    {
+        $id_worker = Session::get('id_user');
+        if ($id_worker) return new Worker($id_worker);
+        else $this->redirect('main/login');
+    }
 }

@@ -1,7 +1,7 @@
 <?php
-require_once('order_action_base.php');
+require_once('order_action_model.php');
 
-class OrderActionStatic extends OrderActionBase {
+class OrderActionStatic extends OrderActionModel {
 
 	public static function add($products, $order)
 	{
@@ -19,58 +19,12 @@ class OrderActionStatic extends OrderActionBase {
 		}
 	}
 	
-	public static function setTimeManufacturing($action, $product)
-	{
-		if (!$action->time_prod) return '';
-		return ($action->time_prod * $product->orderQtyAll) + $action->time_prepar;
-	}
-	
-	private static function addOne($params)
-	{
-        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, id_data, state, type_order, time_manufac, rating) 
-		VALUES (:id_order, :id_prod, :qty, :id_data, :state, :type_order, :time_manufac, :rating)";
-        return self::perform($sql, $params);
-	}
-	
 	public static function getForTerminal($params)
 	{
 		if ($params['action'] == 'all' && $params['order'] == 'all') $ids = self::getAllNotReadyActions($params);
-		else if ($params['action'] != 'all' && $params['order'] == 'all' )$ids = self::getForAllOrders($params);
+		else if ($params['action'] != 'all' && $params['order'] == 'all' ) $ids = self::getForAllOrders($params);
 		else $ids = self::getForOneOrder($params);
 		return self::createArrayActions($ids);
-	}
-	
-	public static function getForAllOrders($params)
-	{
-		unset($params['order']);
-		$sql = 'SELECT `id` FROM `order_actions` 
-		WHERE `id_data` = :action AND `state` != :state AND `type_order` = :type_order AND `status` = :status ORDER BY `rating` DESC';
-		return self::perform($sql, $params)->fetchAll();
-	}
-	
-	public static function getForOneOrder($params)
-	{
-		unset($params['type_order']);
-		if ($params['action'] == 'all') {
-			$where = 'WHERE `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC'; 
-			unset($params['action']);
-		}
-		else $where = 'WHERE `id_data` = :action AND `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC';
-		$sql = 'SELECT `id` FROM `order_actions` '.$where;
-		return self::perform($sql, $params)->fetchAll();
-	}
-	
-	public static function getByIdOrderAndIdProductAndIdAction($params)
-	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_data` = :id_data AND `id_order` = :id_order AND `id_prod` = :id_prod';
-		return self::perform($sql, $params)->fetch();
-	}
-	
-	public static function getAllNotReadyActions($params)
-	{
-		unset($params['action'], $params['order']);
-		$sql = 'SELECT `id` FROM `order_actions` WHERE `state` != :state AND `type_order` = :type_order AND `status` = :status ORDER BY `rating` DESC, `state` DESC';
-		return self::perform($sql, $params)->fetchAll();
 	}
 	
 	public static function createArrayActions($ids)
@@ -82,96 +36,16 @@ class OrderActionStatic extends OrderActionBase {
 		 return $actions;
 	}
 	
-	public static function setStateStartWork($params)
+	public static function setTimeManufacturing($action, $product)
 	{
-		unset($params['action']);
-		$sql = 'UPDATE `order_actions` SET `state` = :state, `time_start` = :time, `id_worker` = :id_worker WHERE `id` = :id';
-		return self::perform($sql, $params);
-	}
-	
-	public static function setStateEndWork($params)
-	{
-		unset($params['action'], $params['id_worker']);
-		$sql = 'UPDATE `order_actions` SET `state` = :state, `time_end` = :time WHERE `id` = :id';
-		return self::perform($sql, $params);
-	}
-	
-	public static function setStateStopWork($params)
-	{
-		unset($params['action'], $params['id_worker'], $params['time']);
-		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id` = :id';
-		return self::perform($sql, $params);
-	}
-	//когда изменяется не из терминала
-	public static function updateState($params)
-	{
-		unset($params['save'], $params['time'], $params['action']);
-		$sql = 'UPDATE `order_actions` SET `state` = :state, `id_worker` = :id_worker WHERE `id` = :id';
-		return self::perform($sql, $params);
-	}
-	
-	public static function getNotReadyActionOrder($params)
-	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `state` != :state AND `id_order` = :id_order AND `status` = :status';
-		return self::perform($sql, $params)->fetchAll();
-	}
-	
-	public static function planWorker($params)
-	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_data` IN ('.$params['default_actions'].') AND `state` != :state AND `status` = :status';
-		unset($params['default_actions']);
-		return self::perform($sql, $params)->fetchAll();
-	}
-	
-	public static function madeWorker($params)
-	{
-		$slq = 'SELECT * FROM `order_actions` 
-		WHERE `id_worker` = :id_worker AND `state` = :state AND `time_end` BETWEEN :period_start AND :period_end AND `status` = :status';
-		return self::perform($slq, $params)->fetchAll();
-	}
-	
-	public static function getIdActionsByIdOrder($id_order)
-	{
-		$slq = 'SELECT * FROM `order_actions` WHERE `id_order` = :id_order AND `status` = :status';
-		$params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE];
-		return self::perform($slq, $params)->fetchAll();
-	}
-	
-	
-	public static function setStateEndedForAllActionsOrder($id_order)
-	{
-		$sql = 'UPDATE `order_actions` SET `state` = :state WHERE `id_order` = :id_order';
-		$params = ['id_order' => $id_order, 'state' => OrderActionState::ENDED];
-		return self::perform($sql, $params);
-	}
-	
-	public static function getProductsOrder($id_order)
-	{
-		$slq = 'SELECT `id_prod` FROM `order_actions` WHERE `id_order` = :id_order AND `status` = :status GROUP BY `id_prod`';
-		$params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE];
-		return self::perform($slq, $params)->fetchAll();
-	}
-	
-	public static function addNote($params)
-	{
-		unset($params['action']);
-		$sql = 'UPDATE `order_actions` SET `note` = :note WHERE `id` = :id';
-		return self::perform($sql, $params);
-	}
-	
-	public static function updateRating($id_order, $rating)
-	{
-		$sql = 'UPDATE `order_actions` SET `rating` = :rating WHERE `id_order` = :id_order';
-		$params = ['rating' => $rating, 'id_order' => $id_order];
-		return self::perform($sql, $params);
+		if (!$action->time_prod) return '';
+		return ($action->time_prod * $product->orderQtyAll) + $action->time_prepar;
 	}
 	
 	public static function getOrdersForTerminal()
 	{
 		$orders = [];
-		$slq = 'SELECT `id_order` FROM `order_actions` WHERE `state` != :state AND `status` = :status GROUP BY `id_order`';
-		$params = ['state' => OrderActionState::ENDED, 'status' => self::STATUS_ACTIVE];
-		$items = self::perform($slq, $params)->fetchAll();
+		$items = self::getOrdersWhereStateActionsNotEnded();
 		if (empty($items)) return $orders;
 		foreach ($items as $item) {
 			$orders[] = new Order($item->id_order);
@@ -179,18 +53,29 @@ class OrderActionStatic extends OrderActionBase {
 		return $orders;
 	}
 	
-	public static function getAllOrdersByIdProduct($id_prod)
+	
+	public static function convertStateWork($state)
 	{
-		$slq = 'SELECT `id_order` FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status GROUP BY `id_order`';
-		$params = ['id_prod' => $id_prod, 'status' => self::STATUS_ACTIVE];
-		return self::perform($slq, $params)->fetchAll();
+		switch ($state) {
+			case OrderActionState::WAITING : return "Ожидает окончания другой операции";
+			case OrderActionState::PLANED : return "Запланирована";
+			case OrderActionState::PROGRESS : return "В работе";
+			case OrderActionState::STOPPED : return "Остановлена";
+			case OrderActionState::ENDED : return "Выполнена";
+			default: return "Не известное состояние";
+		}
 	}
 	
-	public static function getActionsProductInOrder($id_order, $id_prod)
+	public static function getBgStateWork($state)
 	{
-		$slq = 'SELECT `id` FROM `order_actions` WHERE `id_prod` = :id_prod AND `id_order` = :id_order AND `status` = :status';
-		$params = ['id_prod' => $id_prod, 'status' => self::STATUS_ACTIVE, 'id_order' => $id_order];
-		return self::perform($slq, $params)->fetchAll();
+		switch ($state) {
+			case OrderActionState::WAITING : return "orange";
+			case OrderActionState::PLANED : return "#fff";
+			case OrderActionState::PROGRESS : return "yellow";
+			case OrderActionState::STOPPED : return "red";
+			case OrderActionState::ENDED : return "green";
+			default: return "#000";
+		}
 	}
 	
 	

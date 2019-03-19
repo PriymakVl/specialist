@@ -14,9 +14,9 @@ class Controller_Order_Action extends Controller_Base {
 	public function action_edit_state()
 	{
 		$params = ParamOrderAction::editState();
-		$action = new OrderAction($params['id']);
+		$action = new OrderAction($params['id_action']);
 		if (empty($params['save'])) return $this->render('edit_state/main', compact('action'));
-		$action->editState($params)->setMessage('success', 'edit_state')->checkReadyOrder();
+		$action->editState($params)->editTime($params)->setMessage('success', 'edit_state')->checkReadyOrder();
 		$this->redirect('order?id_order='.$action->id_order);
 	}
 	
@@ -25,8 +25,7 @@ class Controller_Order_Action extends Controller_Base {
 		$id_action = Param::get('id_action');
 		if ($id_action) $action = new OrderAction($id_action);
 		else $action = new OrderActionUnplan(Param::get('id_action_unplan'));
-		$action->delete();
-		$this->message->set('success', 'delete');
+		$action->delete()->setMessage('success', 'delete')->checkReadyOrder();
 		$this->redirectPrevious();
 	}
 	
@@ -38,6 +37,7 @@ class Controller_Order_Action extends Controller_Base {
 		if (empty($params['save'])) return $this->render('add_unplan/main', compact('order', 'actions'));
 		OrderActionUnplan::add($params);
 		$this->message->set('success', 'add_unplan');
+		$order->checkReady();
 		$this->redirect('order?tab=4&id_order='.$order->id);
 	}
 	
@@ -45,7 +45,7 @@ class Controller_Order_Action extends Controller_Base {
 	{
 		$params = ParamOrderActionUnplan::edit();
 		$order = new Order($params['id_order']);
-		$action = new OrderActionUnplan($params['id']);
+		$action = new OrderActionUnplan($params['id_action']);
 		if (empty($params['save'])) return $this->render('edit_unplan/main', compact('action', 'order'));
 		$action->edit($params)->setMessage('success', 'edit')->checkReadyOrder();
 		$this->redirect('order?tab=4&id_order='.$order->id);

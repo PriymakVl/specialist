@@ -30,41 +30,17 @@ class ParamOrderAction {
 		return $params;
 	}
 	
-	public static function getNotReadyActionOrder()
-	{
-		$params['id_order'] = Param::get('id_order');
-		$params['status'] = OrderAction::STATUS_ACTIVE;
-		$params['state'] = OrderActionState::ENDED;
-		return $params;
-	}
-	
-	public static function convertStateWork($state)
-	{
-		switch ($state) {
-			case OrderActionState::WAITING : return "Ожидает окончания другой операции";
-			case OrderActionState::PLANED : return "Запланирована";
-			case OrderActionState::PROGRESS : return "В работе";
-			case OrderActionState::STOPPED : return "Остановлена";
-			case OrderActionState::ENDED : return "Выполнена";
-			default: return "Не известное состояние";
-		}
-	}
-	
-	public static function getBgStateWork($state)
-	{
-		switch ($state) {
-			case OrderActionState::WAITING : return "orange";
-			case OrderActionState::PLANED : return "#fff";
-			case OrderActionState::PROGRESS : return "yellow";
-			case OrderActionState::STOPPED : return "red";
-			case OrderActionState::ENDED : return "green";
-			default: return "#000";
-		}
-	}
+	// public static function getNotReadyActionOrder()
+	// {
+		// $params['id_order'] = Param::get('id_order');
+		// $params['status'] = OrderAction::STATUS_ACTIVE;
+		// $params['state'] = OrderActionState::ENDED;
+		// return $params;
+	// }
 	
 	public static function editState()
 	{
-		$keys = ['id', 'save', 'state'];
+		$keys = ['id_action', 'save', 'state'];
 		$params = Param::getAll($keys);
 		$params['id_worker'] = Session::get('id_user');
 		$params['time'] = time();

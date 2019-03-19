@@ -4,7 +4,7 @@
 <div id="terminal-actions-unplan-wrp">
     <? if ($actions): ?>
         <? foreach ($actions as $action): ?>
-            <div id="test" class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>" onclick="to_work(this);"
+            <div id="test" class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>" onclick="show_box_operations(this);"
                  prod_name="<?=$action->prod_name?>"
                  state="<?=$action->state?>"
                  id_item="<?=$action->id?>"

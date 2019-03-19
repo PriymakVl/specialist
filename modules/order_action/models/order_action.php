@@ -31,28 +31,15 @@ class OrderAction extends OrderActionStatic {
 	public function editState($params)
 	{
 		OrderActionState::add($params);
-		self::updateState($params);
+		self::setState($params);
 		return $this;
 	}
 	
-	public function startWork($params)
+	public function editTime($params)
 	{
-		OrderActionState::add($params);
-		self::setStateStartWork($params);
-		return $this;
-	}
-	
-	public function stopWork($params)
-	{
-		OrderActionState::add($params);
-		self::setStateStopWork($params);
-		return $this;
-	}
-	
-	public function endWork($params)
-	{
-		OrderActionState::add($params);
-		self::setStateEndWork($params);
+		if (empty($params['state'])) return $this;
+		if ($params['state'] == OrderActionState::PROGRESS && !$this->time_start) self::setTimeStart($params);
+		if ($params['state'] == OrderActionState::ENDED) self::setTimeEnd($params);
 		return $this;
 	}
 	

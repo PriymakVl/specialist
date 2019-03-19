@@ -130,6 +130,13 @@ class Order extends OrderStatic {
 		self::checkReadyStatic($this->id);
 		return $this;
 	}
+	
+	public function editState($state)
+	{
+		$params = ['state' => $state, 'id_order' => $this->id];
+		self::setState($params);
+		return $this;
+	}
     
 	
 }

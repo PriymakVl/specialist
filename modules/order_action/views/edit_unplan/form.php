@@ -7,7 +7,7 @@
 
 <div id="form-order-action-unplan-wrp">
     <h2>Форма для редактирования внеплановой операции по заказу: <span class="green"><?=$order->symbol?></span></h2>
-    <form action="/order_action/edit_unplan?id_order=<?=$order->id?>&id=<?=$action->id?>" method="post">
+    <form action="/order_action/edit_unplan?id_order=<?=$order->id?>&id_action=<?=$action->id?>" method="post">
         <!-- first box -->
         <div class="form-box">
 			<div id="form-product-wrp"

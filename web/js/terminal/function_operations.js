@@ -1,41 +1,42 @@
- 	var state, id_item, action, prod_name, text_stop_box, note;
-	const STATE_ACTION_PREPARATION = 1;
-	const STATE_ACTION_STOPED = 3;
+ 	var state, id_item, action, prod_name, note;
+	
+	const STATE_ACTION_PLANED = 1;
+	const STATE_ACTION_PROGRESS = 2;
+	const STATE_ACTION_STOPPED = 3;
+	const STATE_ACTION_ENDED = 4;
 
-	//деталь взята в работу
-	function to_work(elem) {
+	function show_box_operations(elem) {
 		state = $(elem).attr('state');
 		id_item = $(elem).attr('id_item');
 		action = $(elem).attr('action');
 		note = $(elem).attr('note');
 		
-		if (state == STATE_ACTION_PREPARATION) {
-			location.href = '/terminal/start_work?id=' + id_item + '&action=' + action ;
-		}
-		else {
-			if (action == 'unplan') $('#terminal-actions-unplan-wrp, #filter-actions-wrp').hide();
-			else $('#terminal-actions-wrp, #filters-wrp').hide();
+		$('#terminal-actions-wrp, #terminal-actions-unplan-wrp, #filters-wrp').hide();
+		$('#operations-box').show();
 			
-			$('#operations-box').show();
-			if (state == STATE_ACTION_STOPED) {
-				 text_stop_box = 'Продолжить задание'; 
-				 $('#prod-state-stop i').removeClass('fa-pause').addClass('fa-angle-double-right');
-			}
-			else {
-				text_stop_box = 'Остановить задание';
-				$('#prod-state-stop i').removeClass('fa-angle-double-right').addClass('fa-pause');
-			}
-			 
-			$('#text-stop-box').text(text_stop_box);
-			if (note) {
-				$('.fa-comment-alt').hide();
-				$('#text-action-note').text(note);
-			} 
-			else {
-				$('.fa-comment-alt').show();
-				$('#text-action-note').text('');
-			}
+		if (state == STATE_ACTION_STOPPED) $('#text-work-box').text('Продолжить задание');
+		else $('#text-work-box').text('Выдать в работу');
+		 
+		if (note) {
+			$('.fa-comment-alt').hide();
+			$('#text-action-note').text(note);
+		} 
+		else {
+			$('.fa-comment-alt').show();
+			$('#text-action-note').text('');
 		}
+		return false;
+	}
+	
+	//в работу
+	function action_state_work() {
+		if (state == STATE_ACTION_PROGRESS) {
+			alert('Операция уже выполняется');
+			return;
+		}
+		var path = getUrl();
+		path = path + '?id_action=' + id_item + '&state=' + STATE_ACTION_PROGRESS;
+		location.href = path;
 		return false;
 	}
 
@@ -47,27 +48,35 @@
 		return false;
 	}
 
-    //end work
+    //made
 	function action_state_made() {
-		if (state == STATE_ACTION_STOPED) {
+		if (state == STATE_ACTION_STOPPED) {
 			alert('Сначала нужно продолжить задание');
 			return;
 		}
-		var params = getObjectGetParams();
-		var request = '/terminal/end_work?id=' + id_item;
-		action = params.action ? params.action : action; //если загружен 1 раз берет значение не с get запроса а с атрибута
-		request = request + '&action=' + action; 
-		location.href = request;
+		else if (state == STATE_ACTION_PLANED) {
+			alert('Сначала нужно выдать задание в работу');
+			return;
+		}
+		var path = getUrl();
+		path = path + '?id_action=' + id_item + '&state=' + STATE_ACTION_ENDED;
+		location.href = path;
 		return false;
 	}
 	
 	 //stop work
 	function action_state_stop() {
-		var params = getObjectGetParams();
-		var request = '/terminal/stop_work?id=' + id_item + '&state=' + state;
-		action = params.action ? params.action : action; //если загружен 1 раз берет значение не с get запроса а с атрибута
-		request = request + '&action=' + action; 
-		location.href = request;
+		if (state == STATE_ACTION_STOPPED) {
+			alert('Задание уже остановлено');
+			return;
+		}
+		else if (state == STATE_ACTION_PLANED) {
+			alert('Сначала нужно выдать задание в работу');
+			return;
+		}
+		var path = getUrl();
+		path = path + '?id_action=' + id_item + '&state=' + STATE_ACTION_STOPPED;
+		location.href = path;
 		return false;
 	}
 	
@@ -81,6 +90,13 @@
 		location.href = request;
 		return false;
 	}
+	
+	function getUrl() {
+		if (action == 'unplan') return '/terminal/edit_state_unplan?action=unplan';
+		else return '/terminal/edit_state?action=' + action;
+	}
+	
+
 	
 	
 

@@ -18,13 +18,13 @@ class OrderActionBase extends Model {
 	
 	public function convertState()
 	{
-		$this->convertState = ParamOrderAction::convertStateWork($this->state);
+		$this->convertState = OrderActionStatic::convertStateWork($this->state);
 		return $this;
 	}
 	
 	public function setBgState()
 	{
-		$this->bgState = ParamOrderAction::getBgStateWork($this->state);
+		$this->bgState = OrderActionStatic::getBgStateWork($this->state);
 		return $this;
 	}
 	
