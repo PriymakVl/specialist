@@ -12,10 +12,10 @@ class Order extends OrderStatic {
 	public $products;
 	public $convertRating;
 
-    public function __construct($order_id)
+    public function __construct($id_order = false)
     {
         $this->tableName = 'orders';
-        parent::__construct($order_id);
+        parent::__construct($this->id ? $this->id : $id_order);
 		$this->message->section = 'order';
     }
 

@@ -65,4 +65,11 @@ class Model extends ModelStatic {
 		return $this;
 	}
 	
+	public function setId($id)
+	{
+		if (empty($id)) throw new Exception('Нет id при создании класса '.__CLASS__);
+		$this->id = $id;
+		return $this;
+	}
+	
 }

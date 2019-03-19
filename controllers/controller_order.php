@@ -41,10 +41,10 @@ class Controller_Order extends Controller_Base {
 	{
 		$params = ParamOrder::addContent();
 		if (empty($params['id_order'])) {
-			$this->message->set('error', 'not-active'); /***/ $this->redirectPrevious();
+			$this->message->set('error', 'not-active'); 
+			$this->redirectPrevious();
 		}
-		$order = new Order($params['id_order']); 
-		$order->addContent($params)->setMessage('success', 'add-content')->setState(OrderState::PREPARATION);
+		$order = (new Order)->setId($this->id_order)->addContent($params)->setMessage('success', 'add-content')->setState(OrderState::PREPARATION);
 		$this->redirect('order?id_order='.$order->id);
 	}
 	
