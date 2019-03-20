@@ -1,5 +1,10 @@
+<? 
+	$tab_active_info = false;
+	if  (Param::get('tab') == 1) $tab_active_info = true;
+	if (!$order->content) $tab_active_info = true;
+?>
 <li>
-    <input type="radio" name="tabs" id="tab-1" checked>
+    <input type="radio" name="tabs" id="tab-1" <? if ($tab_active_info) echo 'checked'; ?>>
     <label for="tab-1">Информация</label>
     <div class="tab-content">
 		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>

@@ -15,9 +15,17 @@ class Order extends OrderStatic {
     public function __construct($id_order = false)
     {
         $this->tableName = 'orders';
-        parent::__construct($this->id ? $this->id : $id_order);
+        parent::__construct($id_order);
 		$this->message->section = 'order';
     }
+	
+	public function getData($id_order = false)
+	{
+		$id_order = $id_order ? $id_order : $this->params->id_order;
+		if (empty($id_order)) return exit('Not id_position in method getData');
+		parent::getData($id_order);
+		return $this;
+	}
 
     public function getContent()
     {
@@ -25,9 +33,9 @@ class Order extends OrderStatic {
         return $this;
     }
 	
-	public function addContent($params)
+	public function addContent()
 	{
-		OrderContent::add($params);
+		OrderContent::add();
 		return $this;
 	}
 	
@@ -63,7 +71,7 @@ class Order extends OrderStatic {
 	
 	public function getPositions()
 	{
-		$this->positions = OrderPositions::get($this->id);
+		$this->positions = OrderPosition::getAllByIdOrder($this->id);
 		return $this;
 	}
 	

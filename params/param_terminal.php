@@ -14,6 +14,16 @@ class ParamTerminal extends Param {
 		return $params;
 	}
 	
+	public static function editStateUnplan()
+	{
+		$keys = ['id_action', 'state'];
+		$params = self::getAll($keys);
+		$params['id_worker'] = Session::get('id_user');
+		$params['time'] = time();
+		$params['type_action'] = 'unplan';
+		return $params;
+	}
+	
 	public static function getActions($worker)
 	{
 		$keys = ['action', 'type_order', 'order'];

@@ -7,9 +7,10 @@
             <div class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>" onclick="show_box_operations(this);"
                  prod_name="<?=$action->product->name?>"
                  state="<?=$action->state?>"
-				 id_item="<?=$action->id?>"
+				 id_action="<?=$action->id?>"
 				 action="<?=$action->id_data?>"
 				 note="<?=$action->note?>"
+				 type_action="plan"
 			>
 				 
 

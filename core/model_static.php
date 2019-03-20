@@ -67,13 +67,13 @@ class ModelStatic extends DB {
 		return self::perform($sql)->fetchColumn();
 	}
 	
-	public static function selectParams($params_all, $keys) 
-	{
-		$params = [];
-        foreach ($keys as $key) {
-            if (isset($params_all[$key])) $params[$key] = $params_all[$key];
-        }
-        return $params;
-	}
+	// public static function selectParams($params_all, $keys) 
+	// {
+		// $params = [];
+        // foreach ($keys as $key) {
+            // if (isset($params_all[$key])) $params[$key] = $params_all[$key];
+        // }
+        // return $params;
+	// }
 	
 }

@@ -1,6 +1,6 @@
 <? 
-	$tab_active_actions = true;
-	if  (Param::get('tab') && Param::get('tab') != 3) $tab_active_actions = false;
+	$tab_active_actions = false;
+	if  (Param::get('tab') && Param::get('tab') == 3) $tab_active_actions = true;
 ?>
 <li id="order-actions-wrp">
     <input type="radio" name="tabs" id="tab-3" <? if ($tab_active_actions) echo 'checked'; ?>>

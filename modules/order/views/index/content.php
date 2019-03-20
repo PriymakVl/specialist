@@ -1,5 +1,9 @@
+<? 
+	$tab_active_content = false;
+	if  (!Param::get('tab') || Param::get('tab') == 2) $tab_active_content = true;
+?>
 <li id="order-content-wrp">
-    <input type="radio" name="tabs" id="tab-2" checked>
+    <input type="radio" name="tabs" id="tab-2" <? if ($tab_active_content) echo 'checked'; ?>>
     <label for="tab-2">Содержание</label>
     <div class="tab-content">
 		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>

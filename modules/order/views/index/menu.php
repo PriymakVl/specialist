@@ -1,13 +1,17 @@
 <div id="menu-order-wrp">
 	<!-- menu order -->
-    <ul id="menu-order" <? if ($order->content || $order->actions || $order->actionsUnplan) echo 'style="display:none;"'?>>
+    <ul id="menu-order">
         <li><a href="/order/edit?id_order=<?=$order->id?>">Редактировать</a></li>
         <li><a href="#" id_order="<?=$order->id?>" id="order-delete">Удалить заказ</a></li>
 		<? if ($id_active != $order->id && $order->state != OrderState::REGISTERED): ?>
 			<li><a href="/order/activate?id_order=<?=$order->id?>">Сделать активным</a></li>
 		<? endif; ?>
-		<li><a href="/order/add_position?id_order=<?=$order->id?>">Добавить позицию</a></li>
-		
+		<br><hr>
+		<!-- order position -->
+		<li>
+			<a href="/order_position/add?id_order=<?=$order->id?>">Добавить позицию</a>
+		</li>
+		<br><hr>
 		<!-- change state order -->
 		<? if ($order->state == OrderState::REGISTERED): ?>
 			<li><a href="/order/to_preparation?id_order=<?=$order->id?>">В подготовку</a></li>
@@ -16,20 +20,21 @@
 		<? elseif ($order->state == OrderState::WORK): ?>
 				<li><a href="/order/to_made?id_order=<?=$order->id?>">Заказ выполнен</a></li>
 		<? endif; ?>
+		<br><hr>
 		<? if (!$order->actionsUnplan): ?>
 			<li>
 				<a href="/order_action/add_unplan?id_order=<?=$order->id?>">Доб. дополн. операц</a>
 			</li>
 		<? endif; ?>
     </ul>
-	
+
 	<!-- menu order content -->
 	<? if ($order->state == OrderState::PREPARATION && $order->content): ?>
 		<ul id="menu-order-content">
 			<li><a href="#" id="content_delete" id_order="<?=$order->id?>">Удалить позиции</a></li>
 		</ul>
 	<? endif; ?>
-	
+	<br><hr>
 	<!-- menu order actions -->
 	<? if ($order->actions): ?>
 		<ul id="menu-order-actions">

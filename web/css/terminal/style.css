@@ -39,7 +39,7 @@ body {
 	letter-spacing: 7px;
 }
 
-#terminal-actions-wrp {
+#terminal-actions-wrp,  #terminal-actions-unplan-wrp {
 	margin-top: 20px;
 	margin-left: 20px;
 }

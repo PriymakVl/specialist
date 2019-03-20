@@ -12,7 +12,7 @@ require_once ('./modules/product/models/product_action.php');
 
 	/*order*/
 require_once ('order_content.php');
-require_once ('order_positions.php');
+require_once ('./modules/order_position/classes/order_position.php');
 require_once ('order_extract_products.php');
 
  /*order action*/

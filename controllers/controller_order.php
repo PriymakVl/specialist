@@ -17,8 +17,7 @@ class Controller_Order extends Controller_Base {
     public function action_index()
 	{;
 		$id_active = Session::get('order-active');
-		$order = new Order($this->id_order);
-		$order->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
+		$order = (new Order)->getData()->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
 		$this->render('index/main', compact('order', 'id_active'));
 	}
 
@@ -36,15 +35,16 @@ class Controller_Order extends Controller_Base {
         Session::set('order-active', $this->id_order);
         $this->redirectPrevious();
     }
-	
+	//добавление деталей в заказ в ручную
 	public function action_add_content()
 	{
-		$params = ParamOrder::addContent();
-		if (empty($params['id_order'])) {
+		$id_order = Session::get('order-active');
+		if (empty($id_order)) {
 			$this->message->set('error', 'not-active'); 
 			$this->redirectPrevious();
 		}
-		$order = (new Order)->setId($this->id_order)->addContent($params)->setMessage('success', 'add-content')->setState(OrderState::PREPARATION);
+		$order = (new Order)->getData($id_order)->addContent();
+		//->setMessage('success', 'add-content')->setState(OrderState::PREPARATION);
 		$this->redirect('order?id_order='.$order->id);
 	}
 	
@@ -119,6 +119,12 @@ class Controller_Order extends Controller_Base {
 		if (empty($params['symbol'])) return $this->render('position/add', ['order' => $order]);
 		OrderPositions::add($params);
 		$this->redirect('order?id_order='.$this->id_order);
+	}
+	
+	public function action_delete_position()
+	{
+		(new OrderPosition)->delete()->setMessage('success', 'delete');
+		$this->redirect('order?tab=1&id_order='.$this->id_order);
 	}
 	
 	public function action_delete_content()

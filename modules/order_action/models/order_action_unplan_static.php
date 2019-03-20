@@ -7,7 +7,7 @@ class OrderActionUnplanStatic extends OrderActionUnplanModel {
 	public static function getActions()
 	{
 		$items = self::getActionsModel();
-		if($items) return self::createArrayActionsUnplan($actions);
+		if($items) return self::createArrayActionsUnplan($items);
 	}
 	
 	public static function createArrayActionsUnplan($actions_arr)

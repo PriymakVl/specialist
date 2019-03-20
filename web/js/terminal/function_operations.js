@@ -1,4 +1,4 @@
- 	var state, id_item, action, prod_name, note;
+ 	var state, id_action, action, type_action, note;
 	
 	const STATE_ACTION_PLANED = 1;
 	const STATE_ACTION_PROGRESS = 2;
@@ -7,9 +7,10 @@
 
 	function show_box_operations(elem) {
 		state = $(elem).attr('state');
-		id_item = $(elem).attr('id_item');
+		id_action = $(elem).attr('id_action');
 		action = $(elem).attr('action');
 		note = $(elem).attr('note');
+		type_action = $(elem).attr('type_action');
 		
 		$('#terminal-actions-wrp, #terminal-actions-unplan-wrp, #filters-wrp').hide();
 		$('#operations-box').show();
@@ -35,7 +36,7 @@
 			return;
 		}
 		var path = getUrl();
-		path = path + '?id_action=' + id_item + '&state=' + STATE_ACTION_PROGRESS;
+		path = path + '&id_action=' + id_action + '&state=' + STATE_ACTION_PROGRESS ;
 		location.href = path;
 		return false;
 	}
@@ -59,7 +60,7 @@
 			return;
 		}
 		var path = getUrl();
-		path = path + '?id_action=' + id_item + '&state=' + STATE_ACTION_ENDED;
+		path = path + '&id_action=' + id_action + '&state=' + STATE_ACTION_ENDED;
 		location.href = path;
 		return false;
 	}
@@ -75,7 +76,7 @@
 			return;
 		}
 		var path = getUrl();
-		path = path + '?id_action=' + id_item + '&state=' + STATE_ACTION_STOPPED;
+		path = path + '&id_action=' + id_action + '&state=' + STATE_ACTION_STOPPED;
 		location.href = path;
 		return false;
 	}
@@ -84,7 +85,7 @@
 		var note = prompt('Введите примечание к операции');
 		if (!note) return;
 		var params = getObjectGetParams();
-		var request = '/terminal/add_note?id=' + id_item + '&note=' + note;
+		var request = '/terminal/add_note?id_action=' + id_action + '&note=' + note;
 		action = params.action ? params.action : action; //если загружен 1 раз берет значение не с get запроса а с атрибута
 		request = request + '&action=' + action; 
 		location.href = request;
@@ -92,7 +93,9 @@
 	}
 	
 	function getUrl() {
-		if (action == 'unplan') return '/terminal/edit_state_unplan?action=unplan';
+		var params = getObjectGetParams();
+		action = params.action ? params.action : action;
+		if (type_action == 'unplan') return '/terminal/edit_state_unplan?action=' + action;
 		else return '/terminal/edit_state?action=' + action;
 	}
 	

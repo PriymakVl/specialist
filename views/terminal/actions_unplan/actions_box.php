@@ -7,8 +7,8 @@
             <div id="test" class="terminal-action-box" style="background:<?=$action->bgTerminalBox?>" onclick="show_box_operations(this);"
                  prod_name="<?=$action->prod_name?>"
                  state="<?=$action->state?>"
-                 id_item="<?=$action->id?>"
-                 action="unplan">
+                 id_action="<?=$action->id?>"
+                 type_action="unplan">
 
                 <span class="info-order">№<?=$number?> заказ: <?=$action->order->symbol?></span>
                 <span class="info-product"><?=$action->prod_symbol?><br>

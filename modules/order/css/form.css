@@ -56,18 +56,6 @@
 	width: 135px;
 }
 
-/* form add position */
-#form-order-position-wrp input[name="symbol"] {
-	margin-right: 50px;
-}
-
-.position-note-wrp {
-	margin-top: 15px;
-}
-
-.position-note-wrp textarea {
-	width: 915px;
-}
 
 
 

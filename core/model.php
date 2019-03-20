@@ -8,11 +8,13 @@ class Model extends ModelStatic {
 	public $data;
 	protected $tableName;
 	public $message;
+	public $params;
 	
 	public function __construct($id = null)
 	{
 		if ($id) $this->getData($id);
 		$this->message = new Message();
+		$this->params = json_decode(json_encode($_REQUEST), FALSE);
 	}
 
 	public function __set($name, $value) 
@@ -65,11 +67,11 @@ class Model extends ModelStatic {
 		return $this;
 	}
 	
-	public function setId($id)
-	{
-		if (empty($id)) throw new Exception('Нет id при создании класса '.__CLASS__);
-		$this->id = $id;
-		return $this;
-	}
+	// public function setId($id)
+	// {
+		// if (empty($id)) throw new Exception('Нет id при создании класса '.__CLASS__);
+		// $this->id = $id;
+		// return $this;
+	// }
 	
 }

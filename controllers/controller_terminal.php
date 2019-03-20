@@ -25,9 +25,8 @@ class Controller_Terminal extends Controller_Base
 	public function action_actions_unplan()
 	{
 		$worker = $this->getWorker();
-		$params = ParamTerminal::getActionsUnplan($worker);
 		$actions = OrderActionUnplan::getActions();
-		$this->render('actions/main', compact('actions', 'worker', 'params'));
+		$this->render('actions_unplan/main', compact('actions', 'worker'));
 	}
 
     public function action_edit_state()
@@ -43,7 +42,7 @@ class Controller_Terminal extends Controller_Base
 		$params = ParamTerminal::editStateUnplan();
 		$action = new OrderActionUnplan($params['id_action']);
 		$action->editState($params)->checkReadyOrder();
-		$this->redirect('terminal/actions?action=unplan');
+		$this->redirect('terminal/actions_unplan');
 	}
 	
 	public function action_add_note()

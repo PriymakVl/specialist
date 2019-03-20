@@ -35,8 +35,8 @@ class OrderActionUnplanModel extends OrderActionBase {
 	
 	public static function setState($params)
 	{
-		$params = self::selectParams($params);
-		$sql = 'UPDATE `order_action_unplan` SET `state` = :state WHERE `id` = :id';
+		$params = self::selectParams($params, ['state', 'id_action']);
+		$sql = 'UPDATE `order_action_unplan` SET `state` = :state WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}
 	

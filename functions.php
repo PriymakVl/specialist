@@ -2,7 +2,6 @@
 
 function debug($array, $exit = true) 
 {
-	if (empty($array)) exit('<br><span style="color: red;">end script</span><br>');
     echo '<br><span style="color: red;">start script</span><br>';
     if(is_array($array) || is_object($array)) {
          echo '<pre>'.print_r($array, true).'</pre>';    
