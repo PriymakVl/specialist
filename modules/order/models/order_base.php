@@ -10,10 +10,12 @@ require_once ('./params/param_order_action.php');
 require_once ('./modules/product/models/product.php');
 require_once ('./modules/product/models/product_action.php');
 
-	/*order*/
-require_once ('order_content.php');
+	/*order position*/
 require_once ('./modules/order_position/classes/order_position.php');
-require_once ('order_extract_products.php');
+
+    /* order content */
+require_once ('./modules/order_content/classes/order_content.php');
+require_once ('./modules/order_content/traits/order_extract_products.php');
 
  /*order action*/
 require_once ('./modules/order_action/models/order_action.php');

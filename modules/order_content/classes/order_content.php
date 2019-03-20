@@ -1,10 +1,7 @@
 <?php
-require_once('order_base.php');
+require_once './core/model.php';
 
 class OrderContent extends OrderBase {
-
-    //const TYPE_SPECIFIC = 1;
-    //const TYPE_PRODUCT = 2;
 
 	public static function add($params)
 	{
