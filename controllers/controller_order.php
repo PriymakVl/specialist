@@ -2,32 +2,30 @@
 require_once('controller_base.php');
 
 class Controller_Order extends Controller_Base {
-	
-	private $id_order;
 
     public function __construct()
     {
         parent::__construct();
         $this->view->pathFolder = './modules/order/views/';
-		$this->id_order = Param::get('id_order');
 		$this->message->section = 'order';
 		$this->view->title = 'Заказ';
     }
 
     public function action_index()
-	{;
-		$id_active = Session::get('order-active');
-		$order = (new Order)->getData()->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
-		$this->render('index/main', compact('order', 'id_active'));
+	{
+		debug($this->get->id_order);
+		$order = new Order($this->get->id_order);
+		debug('ddd');
+		$order->getData()->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
+		debug($order);
+		$this->render('index/main', compact('order'));
 	}
 
 	public function action_list()
 	{
-		$id_active = Session::get('order-active');
-	    $params = ParamOrder::getList();
-		$orders = Order::getList($params);
+		$orders = Order::getList();
         $this->view->title = 'Заказы';
-		$this->render('list/main', compact('orders', 'params', 'id_active'));
+		$this->render('list/main', compact('orders'));
 	}
 	
 	public function action_activate()

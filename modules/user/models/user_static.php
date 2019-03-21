@@ -1,39 +1,26 @@
 <?php
-require_once('user_base.php');
+require_once('user_model.php');
 
-class UserStatic extends UserBase {
-    
-    public static function  getByPassword($password)
-    {
-        $sql = 'SELECT `id`  FROM `users` WHERE `password` = :password';
-        $id = self::perform($sql, ['password' => $password])->fetchColumn();
-        if ($id) return new User($id);
-        return false;
-    }
+class UserStatic extends UserModel {
 	
 	public static function getWorkers()
 	{
-		$sql = 'SELECT `id`  FROM `users` WHERE `position` = :position AND `status` = :status';
-		$params =  ['position' => self::POSITION_WORKER, 'status' => self::STATUS_ACTIVE];
-        $ids = self::perform($sql, $params)->fetchAll();
-        if ($ids) return Helper::createArrayOfObject($ids, 'Worker');
+		$items = getWorkersModel();
+        if ($items) return Helper::createArrayOfObject($ids, 'Worker');
         return false;
 	}
 	
-	public static function authorisation($params)
+	public static function loginStatic($password_form)
 	{
-		$user = self::getUserByLogin($params['login']);
-		if (!$user) return false;
-		if ($user->password == $params['password']) return new User($user->id);
-		else throw new Exception('Неверный пароль');
+		$user = self::getUserByLogin();
+		if (!$user) throw new Exception('error_login');
+		return self::checkPassword($user, $password_form);;
 	}
 	
-	public static function getUserByLogin($login)
+	private static function checkPassword($user, $password_form)
 	{
-		$sql = 'SELECT *  FROM `users` WHERE `login` = :login';
-        $id = self::perform($sql, ['login' => $login])->fetch();
-        if (!$id) throw new Exception('Неверный логин');
-        return $id;
+		if ($user->password != $password_form) throw new Exception('error_password');
+		return new User($user->id);
 	}
 
 }

@@ -9,12 +9,18 @@ class Model extends ModelStatic {
 	protected $tableName;
 	public $message;
 	public $params;
+	public $get;
+	public $post;
+	public $session;
 	
-	public function __construct($id = null)
+	public function __construct($id)
 	{
 		if ($id) $this->getData($id);
 		$this->message = new Message();
-		$this->params = json_decode(json_encode($_REQUEST), FALSE);
+		$this->params = Param::getAll();
+		$this->get = new ArrayGet;
+		$this->post = new ArrayPost();
+		$this->session = new ArraySession();
 	}
 
 	public function __set($name, $value) 
@@ -32,6 +38,7 @@ class Model extends ModelStatic {
         $sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
 		$params = ['id' => $id, 'status' => self::STATUS_ACTIVE];
         $this->data = self::perform($sql, $params)->fetch(PDO::FETCH_ASSOC);
+		return $this;
     }
 
     public function delete()

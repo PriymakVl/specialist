@@ -24,6 +24,7 @@ class Message {
     private function parse($key)
     {
         $messages = parse_ini_file('./web/files/messages.ini', true);
+		if (empty($messages[$this->section][$key])) throw new Exception('Сообщение с таким название раздела или ключа не существует');
         return $messages[$this->section][$key];
     }
 

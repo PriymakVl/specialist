@@ -8,11 +8,11 @@ class DB {
 	private static function getPdo () {
 		
 		$dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME;
-		$options = self::getOptions();
+		$options = self::setOptionsDB();
 		self::$_instance = new PDO($dsn, DB_USER, DB_PASSWORD, $options);
 	}
 
-	private static function getOptions()
+	private static function setOptionsDB()
 	{
 		//$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING];
 

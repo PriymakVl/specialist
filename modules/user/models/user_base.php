@@ -16,8 +16,14 @@ class UserBase extends Model
 
 	public $defaultTypeOrder;
 	public $defaultProductAction;
+	public $options;
 	
-	const POSITION_WORKER = 1;
+	const POSITION_SUPER_ADMIN = 1;
+	const POSITION_ADMIN = 2;
+	const POSITION_BOSS = 3;
+	const POSITION_DESINGER = 4;
+	const POSITION_MANAGER = 5;
+	const POSITION_WORKER = 6;
 	
 
 }

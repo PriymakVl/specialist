@@ -13,27 +13,25 @@ class Controller_Main extends Controller_Base {
 	public function action_404()
     {
         $path = Param::get('path');
+		$this->view->pathLayout = './views/layouts/base.php';
         $this->render('main/404', compact('path'));
     }
 
     public function action_index()
     {
-        $id_user = Session::get('id_user');
-        if (empty($id_user)) return $this->redirect('main/login');
-        $user = new User($id_user);
+        if (!$this->session->id_user) return $this->redirect('main/login');
+        $user = new User($this->session->id_user);
         if ($user->position == User::POSITION_WORKER) $this->redirect('terminal/actions');
         else $this->redirect('order/list');
     }
 
     public function action_login()
     {
-        $params = Param::getAll(['login', 'password']);
-        $user = $params ? UserStatic::authorisation($params) : false;
-        if ($user) {
-            Session::set('id_user', $user->id);
-            $this->redirect('main/index');
-        }
-        $this->render('main/login');
+		if (!$this->post->save) return $this->render('main/login');
+        $user = (new User)->login();
+        if (!$user) $this->redirect('main/login?login_error='.$this->post->login);
+        Session::set('id_user', $user->id);
+        $this->redirect('main/index');
     }
 
     public function action_logout()

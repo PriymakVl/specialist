@@ -3,43 +3,53 @@ require_once('user_static.php');
 
 class User extends UserStatic {
 
-    public function __construct($user_id)
+    public function __construct($user_id = false)
     {
         $this->tableName = 'users';
         parent::__construct($user_id);
-		$this->setProperties();
+		$this->message->section = 'user';
     }
 	
-	private function setProperties()
+	public function getOptions() 
 	{
-		$options = UserOptions::get($this->id);
-		if (!$options) return;
-		$this->defaultProductAction = $this->setProperty('default_product_action', $options);
-		$this->defaultTypeOrder = $this->setProperty('default_type_order', $options);
+		$this->options = UserOptions::get($this->id);
+		return $this;
 	}
 	
-	private function setProperty($name_option, $options)
+	public function setOptions()
+	{
+		if ($this->position == POSITION_WORKER) return 
+		$this->defaultProductAction = $this->setOption('default_product_action', $options);
+		$this->defaultTypeOrder = $this->setOption('default_type_order', $options);
+	}
+	
+	public function setPosition()
+	{
+		if (empty($this->options['position'])) throw new Exception('error-position');
+		$this->position = $this->options['position'];
+		return $this;
+	}
+	
+	private function setOption($name_option, $options)
 	{
 		foreach ($options as $option) {
 			if ($option->name == $name_option) return $option->value;
 		}
 		return null;
 	}
+	
+	public function login()
+	{
+		try {
+			return self::loginStatic(trim($this->post->password));
+		} catch (Exception $e) {;
+			$flag = explode('_', $e->getMessage())[1];//login or password
+			$this->setMessage($flag, $e->getMessage());
+			return false;
+		}
+	}
 
 
-
-//    public function update()
-//    {
-//        $state = Param::get('state');
-//        $date_state = time();
-//
-//        if ($this->state == $state) $date_state = $this->date_state ? $this->date_state : time();
-//        else OrderState::set($this->id, $state);//for show history update
-//
-//        $sql = "UPDATE `orders` SET `number` = :number, `date_exec` = :date_exec, `state` = :state, `date_state` =".$date_state;
-//        $sql .= ',`note` = :note, `type` = :type, `letter` = :letter, `count_pack` = :count_pack WHERE `id` ='.$this->id;
-//        self::perform($sql, Param::forUpdateOrder());
-//    }
     
 	
 }

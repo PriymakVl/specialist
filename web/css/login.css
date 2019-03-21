@@ -208,6 +208,24 @@ label {
   background: #313131;
 }
 
+#login-input-wrp, #password-input-wrp {
+	position: relative;
+}
+
+#error-message-login {
+	position: absolute;
+	top: -22px;
+	left: 93px;
+	color: red;
+}
+
+#error-message-password {
+	position: absolute;
+	top: 44px;
+	left: 105px;
+	color: red;
+}
+
 /*.firmname {
 	color: white;
 	height: 100px;

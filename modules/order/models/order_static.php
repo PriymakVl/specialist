@@ -5,10 +5,9 @@ class OrderStatic extends OrderModel {
 
 	public static function getList($params)
 	{
-		if ($params['state'] == OrderState::ALL) $ids = self::getStateAll($params);
-		else $ids = self::getStateOne($params);
-        if (empty($ids)) return false;
-	    return self::createArrayOfOrder($ids);
+		if (Param::get('state') == OrderState::ALL) $ids = self::getStateAll();
+		else $ids = self::getStateOne();
+        if ($ids) return self::createArrayOfOrder($ids);
 	}
 	
 	protected static function createArrayOfOrder($ids)

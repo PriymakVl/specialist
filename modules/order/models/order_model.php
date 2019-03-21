@@ -10,8 +10,10 @@ class OrderModel extends OrderBase {
 		return self::perform($sql, $params)->fetchAll();	
 	}
 	
-	public static function getStateOne($params)
+	public static function getStateOne()
 	{
+		$params = self::selectParams(['state', 'status']);
+		debug($params);
 		$sql = 'SELECT `id` FROM `orders` WHERE `state` = :state AND `status` = :status ORDER BY rating DESC, date_exec ASC';
 		return self::perform($sql, $params)->fetchAll();
 	}
