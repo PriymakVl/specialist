@@ -10,8 +10,8 @@ define('DB_PASSWORD', '');
 define('DB_NAME', 'specialist');
 
 define('SITE_URL', 'specialist');
-define('CONTROLLER_DEFAULT', 'main');
-define('ACTION_DEFAULT', 'index');
+define('DEFAULT_CONTROLLER_NAME', 'main');
+define('DEFAULT_ACTION_NAME', 'index');
 
 define('ID_CATEGORY_PRODUCTS', 9); //для показа вида категории только на цилиндрах
 define('ID_CATEGORY_CYLINDER', 10);

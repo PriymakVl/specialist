@@ -2,14 +2,11 @@
 
 class Route
 {
-    private static $controller_name = CONTROLLER_DEFAULT;
-    private static $action_name = ACTION_DEFAULT;
+    private static $controller_name = DEFAULT_CONTROLLER_NAME;
+    private static $action_name = DEFAULT_ACTION_NAME;
 
 	public static function start()
 	{
-		// контроллер и действие по умолчанию
-		self::$controller_name = CONTROLLER_DEFAULT;
-		self::$action_name = ACTION_DEFAULT;
 		
 		//убираем из url get параметры
 		$url = explode('?', $_SERVER['REQUEST_URI'], 2);
