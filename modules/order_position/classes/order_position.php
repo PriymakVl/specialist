@@ -4,9 +4,9 @@ require_once('order_position_static.php');
 class OrderPosition extends OrderPositionStatic {
 	
 	
-	public function __construct()
+	public function __construct($id_position = false)
 	{
-		parent::__construct();
+		parent::__construct($id_position);
 		$this->message->section = 'order_position';
 		$this->tableName = 'order_positions';
 	}
@@ -25,7 +25,7 @@ class OrderPosition extends OrderPositionStatic {
 	
 	public function getData($id_position = false)
 	{
-		$id_position = $id_position ? $id_position : $this->params->id_position;
+		$id_position = $id_position ? $id_position : $this->get->id_position;
 		if (empty($id_position)) return exit('Not id_position in method getData');
 		parent::getData($id_position);
 		return $this;

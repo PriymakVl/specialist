@@ -1,6 +1,6 @@
 <?php
 
-require_once('param.php');
+// require_once('param.php');
 
 class ParamProduct extends Param {
     

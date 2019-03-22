@@ -7,8 +7,8 @@ require_once ('./helpers/helper.php');
 require_once ('./params/param_order_action.php');
 
 	/*product*/
-require_once ('./modules/product/models/product.php');
-require_once ('./modules/product/models/product_action.php');
+require_once ('./modules/product/classes/product.php');
+require_once ('./modules/product/classes/product_action.php');
 
 	/*order position*/
 require_once ('./modules/order_position/classes/order_position.php');
@@ -16,11 +16,12 @@ require_once ('./modules/order_position/classes/order_position.php');
     /* order content */
 require_once ('./modules/order_content/classes/order_content.php');
 require_once ('./modules/order_content/traits/order_extract_products.php');
+require_once 'order_param.php';
 
  /*order action*/
-require_once ('./modules/order_action/models/order_action.php');
+require_once ('./modules/order_action/classes/order_action.php');
 
-require_once ('./modules/statistics/models/statistics.php');
+require_once ('./modules/statistics/classes/statistics.php');
 
 
 class OrderBase extends Model

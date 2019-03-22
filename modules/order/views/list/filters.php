@@ -1,5 +1,4 @@
 <?php
-    $state = $params['state'];
     $selected_reg = ($state == OrderState::REGISTERED) ? 'selected' : '';
     $selected_prep = ($state == OrderState::PREPARATION) ? 'selected' : '';
 	$selected_work = ($state == OrderState::WORK) ? 'selected' : '';

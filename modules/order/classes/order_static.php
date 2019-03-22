@@ -3,10 +3,10 @@ require_once('order_model.php');
 
 class OrderStatic extends OrderModel {
 
-	public static function getList($params)
+	public static function getList($state)
 	{
-		if (Param::get('state') == OrderState::ALL) $ids = self::getStateAll();
-		else $ids = self::getStateOne();
+		if ($state == OrderState::ALL) $ids = self::getStateAll();
+		else $ids = self::getStateOne($state);
         if ($ids) return self::createArrayOfOrder($ids);
 	}
 	

@@ -1,42 +1,42 @@
 <?php
 require_once ('./core/controller.php');
 
-        /* params */
+         /* params */
 require_once ('./core/param.php');
-//require_once ('./params/param_order.php');
-//require_once ('./params/param_product.php');
-//require_once ('./params/param_product_action.php');
-//require_once ('./params/param_statistics.php');
-//require_once ('./params/param_order_action_unplan.php');
-//require_once ('./params/param_drawing.php');
+require_once ('./params/param_order.php');
+require_once ('./params/param_product.php');
+require_once ('./params/param_product_action.php');
+require_once ('./params/param_statistics.php');
+require_once ('./params/param_order_action_unplan.php');
+require_once ('./params/param_drawing.php');
 
-	/*terminal*/
-//require_once ('./params/param_terminal.php');
+	// /*terminal*/
+require_once ('./params/param_terminal.php');
 
 
-        /* user */
-//require_once ('./modules/user/models/user.php');
-require_once('./modules/user/models/worker.php');
+        // /* user */
+require_once ('./modules/user/classes/user.php');
+require_once('./modules/user/classes/worker.php');
 
-        /* order */
-require_once('./modules/order/models/order.php');
-require_once('./modules/order/models/order_static.php');
-require_once('./modules/order/models/order_state.php');
+        // /* order */
+require_once('./modules/order/classes/order.php');
+require_once('./modules/order/classes/order_static.php');
+require_once('./modules/order/classes/order_state.php');
 
-    /* order action */
-require_once('./modules/order_action/models/order_action.php');
-require_once('./modules/order_action/models/order_action_unplan.php');
+    // /* order action */
+require_once('./modules/order_action/classes/order_action.php');
+require_once('./modules/order_action/classes/order_action_unplan.php');
 
-	/*order content*/
+	// /*order content*/
 require_once('./modules/order_content/classes/order_content.php');
 
-	/*product*/
-require_once('./modules/product/models/product.php');
-require_once('./modules/product/models/product_action.php');
+	// /*product*/
+require_once('./modules/product/classes/product.php');
+require_once('./modules/product/classes/product_action.php');
 
-require_once('./modules/statistics/models/statistics.php');
+require_once('./modules/statistics/classes/statistics.php');
 require_once ('./models/data_action.php');
-require_once('./modules/drawing/models/drawing.php');
+require_once('./modules/drawing/classes/drawing.php');
 
 
 

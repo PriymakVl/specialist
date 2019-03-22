@@ -3,17 +3,15 @@ require_once('order_base.php');
 
 class OrderModel extends OrderBase {
 
-	public static function getStateAll($params)
+	public static function getStateAll()
 	{
-		unset($params['state']);
 		$sql = 'SELECT `id` FROM `orders` WHERE `status` = :status ORDER BY rating DESC, date_exec ASC';
-		return self::perform($sql, $params)->fetchAll();	
+		return self::perform($sql, ['status' => self::STATUS_ACTIVE])->fetchAll();	
 	}
 	
-	public static function getStateOne()
+	public static function getStateOne($state)
 	{
-		$params = self::selectParams(['state', 'status']);
-		debug($params);
+		$params = ['status' => self::STATUS_ACTIVE, 'state' => $state];
 		$sql = 'SELECT `id` FROM `orders` WHERE `state` = :state AND `status` = :status ORDER BY rating DESC, date_exec ASC';
 		return self::perform($sql, $params)->fetchAll();
 	}
@@ -26,9 +24,9 @@ class OrderModel extends OrderBase {
 	   return self::perform($sql, $params)->fetch();
 	}
 
-    public static function add($params)
+    public static function addDataModel()
     {
-		unset($params['save']);
+		$params = OrderParam::addData(['symbol', 'note', 'date_exec', 'type', 'state', 'rating']);
         $fields = 'symbol, note, date_exec, type, state, rating, date_reg';
         $values = ':symbol, :note, :date_exec, :type, :state, :rating, :date_reg';
         $sql = 'INSERT INTO `orders` ('.$fields.') VALUES ('.$values.')';
@@ -50,7 +48,7 @@ class OrderModel extends OrderBase {
         return self::perform($sql, $params)->fetchAll();
     }
 	
-	public static function setState($params)
+	public static function setStateModel($params)
 	{
 		$sql = 'UPDATE `orders` SET `state` = :state WHERE `id` = :id_order';
 		return self::update($sql, $params);

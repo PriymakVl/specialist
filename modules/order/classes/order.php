@@ -26,6 +26,18 @@ class Order extends OrderStatic {
 		parent::getData($id_order);
 		return $this;
 	}
+	
+	public function addData()
+	{
+		$id_order = self::addDataModel();
+		return (new self)->getData($id_order);
+	}
+	
+	public function setActive()
+	{
+		Session::set('id_order_active', $this->id);
+		return $this;
+	}
 
     public function getContent()
     {
@@ -142,7 +154,7 @@ class Order extends OrderStatic {
 	public function editState($state)
 	{
 		$params = ['state' => $state, 'id_order' => $this->id];
-		self::setState($params);
+		self::setStateModel($params);
 		return $this;
 	}
     

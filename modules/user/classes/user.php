@@ -3,10 +3,10 @@ require_once('user_static.php');
 
 class User extends UserStatic {
 
-    public function __construct($user_id = false)
+    public function __construct($id_user = false)
     {
         $this->tableName = 'users';
-        parent::__construct($user_id);
+        parent::__construct($id_user);
 		$this->message->section = 'user';
     }
 	
@@ -20,14 +20,6 @@ class User extends UserStatic {
 	{
 		if ($this->position == POSITION_WORKER) return 
 		$this->defaultProductAction = $this->setOption('default_product_action', $options);
-		$this->defaultTypeOrder = $this->setOption('default_type_order', $options);
-	}
-	
-	public function setPosition()
-	{
-		if (empty($this->options['position'])) throw new Exception('error-position');
-		$this->position = $this->options['position'];
-		return $this;
 	}
 	
 	private function setOption($name_option, $options)
@@ -36,6 +28,13 @@ class User extends UserStatic {
 			if ($option->name == $name_option) return $option->value;
 		}
 		return null;
+	}
+	
+	public function getDefaultStateOrders()
+	{
+		if ($this->options->default_state_orders) $this->defaultStateOrders = $this->options->default_state_orders;
+		else $this->defaultStateOrders = OrderState::REGISTERED;
+		return $this;
 	}
 	
 	public function login()

@@ -13,9 +13,8 @@ class Controller_Order_Position extends Controller_Base {
 	
 	public function action_add()
 	{
-		$order = new Order(Param::get('id_order'));
-
-		if (empty(Param::get('save'))) return $this->render('add/main', ['order' => $order]);
+		$order = new Order($this->get->id_order);
+		if (!$this->post->save) return $this->render('add/main', ['order' => $order]);
 		$position = (new OrderPosition)->addData()->setMessage('success', 'add');
 		$this->redirect('order?tab=1&id_order='.$order->id);
 	}

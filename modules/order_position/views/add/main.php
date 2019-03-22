@@ -1,9 +1,3 @@
-<?php
-
-require_once ('./modules/order/models/order.php');
-
-?>
-
 <!-- css files -->
 <link rel="stylesheet" href="/web/css/total/form.css">
 <link rel="stylesheet" href="/web/modules/order_position/css/form.css">
@@ -31,7 +25,7 @@ require_once ('./modules/order/models/order.php');
 
 			<!-- buttons -->
 			<div class="button-box">
-				<input type="submit" value="Сохранить" name="save">
+				<input type="submit" value="Сохранить" name="save" value="save">
 				<input type="button" onclick="location.href='/order?tab=1&id_order=' + <?=$order->id?>" value="Отменить">
 			</div>
 		</form>

@@ -73,7 +73,7 @@ class OrderActionModel extends OrderActionBase {
 		// return self::perform($sql, $params);
 	// }
 	
-	public static function setState($params)
+	public static function setStateModel($params)
 	{
 		$params = self::selectParams($params, ['state', 'id_worker', 'id_action']);
 		$sql = 'UPDATE `order_actions` SET `state` = :state, `id_worker` = :id_worker WHERE `id` = :id_action';

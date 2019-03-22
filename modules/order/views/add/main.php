@@ -1,7 +1,7 @@
 <?php
 
-require_once ('./modules/order/models/order.php');
-require_once ('./modules/order/models/order_state.php');
+require_once ('./modules/order/classes/order.php');
+require_once ('./modules/order/classes/order_state.php');
 
 ?>
 

@@ -1,9 +1,3 @@
-<?php
-
-require_once ('./modules/order/models/order.php');
-
-?>
-
 <!-- css files -->
 <link rel="stylesheet" href="/web/css/total/form.css">
 <link rel="stylesheet" href="/web/modules/order_position/css/form.css">

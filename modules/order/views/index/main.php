@@ -1,9 +1,3 @@
-<?php
-
-require_once ('./modules/order/models/order.php');
-
-?>
-
 <!-- css files -->
 <link rel="stylesheet" href="/modules/order/css/menu.css">
 <link rel="stylesheet" href="/modules/order/css/index.css">
@@ -11,7 +5,7 @@ require_once ('./modules/order/models/order.php');
 <div id="content">
 
     <!-- active box info -->
-	<? if ($id_active == $order->id): ?>
+	<? if ($this->session->id_order_active == $order->id): ?>
 		<div class="message message-success">Активный заказ</div>
     <? endif; ?>
 

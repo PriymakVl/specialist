@@ -13,19 +13,18 @@ class Controller_Order extends Controller_Base {
 
     public function action_index()
 	{
-		debug($this->get->id_order);
 		$order = new Order($this->get->id_order);
-		debug('ddd');
-		$order->getData()->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
-		debug($order);
+		$order->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
 		$this->render('index/main', compact('order'));
 	}
 
 	public function action_list()
 	{
-		$orders = Order::getList();
+		$user = (new User)->getData($this->session->id_user)->getOptions()->getDefaultStateOrders();
+		$state = $this->get->state ? $this->get->state : $user->defaultStateOrders;
+		$orders = Order::getList($state);
         $this->view->title = 'Заказы';
-		$this->render('list/main', compact('orders'));
+		$this->render('list/main', compact('orders', 'state'));
 	}
 	
 	public function action_activate()
@@ -71,18 +70,14 @@ class Controller_Order extends Controller_Base {
 	public function action_add()
     {
         $this->view->title = 'Добавить заказ';
-		$params = ParamOrder::add();
-		if (empty($params['save'])) return $this->render('add/main');
-        $order = Order::getBySymbol($params['symbol']);
+		if (!$this->post->save) return $this->render('add/main');
+        $order = Order::getBySymbol($this->post->symbol);
         if ($order) {
             $this->message->set('error', 'exist');
             $this->redirect('order/index?id_order='.$order->id);
-        }
-        else {
-            $id_add = Order::add($params);
-            Session::set('order-active', $id_add);
-            $this->message->set('success', 'add');
-            $this->redirect('order/add_position?id_order='.$id_add);
+        } else {
+			$order = (new Order)->addData()->setActive()->setMessage('success', 'add');
+            $this->redirect('order_position/add?id_order='.$order->id);
         }
     }
 	
@@ -134,7 +129,7 @@ class Controller_Order extends Controller_Base {
 	
 	 public function action_search()
 	 {
-		 $orders = Order::searchBySymbol(Param::get('symbol'));
+		 $orders = Order::searchBySymbol();
 
 		 if (count($orders) == 1) {
 			 $this->message->set('success', 'found');

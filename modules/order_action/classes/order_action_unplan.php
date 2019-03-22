@@ -14,7 +14,7 @@ class OrderActionUnplan extends OrderActionUnplanStatic {
 	public function editState($params)
 	{
 		OrderActionState::add($params);
-		self::setState($params);
+		self::setStateModel($params);
 		return $this;
 	}
 	

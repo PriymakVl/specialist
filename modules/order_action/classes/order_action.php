@@ -31,7 +31,7 @@ class OrderAction extends OrderActionStatic {
 	public function editState($params)
 	{
 		OrderActionState::add($params);
-		self::setState($params);
+		self::setStateModel($params);
 		return $this;
 	}
 	

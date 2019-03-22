@@ -1,17 +1,14 @@
 <div id="menu-order-wrp">
 	<!-- menu order -->
-    <ul id="menu-order">
-        <li><a href="/order/edit?id_order=<?=$order->id?>">Редактировать</a></li>
-        <li><a href="#" id_order="<?=$order->id?>" id="order-delete">Удалить заказ</a></li>
-		<? if ($id_active != $order->id && $order->state != OrderState::REGISTERED): ?>
-			<li><a href="/order/activate?id_order=<?=$order->id?>">Сделать активным</a></li>
-		<? endif; ?>
-		<br><hr>
+	<? include 'order_menu.php'; ?>
+		<br>
+		
 		<!-- order position -->
 		<li>
 			<a href="/order_position/add?id_order=<?=$order->id?>">Добавить позицию</a>
 		</li>
 		<br><hr>
+		
 		<!-- change state order -->
 		<? if ($order->state == OrderState::REGISTERED): ?>
 			<li><a href="/order/to_preparation?id_order=<?=$order->id?>">В подготовку</a></li>
@@ -34,7 +31,8 @@
 			<li><a href="#" id="content_delete" id_order="<?=$order->id?>">Удалить позиции</a></li>
 		</ul>
 	<? endif; ?>
-	<br><hr>
+	<br>
+	
 	<!-- menu order actions -->
 	<? if ($order->actions): ?>
 		<ul id="menu-order-actions">
