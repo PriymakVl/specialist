@@ -1,25 +1,16 @@
 <?php
 
-class View {
+class View extends Core {
 
 	public $footer = 'footer.php';
 	public $pathFolder = './views/';
-	public $pathLayout = './views/layouts/base.php';
+	public $pathLayout = './views/layouts/default.php';
 	public $title = 'Главная страница';
-	public $message;
-	public $params;
-	public $get;
-	public $post;
-	public $session;
 	
 	public function __construct()
 	{
-		$this->message = new Message();
+		parent::__construct();
 		$this->message->get();
-		$this->params = Param::getAll();
-		$this->get = new ArrayGet;
-		$this->post = new ArrayPost();
-		$this->session = new ArraySession();
 	}
 
 	public function render($content, $data, $view)
@@ -32,7 +23,7 @@ class View {
 		$params = $this->params;
 		$session = $this->session;
         if ($data) extract($data);
-		require ($this->pathLayout);
+		return require ($this->pathLayout);
 	}
 
 	public function renderPart($path, $data = null)
@@ -41,13 +32,5 @@ class View {
         if ($data) extract($data);
         require $path;
     }
-
-//	public function renderWithLayout($layout, $content, $data = null)
-//    {
-//        $content = $content.'.php';
-//        if ($data) extract($data);
-//        include_once('./views/layouts/'.$layout.'.php');
-//        exit();
-//    }
 
 }

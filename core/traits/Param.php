@@ -1,26 +1,24 @@
 <?php
 
-require_once 'model.php';
+trait Param {
 
-class Param {
-
- public static function get($key, $default = false)
+ public static function getParam($key, $default = false)
     {
         if (empty($_REQUEST[$key])) return $default;
         return $_REQUEST[$key];
     }
 
-    public static function getAll($params = false)
+    public static function getParams($params = false)
     {
         if (!$params) $params = array_merge($_REQUEST, $_SESSION);
-		$params['status'] = Model::STATUS_ACTIVE;
+		$params['status'] = STATUS_ACTIVE;
 		return json_decode(json_encode($params), FALSE);
     }
 	
-	public static function getAllAsArray()
+	public static function getParamsAsArray()
     {
         $params = array_merge($_REQUEST, $_SESSION);
-		$params['status'] = Model::STATUS_ACTIVE;
+		$params['status'] = STATUS_ACTIVE;
 		return $params;
     }
 
@@ -31,7 +29,7 @@ class Param {
         return explode(',', rtrim($str, ','));
     }
 	
-	public static function select($keys, $params = false) 
+	public static function selectParams($keys, $params = false) 
 	{
 		if (empty($keys)) throw new Exception('Нет массива ключей');
 		if (!is_array($keys)) throw new Exception('Ключи не являются массивом');

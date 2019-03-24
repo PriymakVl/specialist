@@ -1,26 +1,16 @@
 <?php
-require_once('model_static.php');
 
-class Model extends ModelStatic {
+class Model extends Core {
 
-	public $sql;
-	protected $stmt;
+	use ModelStatic;
+	
 	public $data;
 	protected $tableName;
-	public $message;
-	public $params;
-	public $get;
-	public $post;
-	public $session;
 	
 	public function __construct($id)
 	{
+		parent::__construct();
 		if ($id) $this->getData($id);
-		$this->message = new Message();
-		$this->params = Param::getAll();
-		$this->get = new ArrayGet;
-		$this->post = new ArrayPost();
-		$this->session = new ArraySession();
 	}
 
 	public function __set($name, $value) 
@@ -36,7 +26,7 @@ class Model extends ModelStatic {
     public function getData($id)
     {
         $sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
-		$params = ['id' => $id, 'status' => self::STATUS_ACTIVE];
+		$params = ['id' => $id, 'status' => STATUS_ACTIVE];
         $this->data = self::perform($sql, $params)->fetch(PDO::FETCH_ASSOC);
 		return $this;
     }
@@ -44,7 +34,7 @@ class Model extends ModelStatic {
     public function delete()
     {
 		$sql = 'UPDATE `'.$this->tableName.'` SET `status` = :status WHERE id = :id';
-		$params = ['status' => self::STATUS_DELETE, 'id' => $this->id];
+		$params = ['status' => STATUS_DELETE, 'id' => $this->id];
 		self::perform($sql, $params);
         return $this;
     }
@@ -73,12 +63,6 @@ class Model extends ModelStatic {
 		$this->message->set($type, $key);
 		return $this;
 	}
-	
-	// public function setId($id)
-	// {
-		// if (empty($id)) throw new Exception('Нет id при создании класса '.__CLASS__);
-		// $this->id = $id;
-		// return $this;
-	// }
+
 	
 }

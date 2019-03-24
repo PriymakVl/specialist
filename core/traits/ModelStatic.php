@@ -1,15 +1,12 @@
 <?php
-require_once 'db.php';
-require_once 'param.php';
 
-class ModelStatic extends DB {
-
-    const STATUS_DELETE = 0;
-    const STATUS_ACTIVE = 1;
+trait ModelStatic {
+	
+	use DB;
 
     protected static function perform($sql, $params = null)
     {
-        $pdo = parent::getInstance();
+        $pdo = self::getInstance();
         if ($params) {
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);
@@ -21,7 +18,7 @@ class ModelStatic extends DB {
     public static function getAll($table_name)
     {
         $sql = 'SELECT * FROM `'.$table_name.'` WHERE `status`= :status';
-		$params = ['status' => self::STATUS_ACTIVE];
+		$params = ['status' => STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
 	

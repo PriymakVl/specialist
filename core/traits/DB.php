@@ -1,7 +1,6 @@
-<?php
-require_once('./config.php');
+`<?php
 
-class DB {
+trait DB {
 	
 	private  static $_instance = null;
 	
