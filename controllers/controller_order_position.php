@@ -1,5 +1,4 @@
 <?php
-require_once('controller_base.php');
 
 class Controller_Order_Position extends Controller_Base {
 

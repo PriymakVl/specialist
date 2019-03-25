@@ -65,9 +65,4 @@ trait ModelStatic {
 		return self::perform($sql)->fetchColumn();
 	}
 	
-	public static function selectParams($keys, $params = false) 
-	{
-		return Param::select($keys);
-	}
-	
 }

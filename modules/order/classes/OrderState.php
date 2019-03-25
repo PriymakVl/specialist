@@ -1,5 +1,4 @@
 <?php
-require_once ('order_base.php');
 
 class OrderState extends OrderBase {
 

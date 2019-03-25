@@ -1,7 +1,8 @@
 <?php
-require_once('user_static.php');
 
-class User extends UserStatic {
+class User extends UserBase {
+	
+	use UserStatic;
 
     public function __construct($id_user = false)
     {

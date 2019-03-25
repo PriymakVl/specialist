@@ -1,8 +1,6 @@
 <?php
-require_once './core/model.php';
-require_once './modules/order_position/traits/order_position_param.php';
 
-class OrderPositionModel extends Model {
+trait OrderPositionModel {
 
 	use OrderPositionParam;
 	
@@ -22,7 +20,7 @@ class OrderPositionModel extends Model {
 	
 	public static function getAllByIdOrder($id_order)
 	{
-		$params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE];
+		$params = ['id_order' => $id_order, 'status' => STATUS_ACTIVE];
 		$sql = 'SELECT * FROM `order_positions` WHERE `id_order` = :id_order AND `status` = :status';
         return self::perform($sql, $params)->fetchAll();
 	}

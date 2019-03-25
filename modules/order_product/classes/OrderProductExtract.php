@@ -1,9 +1,6 @@
 <?php
 
-//require_once ('order_base.php');
-
-class OrderExtractProducts extends OrderBase
-{
+class OrderProductExtract {
 	
 	public static function get($content)
 	{

@@ -1,9 +1,10 @@
 <?php
+
 require_once 'config.php';
 require_once 'functions.php';
-//require_once 'autoload.php';
+require_once 'autoload.php';
 
-require_once 'core/route.php';
+session_start();
 
 Route::start();
 

@@ -1,8 +1,9 @@
 <?php
-require_once('order_action_model.php');
 
-class OrderActionStatic extends OrderActionModel {
-
+trait OrderActionStatic {
+	
+	use OrderActionModel;
+	
 	public static function add($products, $order)
 	{
 		foreach ($products as $product) {

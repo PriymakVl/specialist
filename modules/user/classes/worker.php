@@ -1,7 +1,8 @@
 <?php
-require_once('worker_static.php');
 
-class Worker extends WorkerStatic {
+class Worker extends UserBase {
+	
+	use WorkerStatic;
 
 	 //public $productsCut;
 	 public $timePlan = 0;

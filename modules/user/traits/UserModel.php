@@ -1,7 +1,6 @@
 <?php
-require_once('user_base.php');
 
-class UserModel extends UserBase {
+trait UserModel {
     
     public static function  getByPassword($password)
     {

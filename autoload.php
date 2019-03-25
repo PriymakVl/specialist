@@ -24,16 +24,16 @@ function autoload_core_trait ($class_name)
 
 function autoload_controller($class_name)
 {
-	if (strpos($class_name, 'Controller') !== false) require_once './controllers/'.$class_name.'.php';
+	if (strpos($class_name, 'Controller_Base') !== false) require_once './controllers/controller_base.php';
 }
 
 function autoload_class($class_name)
 {
 	$module_name = false;
-	if (strpos($class_name, 'Order') !== false) $module_name = 'order';
-	else if (strpos($class_name, 'OrderPosition') !== false) $module_name = 'order_position';
+	if (strpos($class_name, 'OrderPosition') !== false) $module_name = 'order_position';
 	else if (strpos($class_name, 'OrderAction') !== false) $module_name = 'order_action';
 	else if (strpos($class_name, 'OrderContent') !== false) $module_name = 'order_content';
+	else if (strpos($class_name, 'Order') !== false) $module_name = 'order';
 	else if (strpos($class_name, 'Product') !== false) $module_name = 'product';
 	else if (strpos($class_name, 'Statistics') !== false) $module_name = 'statistics';
 	else if (strpos($class_name, 'User') !== false) $module_name = 'user';

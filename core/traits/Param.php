@@ -33,7 +33,7 @@ trait Param {
 	{
 		if (empty($keys)) throw new Exception('Нет массива ключей');
 		if (!is_array($keys)) throw new Exception('Ключи не являются массивом');
-		if (!$params) $params = self::getAllAsArray();
+		if (!$params) $params = self::getParamsAsArray();
 		$select = [];
         foreach ($keys as $key) {
             if (isset($params[$key])) $select[$key] = $params[$key];

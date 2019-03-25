@@ -1,8 +1,9 @@
 <?php
-require_once('./core/model.php');
 
-class OrderContentModel extends Model {
+trait OrderProductModel {
 
+	use OrderProductParam;
+	
 	const ID_MAIN_PARENT = 0;
 
 	public static function addOne($params)

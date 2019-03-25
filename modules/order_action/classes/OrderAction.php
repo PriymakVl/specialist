@@ -1,7 +1,8 @@
 <?php
-require_once('order_action_static.php');
 
-class OrderAction extends OrderActionStatic {
+class OrderAction {
+	
+	use OrderActionStatic;
 	
 	public $name;
 	public $price;

@@ -1,8 +1,8 @@
 <?php
-require_once('order_position_static.php');
 
-class OrderPosition extends OrderPositionStatic {
+class OrderPosition extends Model {
 	
+	use OrderPositionStatic;
 	
 	public function __construct($id_position = false)
 	{

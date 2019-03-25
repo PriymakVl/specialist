@@ -17,5 +17,6 @@ class GlobalArray {
 	public function __get($name) 
 	{
 		if (isset($this->array[$name])) return $this->array[$name];
+		return null;
 	}
 }

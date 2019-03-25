@@ -1,12 +1,12 @@
 <?php
 
-require_once('./core/param.php');
+trait OrderParam {
 
-class OrderParam extends Param {
-
-	static function addData ($keys)
+	use Param;
+	
+	static function addDataParam ($keys)
 	{
-		$params = self::select($keys);
+		$params = self::selectParams($keys);
 		$params['date_exec'] = Date::convertStringToTime($params['date_exec']);
 		$params['date_reg'] = time();
 		$params['state'] = OrderState::REGISTERED;

@@ -1,17 +1,7 @@
 <?php
-require_once ('order_static.php');
 
-class Order extends OrderStatic {
-
-    public $content;
-	public $positionsTable;
-	public $positions;
-	public $convertState;
-	public $actions;
-	public $actionsUnplan;
-	public $products;
-	public $convertRating;
-
+class Order extends OrderBase {
+	
     public function __construct($id_order = false)
     {
         $this->tableName = 'orders';
@@ -35,7 +25,7 @@ class Order extends OrderStatic {
 	
 	public function setActive()
 	{
-		Session::set('id_order_active', $this->id);
+		$this->setSession('id_order_active', $this->id);
 		return $this;
 	}
 
@@ -45,11 +35,11 @@ class Order extends OrderStatic {
         return $this;
     }
 	
-	public function addContent()
-	{
-		OrderContent::add();
-		return $this;
-	}
+	// public function addContent()
+	// {
+		// OrderContent::add();
+		// return $this;
+	// }
 	
 	public function edit($params)
 	{

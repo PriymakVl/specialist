@@ -1,5 +1,4 @@
 <?php
-require_once('controller_base.php');
 
 class Controller_Product extends Controller_Base {
 

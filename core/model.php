@@ -15,21 +15,27 @@ class Model extends Core {
 
 	public function __set($name, $value) 
 	{
-		if ($this->data[$name]) $this->data[$name] = $value;
+		if ($this->data->$name) $this->data->$name = $value;
 	}
  
 	public function __get($name) 
 	{
-		if ($this->data[$name]) return $this->data[$name];
+		if ($this->data->$name) return $this->data->$name;
 	}
 
     public function getData($id)
     {
         $sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
 		$params = ['id' => $id, 'status' => STATUS_ACTIVE];
-        $this->data = self::perform($sql, $params)->fetch(PDO::FETCH_ASSOC);
+        $this->data = self::perform($sql, $params)->fetch();//PDO::FETCH_ASSOC
 		return $this;
     }
+	
+	public function setData($data)
+	{
+		$this->data = $data;
+		return $this;
+	}
 
     public function delete()
     {

@@ -1,5 +1,4 @@
 <?php
-require_once('user_base.php');
 
 class UserOptions extends UserBase
 {
@@ -13,7 +12,7 @@ class UserOptions extends UserBase
 	public static function getByIdUser($id_user)
     {
         $sql = 'SELECT * FROM `user_options` WHERE `id_user` = :id_user AND `status` = :status';
-		return self::perform($sql, ['id_user' => $id_user, 'status' => self::STATUS_ACTIVE])->fetchAll();
+		return self::perform($sql, ['id_user' => $id_user, 'status' => STATUS_ACTIVE])->fetchAll();
     }
 	
 	public static function groupOptions($options)

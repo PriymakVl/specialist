@@ -1,7 +1,5 @@
 <?php
 
-require_once('controller_base.php');
-
 class Controller_Terminal extends Controller_Base
 {
     public $worker;

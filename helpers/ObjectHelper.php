@@ -7,20 +7,25 @@ class ObjectHelper {
         $objects = [];
         if (empty($items)) return $objects;
         foreach ($items as $item) {
-			self::createObject($item, $class_name, $methods);
+			$object = self::createObject($item, $class_name, $methods);
+			unset($methods['getData'], $methods['setData']);
+			if ($methods) self::callMethodsObject($object, $methods);
 			$objects[] = $object;
         }
         return $objects;
     }
 	
 	private static function createObject($item, $class_name, $methods) {
-		if (empty($methods)) return new $class_name ($item->id);
-		if (in_array('setData')) $object = (new $class_name)->setData($item);
-		else if (in_array('getData')) $object = (new $class_name)->getData($item->id);
+		if (in_array('setData', $methods)) $object = (new $class_name)->setData($item);
+		else if (in_array('getData', $methods)) $object = (new $class_name)->getData($item->id);
 		else $object = new $class_name ($item->id);
-		debug($object);
+		return $object;
+	}
+	
+	private static function  callMethodsObject($object, $methods) 
+	{
 		foreach ($methods as $method_name) {
-			if ($method_name != 'setData' || $method_name != 'getData') $object->$method_name();
+			$object->$method_name();
 		}
 		return $object;
 	}

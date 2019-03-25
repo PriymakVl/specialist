@@ -1,12 +1,13 @@
 <?php
-require_once('user_model.php');
 
-class UserStatic extends UserModel {
+trait UserStatic  {
+	
+	use UserModel;
 	
 	public static function getWorkers()
 	{
 		$items = getWorkersModel();
-        if ($items) return Helper::createArrayOfObject($ids, 'Worker');
+        if ($items) return ObjectHelper::createArray($items, 'Worker');
         return false;
 	}
 	

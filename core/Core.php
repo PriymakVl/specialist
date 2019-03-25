@@ -18,4 +18,18 @@ class Core {
 		$this->session = new GlobalArray($_SESSION);
 		$this->params = self::getParams();
 	}
+	
+	public function setSession($key, $value)
+	{
+		if (!$key || !$value) throw new Exception('Нет ключа или значения для созданя сессии');
+		$_SESSION[$key] = $value;
+		return $this;
+	}
+	
+	public function deleteSession($key)
+	{
+		if (empty($_SESSION[$key])) throw new Exception('В сессии нет указанного ключа');
+		unset($_SESSION[$key]);
+		return $this;
+	}
 }

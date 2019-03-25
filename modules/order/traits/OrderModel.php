@@ -1,18 +1,19 @@
 <?php
-require_once('order_base.php');
 
-class OrderModel extends OrderBase {
+trait OrderModel {
+	
+	use OrderParam;
 
 	public static function getStateAll()
 	{
-		$sql = 'SELECT `id` FROM `orders` WHERE `status` = :status ORDER BY rating DESC, date_exec ASC';
-		return self::perform($sql, ['status' => self::STATUS_ACTIVE])->fetchAll();	
+		$sql = 'SELECT * FROM `orders` WHERE `status` = :status ORDER BY rating DESC, date_exec ASC';
+		return self::perform($sql, ['status' => STATUS_ACTIVE])->fetchAll();	
 	}
 	
 	public static function getStateOne($state)
 	{
-		$params = ['status' => self::STATUS_ACTIVE, 'state' => $state];
-		$sql = 'SELECT `id` FROM `orders` WHERE `state` = :state AND `status` = :status ORDER BY rating DESC, date_exec ASC';
+		$params = ['status' => STATUS_ACTIVE, 'state' => $state];
+		$sql = 'SELECT * FROM `orders` WHERE `state` = :state AND `status` = :status ORDER BY rating DESC, date_exec ASC';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
@@ -20,13 +21,13 @@ class OrderModel extends OrderBase {
 	{
 	   if (empty($symbol)) return false;
 	   $sql = 'SELECT * FROM `orders` WHERE `symbol` = :symbol AND `status` = :status';
-	   $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
+	   $params = ['symbol' => $symbol, 'status' => STATUS_ACTIVE];
 	   return self::perform($sql, $params)->fetch();
 	}
 
     public static function addDataModel()
     {
-		$params = OrderParam::addData(['symbol', 'note', 'date_exec', 'type', 'state', 'rating']);
+		$params = self::addDataParam(['symbol', 'note', 'date_exec', 'type', 'state', 'rating']);
         $fields = 'symbol, note, date_exec, type, state, rating, date_reg';
         $values = ':symbol, :note, :date_exec, :type, :state, :rating, :date_reg';
         $sql = 'INSERT INTO `orders` ('.$fields.') VALUES ('.$values.')';
@@ -44,7 +45,7 @@ class OrderModel extends OrderBase {
     public static function searchBySymbol($symbol)
     {
         $sql = 'SELECT * FROM `orders` WHERE `symbol` like concat("%", :symbol, "%") AND `status` = :status';
-        $params = ['symbol' => $symbol, 'status' => self::STATUS_ACTIVE];
+        $params = ['symbol' => $symbol, 'status' => STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
 	

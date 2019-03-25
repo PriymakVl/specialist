@@ -1,5 +1,4 @@
 <?php
-require_once('./core/model.php');
 
 class OrderActionBase extends Model {
 

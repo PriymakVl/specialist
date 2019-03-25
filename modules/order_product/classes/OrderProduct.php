@@ -1,7 +1,8 @@
 <?php
-require_once './core/model.php';
 
-class OrderContent extends OrderBase {
+class OrderProduct {
+	
+	use OrderProductStatic;
 
 	public static function add($params)
 	{

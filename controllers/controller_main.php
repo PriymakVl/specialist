@@ -1,7 +1,5 @@
 <?php
 
-require_once('controller_base.php');
-
 class Controller_Main extends Controller_Base {
 
     public function __construct()
@@ -21,23 +19,21 @@ class Controller_Main extends Controller_Base {
     {
         if (!$this->session->id_user) return $this->redirect('main/login');
         $user = new User($this->session->id_user);
-        if ($user->position == User::POSITION_WORKER) $this->redirect('terminal/actions');
-        else $this->redirect('order/list');
+        if ($user->position == User::POSITION_WORKER)return $this->redirect('terminal/actions');
+        return $this->redirect('order/list');
     }
 
     public function action_login()
     {
 		if (!$this->post->save) return $this->render('main/login');
         $user = (new User)->login();
-        if (!$user) $this->redirect('main/login?login_error='.$this->post->login);
-        Session::set('id_user', $user->id);
-        $this->redirect('main/index');
+        if (!$user) return $this->redirect('main/login?login_error='.$this->post->login);
+		return $this->setSession('id_user', $user->id)->redirect('main/index');
     }
 
     public function action_logout()
     {
-        Session::delete('id_user');
-        $this->redirect('main/login');
+        $this->deleteSession('id_user')->redirect('main/login');
     }
 
 }

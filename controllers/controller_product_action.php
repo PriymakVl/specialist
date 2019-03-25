@@ -1,6 +1,5 @@
 <?php
-require_once('controller_base.php');
-//production time
+
 class Controller_Product_Action extends Controller_Base {
 
     public function __construct()

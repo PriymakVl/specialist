@@ -1,7 +1,3 @@
-<?php
-    require_once ('./modules/order/classes/order_state.php');
-?>
-
 <nav id="main-menu">
     <ul>
         <!-- orders -->

@@ -1,5 +1,4 @@
-<?php
-require_once('controller_base.php');
+<?php;
 
 class Controller_Statistics extends Controller_Base {
 

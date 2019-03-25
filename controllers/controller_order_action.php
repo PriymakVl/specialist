@@ -1,5 +1,4 @@
 <?php
-require_once('controller_base.php');
 
 class Controller_Order_Action extends Controller_Base {
 
@@ -60,6 +59,13 @@ class Controller_Order_Action extends Controller_Base {
 			$action = new OrderActionUnplan($params['id_action']); /***/ $action->getAllStates($params);
 		}
 		return $this->render('states/main', compact('action', 'params'));
+	}
+	
+	public function action_to_work()
+	{
+		$order = new Order($this->id_order);
+		$order->toWork()->setState(OrderState::WORK)->setMessage('success', 'work');
+		$this->redirectPrevious();
 	}
 
 	

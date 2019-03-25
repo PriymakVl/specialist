@@ -28,5 +28,20 @@ class Controller extends Core {
 		exit();
     }
 	
+	protected function setMessage($type, $key, $section = false) 
+	{
+		$section = $section ? $section : $this->message->section;
+		if (!$section) throw new Exception('Не указан раздел сообщений');
+		$this->message->section = $section;
+		$this->message->set($type, $key);
+		return $this;
+	}
+	
+	protected function setTitle ($title)
+	{
+		$this->view->title = $title;
+		return $this;
+	}
+	
 
 }

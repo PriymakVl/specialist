@@ -1,14 +1,6 @@
 <?php
-require_once('user.php');
 
-class WorkerStatic extends User {
- 
- 
- const COST_WORK_MINUTE = '0.85';
- const ACTION_UNIVER = 2;
- const ACTION_CHPU = 3;
- const ACTION_FREZ = 4;
- const ACTION_ASSEMB = 6;
+trait WorkerStatic  {
  
 	public static function getAllWithStatistics()
 	{

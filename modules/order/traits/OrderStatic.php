@@ -1,20 +1,23 @@
 <?php
-require_once('order_model.php');
 
-class OrderStatic extends OrderModel {
+trait OrderStatic {
+	
+	use OrderModel;
 
 	public static function getList($state)
 	{
-		if ($state == OrderState::ALL) $ids = self::getStateAll();
-		else $ids = self::getStateOne($state);
-        if ($ids) return self::createArrayOfOrder($ids);
+		if ($state == OrderState::ALL) $items = self::getStateAll();
+		else $items = self::getStateOne($state);
+		//if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getPositions', 'getPositionsTable']);
+		if ($items) return self::createArrayOfOrder($items);
 	}
 	
-	protected static function createArrayOfOrder($ids)
+	protected static function createArrayOfOrder($items)
     {
-        $orders = Helper::createArrayOfObject($ids, 'Order');
-		foreach ($orders as $order) {
-			$order->getPositions()->getPositionsTable();
+        //$orders = ObjectHelper::createArray($items, 'Order', ['setData', 'getPositions', 'getPositionsTable']);
+		foreach ($items as $item) {
+			$orders[] = (new Order)->setData($item)->getPositions()->getPositionsTable();
+			//$order->getPositions()->getPositionsTable();
 		}
 		return $orders;
     }
