@@ -10,9 +10,8 @@ class Controller_Main extends Controller_Base {
 
 	public function action_404()
     {
-        $path = Param::get('path');
 		$this->view->pathLayout = './views/layouts/base.php';
-        $this->render('main/404', compact('path'));
+        $this->render('main/404', ['path' => $this->get->path]);
     }
 
     public function action_index()

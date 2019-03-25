@@ -17,7 +17,6 @@ trait OrderStatic {
         //$orders = ObjectHelper::createArray($items, 'Order', ['setData', 'getPositions', 'getPositionsTable']);
 		foreach ($items as $item) {
 			$orders[] = (new Order)->setData($item)->getPositions()->getPositionsTable();
-			//$order->getPositions()->getPositionsTable();
 		}
 		return $orders;
     }

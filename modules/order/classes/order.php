@@ -79,7 +79,7 @@ class Order extends OrderBase {
 	
 	public function getPositionsTable()
 	{
-		if (!$this->positions) return;
+		if (!$this->positions) return $this;
 		$this->positionsTable = '<table>';
 		foreach ($this->positions as $position) {
 			$this->positionsTable .= '<tr><td>'.$position->symbol.'</td><td>'.$position->qty.'шт.</td><td>'.$position->note.'</td></tr>';

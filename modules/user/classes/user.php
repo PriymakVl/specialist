@@ -33,7 +33,7 @@ class User extends UserBase {
 	
 	public function getDefaultStateOrders()
 	{
-		if ($this->options->default_state_orders) $this->defaultStateOrders = $this->options->default_state_orders;
+		if (isset($this->options->default_state_orders)) $this->defaultStateOrders = $this->options->default_state_orders;
 		else $this->defaultStateOrders = OrderState::REGISTERED;
 		return $this;
 	}
