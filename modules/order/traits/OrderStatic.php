@@ -52,6 +52,14 @@ trait OrderStatic {
 		return ($product->orderQtyAll * $product->time_prod) + $time_prepar;
 	}
 	
+	public static function deleteStatic($id_order)
+	{
+		//OrderProduct::deleteOrder($id_order);
+		//OrderAction::deleteOrder($id_order);
+		//OrderActionUnplan::deleteOrder($id_order);
+		//OrderActionState::deleteOrder($id_order);
+	}
+	
 
 }
 

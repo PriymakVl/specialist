@@ -8,8 +8,7 @@ class ObjectHelper {
         if (empty($items)) return $objects;
         foreach ($items as $item) {
 			$object = self::createObject($item, $class_name, $methods);
-			unset($methods['getData'], $methods['setData']);
-			if ($methods) self::callMethodsObject($object, $methods);
+			$object = self::callMethodsObject($object, $methods);
 			$objects[] = $object;
         }
         return $objects;
@@ -25,6 +24,7 @@ class ObjectHelper {
 	private static function  callMethodsObject($object, $methods) 
 	{
 		foreach ($methods as $method_name) {
+			if ($method_name == 'setData' || $method_name == 'getData') continue;
 			$object->$method_name();
 		}
 		return $object;

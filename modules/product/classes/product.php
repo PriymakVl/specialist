@@ -1,16 +1,10 @@
 <?php
-require_once('product_static.php');
 
-class Product extends ProductStatic {
+class Product extends ProductBase {
 	
-	public $parent;
-	public $typeViewSpecification;
-	public $actions;
-	public $statistics;
-	public $specificationGroup;//divided on group detail, unit and other
-	public $drawings;
-
-    public function __construct($id_prod)
+	use ProductStatic;
+	
+    public function __construct($id_prod = false)
     {
         $this->tableName = 'products';
         parent::__construct($id_prod);
@@ -29,6 +23,12 @@ class Product extends ProductStatic {
 			self::getSpecificationChildrenStatic($this->specification);
 		}
 		return $this;
+	}
+	
+	public function addData()
+	{
+		$id_prod = self::addDataModel();
+		return (new self)->getData($id_prod);
 	}
 	
 	public function getActions()
@@ -86,6 +86,22 @@ class Product extends ProductStatic {
 		$this->drawings = Drawing::getAllByIdProduct($this->id);
 		return $this;
 	}
+	
+	public function delete()
+	{
+		parent::delete();
+		//if ($this->specification) self::deleteSpecification($this->specification);
+		//todo write method deleteSpecification;
+		return $this;
+	}
+	
+	public function edit()
+	{
+		if ($this->post->edit_all) self::editAll($this->symbol);
+		else self::editOne();
+		return $this;
+	}
+			
     
 	
 }

@@ -5,6 +5,20 @@ trait OrderProductModel {
 	use OrderProductParam;
 	
 	const ID_MAIN_PARENT = 0;
+	
+	public static function add($params)
+	{
+        $sql = "INSERT INTO `order_content` (id_order, id_prod, quantity) VALUES (:id_order, :id_prod, :quantity)";
+        return self::perform($sql, $params);
+	}
+	
+	public static function get($id_order)
+	{
+		$sql = 'SELECT * FROM `order_content` WHERE `id_order` = :id_order AND `status` = :status';
+        $params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE];
+        $items = self::perform($sql, $params)->fetchAll();
+        return self::createArrayContent($items);
+	}
 
 	public static function addOne($params)
 	{
@@ -19,9 +33,10 @@ trait OrderProductModel {
         return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public static function getAllForParentModel()
+	public static function getSpecificationModel($id_parent)
 	{
-		$params = self::getParams('getAllForParentModel', ['id_order', 'status', 'id_parent']);
+		$params = self::selectParams(['id_order', 'status']);
+		$params['id_parent'] = $id_parent;
 		$sql = 'SELECT * FROM `order_content` WHERE `id_order` = :id_order AND `status` = :status AND `id_parent` = :id_parent';
         return self::perform($sql, $params)->fetchAll();
 	}
@@ -38,6 +53,9 @@ trait OrderProductModel {
 		$params = ['id_order' => $id_order, 'id_prod' => $id_prod, 'status' => self::STATUS_DELETE];
 		return self::perform($sql, $params);
 	}
+	
+	
+	
 	
 	
 	

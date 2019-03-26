@@ -12,29 +12,24 @@ class Controller_Product extends Controller_Base {
 
     public function action_index()
 	{
-		$id_active = Session::get('product-active');
-		$product = new Product(Param::get('id_prod'));
-		$product->getSpecification()->getSpecificationChildren()->getSpecificationGroup()->getParent()->getActions()->countTimeManufacturing()->getStatistics()->getDrawings();
-		$this->render('index/main', compact('product', 'id_active'));
+		$product = (new Product)->getData($this->get->id_prod)->getSpecification()->getSpecificationChildren()->getSpecificationGroup();
+		$product->getParent();
+		//->getActions()->countTimeManufacturing()->getStatistics()->getDrawings()
+		$this->render('index/main', compact('product'));
 	}
 
 	public function action_add()
     {
-        $params = ParamProduct::add();
-		if (empty($params['save'])) return $this->render('add/main', compact('params'));
-		$id_add = Product::add($params);
-		$this->message->set('success', 'add');
-		Session::set('product-active', $id_add);
-		$this->redirect('product?id_prod='.$params['id_parent']);
+		if (!$this->post->save) return $this->render('add/main', compact('params'));
+		$product = (new Product)->addData()->setMessage('success', 'add');
+		$this->setSession('id_prod_active', $product->id)->redirect('product?id_prod='.$product->id_parent);
     }
 	
 	public function action_edit()
     {
-		$product = new Product(Param::get('id'));
-		$params = ParamProduct::edit($product);
-		if (empty($params['save'])) return $this->render('edit/main', compact('product'));
-		if (empty($params['edit_all'])) Product::editOne($params);
-		else Product::editAll($params);
+		$product = new Product($this->get->id_prod);
+		if (!$this->post->save) return $this->render('edit/main', compact('product'));
+		$product->edit()->setMessage('success', 'edit');
 		$this->redirect('product?id_prod='.$product->id);
     }
 	
@@ -51,16 +46,13 @@ class Controller_Product extends Controller_Base {
 	
 	public function action_activate()
 	{
-		$id_prod = Param::get('id_prod');
-		Session::set('product-active', $id_prod);
-        $this->redirectPrevious();
+		$this->setSession('id_prod_active', $this->get->id_prod)->redirectPrevious();
 	}
 	
 	public function action_delete()
 	{
-		$product = new Product(Param::get('id'));
-		$product->delete();
-		$this->redirect('product?id_prod='.$product->id_parent);
+		$product = (new Product)->getData($this->get->id_prod)->getSpecification()->delete();
+		$this->setMessage('success', 'delete')->redirect('product?id_prod='.$product->id_parent);
 	}
 
     

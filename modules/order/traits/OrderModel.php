@@ -36,7 +36,7 @@ trait OrderModel {
 	
 	public static function editModel($params)
 	{
-		unset($params['save']);
+		$params = self::editModelParam();
 		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note, `rating` = :rating, `state` = :state
 		WHERE `id` = :id_order';
 		return self::update($sql, $params);

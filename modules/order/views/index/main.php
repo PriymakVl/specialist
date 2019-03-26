@@ -18,8 +18,8 @@
             <!-- order  info -->
             <? include_once('info.php'); ?>
 
-            <!-- content -->
-			<? if ($order->content) include_once('content.php'); ?>
+            <!-- products -->
+			<? if ($order->products) include_once('products.php'); ?>
 
             <!-- actions -->
             <? if ($order->actions) include_once('actions.php'); ?>
@@ -30,7 +30,7 @@
     </div>
 
     <!-- order menu -->
-    <? include_once('menu.php'); ?>
+    <? include_once('menu/main_menu.php'); ?>
 
 </div><!-- id content -->
 

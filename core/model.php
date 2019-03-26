@@ -25,6 +25,7 @@ class Model extends Core {
 
     public function getData($id)
     {
+		if ($this->data) return $this;
         $sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
 		$params = ['id' => $id, 'status' => STATUS_ACTIVE];
         $this->data = self::perform($sql, $params)->fetch();//PDO::FETCH_ASSOC
@@ -33,6 +34,7 @@ class Model extends Core {
 	
 	public function setData($data)
 	{
+		if ($this->data) return $this;
 		$this->data = $data;
 		return $this;
 	}

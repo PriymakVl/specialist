@@ -1,18 +1,14 @@
 <?php
-require_once('product_model.php');
 
-class ProductStatic extends ProductModel {
+trait ProductStatic  {
 
+	use ProductModel;
 
     public static function getSpecificationStatic($id_parent)
     {
-		$ids = self::getAllByIdParent($id_parent);
-		if (empty($ids)) return false;
-        $products = Helper::createArrayOfObject($ids, 'Product');
-		foreach ($products as $product) {
-			$product->getActions()->countTimeManufacturing();
-		}
-		return $products;
+		$items = self::getAllByIdParent($id_parent);
+		if ($items) return ObjectHelper::createArray($items, 'Product', ['setData']); 
+			//->countTimeManufacturing()->getActions();
     }
 	
 	public static function getSpecificationGroupStatic($specification)
@@ -34,6 +30,11 @@ class ProductStatic extends ProductModel {
 		foreach ($specification as $item) {
 			$item->getSpecification($item->id)->getSpecificationGroup();
 		}
+	}
+	
+	protected static function deleteSpecification($specification)
+	{
+		throw new Exception('Method deleteSpecification do not write');
 	}
 	
 

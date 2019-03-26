@@ -13,6 +13,14 @@ class ArrayHelper {
 		return $array_same_values;
 	}
 	
+	public static function deleteValue($value, $array)
+	{
+		while (($i = array_search($value, $array)) !== false) {
+			unset($array[$i]);
+		} 
+		return $array;
+	}
+	
 	
 	
 }

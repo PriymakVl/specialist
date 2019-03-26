@@ -1,10 +1,5 @@
-<?php
-	$tab_active_unplan = false;
-	if (Param::get('tab') == 4) $tab_active_unplan = true;
-?>
-
 <li id="order-actions-wrp">
-    <input type="radio" name="tabs" id="tab-4" <? if ($tab_active_unplan) echo 'checked'; ?>>
+    <input type="radio" name="tabs" id="tab-4" <? if ($this->get->tab == 4) echo 'checked'; ?>>
     <label for="tab-4">Дополн. операции</label>
     <div class="tab-content">
 		<h3>

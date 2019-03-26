@@ -1,5 +1,5 @@
 <li>
-    <input type="radio" name="tabs" id="tab-4">
+    <input type="radio" name="tabs" id="tab-5" <? if ($this->get->tab == 5) echo 'checked'; ?>>
     <label for="tab-4">Статистика</label>
     <div class="tab-content">
 

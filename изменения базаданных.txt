@@ -1,2 +1,4 @@
 добавить rating in order_actions
 добавить таблицу чертежей
+изменить таблицу order_content on order_products
+изменить quntity on qty products

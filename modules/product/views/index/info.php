@@ -22,7 +22,7 @@
 			<tr>
                 <td>3</td>
                 <td>Количество</td>
-                <td class="left"><? if ($product->quantity) echo $product->quantity.' шт.'?></td>
+                <td class="left"><? if ($product->qty) echo $product->qty.' шт.'?></td>
             </tr>
 			
 			<!-- time manufacturing -->

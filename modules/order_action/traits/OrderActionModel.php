@@ -2,6 +2,7 @@
 
 trait OrderActionModel {
 
+	use OrderActionParam;
 	
 	private static function addOne()
 	{

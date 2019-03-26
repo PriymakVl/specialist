@@ -1,7 +1,7 @@
 <? 
 	$tab_active_info = false;
-	if  (Param::get('tab') == 1) $tab_active_info = true;
-	if (!$order->content) $tab_active_info = true;
+	if  ($this->get->tab == 1) $tab_active_info = true;
+	if (!$order->products && !$this->get->tab) $tab_active_info = true;
 ?>
 <li>
     <input type="radio" name="tabs" id="tab-1" <? if ($tab_active_info) echo 'checked'; ?>>
@@ -17,7 +17,9 @@
             <tr>
                 <td>1</td>
                 <td>Состояние</td>
-                <td><?=$order->convertState?></td>
+                <td>
+					<span style="font-weight:bold;"><?=$order->convertState?></span>
+				</td>
             </tr>
 			<tr>
 				<td>2</td>

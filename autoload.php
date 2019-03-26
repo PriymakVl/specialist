@@ -54,6 +54,7 @@ function autoload_helper($class_name)
 {
 	switch($class_name) {
 		case 'ObjectHelper': return require './helpers/ObjectHelper.php';
+		case 'ArrayHelper': return require './helpers/ArrayHelper.php';
 		case 'Date': return require './helpers/Date.php';
 		case 'Excel': return require './helpers/Excel.php';
 	}

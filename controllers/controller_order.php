@@ -13,7 +13,8 @@ class Controller_Order extends Controller_Base {
     public function action_index()
 	{
 		$order = new Order($this->get->id_order);
-		$order->getPositions()->getProducts()->convertState()->getActions()->getActionsUnplan()->convertRating();
+		$order->getPositions()->convertState()->convertRating();;
+		//->getProducts()->getActions()->getActionsUnplan();
 		$this->render('index/main', compact('order'));
 	}
 
@@ -25,12 +26,12 @@ class Controller_Order extends Controller_Base {
 		$this->setTitle('Заказы')->render('list/main', compact('orders', 'state'));
 	}
 	
-	public function action_to_made()
-	{
-		$order = new Order($this->id_order);
-		$order->toMade()->setState(OrderState::MADE)->setMessage('success', 'made');
-		$this->redirectPrevious();
-	}
+	// public function action_to_made()
+	// {
+		// $order = new Order($this->id_order);
+		// $order->toMade()->setState(OrderState::MADE)->setMessage('success', 'made');
+		// $this->redirectPrevious();
+	// }
 	
 	public function action_add()
     {
@@ -38,20 +39,21 @@ class Controller_Order extends Controller_Base {
         $order = Order::getBySymbol($this->post->symbol);
         if ($order) return $this->setMessage('error', 'exist')->redirect('order/index?id_order='.$order->id);
 		$order = (new Order)->addData()->setActive();
-		$this->setMessage('success', 'add')->redirect('order_position/add?id_order='.$order->id);
+		$this->setMessage('success', 'add')->redirect('order?id_order='.$order->id);
     }
 	
 	public function action_edit()
 	{
-		$order = new Order($this->id_order);
+		$order = new Order($this->get->id_order);
 		if (!$this->post->save) return $this->render('edit/main', compact('order'));
-		$order->edit($params)->setMessage('success', 'edit')->checkReady();
-		$this->redirect('order?id_order='.$this->id_order);
+		$order->edit()->setMessage('success', 'edit');
+		//->checkReady();
+		$this->redirect('order?id_order='.$order->id);
 	}
 	
 	public function action_delete()
 	{
-		$order = (new Order)->getData($this->get->id_order)->deleteStatic();
+		$order = (new Order)->getData($this->get->id_order)->delete();
 		$this->setMessage('success', 'delete')->redirect('order/list');
 	}
 	

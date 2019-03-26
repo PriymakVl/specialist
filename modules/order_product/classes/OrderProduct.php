@@ -3,65 +3,31 @@
 class OrderProduct {
 	
 	use OrderProductStatic;
+	
+	public $options;
+	public $this->specification;
 
-	public static function add($params)
+	public function getOptions()
 	{
-        $sql = "INSERT INTO `order_content` (id_order, id_prod, quantity) VALUES (:id_order, :id_prod, :quantity)";
-        return self::perform($sql, $params);
+		$this->options = Product::getOptions($this->id_prod);
+		return $this;
 	}
 	
-	public static function get($id_order)
+	public function getSpecification()
 	{
-		$sql = 'SELECT * FROM `order_content` WHERE `id_order` = :id_order AND `status` = :status';
-        $params = ['id_order' => $id_order, 'status' => self::STATUS_ACTIVE];
-        $items = self::perform($sql, $params)->fetchAll();
-        return self::createArrayContent($items);
+		$this->specification = self::getSpecificationModel($this->id);
+		return $this;
 	}
 	
-	private static function createArrayContent($items)
-    {
-        $content = [];
-        if (empty($items)) return $content;
-        foreach ($items as $item) {
-            $product = new Product($item->id_prod);
-            $product->orderQtyAll = $item->quantity;
-			$product->getSpecification()->countTimeManufacturing();
-			$product->id_item = $item->id;
-            $content[] = $product;
-        }
-        return $content;
-    }
-	
-	public static function changeQuantity($params)
+	public function convertSpecification()
 	{
-		$sql = 'UPDATE `order_content` SET `quantity` = :qty WHERE `id` = :id_item';
-		return self::update($sql, $params);
+		$methods = ['setData', 'getOptions'];
+		$this->specification = ObjectHelper::createArray($this->specification, 'OrderProduct', $methods);
+		return $this;
 	}
 	
-	public static function deleteAll($id_order, $ids) 
-	{
-		foreach ($ids as $id) {
-			self::deleteOne($id_order, $id);
-		}
-	}
 	
-	public static function deleteOne($id_order, $id_prod)
-	{
-		$sql = 'UPDATE `order_content` SET `status` = :status WHERE `id_prod` = :id_prod AND `id_order` = :id_order';
-		$params = ['id_order' => $id_order, 'id_prod' => $id_prod, 'status' => self::STATUS_DELETE];
-		return self::perform($sql, $params);
-	}
 	
-	public static function addByPositionsOrder($positions)
-	{
-		foreach ($positions as $position) {
-			if (!$position->symbol) continue;
-			$symbol = explode('x', $position->symbol)[0];//get symbol product without length cylinder
-			$items = Product::getAllBySymbol($symbol);
-			if (empty($items)) continue;
-			self::add($position->id_order, $items[0]->id, $position->qty);
-		}
-	}
 	
 	
 	

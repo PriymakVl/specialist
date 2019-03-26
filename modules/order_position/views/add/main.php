@@ -4,9 +4,6 @@
 
 <div id="content">
 
-	<!-- message -->
-    <? include_once('./views/total/message.php'); ?>
-
     <div id="form-order-position-wrp">
 		<h2>Форма для добавления позиции к заказу: <span class="red"><?=$order->symbol?></span></h2>
 		<form action="/order_position/add?id_order=<?=$order->id?>" method="post">

@@ -28,46 +28,12 @@ class Order extends OrderBase {
 		$this->setSession('id_order_active', $this->id);
 		return $this;
 	}
-
-    public function getContent()
-    {
-        $this->content = OrderContent::get($this->id);
-        return $this;
-    }
 	
-	// public function addContent()
-	// {
-		// OrderContent::add();
-		// return $this;
-	// }
-	
-	public function edit($params)
+	public function edit()
 	{
-		Order::editModel($params);
-		OrderAction::updateRating($this->id, $params['rating']);
-		return $this;
-	}
-	
-	public function toPreparation()
-	{
-		if ($this->positions) OrderContent::addByPositionsOrder($this->positions);
-		return $this;
-	}
-	
-	public function toWork()
-	{	
-		$this->getContent();
-		$products = OrderExtractProducts::get($this->content);
-		OrderAction::add($products, $this);
-		return $this;
-		//todo для учета статистики добавить состояние в OrderState
-		//$products = $this->getListOfProduct();
-	}
-	
-	public function toMade()
-	{
-		OrderAction::setStateEndedForAllActionsOrder($this->id);
-		OrderActionUnplan::setStateEndedForAllActionsOrder($this->id);
+		Order::editModel();
+		//OrderProduct::editParamOrder($this->id);
+		// OrderAction::editParamOrder($this->id);
 		return $this;
 	}
 	
@@ -79,12 +45,7 @@ class Order extends OrderBase {
 	
 	public function getPositionsTable()
 	{
-		if (!$this->positions) return $this;
-		$this->positionsTable = '<table>';
-		foreach ($this->positions as $position) {
-			$this->positionsTable .= '<tr><td>'.$position->symbol.'</td><td>'.$position->qty.'шт.</td><td>'.$position->note.'</td></tr>';
-		}
-		$this->positionsTable .= '</table>';
+		if ($this->positions) $this->positionsTable = OrderPosition::convertPositionsToTable($this->positions);
 		return $this;
 	}
 	
@@ -93,6 +54,17 @@ class Order extends OrderBase {
 		$this->convertState = OrderState::convert($this->state);
 		return $this;
 	}
+	
+	public function delete()
+	{
+		parent::delete();
+		self::deleteStatic($this->id);
+		return $this;
+	}
+	
+	
+	
+	
 	
 	public function getActions()
 	{
@@ -120,12 +92,7 @@ class Order extends OrderBase {
 	
 	public function getProducts()
 	{
-		$items = OrderAction::getProductsOrder($this->id);
-		if (empty($items)) return;
-		foreach ($items as $item) {
-			$product = new Product($item->id_prod);
-			$this->products[] = $product;
-		}
+		$this->products = OrderProduct::getMainParent();
 		return $this;
 	}
 	

@@ -26,7 +26,7 @@
 		<? endforeach; ?>
 	<? else: ?>
 		<tr>
-			<td colspan="4" class="red">Позиций нет</td>
+			<td colspan="5" class="red">Позиций нет</td>
 		</tr>
 	<? endif; ?>
 </table>

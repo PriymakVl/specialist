@@ -1,16 +1,10 @@
-<?php
-
-require_once ('./modules/product/models/product.php');
-
-?>
-
 <!-- css files -->
 <link rel="stylesheet" href="/modules/product/css/index.css">
 
 <div id="content">
 
     <!-- active box info -->
-	<? if ($id_active == $product->id): ?>
+	<? if ($this->session->id_prod_active == $product->id): ?>
 		<div class="message message-success">Активный</div>
     <? endif; ?>
 
@@ -25,8 +19,10 @@ require_once ('./modules/product/models/product.php');
 
             <!-- specifications -->
 			<? 
-				if ($product->id == ID_CATEGORY_CYLINDER || $product->id == ID_CATEGORY_PRESS || $product->id == ID_CATEGORY_PRODUCTS) include_once('specification/category.php'); 
-				else if ($product->specificationGroup)  include_once('specification/groups.php');  
+				if ($product->specification) {
+					if ($product->id == ID_CATEGORY_CYLINDER || $product->id == ID_CATEGORY_PRESS || $product->id == ID_CATEGORY_PRODUCTS) include_once('specification/category.php'); 
+					else if ($product->specificationGroup)  include_once('specification/groups.php');  
+				}
 			?>
 
             <!-- actions -->
@@ -48,4 +44,5 @@ require_once ('./modules/product/models/product.php');
 <!-- js files -->
 <script src="/modules/product/js/add_to_order.js"></script>
 <script src="/modules/product/js/delete_action.js"></script>
+<script src="/modules/product/js/delete_product.js"></script>
 

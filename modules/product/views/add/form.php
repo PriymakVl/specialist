@@ -25,13 +25,13 @@
 			<!-- product quantity -->
 			<div id="form-product-quantity-wrp">
 				<label>Количество:</label>
-				<input type="number" name="quantity" value="1">
+				<input type="number" name="qty" value="1">
 			</div>
 			
 			<!-- product parent -->
 			<div id="form-product-parent-wrp">
 				<label>ID Parent:</label>
-				<input type="text" name="id_parent" value="<?=$params['id_parent']?>">
+				<input type="text" name="id_parent" value="<?=$this->get->id_parent?>">
 			</div>
         </div>
 		

@@ -7,7 +7,7 @@
             <a href="/product/edit?id=<?=$product->id?>">Редактировать</a>
         </li>
         <li>
-            <a href="/product/delete?id=<?=$product->id?>">Удалить</a>
+            <a href="#" id_prod="<?=$product->id?>" id="product-delete">Удалить</a>
         </li>
 		<br><hr>
 		

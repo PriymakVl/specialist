@@ -3,7 +3,7 @@
 <tr>
 <? foreach($product->specificationGroup['product'] as $prod_specif): ?>
 	<tr>
-		<td class="<?=($id_active == $prod_specif->id)?'bg-green':''?>">
+		<td class="<?=($this->session->id_prod_active == $prod_specif->id)?'bg-green':''?>">
 			<?=$prod_specif->number?>
 		</td>
 		<td>
@@ -12,7 +12,7 @@
 		<td>
 			<a href="/product?id_prod=<?=$prod_specif->id?>"><?=$prod_specif->name?></a>
 		</td>
-		<td><?=$prod_specif->quantity?></td>
+		<td><?=$prod_specif->qty?></td>
 		<td>
 			<? if ($prod_specif->timeActions): ?>
 				<?=$prod_specif->timeActions?> мин.</td>
