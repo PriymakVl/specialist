@@ -20,7 +20,7 @@ class Controller_Order_Position extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$position = (new OrderPosition)->getData()->delete()->setMessage('success', 'delete');
+		$position = (new OrderPosition)->getData()->remove()->setMessage('success', 'delete');
 		$this->redirect('order?tab=1&id_order='.$position->id_order);
 	}
 	

@@ -11,16 +11,11 @@
             </tr>
             <tr>
                 <td>1</td>
-                <td>Обозначение</td>
-                <td class="left"><?=$product->symbol?></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Наименование</td>
-                <td class="left"><?=$product->name?></td>
+                <td>Номер в спецификации</td>
+                <td class="left"><?=$product->number?></td>
             </tr>
 			<tr>
-                <td>3</td>
+                <td>2</td>
                 <td>Количество</td>
                 <td class="left"><? if ($product->qty) echo $product->qty.' шт.'?></td>
             </tr>
@@ -28,7 +23,7 @@
 			<!-- time manufacturing -->
 			<? if ($product->type != Product::TYPE_CATEGORY): ?>
 				<tr>
-					<td>4</td>
+					<td>3</td>
 					<td>Трудоемкость</td>
 					<td class="left">
 						<? if ($product->timeManufacturing): ?>
@@ -39,6 +34,13 @@
 					</td>
 				</tr>
 			<? endif; ?>
+			
+			<!-- type product -->
+			<tr>
+                <td>4</td>
+                <td>Тип</td>
+                <td class="left"><?=$product->typeString?></td>
+            </tr>
 			
 			<!-- parent -->
 			<? if ($product->parent): ?>

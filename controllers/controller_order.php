@@ -26,13 +26,6 @@ class Controller_Order extends Controller_Base {
 		$this->setTitle('Заказы')->render('list/main', compact('orders', 'state'));
 	}
 	
-	// public function action_to_made()
-	// {
-		// $order = new Order($this->id_order);
-		// $order->toMade()->setState(OrderState::MADE)->setMessage('success', 'made');
-		// $this->redirectPrevious();
-	// }
-	
 	public function action_add()
     {
 		if (!$this->post->save) return $this->setTitle('Добавить заказ')->render('add/main');
@@ -55,6 +48,12 @@ class Controller_Order extends Controller_Base {
 	{
 		$order = (new Order)->getData($this->get->id_order)->delete();
 		$this->setMessage('success', 'delete')->redirect('order/list');
+	}
+	
+	public function action_activate()
+	{
+		$this->setSession('id_order_active', $this->get->id_order);
+		$this->redirectPrevious();
 	}
 	
 	 public function action_search()

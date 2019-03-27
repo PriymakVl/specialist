@@ -1,6 +1,6 @@
 <div id="form-product-wrp">
-    <h2>Форма для редактирования продукции</h2>
-    <form action="/product/edit?id=<?=$product->id?>" method="post">
+    <h2>Форма для редактирования <span class="green"><?=$product->name?></span>:<span class="blue"><?=$product->symbol?></span></h2>
+    <form action="/product/edit?id_prod=<?=$product->id?>" method="post">
         <!-- first box -->
         <div class="form-box">
             <!-- product symbol-->
@@ -25,7 +25,7 @@
 			<!-- product quantity -->
 			<div id="form-product-quantity-wrp">
 				<label>Количество:</label>
-				<input type="text" name="quantity" value="<?=$product->quantity?>">
+				<input type="number" name="qty" value="<?=$product->qty?>">
 			</div>
 			
 			<!-- product parent -->

@@ -4,11 +4,9 @@ trait OrderProductModel {
 
 	use OrderProductParam;
 	
-	const ID_MAIN_PARENT = 0;
-	
-	public static function add($params)
+	public static function addProductModel($params)
 	{
-        $sql = "INSERT INTO `order_content` (id_order, id_prod, quantity) VALUES (:id_order, :id_prod, :quantity)";
+        $sql = "INSERT INTO `order_products` (id_order, id_prod, qty) VALUES (:id_order, :id_prod, :qty)";
         return self::perform($sql, $params);
 	}
 	

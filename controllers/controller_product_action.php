@@ -21,8 +21,7 @@ class Controller_Product_Action extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$action = new ProductAction(Param::get('id'));
-		$action->delete();
+		$action = (new ProductAction)->getData($this->get->id_action)->delete();
 		$this->redirectPrevious();
 	}
 	

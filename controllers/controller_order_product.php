@@ -32,11 +32,11 @@ class Controller_Order_Product extends Controller_Base {
 
 	public function action_add()
 	{
-		$id_order = Session::get('order-active');
-		if (!$this->session->id_order_active) $this->message->set('error', 'not-active', 'order')->redirectPrevious();
-		$order = (new Order)->getData($id_order)->addContent();
+		if (!$this->session->id_order_active) $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
+		$prod_base = (new Product)->getData($this->get->id_prod)->getSpecification();
+		$prod_order = (new OrderProduct)->add($prod_base);
 		//->setMessage('success', 'add-content')->setState(OrderState::PREPARATION);
-		$this->redirect('order?id_order='.$order->id);
+		$this->redirect('order?id_order='.$this->session->id_order_active);
 	}
 	
 	public function action_to_preparation()

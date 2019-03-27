@@ -40,6 +40,7 @@ class ProductBase extends Model
 	public $specificationGroup;//divided on group detail, unit and other
 	public $drawings;
 	public $specification;
+	public $typeString;
 
 
 }

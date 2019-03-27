@@ -2,7 +2,7 @@
 	$number = 1;
 ?>
 <li>
-    <input type="radio" name="tabs" id="tab-5" <? if (Param::get('tab') == 5) echo 'checked'; ?>>
+    <input type="radio" name="tabs" id="tab-5" <? if ($this->get->tab == 5 && $product->drawings) echo 'checked'; ?>>
     <label for="tab-5">Чертежи</label>
     <div class="tab-content">
 		<h2><?=$product->name?>: <span class="green"><?=$product->symbol?></span></h2>
@@ -18,13 +18,13 @@
 				<tr>
 					<td><?=$number?></td>
 					<td>
-						<a href="/web/drawings/<?=$dwg->filename?>"><?=$dwg->filename?></a>
+						<a href="/web/drawings/<?=$dwg->filename?>" target="_blank"><?=$dwg->filename?></a>
 					</td>
 					<td><?=date('d.m.y', $dwg->date_add)?></td>
 					<td><?=$dwg->note?></td>
 					<td class="action-control-box">
 						<a href="/drawing/edit_note?id_dwg=<?=$dwg->id?>">Редактировать</a><br>
-						<a href="#" class="dwg-delete" id_dwg="<?=$dwg->id?>">Удалить</a>
+						<a href="#" class="delete-dwg" id_dwg="<?=$dwg->id?>">Удалить</a>
 					</td>
 				</tr>
 				<? $number++; ?>

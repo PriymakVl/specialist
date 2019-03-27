@@ -1,25 +1,26 @@
 <?php
-require_once('./core/model.php');
 
-class DrawingModel extends Model {
+trait DrawingModel  {
+	
+	use DrawingParam;
 	
 	public static function getAllByIdProduct($id_prod)
     {
         $sql = 'SELECT * FROM `drawings` WHERE `id_prod` = :id_prod AND `status` = :status';
-		$params = ['id_prod' => $id_prod, 'status' => self::STATUS_ACTIVE];
+		$params = ['id_prod' => $id_prod, 'status' => STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
 	
-	protected static function addToDatabase($params)
+	protected static function addDataModel($data)
 	{
-		unset($params['save']);
-        $sql = 'INSERT INTO `drawings` (filename, id_prod, note, date_add) VALUES (:filename, :id_prod, :note, :date_add)';
+		$params = self::addDataModelParams($data);
+		$sql = 'INSERT INTO `drawings` (filename, id_prod, note, date_add, id_user) VALUES (:filename, :id_prod, :note, :date_add, :id_user)';
         return self::insert($sql, $params); 
 	}
 	
-	protected static function updateNote($params)
+	protected static function editNoteModel()
 	{
-		unset($params['save'], $params['id_prod']);
+		$params = self::selectParams(['note', 'id_dwg']);
 		$sql = 'UPDATE `drawings` SET `note` = :note WHERE `id` = :id_dwg';
 		return self::update($sql, $params); 
 	}

@@ -13,21 +13,22 @@ class Controller_Product extends Controller_Base {
     public function action_index()
 	{
 		$product = (new Product)->getData($this->get->id_prod)->getSpecification()->getSpecificationChildren()->getSpecificationGroup();
-		$product->getParent();
-		//->getActions()->countTimeManufacturing()->getStatistics()->getDrawings()
+		$product->getParent()->convertType()->getDrawings();
+		//->getActions()->countTimeManufacturing()->getStatistics()
 		$this->render('index/main', compact('product'));
 	}
 
 	public function action_add()
     {
-		if (!$this->post->save) return $this->render('add/main', compact('params'));
+		$parent = new Product($this->get->id_parent);
+		if (!$this->post->save) return $this->render('add/main', compact('parent'));
 		$product = (new Product)->addData()->setMessage('success', 'add');
 		$this->setSession('id_prod_active', $product->id)->redirect('product?id_prod='.$product->id_parent);
     }
 	
 	public function action_edit()
     {
-		$product = new Product($this->get->id_prod);
+		$product = (new Product)->getData($this->get->id_prod);
 		if (!$this->post->save) return $this->render('edit/main', compact('product'));
 		$product->edit()->setMessage('success', 'edit');
 		$this->redirect('product?id_prod='.$product->id);
@@ -35,13 +36,9 @@ class Controller_Product extends Controller_Base {
 	
 	public function action_copy()
 	{
-		$params = ParamProduct::copy();
-		if (empty($params['id_parent'])) { 
-			$this->message->set('error', 'copy-not-parent'); /***/ return $this->redirectPrevious(); 
-		}
-		Product::add($params);
-		$this->message->set('success', 'copy');
-		$this->redirect('product?id_prod='.$params['id_parent']);
+		if (!$this->session->id_prod_active) return $this->message->set('error', 'copy-not-parent')->redirectPrevious(); 
+		(new Product)->copy()->setMessage('success', 'copy');
+		$this->redirect('product?id_prod='.$this->session->id_prod_active);
 	}
 	
 	public function action_activate()

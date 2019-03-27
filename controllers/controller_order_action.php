@@ -24,7 +24,7 @@ class Controller_Order_Action extends Controller_Base {
 		$id_action = Param::get('id_action');
 		if ($id_action) $action = new OrderAction($id_action);
 		else $action = new OrderActionUnplan(Param::get('id_action_unplan'));
-		$action->delete()->setMessage('success', 'delete')->checkReadyOrder();
+		$action->remove()->setMessage('success', 'delete')->checkReadyOrder();
 		$this->redirectPrevious();
 	}
 	

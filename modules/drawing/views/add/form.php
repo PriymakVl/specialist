@@ -1,6 +1,6 @@
 <div id="form-drawing-wrp">
     <h2>Форма для добавления чертежа</h2>
-    <form action="/drawing/add?id_prod=<?=$params['id_prod']?>" method="post" enctype="multipart/form-data">
+    <form action="/drawing/add?id_prod=<?=$this->get->id_prod?>" method="post" enctype="multipart/form-data">
         <!-- file drawing -->
         <div class="form-box">
             <label>Файл чертежа:</label>

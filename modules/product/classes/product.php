@@ -2,7 +2,7 @@
 
 class Product extends ProductBase {
 	
-	use ProductStatic;
+	use ProductStatic, ProductConvert, ProductSpecification;
 	
     public function __construct($id_prod = false)
     {
@@ -13,14 +13,14 @@ class Product extends ProductBase {
 	
 	public function getSpecification()
 	{
-		$this->specification = self::getSpecificationStatic($this->id);
+		$this->specification = self::getSpecificationTrait($this->id);
 		return $this;
 	}
 	//чтобы показывать в виде категории
 	public function getSpecificationChildren()
 	{
 		if ($this->id == ID_CATEGORY_PRODUCTS || $this->id == ID_CATEGORY_CYLINDER || $this->id == ID_CATEGORY_PRESS) {
-			self::getSpecificationChildrenStatic($this->specification);
+			self::getSpecificationChildrenTrait($this->specification);
 		}
 		return $this;
 	}
@@ -77,7 +77,7 @@ class Product extends ProductBase {
 	public function getSpecificationGroup()
 	{
 		if (empty($this->specification)) return $this;
-		$this->specificationGroup = self::getSpecificationGroupStatic($this->specification);
+		$this->specificationGroup = self::getSpecificationGroupTrait($this->specification);
 		return $this;
 	}
 	
@@ -97,8 +97,20 @@ class Product extends ProductBase {
 	
 	public function edit()
 	{
-		if ($this->post->edit_all) self::editAll($this->symbol);
+		if ($this->post->edit_all) self::editAllStatic($this->symbol);
 		else self::editOne();
+		return $this;
+	}
+	
+	public function convertType()
+	{
+		$this->typeString = $this->convertTypeTrait($this->type);
+		return $this;
+	}
+	
+	public function copy()
+	{
+		self::CopyStatic($this);
 		return $this;
 	}
 			

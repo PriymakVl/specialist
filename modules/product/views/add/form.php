@@ -1,5 +1,5 @@
 <div id="form-product-wrp">
-    <h2>Форма для добавления продукции</h2>
+    <h2>Форма для добавления продукта в <span class="green"><?=$parent->name?></span>:<span class="blue"><?=$parent->symbol?></span></h2>
     <form action="/product/add" method="post">
         <!-- first box -->
         <div class="form-box">

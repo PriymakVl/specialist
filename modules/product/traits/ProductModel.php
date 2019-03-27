@@ -11,9 +11,9 @@ trait ProductModel  {
         return self::perform($sql, $params)->fetchAll();
     }
 	
-	public static function addDataModel()
+	public static function addDataModel($params = false)
 	{
-		$params = self::selectParams(['symbol', 'name', 'qty', 'type', 'id_parent', 'note', 'number']);
+		if (!$params) $params = self::selectParams(['symbol', 'name', 'qty', 'type', 'id_parent', 'note', 'number']);
 		$fields = 'symbol, name, qty, type, id_parent, note, number';
         $values = ':symbol, :name, :qty, :type, :id_parent, :note, :number';
         $sql = 'INSERT INTO `products` ('.$fields.') VALUES ('.$values.')';
@@ -22,13 +22,13 @@ trait ProductModel  {
 	
 	public static function editOne() 
 	{
-		$params = self::selectParams(['symbol', 'name', 'type', 'note', 'id_parent', 'id_prod']);
+		$params = self::selectParams(['symbol', 'name', 'type', 'note', 'id_parent', 'id_prod', 'qty', 'number']);
 		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note, `id_parent` = :id_parent, 
 				`qty` = :qty, `number` = :number WHERE `id` = :id_prod';
 		return self::update($sql, $params);
 	}
 	
-	public static function editAll($symbol_old)
+	public static function editAllModel($symbol_old)
 	{
 		$params = self::selectParams(['symbol', 'name', 'type', 'note', 'symbol_old']);
 		$sql = 'UPDATE `products` SET `symbol` = :symbol, `name` = :name, `type` = :type, `note` = :note WHERE `symbol` = :symbol_old';

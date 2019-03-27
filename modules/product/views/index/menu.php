@@ -4,7 +4,7 @@
             <a href="/product/add?id_parent=<?=$product->id?>">Добавить</a>
         </li>
         <li>
-            <a href="/product/edit?id=<?=$product->id?>">Редактировать</a>
+            <a href="/product/edit?id_prod=<?=$product->id?>">Редактировать</a>
         </li>
         <li>
             <a href="#" id_prod="<?=$product->id?>" id="product-delete">Удалить</a>
@@ -23,7 +23,7 @@
 		
 		
 		<li>
-            <a href="/order/add_content?id_prod=<?=$product->id?>">Добавить в заказ</a>
+            <a href="#" id_prod="<?=$product->id?>" id="add-to-order">Добавить в заказ</a>
         </li>
 		<li>
             <a href="/product/copy?id_prod=<?=$product->id?>">Скопировать</a>

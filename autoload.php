@@ -32,7 +32,7 @@ function autoload_class($class_name)
 	$module_name = false;
 	if (strpos($class_name, 'OrderPosition') !== false) $module_name = 'order_position';
 	else if (strpos($class_name, 'OrderAction') !== false) $module_name = 'order_action';
-	else if (strpos($class_name, 'OrderContent') !== false) $module_name = 'order_content';
+	else if (strpos($class_name, 'OrderProduct') !== false) $module_name = 'order_product';
 	else if (strpos($class_name, 'Order') !== false) $module_name = 'order';
 	else if (strpos($class_name, 'Product') !== false) $module_name = 'product';
 	else if (strpos($class_name, 'Statistics') !== false) $module_name = 'statistics';

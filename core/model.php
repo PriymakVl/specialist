@@ -29,8 +29,16 @@ class Model extends Core {
         $sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
 		$params = ['id' => $id, 'status' => STATUS_ACTIVE];
         $this->data = self::perform($sql, $params)->fetch();//PDO::FETCH_ASSOC
+		if (!$this->data) throw new Exception('Нет данных в базе для этого объекта');
 		return $this;
     }
+	
+	public function getDataArray($id)
+	{
+		$sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
+		$params = ['id' => $id, 'status' => STATUS_ACTIVE];
+		return self::perform($sql, $params)->fetch(PDO::FETCH_ASSOC);
+	}
 	
 	public function setData($data)
 	{
