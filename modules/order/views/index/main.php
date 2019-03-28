@@ -36,9 +36,9 @@
 
 <!-- js files -->
 <script src="/modules/order/js/change_menu.js"></script>
-<script src="/modules/order/js/change_quantity_content.js"></script>
+<script src="/modules/order_product/js/edit_product.js"></script>
 <script src="/modules/order/js/order_delete.js"></script>
-<script src="/modules/order/js/content_delete.js"></script>
+<script src="/modules/order_product/js/delete_product.js"></script>
 <script src="/modules/order/js/order_actions_managment.js"></script>
 <script src="/modules/order/js/delete_action_unplan.js"></script>
 <script src="/modules/order/js/edit_action_unplan.js"></script>

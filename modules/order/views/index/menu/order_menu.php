@@ -5,3 +5,4 @@
 		<li><a href="/order/activate?id_order=<?=$order->id?>">Сделать активным</a></li>
 	<? endif; ?>
 </ul>
+<br>

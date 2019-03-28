@@ -62,10 +62,6 @@ class Order extends OrderBase {
 		return $this;
 	}
 	
-	
-	
-	
-	
 	public function getActions()
 	{
 		if ($this->state < OrderState::WORK) return $this;
@@ -92,7 +88,7 @@ class Order extends OrderBase {
 	
 	public function getProducts()
 	{
-		$this->products = OrderProduct::getMainParent();
+		$this->products = OrderProduct::getMainParentOrder($this->id);
 		return $this;
 	}
 	

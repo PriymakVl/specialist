@@ -42,11 +42,10 @@ trait ProductModel  {
         return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public function getOptions($id)
+	public static function getOptions($id_prod)
     {
-        $sql = 'SELECT * FROM ``products`` WHERE `id` = :id AND `status` = :status';
-		$params = ['id' => $id, 'status' => STATUS_ACTIVE];
-        return self::perform($sql, $params)->fetch();
+        $sql = 'SELECT * FROM `products` WHERE `id` = :id_prod';
+        return self::perform($sql, ['id_prod' => $id_prod])->fetch();
     }
 	
 }

@@ -2,15 +2,6 @@
     width: 898px;
 }
 
-.product-qty {
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.product-qty:hover {
-	text-decoration: none;
-}
-
 #table-order-positions {
 	margin-top: 15px;
 }
