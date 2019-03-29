@@ -1,8 +1,27 @@
 <?php
-require_once('product_base.php');
 
-class ProductTime extends ProductBase {
+trait ProductTime {
 
+	public function countTimeManufacturing()
+	{
+		$this->countTimeActions();
+		$this->countTimeSpecification();
+		$this->timeManufacturing = $this->timeActions + $this->timeSpecification;
+		return $this;
+	}
+	
+	public function countTimeActions()
+	{
+		if ($this->actions) $this->timeActions = ProductTime::countTimeProductActions($this->actions, $this->quantity);
+		return $this;
+	}
+	
+	private function countTimeSpecification()
+	{
+		if ($this->specification) $this->timeSpecification = ProductTime::countTimeProductSpecification($this);
+		return $this;
+	}
+	
 	public static function countTimeProductSpecification($product)
 	{
 		$time_total = 0;
@@ -36,6 +55,5 @@ class ProductTime extends ProductBase {
 		}
 		return $time_total;
 	}
-	
-	
+
 }

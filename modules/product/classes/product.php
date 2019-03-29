@@ -2,7 +2,7 @@
 
 class Product extends ProductBase {
 	
-	use ProductStatic, ProductConvert, ProductSpecification;
+	use ProductTotal, ProductConvert, ProductSpecification, ProductTime;
 	
     public function __construct($id_prod = false)
     {
@@ -11,24 +11,10 @@ class Product extends ProductBase {
 		$this->message->section = 'product';
     }
 	
-	public function getSpecification()
-	{
-		$this->specification = self::getSpecificationTrait($this->id);
-		return $this;
-	}
-	//чтобы показывать в виде категории
-	public function getSpecificationChildren()
-	{
-		if ($this->id == ID_CATEGORY_PRODUCTS || $this->id == ID_CATEGORY_CYLINDER || $this->id == ID_CATEGORY_PRESS) {
-			self::getSpecificationChildrenTrait($this->specification);
-		}
-		return $this;
-	}
-	
 	public function addData()
 	{
-		$id_prod = self::addDataModel();
-		return (new self)->getData($id_prod);
+		$id_prod = $this->addDataModel();
+		return (new self)->setData($id_prod);
 	}
 	
 	public function getActions()
@@ -43,26 +29,6 @@ class Product extends ProductBase {
 		return $this;
 	}
 	
-	public function countTimeManufacturing()
-	{
-		$this->countTimeActions();
-		$this->countTimeSpecification();
-		$this->timeManufacturing = $this->timeActions + $this->timeSpecification;
-		return $this;
-	}
-	
-	public function countTimeActions()
-	{
-		if ($this->actions) $this->timeActions = ProductTime::countTimeProductActions($this->actions, $this->quantity);
-		return $this;
-	}
-	
-	private function countTimeSpecification()
-	{
-		if ($this->specification) $this->timeSpecification = ProductTime::countTimeProductSpecification($this);
-		return $this;
-	}
-	
 	public function getStatistics()
 	{
 		$items = OrderAction::getAllOrdersByIdProduct($this->id);
@@ -71,13 +37,6 @@ class Product extends ProductBase {
 				$this->statistics[$i]['order'] = new Order($items[$i]->id_order);
 				$this->statistics[$i]['time'] = Statistics::countTimeFactMadeProductInOrder($items[$i]->id_order, $this->id);
 		}
-		return $this;
-	}
-	
-	public function getSpecificationGroup()
-	{
-		if (empty($this->specification)) return $this;
-		$this->specificationGroup = self::getSpecificationGroupTrait($this->specification);
 		return $this;
 	}
 	
@@ -97,20 +56,14 @@ class Product extends ProductBase {
 	
 	public function edit()
 	{
-		if ($this->post->edit_all) self::editAllStatic($this->symbol);
+		if ($this->post->edit_all) $this->editAll($this->symbol);
 		else self::editOne();
-		return $this;
-	}
-	
-	public function convertType()
-	{
-		$this->typeString = $this->convertTypeTrait($this->type);
 		return $this;
 	}
 	
 	public function copy()
 	{
-		self::CopyStatic($this);
+		$this->CopyTotal();
 		return $this;
 	}
 			

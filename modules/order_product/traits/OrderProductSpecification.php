@@ -1,27 +1,15 @@
 <?php
 
 trait OrderProductSpecification {
-
-	public function getSpecificationArray()
-	{
-		$this->specification = $this->getSpecificationModel();
-		return $this;
-	}
 	
 	public function getSpecification()
 	{
-		$specification = $this->getSpecificationModel();
-		$methods = ['setData', 'getOptions'];
-		if ($specification) $this->specification = ObjectHelper::createArray($specification, 'OrderProduct', $methods);
+		$items = $this->getByIdParent();
+		if (!$items) return $this;
+		$methods = ['setData', 'getOptions', 'setTypeProduct'];
+		$this->specification = ObjectHelper::createArray($items, 'OrderProduct', $methods);
+		$this->specificationGroup = (new Product)->getSpecificationGroup($this->specification);
 		return $this;
-	}
-	
-	public function getSpecificationModel()
-	{
-		$params = self::selectParams(['id_order', 'status']);
-		$params['id_parent'] = $this->id;
-		$sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status AND `id_parent` = :id_parent';
-        return self::perform($sql, $params)->fetchAll();
 	}
 	
 	/** add specification **/
@@ -56,6 +44,13 @@ trait OrderProductSpecification {
 			if ($product->specification) $product->deleteSpecification();
 			$product->delete();
 		}
+		return $this;
+	}
+	
+	public function getSpecificationGroup()
+	{
+		if (!$this->specification) return $this;
+		$this->specificationGroup = self::getSpecificationGroupTrait($this->specification);
 		return $this;
 	}
 	

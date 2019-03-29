@@ -5,3 +5,4 @@
 id_user in table drawings
 изменить quntity on qty order_products
 добавить time_manuf in order_products
+add note in order_products

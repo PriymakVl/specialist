@@ -2,9 +2,15 @@
 
 trait ProductConvert {
 
-	public static function convertTypeTrait($type)
+	public function convertPropeties()
 	{
-		switch ($type) {
+		$this->typeString = $this->setTypeString($this->type);
+		return $this;
+	}
+	
+	public static function setTypeString()
+	{
+		switch ($this->type) {
 			case self::TYPE_CATEGORY: return 'Категория';
 			case self::TYPE_PRODUCT: return 'Изделие';
 			case self::TYPE_UNIT: return 'Узел';

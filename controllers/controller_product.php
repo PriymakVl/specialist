@@ -12,8 +12,8 @@ class Controller_Product extends Controller_Base {
 
     public function action_index()
 	{
-		$product = (new Product)->getData($this->get->id_prod)->getSpecification()->getSpecificationChildren()->getSpecificationGroup();
-		$product->getParent()->convertType()->getDrawings();
+		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->getSpecificationChildren()->getSpecificationGroup();
+		$product->getParent()->convertProperties()->getDrawings();
 		//->getActions()->countTimeManufacturing()->getStatistics()
 		$this->render('index/main', compact('product'));
 	}
@@ -28,7 +28,7 @@ class Controller_Product extends Controller_Base {
 	
 	public function action_edit()
     {
-		$product = (new Product)->getData($this->get->id_prod);
+		$product = (new Product)->setData($this->get->id_prod);
 		if (!$this->post->save) return $this->render('edit/main', compact('product'));
 		$product->edit()->setMessage('success', 'edit');
 		$this->redirect('product?id_prod='.$product->id);

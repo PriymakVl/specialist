@@ -4,7 +4,7 @@ trait OrderParam {
 
 	use Param;
 	
-	static function addDataParam($keys)
+	public function addDataParam($keys)
 	{
 		$params = self::selectParams($keys);
 		$params['date_exec'] = Date::convertStringToTime($params['date_exec']);
@@ -13,7 +13,7 @@ trait OrderParam {
 		return $params;
 	}
 	
-	static function editModelParam() 
+	public function editModelParam() 
 	{
 		$params = self::selectParams(['type', 'note', 'rating', 'state', 'id_order']);
 		$params['date_exec'] = Date::convertStringToTime(self::getParam('date_exec'));

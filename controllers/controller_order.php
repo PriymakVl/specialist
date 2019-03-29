@@ -13,16 +13,16 @@ class Controller_Order extends Controller_Base {
     public function action_index()
 	{
 		$order = new Order($this->get->id_order);
-		$order->getPositions()->convertState()->convertRating()->getProducts();
+		$order->getPositions()->convertProperties()->getProducts();
 		//->getActions()->getActionsUnplan();
 		$this->render('index/main', compact('order'));
 	}
 
 	public function action_list()
 	{
-		$user = (new User)->getData($this->session->id_user)->getOptions()->getDefaultStateOrders();
+		$user = (new User)->setData($this->session->id_user)->getOptions()->getDefaultStateOrders();
 		$state = $this->get->state ? $this->get->state : $user->defaultStateOrders;
-		$orders = Order::getList($state);
+		$orders = (new Order)->getList($state);
 		$this->setTitle('Заказы')->render('list/main', compact('orders', 'state'));
 	}
 	
@@ -46,7 +46,7 @@ class Controller_Order extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$order = (new Order)->getData($this->get->id_order)->delete();
+		$order = (new Order)->setData($this->get->id_order)->delete();
 		$this->setMessage('success', 'delete')->redirect('order/list');
 	}
 	

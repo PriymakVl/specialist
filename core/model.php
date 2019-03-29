@@ -10,7 +10,7 @@ class Model extends Core {
 	public function __construct($id)
 	{
 		parent::__construct();
-		if ($id) $this->getData($id);
+		if ($id) $this->setData($id);
 	}
 
 	public function __set($name, $value) 
@@ -25,12 +25,9 @@ class Model extends Core {
 
     public function getData($id)
     {
-		if ($this->data) return $this;
         $sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
 		$params = ['id' => $id, 'status' => STATUS_ACTIVE];
-        $this->data = self::perform($sql, $params)->fetch();//PDO::FETCH_ASSOC
-		if (!$this->data) throw new Exception('Нет данных в базе для этого объекта');
-		return $this;
+        return self::perform($sql, $params)->fetch();
     }
 	
 	public function getDataArray($id)
@@ -43,6 +40,8 @@ class Model extends Core {
 	public function setData($data)
 	{
 		if ($this->data) return $this;
+		if (is_numeric($data)) $data = $this->getData($data);
+		if (!$data) throw new Exception('Нет данных в базе для этого объекта');
 		$this->data = $data;
 		return $this;
 	}

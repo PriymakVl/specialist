@@ -18,13 +18,13 @@
                 <td>1</td>
                 <td>Состояние</td>
                 <td>
-					<span style="font-weight:bold;"><?=$order->convertState?></span>
+					<span style="font-weight:bold;"><?=$order->stateString?></span>
 				</td>
             </tr>
 			<tr>
 				<td>2</td>
 				<td>Приоритет заказа</td>
-				<td><?=$order->convertRating?></td>
+				<td><?=$order->ratingString?></td>
 			</tr>
             <tr>
                 <td>3</td>

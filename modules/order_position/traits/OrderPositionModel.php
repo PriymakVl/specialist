@@ -18,7 +18,7 @@ trait OrderPositionModel {
         return self::insert($sql, $params);
 	}
 	
-	public static function getAllByIdOrder($id_order)
+	public function getAllByIdOrder($id_order)
 	{
 		$params = ['id_order' => $id_order, 'status' => STATUS_ACTIVE];
 		$sql = 'SELECT * FROM `order_positions` WHERE `id_order` = :id_order AND `status` = :status';

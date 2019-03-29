@@ -2,7 +2,7 @@
 
 class OrderProduct extends OrderProductBase {
 	
-	use OrderProductStatic, OrderProductConvert, OrderProductSpecification;
+	use OrderProductTotal, OrderProductConvert, OrderProductSpecification;
 	
 	public function __construct($id = false)
 	{
@@ -13,7 +13,7 @@ class OrderProduct extends OrderProductBase {
 
 	public function getOptions()
 	{
-		$this->options = Product::getOptions($this->id_prod);
+		$this->options = (new Product)->getData($this->id_prod);
 		return $this;
 	}
 	
@@ -25,12 +25,31 @@ class OrderProduct extends OrderProductBase {
 		$this->getData($id);
 		return $this;
 	}
+	//for convert specification
+	public function setTypeProduct()
+	{
+		$this->type = $this->options->type;
+		return $this;
+	}
 	
 	public function edit()
 	{
 		$this->editModel();
 		return $this;
 	}
+	
+	public function getParent()
+	{
+		if ($this->id_parent) $this->parent = (new self)->setData($this->getParentData())->getOptions(); 
+		return $this;
+	}
+	
+	public function getOrder()
+	{
+		$this->order = (new Order)->getData($this->id_order);
+		return $this;
+	}
+	
 	
 	
 	

@@ -9,20 +9,10 @@ class Controller_Order_Product extends Controller_Base {
 		$this->message->section = 'order_product';
     }
 
-    public function action_index()
+	public function action_index()
 	{
-		// $order = new Order($this->get->id_order);
-		// $order->getPositions()->getContent()->convertState()->getActions()->getActionsUnplan()->convertRating();
-		// $this->render('index/main', compact('order'));
-	}
-
-	public function action_list()
-	{
-		// $user = (new User)->getData($this->session->id_user)->getOptions()->getDefaultStateOrders();
-		// $state = $this->get->state ? $this->get->state : $user->defaultStateOrders;
-		// $orders = Order::getList($state);
-        // $this->view->title = 'Заказы';
-		// $this->render('list/main', compact('orders', 'state'));
+		$product = (new OrderProduct)->setData($this->get->id_prod)->getOptions()->getParent()->getOrder()->getSpecification();
+		$this->setTitle('Продукт '.$product->options->symbol)->render('index/main', compact('product'));
 	}
 	
 	public function action_activate()
@@ -34,7 +24,7 @@ class Controller_Order_Product extends Controller_Base {
 	{
 		if (!$this->session->id_order_active) $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
 		$product = (new OrderProduct)->addProduct()->addSpecification()->setMessage('success', 'add');
-		$order = (new Order)->getData($product->id_order)->setState(OrderState::PREPARATION);
+		$order = (new Order)->setData($product->id_order)->setState(OrderState::PREPARATION);
 		$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$order->id.'&id_active='.$product->id);
 	}
 	
@@ -48,7 +38,7 @@ class Controller_Order_Product extends Controller_Base {
 	
 	public function action_edit()
 	{
-		$product = (new OrderProduct)->getData($this->get->id_prod)->getOptions();
+		$product = (new OrderProduct)->setData($this->get->id_prod)->getOptions();
 		if (!$this->post->save) return $this->setTitle('Редактирование продукта')->render('edit/main', compact('product'));
 		$product->edit()->setMessage('success', 'edit');
 		//->checkStateOrder();

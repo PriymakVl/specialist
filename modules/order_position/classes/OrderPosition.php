@@ -2,7 +2,9 @@
 
 class OrderPosition extends Model {
 	
-	use OrderPositionStatic;
+	use OrderPositionTotal, OrderPositionConvert;
+	
+	public $order;
 	
 	public function __construct($id_position = false)
 	{
@@ -13,21 +15,19 @@ class OrderPosition extends Model {
 	
 	public function addData()
 	{
-        $id_position = self::addDataModel();
-		return (new self)->getData($id_position);
+        $id_position = $this->addDataModel();
+		return (new self)->setData($id_position);
 	}
 	
 	public function editData()
 	{
-		self::editDataModel();
+		$this->editDataModel();
 		return $this;
 	}
 	
-	public function getData($id_position = false)
+	public function getOrder()
 	{
-		$id_position = $id_position ? $id_position : $this->get->id_position;
-		if (empty($id_position)) return exit('Not id_position in method getData');
-		parent::getData($id_position);
+		$this->order = (new Order)->getData($this->id_order);
 		return $this;
 	}
 	

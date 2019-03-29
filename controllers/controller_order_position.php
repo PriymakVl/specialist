@@ -20,15 +20,14 @@ class Controller_Order_Position extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$position = (new OrderPosition)->getData()->remove()->setMessage('success', 'delete');
+		$position = (new OrderPosition)->setData($this->get->id_position)->delete()->setMessage('success', 'delete');
 		$this->redirect('order?tab=1&id_order='.$position->id_order);
 	}
 	
 	public function action_edit()
 	{
-		$position = (new OrderPosition)->getData();
-		$order = new Order($position->id_order);
-		if (empty($position->params->save)) return $this->render('edit/main', compact('position', 'order'));
+		$position = (new OrderPosition)->setData($this->get->id_position)->getOrder();
+		if (!$this->post->save) return $this->render('edit/main', compact('position'));
 		$position->editData()->setMessage('success', 'edit');
 		$this->redirect('order?tab=1&id_order='.$position->id_order);
 	}

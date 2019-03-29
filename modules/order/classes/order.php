@@ -2,6 +2,8 @@
 
 class Order extends OrderBase {
 	
+	use OrderTotal, OrderConvert, OrderTime;
+	
     public function __construct($id_order = false)
     {
         $this->tableName = 'orders';
@@ -9,18 +11,10 @@ class Order extends OrderBase {
 		$this->message->section = 'order';
     }
 	
-	public function getData($id_order = false)
-	{
-		$id_order = $id_order ? $id_order : $this->params->id_order;
-		if (empty($id_order)) return exit('Not id_position in method getData');
-		parent::getData($id_order);
-		return $this;
-	}
-	
 	public function addData()
 	{
-		$id_order = self::addDataModel();
-		return (new self)->getData($id_order);
+		$id_order = $this->addDataModel();
+		return (new self)->setData($id_order);
 	}
 	
 	public function setActive()
@@ -39,19 +33,13 @@ class Order extends OrderBase {
 	
 	public function getPositions()
 	{
-		$this->positions = OrderPosition::getAllByIdOrder($this->id);
+		$this->positions = (new OrderPosition)->getAllByIdOrder($this->id);
 		return $this;
 	}
 	
 	public function getPositionsTable()
 	{
-		if ($this->positions) $this->positionsTable = OrderPosition::convertPositionsToTable($this->positions);
-		return $this;
-	}
-	
-	public function convertState()
-	{
-		$this->convertState = OrderState::convert($this->state);
+		if ($this->positions) $this->positionsTable = (new OrderPosition)->convertPositionsToTable($this->positions);
 		return $this;
 	}
 	
@@ -88,19 +76,13 @@ class Order extends OrderBase {
 	
 	public function getProducts()
 	{
-		$this->products = OrderProduct::getMainParentOrder($this->id);
-		return $this;
-	}
-	
-	public function convertRating()
-	{
-		$this->convertRating = self::convertRatingStatic($this->rating);
+		$this->products = (new OrderProduct)->getMainParentOrder($this->id);
 		return $this;
 	}
 	
 	public function checkReady()
 	{
-		self::checkReadyStatic($this->id);
+		$this->checkReadyTotal();
 		return $this;
 	}
 	

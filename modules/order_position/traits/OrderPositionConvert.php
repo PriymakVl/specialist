@@ -1,10 +1,8 @@
 <?php
 
-trait OrderPositionStatic  {
+trait OrderPositionConvert {
 
-	use OrderPositionModel;
-	
-	public static function convertPositionsToTable($positions) 
+	public function convertPositionsToTable($positions) 
 	{
 		$table = '<table>';
 		foreach ($positions as $position) {
@@ -12,29 +10,5 @@ trait OrderPositionStatic  {
 		}
 		return $table .= '</table>';
 	}
-	
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

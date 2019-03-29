@@ -1,6 +1,6 @@
 <? 
 	$tab_active_products = false;
-	if  (!$this->get->tab || $order->products) $tab_active_products = true;
+	if  (!$this->get->tab & $order->products) $tab_active_products = true;
 	if ($this->get->tab == 2) $tab_active_products = true;
 ?>
 <li id="order-products-wrp">
@@ -24,11 +24,7 @@
 							<input type="radio" name="product" id_prod="<?=$product->id?>">
 						</td>
 						<td>
-							<? if ($product->specification): ?>
-								<a href="/order_product?id_prod=<?=$product->id?>"><?=$product->options->symbol?></a>
-							<? else: ?>
-								<?=$product->options->symbol?>
-							<? endif; ?>
+							<a href="/order_product?id_prod=<?=$product->id?>"><?=$product->options->symbol?></a>
 						</td>
 						<td><?=$product->options->name?></td>
 						<td><?=$product->qty?></td>

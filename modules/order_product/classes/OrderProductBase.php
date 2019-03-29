@@ -11,8 +11,13 @@ class OrderProductBase extends Model {
 	
 	public $options;
 	public $specification;
+	public $actions;
+	public $specificationGroup;
 	public $stateString;
 	public $stateBg;
+	public $order;
+	public $parent;
+	public $type;
 }
 
 

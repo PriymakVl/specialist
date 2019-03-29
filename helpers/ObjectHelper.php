@@ -16,7 +16,6 @@ class ObjectHelper {
 	
 	private static function createObject($item, $class_name, $methods) {
 		if (in_array('setData', $methods)) $object = (new $class_name)->setData($item);
-		else if (in_array('getData', $methods)) $object = (new $class_name)->getData($item->id);
 		else $object = new $class_name ($item->id);
 		return $object;
 	}
@@ -24,7 +23,7 @@ class ObjectHelper {
 	private static function  callMethodsObject($object, $methods) 
 	{
 		foreach ($methods as $method_name) {
-			if ($method_name == 'setData' || $method_name == 'getData') continue;
+			if ($method_name == 'setData') continue;
 			$object->$method_name();
 		}
 		return $object;

@@ -8,7 +8,7 @@
     <? include_once('./views/total/message.php'); ?>
 
     <div id="form-order-position-wrp">
-		<h2>Форма для редактирования позиции к заказу: <span class="red"><?=$order->symbol?></span></h2>
+		<h2>Форма для редактирования позиции к заказу: <span class="red"><?=$position->order->symbol?></span></h2>
 		<form action="/order_position/edit?id_position=<?=$position->id?>" method="post">
 		
 			<div class="form-box">
