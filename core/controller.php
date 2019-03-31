@@ -24,7 +24,7 @@ class Controller extends Core {
 
     protected function render($template, $data = null)
     {
-        return $this->view->render($template, $data, $this->view);
+        return $this->view->render($template, $data);
 		exit();
     }
 	
