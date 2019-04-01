@@ -12,7 +12,7 @@ class Controller_Product extends Controller_Base {
 
     public function action_index()
 	{
-		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->getSpecificationChildren()->getSpecificationGroup();
+		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->getSpecificationChildren();
 		$product->getParent()->convertProperties()->getDrawings();
 		//->getActions()->countTimeManufacturing()->getStatistics()
 		$this->render('index/main', compact('product'));
@@ -37,7 +37,7 @@ class Controller_Product extends Controller_Base {
 	public function action_copy()
 	{
 		if (!$this->session->id_prod_active) return $this->message->set('error', 'copy-not-parent')->redirectPrevious(); 
-		(new Product)->copy()->setMessage('success', 'copy');
+		(new Product)->setData($this->get->id_prod)->copy()->setMessage('success', 'copy');
 		$this->redirect('product?id_prod='.$this->session->id_prod_active);
 	}
 	
@@ -48,7 +48,7 @@ class Controller_Product extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$product = (new Product)->getData($this->get->id_prod)->getSpecification()->delete();
+		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->delete();
 		$this->setMessage('success', 'delete')->redirect('product?id_prod='.$product->id_parent);
 	}
 

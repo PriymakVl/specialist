@@ -2,13 +2,13 @@
 
 trait ProductConvert {
 
-	public function convertPropeties()
+	public function convertProperties()
 	{
-		$this->typeString = $this->setTypeString($this->type);
+		$this->typeString = $this->setTypeString();
 		return $this;
 	}
 	
-	public static function setTypeString()
+	public function setTypeString()
 	{
 		switch ($this->type) {
 			case self::TYPE_CATEGORY: return 'Категория';
