@@ -2,7 +2,7 @@
 
 class Drawing extends Model {
 	
-	use DrawingStatic, DrawingMessage;
+	use DrawingFile, DrawingMessage, DrawingModel;
 
     public function __construct($id_dwg = false)
     {
@@ -13,15 +13,15 @@ class Drawing extends Model {
 	
 	public function editNote()
 	{
-		self::editNoteModel();
+		$this->editNoteModel();
 		return $this;
 	}
 	
 	public function addFile()
 	{
-		$filename = self::addFileStatic();
-		$id_dwg = $filename ? self::addDataModel(['filename' => $filename, 'id_user' => $this->session->id_user]) : false;
-		if ($id_dwg) self::getData($id_dwg);
+		$filename = $this->saveFile();
+		$id_dwg = $filename ? $this->addDataModel($filename) : false;
+		if ($id_dwg) $this->setData($id_dwg);
 		return $this;
 	}
 	

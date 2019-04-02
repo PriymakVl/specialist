@@ -22,8 +22,7 @@ class OrderProduct extends OrderProductBase {
 		$params = ['id_prod' => $this->get->id_prod, 'qty' => $this->get->qty, 'id_parent' => self::ID_MAIN_PARENT, 'state' => self::STATE_WAITING];
 		$params['id_order'] = $this->session->id_order_active;
 		$id = $this->addOne($params);
-		$this->getData($id);
-		return $this;
+		return $this->setData($id);
 	}
 	//for convert specification
 	public function setTypeProduct()
@@ -49,6 +48,20 @@ class OrderProduct extends OrderProductBase {
 		$this->order = (new Order)->getData($this->id_order);
 		return $this;
 	}
+	
+	public function deleteAll()
+	{
+		$this->delete()->deleteSpecification();
+		// ->deleteActions();
+		return $this;
+	}
+	
+	public function setStateOrder()
+	{
+		(new OrderState)->check($this->id_order);
+		return $this;
+	}
+	
 	
 	
 	

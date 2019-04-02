@@ -16,20 +16,20 @@ trait OrderProductSpecification {
 	
 	public function addSpecification()
 	{
-		$prod_base = (new Product)->getData($this->get->id_prod)->getSpecification();
-		if (!$prod_base->specification) return $this;
-		$this->addSpecificationRecursive($prod_base->specification, $this->id_order);
+		$product = (new Product)->setData($this->get->id_prod)->getSpecification();//from base product
+		if (!$product->specification) return $this;
+		$this->addSpecificationRecursive($product->specification, $this->id);
 		return $this;
 	}
 	
-	public function addSpecificationRecursive($specification)
+	public function addSpecificationRecursive($specification, $id_parent)
 	{
 		foreach ($specification as $product) {
-			//$product->getSpecification();
-			//if ($product->specification) $this->addSpecificationRecursive($product->specification);
+			$product->getSpecification();
 			$qty = $product->qty * $this->qty;
-			$params = ['qty' => $qty, 'id_parent' => $this->id, 'id_prod' => $product->id, 'id_order' => $this->id_order, 'state' => self::STATE_WAITING];
-			$this->addOne($params);
+			$params = ['qty' => $qty, 'id_parent' => $id_parent, 'id_prod' => $product->id, 'id_order' => $this->id_order, 'state' => self::STATE_WAITING];
+			$id_sub_parent = $this->addOne($params);
+			if ($product->specification) $this->addSpecificationRecursive($product->specification, $id_sub_parent);
 		}
 		return $this;
 	}

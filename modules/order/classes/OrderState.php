@@ -46,6 +46,17 @@ class OrderState extends OrderBase {
         // }
         // return $states;
     // }
+	
+	public function check($id_order)
+	{
+		$products = (new OrderProduct)->getAllOnOrder($id_order);
+		if (!$products) return (new Order)->setData($id_order)->setState(self::REGISTERED);
+		foreach ($products as $product) {
+			if ($product->state == OrderProduct::STATE_WAITING) return (new Order)->setData($id_order)->setState(self::PREPARATION);
+			if ($product->state == OrderProduct::STATE_STOPPED || $product->state == OrderProduct::STATE_PROGRESS) return (new Order)->setData($id_order)->setState(self::WORK);
+		}
+		return (new Order)->setData($id_order)->setState(self::MADE);
+	}
 
     public function setStateString($state)
     {

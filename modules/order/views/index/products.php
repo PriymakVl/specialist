@@ -1,4 +1,5 @@
 <? 
+	$number = 1;
 	$tab_active_products = false;
 	if  (!$this->get->tab & $order->products) $tab_active_products = true;
 	if ($this->get->tab == 2) $tab_active_products = true;
@@ -11,7 +12,7 @@
         <table width="940">
             <? if ($order->products): ?>
 				<tr>
-					<th width="50"><input type="checkbox" disabled></th>
+					<th width="50">№</th>
 					<th width="150">Обозначение</th>
 					<th width="380">Наименование</th>
 					<th width="80">Кол-во</th>
@@ -20,9 +21,7 @@
 				</tr>
                 <? foreach($order->products as $product): ?>
                     <tr>
-						<td class="<?=$this->get->id_active == $product->id ? 'bg-green' : ''?>">
-							<input type="radio" name="product" id_prod="<?=$product->id?>">
-						</td>
+						<td><?=$number?></td>
 						<td>
 							<a href="/order_product?id_prod=<?=$product->id?>"><?=$product->options->symbol?></a>
 						</td>
@@ -37,6 +36,7 @@
 						</td>
 						<td style="background:<?=$product->stateBg?>"><?=$product->stateString?></td>
 					</tr>
+					<? $number++; ?>
                 <? endforeach; ?>
             <? else: ?>
                 <tr>

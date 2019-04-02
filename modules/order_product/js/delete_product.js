@@ -4,9 +4,7 @@ $(document).ready(function() {
 
         e.preventDefault();
 		
-		var id_prod = $('#order-products-wrp table :radio:checked').attr('id_prod');
-
-		if (!id_prod) {alert('Вы не выбрали что удалить'); return;}
+		var id_prod = $(this).attr('id_prod');
 		
 		var agree = confirm('Вы действительно хотите удалить?');
 

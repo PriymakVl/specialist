@@ -19,8 +19,8 @@ class Controller_Drawing extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$dwg = (new Drawing)->getData($this->get->id_dwg)->delete()->setMessage('success', 'delete');
-		$this->redirect('product?tab='.self::PRODUCT_TAB_DRAWINGS.'&id_prod='.$dwg->id_prod);
+		$dwg = (new Drawing)->setData($this->get->id_dwg)->delete()->setMessage('success', 'delete');
+		$this->redirect('product?tab='.self::PRODUCT_TAB_DRAWINGS.'&id_prod='.$this->get->id_prod);
 	}
 	
 	public function action_edit_note()
@@ -28,7 +28,7 @@ class Controller_Drawing extends Controller_Base {
 		$dwg = new Drawing($this->get->id_dwg);
 		if (!$this->post->save) return $this->render('edit_note/main', compact('dwg'));
 		$dwg->editNote()->setMessage('success', 'edit_note');
-		$this->redirect('product?tab='.self::PRODUCT_TAB_DRAWINGS.'&id_prod='.$dwg->id_prod);
+		$this->redirect('product?tab='.self::PRODUCT_TAB_DRAWINGS.'&id_prod='.$this->get->id_prod);
 	}
 
     

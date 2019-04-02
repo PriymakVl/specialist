@@ -41,6 +41,7 @@ trait OrderProductTotal  {
 			self::add($position->id_order, $items[0]->id, $position->qty);
 		}
 	}
+	
 
 	
 	

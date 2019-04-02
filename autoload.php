@@ -34,6 +34,7 @@ function autoload_class($class_name)
 	else if (strpos($class_name, 'OrderAction') !== false) $module_name = 'order_action';
 	else if (strpos($class_name, 'OrderProduct') !== false) $module_name = 'order_product';
 	else if (strpos($class_name, 'Order') !== false) $module_name = 'order';
+	else if (strpos($class_name, 'ProductAction') !== false) $module_name = 'product_action';
 	else if (strpos($class_name, 'Product') !== false) $module_name = 'product';
 	else if (strpos($class_name, 'Statistics') !== false) $module_name = 'statistics';
 	else if (strpos($class_name, 'User') !== false) $module_name = 'user';

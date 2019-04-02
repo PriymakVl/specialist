@@ -2,6 +2,7 @@
 	$tab_active_info = false;
 	if  ($this->get->tab == 1) $tab_active_info = true;
 	if (!$order->products && !$this->get->tab) $tab_active_info = true;
+	if (!$order->products && $this->get->tab = 2) $tab_active_info = true;
 ?>
 <li>
     <input type="radio" name="tabs" id="tab-1" <? if ($tab_active_info) echo 'checked'; ?>>

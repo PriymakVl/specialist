@@ -1,6 +1,9 @@
+<?php
+	$data_actions = DataAction::getAll('data_actions');
+?>
 <div id="form-add-action-wrp">
     <h2>Форма добавления операции</h2>
-    <form action="/product_action/add?id_prod=<?=$product->id?>" method="post">
+    <form action="/product_action/add?id_prod=<?=$this->get->id_prod?>&symbol=<?=$this->get->symbol?>" method="post">
 	
 			<div class="form-box product-action-wrp">
 			

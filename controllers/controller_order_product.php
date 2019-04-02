@@ -23,9 +23,9 @@ class Controller_Order_Product extends Controller_Base {
 	public function action_add()
 	{
 		if (!$this->session->id_order_active) $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
-		$product = (new OrderProduct)->addProduct()->addSpecification()->setMessage('success', 'add');
-		$order = (new Order)->setData($product->id_order)->setState(OrderState::PREPARATION);
-		$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$order->id.'&id_active='.$product->id);
+		$product = (new OrderProduct)->addProduct()->addSpecification()->setStateOrder()->setMessage('success', 'add');
+		// $order = (new Order)->setData($product->id_order)->setState(OrderState::PREPARATION);
+		$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order.'&id_active='.$product->id);
 	}
 	
 	// public function action_to_preparation()
@@ -47,8 +47,7 @@ class Controller_Order_Product extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$product = (new OrderProduct)->getData($this->get->id_prod)->delete();
-		//->getSpecification()->deleteSpecification();
+		$product = (new OrderProduct)->setData($this->get->id_prod)->getSpecification()->deleteAll()->setStateOrder();
 		$this->setMessage('success', 'delete')->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order);
 	}
     

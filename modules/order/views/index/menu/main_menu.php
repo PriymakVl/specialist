@@ -5,8 +5,6 @@
 	<!-- order position menu -->
 	<? include 'order_positions_menu.php' ?>
 
-	<!-- order products menu -->
-	<? if ($order->products) include 'order_products_menu.php'; ?>
 
 	<!-- order actions menu -->
 	<? include 'order_actions_menu.php' ?>

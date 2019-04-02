@@ -1,5 +1,5 @@
 <li>
-    <input type="radio" name="tabs" id="tab-3">
+    <input type="radio" name="tabs" id="tab-3" <? if ($this->get->tab == 3) echo 'checked'; ?>>
     <label for="tab-3">Операции</label>
     <div class="tab-content">
 		<h2><?=$product->name?>: <span class="green"><?=$product->symbol?></span></h2>
@@ -32,8 +32,8 @@
 					</td>
 					<td><?=$action->note?></td>
 					<td class="action-control-box">
-						<a href="/product_action/edit?id=<?=$action->id?>&id_prod=<?=$product->id?>">Редактировать</a><br>
-						<a href="#" class="product-action-delete" id_action="<?=$action->id?>">Удалить</a>
+						<a href="/product_action/edit?id_action=<?=$action->id?>&id_prod=<?=$product->id?>">Редактировать</a><br>
+						<a href="#" class="product-action-delete" id_action="<?=$action->id?>" id_prod="<?=$product->id?>">Удалить</a>
 					</td>
 				</tr>
 			<? endforeach; ?>

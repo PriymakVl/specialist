@@ -28,9 +28,9 @@
 
 </div><!-- id content -->
 
-<!-- js files 
-<script src="/modules/product/js/delete_action.js"></script>
-<script src="/modules/product/js/delete_product.js"></script>
+<!-- js files -->
+<script src="/modules/order_product/js/delete_product.js"></script>
+<!--<script src="/modules/product/js/delete_action.js"></script>
 <script src="/modules/drawing/js/delete_drawing.js"></script>
 <script src="/modules/order_product/js/add_to_order.js"></script> -->
 

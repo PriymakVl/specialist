@@ -17,7 +17,7 @@
 			</li>
 		<? endif; ?>
 		<li>
-			<a href="drawing/add?id_prod=<?=$product->id?>">Добавить чертеж</a>
+			<a href="drawing/add?symbol=<?=$product->symbol?>&id_prod=<?=$product->id?>">Добавить чертеж</a>
 		</li>
 		<br><hr>
 		
@@ -31,7 +31,7 @@
 		<!-- form add product actions -->
 		<? if ($product->type == Product::TYPE_DETAIL || $product->type == Product::TYPE_UNIT || $product->type == Product::TYPE_PRODUCT): ?>
 			<li>
-				<a href="/product_action/add?id_prod=<?=$product->id?>">Добавить операцию</a>
+				<a href="/product_action/add?id_prod=<?=$product->id?>&symbol=<?=$product->symbol?>">Добавить операцию</a>
 			</li>
 		<? endif; ?>
     </ul>

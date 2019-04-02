@@ -19,7 +19,7 @@ class Product extends ProductBase {
 	
 	public function getActions()
 	{
-		$this->actions = ProductAction::getAllBySymbol($this->symbol);
+		$this->actions = (new ProductAction)->getForProduct($this->symbol);
 		return $this;
 	}
 	
@@ -42,7 +42,7 @@ class Product extends ProductBase {
 	
 	public function getDrawings()
 	{
-		$this->drawings = Drawing::getAllByIdProduct($this->id);
+		$this->drawings = (new Drawing)->getAllBySymbolProduct($this->symbol);
 		return $this;
 	}
 	

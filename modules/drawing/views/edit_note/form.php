@@ -1,6 +1,6 @@
 <div id="form-drawing-wrp">
     <h2>Форма для редактирования примечания чертежа</h2>
-    <form action="/drawing/edit_note?id_dwg=<?=$dwg->id?>" method="post">
+    <form action="/drawing/edit_note?id_dwg=<?=$dwg->id?>&id_prod=<?=$this->get->id_prod?>" method="post">
       
         <!-- note -->
         <div class="form-box">

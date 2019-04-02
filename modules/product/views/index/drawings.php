@@ -23,8 +23,8 @@
 					<td><?=date('d.m.y', $dwg->date_add)?></td>
 					<td><?=$dwg->note?></td>
 					<td class="action-control-box">
-						<a href="/drawing/edit_note?id_dwg=<?=$dwg->id?>">Редактировать</a><br>
-						<a href="#" class="delete-dwg" id_dwg="<?=$dwg->id?>">Удалить</a>
+						<a href="/drawing/edit_note?id_dwg=<?=$dwg->id?>&id_prod=<?=$product->id?>">Редактировать</a><br>
+						<a href="#" class="delete-dwg" id_dwg="<?=$dwg->id?>" id_prod="<?=$product->id?>">Удалить</a>
 					</td>
 				</tr>
 				<? $number++; ?>

@@ -4,10 +4,12 @@ trait DrawingParam {
 
 	use Param;
 	
-	public static function addDataModelParams($data)
+	public function addDataParams($filename)
 	{
-		$params = self::selectParams(['note', 'id_prod']);
-		$params = array_merge($params, $data);
+		$params['note'] = self::getParam('note');
+		$params['symbol'] = trim(self::getParam('symbol'));
+		$params['filename'] = $filename;
+		$params['id_user'] = $this->session->id_user;
 		$params['date_add'] = time();
 		return $params;
 	}
