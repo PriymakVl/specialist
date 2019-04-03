@@ -2,7 +2,7 @@
 
 class OrderProduct extends OrderProductBase {
 	
-	use OrderProductTotal, OrderProductConvert, OrderProductSpecification;
+	use OrderProductTotal, OrderProductConvert, OrderProductSpecification, OrderProductState;
 	
 	public function __construct($id = false)
 	{
@@ -60,6 +60,11 @@ class OrderProduct extends OrderProductBase {
 	{
 		(new OrderState)->check($this->id_order);
 		return $this;
+	}
+	
+	public function editState($order)
+	{
+		if ($order->state == OrderState::PREPARATION) return $this->setStatePreparation($order);
 	}
 	
 	

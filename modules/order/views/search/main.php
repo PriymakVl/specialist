@@ -1,10 +1,3 @@
-<?php
-
-require_once ('./modules/order/models/order.php');
-require_once ('./modules/order/models/order_state.php');
-
-?>
-
 <!-- css files -->
 <link rel="stylesheet" href="/modules/order/css/list.css">
 

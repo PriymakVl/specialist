@@ -3,7 +3,7 @@
 ?>
 <div id="form-add-action-wrp">
     <h2>Форма редактирования операции</h2>
-    <form action="/product_action/edit?id_action=<?=$action->id?>&id_prod=<?=$this->get->id_prod?>?>" method="post">
+    <form action="/product_action/edit?id_action=<?=$action->id?>&id_prod=<?=$this->get->id_prod?>" method="post">
 	
 			<div class="form-box product-action-wrp">
 				<label>Наименование:</label>
@@ -16,9 +16,9 @@
 				<label>Номер:</label>
 				<input type="number" name="number" value="<?=$action->number?>">
 				<label>Подгот-ное время:</label>
-				<input type="text" name="time_prepar" value="<?=$action->time_prepar?>">
+				<input type="number" name="time_prepar" value="<?=$action->time_prepar?>">
 				<label>Штучное время:</label>
-				<input type="text" name="time_prod" required value="<?=$action->time_prod?>">
+				<input type="number" name="time_prod" required value="<?=$action->time_prod?>">
 				
 			</div>
 

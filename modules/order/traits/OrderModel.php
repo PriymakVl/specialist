@@ -34,26 +34,19 @@ trait OrderModel {
 		return self::insert($sql, $params);
     }
 	
-	public function editModel($params)
+	public function editData()
 	{
-		$params = self::editModelParam();
-		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note, `rating` = :rating, `state` = :state
-		WHERE `id` = :id_order';
+		$params = $this->editDataParam();
+		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note, `rating` = :rating WHERE `id` = :id_order';
 		return self::update($sql, $params);
 	}
 
-    public function searchBySymbol($symbol)
+    public function searchBySymbol()
     {
         $sql = 'SELECT * FROM `orders` WHERE `symbol` like concat("%", :symbol, "%") AND `status` = :status';
-        $params = ['symbol' => $symbol, 'status' => STATUS_ACTIVE];
+        $params = ['symbol' => trim($this->post->symbol), 'status' => STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
-	
-	public function setStateModel($params)
-	{
-		$sql = 'UPDATE `orders` SET `state` = :state WHERE `id` = :id_order';
-		return self::update($sql, $params);
-	}
     
 }
 

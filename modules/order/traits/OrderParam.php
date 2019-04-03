@@ -13,11 +13,11 @@ trait OrderParam {
 		return $params;
 	}
 	
-	public function editModelParam() 
+	public function editDataParam() 
 	{
-		$params = self::selectParams(['type', 'note', 'rating', 'state', 'id_order']);
-		$params['date_exec'] = Date::convertStringToTime(self::getParam('date_exec'));
-		$params['symbol'] = trim(self::getParam('symbol'));
+		$params = self::selectParams(['type', 'note', 'rating', 'id_order']);
+		$params['date_exec'] = Date::convertStringToTime($this->post->date_exec);
+		$params['symbol'] = trim($this->post->symbol);
 		return $params;
 	}
 	

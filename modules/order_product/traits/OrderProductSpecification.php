@@ -14,9 +14,10 @@ trait OrderProductSpecification {
 	
 	/** add specification **/
 	
-	public function addSpecification()
+	public function addSpecification($id_prod = false)
 	{
-		$product = (new Product)->setData($this->get->id_prod)->getSpecification();//from base product
+		$id_prod = $id_prod ? $id_prod : $this->get->id_prod;
+		$product = (new Product)->setData($id_prod)->getSpecification();//from base product
 		if (!$product->specification) return $this;
 		$this->addSpecificationRecursive($product->specification, $this->id);
 		return $this;

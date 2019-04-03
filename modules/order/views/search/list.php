@@ -11,7 +11,7 @@
     <? if ($orders): ?>
         <?foreach ($orders as $order): ?>
             <tr>
-                <td class="<?=($id_active == $order->id)?'bg-green':''?>">
+                <td class="<?=($this->session->id_order_active == $order->id)?'bg-green':''?>">
                     <input type="checkbox" name="order" id_order="<?=$order->id?>">
                 </td>
                 <td>

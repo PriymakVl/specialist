@@ -40,7 +40,15 @@ class Controller_Order extends Controller_Base {
 		$order = new Order($this->get->id_order);
 		if (!$this->post->save) return $this->render('edit/main', compact('order'));
 		$order->edit()->setMessage('success', 'edit');
-		//->checkReady();
+		$this->redirect('order?id_order='.$order->id);
+	}
+	
+	public function action_edit_state()
+	{
+		$order = new Order($this->get->id_order);
+		if (!$this->post->save) return $this->render('edit_state/main', compact('order'));
+		$order->editState();
+		//->setEditStateMessage();
 		$this->redirect('order?id_order='.$order->id);
 	}
 	
@@ -58,14 +66,10 @@ class Controller_Order extends Controller_Base {
 	
 	 public function action_search()
 	 {
-		 $items = Order::searchBySymbol();
-
-		 if (count($items) == 1) return $this->setMessage('success', 'found', 'order_search')->redirect('order?id_order='.$items[0]->id);
-		 else if (count($orders ) > 1) {
-			$orders = ObjectHelper::createArray($items, 'Order', 'setData');
-			$this->setMessage('success', 'found_next', 'order_search')->render('search/main', compact('orders'));
-		 } 
-		 else $this->message->set('error', 'not_found')->redirectPrevious();
+		 $orders = (new Order)->search();
+		 if (count($orders) == 1) return $this->setMessage('success', 'found', 'order_search')->redirect('order?id_order='.$orders[0]->id);
+		 else if (count($orders ) > 1) $this->setMessage('success', 'found_next', 'order_search')->render('search/main', compact('orders'));
+		 else $this->setMessage('error', 'not_found', 'order_search')->redirectPrevious();
 	 }
     
 

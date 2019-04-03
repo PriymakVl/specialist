@@ -25,9 +25,17 @@ class Order extends OrderBase {
 	
 	public function edit()
 	{
-		Order::editModel();
-		//OrderProduct::editParamOrder($this->id);
-		// OrderAction::editParamOrder($this->id);
+		$this->editData();
+		return $this;
+	}
+	
+	public function editState()
+	{
+		if ($this->post->state == $this->state) return $this;
+		$this->setState($this->post->state);
+		$order = (new Order)->setData($this->id)->getPositions()->getProducts(); //with new state
+		(new OrderProduct)->editState($order);
+		// (new OrderAction)->editState($this);
 		return $this;
 	}
 	
@@ -46,21 +54,21 @@ class Order extends OrderBase {
 	public function delete()
 	{
 		parent::delete();
-		self::deleteStatic($this->id);
+		// self::deleteStatic($this->id);
 		return $this;
 	}
 	
-	public function getActions()
-	{
-		if ($this->state < OrderState::WORK) return $this;
-		$items = OrderAction::getIdActionsByIdOrder($this->id);
-		foreach ($items as $item) {
-			$action = new OrderAction($item->id);
-			$action->getProduct()->convertState()->setBgState()->isStates();
-			$this->actions[] = $action;
-		}
-		return $this;
-	}
+	// public function getActions()
+	// {
+		// if ($this->state < OrderState::WORK) return $this;
+		// $items = OrderAction::getIdActionsByIdOrder($this->id);
+		// foreach ($items as $item) {
+			// $action = new OrderAction($item->id);
+			// $action->getProduct()->convertState()->setBgState()->isStates();
+			// $this->actions[] = $action;
+		// }
+		// return $this;
+	// }
 	
 	public function getActionsUnplan()
 	{
@@ -86,11 +94,10 @@ class Order extends OrderBase {
 		return $this;
 	}
 	
-	public function editState($state)
+	public function search()
 	{
-		$params = ['state' => $state, 'id_order' => $this->id];
-		self::setStateModel($params);
-		return $this;
+		$items = $this->searchBySymbol();
+		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getPositions', 'getPositionsTable']);
 	}
     
 	
