@@ -70,17 +70,17 @@ class Order extends OrderBase {
 		// return $this;
 	// }
 	
-	public function getActionsUnplan()
-	{
-		if ($this->state < OrderState::WORK) return $this;
-		$items = OrderActionUnplan::getByIdOrder($this->id); /***/ if (empty($items)) return $this;
-		foreach ($items as $item) {
-			$action_unplan = new OrderActionUnplan($item->id);
-			$action_unplan->convertState()->setBgState();
-			$this->actionsUnplan[] = $action_unplan;
-		}
-		return $this;
-	}
+	// public function getActionsUnplan()
+	// {
+		// if ($this->state < OrderState::WORK) return $this;
+		// $items = OrderActionUnplan::getByIdOrder($this->id); /***/ if (empty($items)) return $this;
+		// foreach ($items as $item) {
+			// $action_unplan = new OrderActionUnplan($item->id);
+			// $action_unplan->convertState()->setBgState();
+			// $this->actionsUnplan[] = $action_unplan;
+		// }
+		// return $this;
+	// }
 	
 	public function getProducts()
 	{

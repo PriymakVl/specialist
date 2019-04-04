@@ -16,7 +16,7 @@
 			<? if ($product->specification) include 'specification/groups.php'; ?>
 
             <!-- actions -->
-            <? //if ($product->actions) include_once('actions.php'); ?>
+            <? if ($product->actions) include_once('actions.php'); ?>
 			
 			<!-- drawings -->
 			<? //if ($product->drawings) include_once('drawings.php'); ?>

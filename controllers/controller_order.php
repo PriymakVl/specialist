@@ -14,7 +14,7 @@ class Controller_Order extends Controller_Base {
 	{
 		$order = new Order($this->get->id_order);
 		$order->getPositions()->convertProperties()->getProducts();
-		//->getActions()->getActionsUnplan();
+		//->getActionsNotbase()->getActions();
 		$this->render('index/main', compact('order'));
 	}
 

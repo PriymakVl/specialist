@@ -12,6 +12,27 @@ trait OrderProductSpecification {
 		return $this;
 	}
 	
+	public function getSpecificationAll()
+	{
+		$this->specificationAll = $this->getByIdParent();
+		if ($this->specificationAll) {;
+			$this->getSpecificationRecursive($this->specificationAll);
+			$this->specificationAll = ObjectHelper::createArray($this->specificationAll, 'OrderProduct', ['setData', 'getOptions']);
+		}
+		return $this;
+	}
+	
+	public function getSpecificationRecursive($products)
+	{
+		foreach ($products as $product) {
+			$items= $this->getByIdParent($product->id);
+			if (!$items) continue;
+			$this->specificationAll = array_merge($this->specificationAll, $items);
+			$this->getSpecificationRecursive($items);
+		}
+	}
+	
+	
 	/** add specification **/
 	
 	public function addSpecification($id_prod = false)
@@ -37,12 +58,10 @@ trait OrderProductSpecification {
 	
 	/** delete specification **/
 		
-	public function deleteSpecification()
+	public function deleteSpecificationAll()
 	{
-		if (!$this->specification) return $this;
-		foreach ($this->specification as $product) {
-			$product->getSpecification();
-			if ($product->specification) $product->deleteSpecification();
+		if (!$this->specificationAll) return $this;
+		foreach ($this->specificationAll as $product) {
 			$product->delete();
 		}
 		return $this;

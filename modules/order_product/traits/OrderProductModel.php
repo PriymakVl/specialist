@@ -25,10 +25,10 @@ trait OrderProductModel {
         return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public function getByIdParent()
+	public function getByIdParent($id_parent = false)
 	{
 		$sql = 'SELECT * FROM `order_products` WHERE `status` = :status AND `id_parent` = :id_parent';
-        $params = ['status' => STATUS_ACTIVE, 'id_parent' => $this->id];
+        $params = ['status' => STATUS_ACTIVE, 'id_parent' => $id_parent ? $id_parent : $this->id];
         return self::perform($sql, $params)->fetchAll();
 	}
 	

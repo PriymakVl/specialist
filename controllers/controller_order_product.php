@@ -11,7 +11,7 @@ class Controller_Order_Product extends Controller_Base {
 
 	public function action_index()
 	{
-		$product = (new OrderProduct)->setData($this->get->id_prod)->getOptions()->getParent()->getOrder()->getSpecification();
+		$product = (new OrderProduct)->setData($this->get->id_prod)->getOptions()->getParent()->getOrder()->getSpecification()->getActions();
 		$this->setTitle('Продукт '.$product->options->symbol)->render('index/main', compact('product'));
 	}
 	
@@ -25,7 +25,8 @@ class Controller_Order_Product extends Controller_Base {
 		if (!$this->session->id_order_active) $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
 		$product = (new OrderProduct)->addProduct()->addSpecification()->setStateOrder()->setMessage('success', 'add');
 		// $order = (new Order)->setData($product->id_order)->setState(OrderState::PREPARATION);
-		$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order.'&id_active='.$product->id);
+		$this->redirect('order_action/add_product?id_prod='.$product->id);
+		//$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order.'&id_active='.$product->id);
 	}
 	
 	// public function action_to_preparation()

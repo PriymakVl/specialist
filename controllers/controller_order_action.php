@@ -10,6 +10,13 @@ class Controller_Order_Action extends Controller_Base {
 		$this->message->section = 'order_action';
     }
 	
+	public function action_add_product()
+	{
+		$product = (new OrderProduct)->setData($this->get->id_prod)->getOptions()->getSpecificationAll();
+		(new OrderAction)->addForProduct($product)->addForSpecification($product->specificationAll);
+		$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order.'&id_active='.$product->id);
+	}
+	
 	public function action_edit_state()
 	{
 		$params = ParamOrderAction::editState();

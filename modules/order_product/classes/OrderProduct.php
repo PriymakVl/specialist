@@ -10,12 +10,6 @@ class OrderProduct extends OrderProductBase {
 		parent::__construct($id);
 		$this->message->section = 'order_product';
 	}
-
-	public function getOptions()
-	{
-		$this->options = (new Product)->getData($this->id_prod);
-		return $this;
-	}
 	
 	public function addProduct()
 	{
@@ -23,12 +17,6 @@ class OrderProduct extends OrderProductBase {
 		$params['id_order'] = $this->session->id_order_active;
 		$id = $this->addOne($params);
 		return $this->setData($id);
-	}
-	//for convert specification
-	public function setTypeProduct()
-	{
-		$this->type = $this->options->type;
-		return $this;
 	}
 	
 	public function edit()
@@ -51,8 +39,9 @@ class OrderProduct extends OrderProductBase {
 	
 	public function deleteAll()
 	{
-		$this->delete()->deleteSpecification();
-		// ->deleteActions();
+		$this->getSpecificationAll()->deleteSpecificationAll()->delete();
+		$products = $this->specificationAll ? array_merge([$this], $this->specificationAll) : [$this];
+		(new OrderAction)->deleteFromProducts($products);
 		return $this;
 	}
 	
@@ -65,6 +54,12 @@ class OrderProduct extends OrderProductBase {
 	public function editState($order)
 	{
 		if ($order->state == OrderState::PREPARATION) return $this->setStatePreparation($order);
+	}
+	
+	public function getActions()
+	{
+		$this->actions = (new OrderAction)->getForProduct($this);
+		return $this;
 	}
 	
 	
