@@ -5,9 +5,10 @@ class OrderActionBase extends Model {
 	public $product;
 	public $order;
 	public $states;
-	public $convertState;
+	public $stateString;
+	public $stateBg;
+	
 	public $action;//объект операции обработки
-	public $bgState;
 	public $bgTerminalBox;
 	
 	public $name;

@@ -2,7 +2,7 @@
 
 trait OrderActionModel {
 	
-	private function addOne($action, $product)
+	private function addModel($action, $product)
 	{
 		$params = $this->addOneParam($action, $product);
         $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, id_data, state, type_order, time_prepar, time_prod, note, rating) 
@@ -26,21 +26,29 @@ trait OrderActionModel {
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public function getForOneOrder()
+	// public function getForOneOrder()
+	// {
+		// unset($params['type_order']);
+		// if ($params['action'] == 'all') {
+			// $where = 'WHERE `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC'; 
+			// unset($params['action']);
+		// }
+		// else $where = 'WHERE `id_data` = :action AND `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC';
+		// $sql = 'SELECT `id` FROM `order_actions` '.$where;
+		// return self::perform($sql, $params)->fetchAll();
+	// }
+	
+	public function getAllByIdOrder()
 	{
-		unset($params['type_order']);
-		if ($params['action'] == 'all') {
-			$where = 'WHERE `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC'; 
-			unset($params['action']);
-		}
-		else $where = 'WHERE `id_data` = :action AND `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC';
-		$sql = 'SELECT `id` FROM `order_actions` '.$where;
+		$params = ['id_order' => $this->get->id_order, 'status' => STATUS_ACTIVE];
+		$sql = 'SELECT * FROM `order_actions` WHERE`id_order` = :id_order AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public static function getByIdProductAndIdOrder($params)
+	public function getAllByIdProduct()
 	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_order` = :id_order AND `id_prod` = :id_prod AND `status` = :status';
+		$params = ['id_prod' => $this->get->id_prod, 'status' => STATUS_ACTIVE];
+		$sql = 'SELECT * FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	

@@ -18,6 +18,12 @@ trait OrderConvert {
 		}
 	}
 	
+	public function getPositionsTable()
+	{
+		if ($this->positions) $this->positionsTable = (new OrderPosition)->convertPositionsToTable($this->positions);
+		return $this;
+	}
+	
 	
 
 }

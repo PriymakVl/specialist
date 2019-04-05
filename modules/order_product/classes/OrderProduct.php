@@ -13,9 +13,8 @@ class OrderProduct extends OrderProductBase {
 	
 	public function addProduct()
 	{
-		$params = ['id_prod' => $this->get->id_prod, 'qty' => $this->get->qty, 'id_parent' => self::ID_MAIN_PARENT, 'state' => self::STATE_WAITING];
-		$params['id_order'] = $this->session->id_order_active;
-		$id = $this->addOne($params);
+		$product = (new Product)->setData($this->get->id_prod);
+		$id = $this->addModel($product, self::ID_MAIN_PARENT);
 		return $this->setData($id);
 	}
 	
@@ -27,7 +26,7 @@ class OrderProduct extends OrderProductBase {
 	
 	public function getParent()
 	{
-		if ($this->id_parent) $this->parent = (new self)->setData($this->getParentData())->getOptions(); 
+		if ($this->id_parent) $this->parent = (new self)->setData($this->id_parent); 
 		return $this;
 	}
 	
@@ -43,17 +42,6 @@ class OrderProduct extends OrderProductBase {
 		$products = $this->specificationAll ? array_merge([$this], $this->specificationAll) : [$this];
 		(new OrderAction)->deleteFromProducts($products);
 		return $this;
-	}
-	
-	public function setStateOrder()
-	{
-		(new OrderState)->check($this->id_order);
-		return $this;
-	}
-	
-	public function editState($order)
-	{
-		if ($order->state == OrderState::PREPARATION) return $this->setStatePreparation($order);
 	}
 	
 	public function getActions()

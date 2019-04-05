@@ -6,8 +6,7 @@ trait OrderProductSpecification {
 	{
 		$items = $this->getByIdParent();
 		if (!$items) return $this;
-		$methods = ['setData', 'getOptions', 'setTypeProduct'];
-		$this->specification = ObjectHelper::createArray($items, 'OrderProduct', $methods);
+		$this->specification = ObjectHelper::createArray($items, 'OrderProduct', ['setData']);
 		$this->specificationGroup = (new Product)->getSpecificationGroup($this->specification);
 		return $this;
 	}
@@ -48,9 +47,7 @@ trait OrderProductSpecification {
 	{
 		foreach ($specification as $product) {
 			$product->getSpecification();
-			$qty = $product->qty * $this->qty;
-			$params = ['qty' => $qty, 'id_parent' => $id_parent, 'id_prod' => $product->id, 'id_order' => $this->id_order, 'state' => self::STATE_WAITING];
-			$id_sub_parent = $this->addOne($params);
+			$id_sub_parent = $this->addModel($product, $id_parent);
 			if ($product->specification) $this->addSpecificationRecursive($product->specification, $id_sub_parent);
 		}
 		return $this;

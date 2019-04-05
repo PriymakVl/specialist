@@ -9,30 +9,27 @@ class Controller_Order_Action extends Controller_Base {
         $this->view->pathFolder = './modules/order_action/views/';
 		$this->message->section = 'order_action';
     }
-	
-	public function action_add_product()
+	//add action where add product in order
+	public function action_add_for_product()
 	{
-		$product = (new OrderProduct)->setData($this->get->id_prod)->getOptions()->getSpecificationAll();
+		$product = (new OrderProduct)->setData($this->get->id_prod)->getSpecificationAll();
 		(new OrderAction)->addForProduct($product)->addForSpecification($product->specificationAll);
 		$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order.'&id_active='.$product->id);
 	}
 	
 	public function action_edit_state()
 	{
-		$params = ParamOrderAction::editState();
-		$action = new OrderAction($params['id_action']);
-		if (empty($params['save'])) return $this->render('edit_state/main', compact('action'));
-		$action->editState($params)->editTime($params)->setMessage('success', 'edit_state')->checkReadyOrder();
-		$this->redirect('order?id_order='.$action->id_order);
+		$action = (new OrderAction)->setData($this->get->id_action)->getProperties();
+		if ($this->post->save) return $this->render('edit_state/main', compact('action'));
+		$action->editState()->setMessage('success', 'edit_state');
+		// ->editTime($params)->checkReadyOrder()
+		$this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$action->id_order);
 	}
 	
 	public function action_delete()
 	{
-		$id_action = Param::get('id_action');
-		if ($id_action) $action = new OrderAction($id_action);
-		else $action = new OrderActionUnplan(Param::get('id_action_unplan'));
-		$action->remove()->setMessage('success', 'delete')->checkReadyOrder();
-		$this->redirectPrevious();
+		$action = (new OrderAction)->setData($this->get->id_action)->delete()->checkStateProduct();
+		$this->setMessage('success', 'delete')->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$action->id_order);;
 	}
 	
 	public function action_add_unplan()

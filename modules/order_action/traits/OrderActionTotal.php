@@ -4,7 +4,7 @@ trait OrderActionTotal {
 	
 	public function addForProduct($product)
 	{
-		$actions = (new ProductAction)->getAllBySymbolProduct($product->options->symbol);
+		$actions = (new ProductAction)->getAllBySymbolProduct($product->symbol);
 		if ($actions) $this->addAction($actions, $product);
 		return $this;
 	}
@@ -19,14 +19,13 @@ trait OrderActionTotal {
 	private function addAction($actions, $product)
 	{
 		foreach ($actions as $action) {
-			self::addOne($action, $product);
+			self::addModel($action, $product);
 		}
 	}
 	
-	public function getForProduct($product)
+	public function getForProduct()
 	{
-		$params = ['id_prod' => $product->id, 'id_order' => $product->id_order, 'status' => STATUS_ACTIVE];
-		$items = $this->getByIdProductAndIdOrder($params);
+		$items = $this->getAllByIdProduct();
 		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getProperties']);
 	}
 	
@@ -52,6 +51,12 @@ trait OrderActionTotal {
 		foreach ($actions as $action) {
 			$action->delete();
 		}
+	}
+	
+	public function getForOrder()
+	{
+		$items = $this->getAllByIdOrder();
+		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState', 'getProduct', 'getProperties']);//'isStates'
 	}
 	
 

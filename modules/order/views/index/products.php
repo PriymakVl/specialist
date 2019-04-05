@@ -23,16 +23,12 @@
                     <tr>
 						<td><?=$number?></td>
 						<td>
-							<a href="/order_product?id_prod=<?=$product->id?>"><?=$product->options->symbol?></a>
+							<a href="/order_product?id_prod=<?=$product->id?>"><?=$product->symbol?></a>
 						</td>
-						<td><?=$product->options->name?></td>
+						<td><?=$product->name?></td>
 						<td><?=$product->qty?></td>
 						<td>
-							<? if ($product->time_manuf): ?>
-								<?=$product->time_manuf?> мин.
-							<? else: ?>
-								<span class="red">Не указана</span>
-							<? endif; ?>
+							<span class="red">Не указана</span>
 						</td>
 						<td style="background:<?=$product->stateBg?>"><?=$product->stateString?></td>
 					</tr>

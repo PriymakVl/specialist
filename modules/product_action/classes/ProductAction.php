@@ -2,11 +2,7 @@
 
 class ProductAction extends Model {
 
-	public $name;
-	public $price;
-	public $options;
-	
-	use ProductActionModel;
+	use ProductActionModel, ProductActionParam, Param;
 	
 	public function __construct($id_action = false)
     {
@@ -17,16 +13,8 @@ class ProductAction extends Model {
 	
 	public function getForProduct($symbol)
 	{
-		$items = $this->getAllBySymbolProduct($symbol);
-		if ($items) return ObjectHelper::createArray($items, 'ProductAction', ['setData', 'setProperties']);
-	}
-	
-	public function setProperties()
-	{
-		$this->options = new DataAction($this->id_data);
-		$this->name = $this->options->name;
-		$this->price = $this->options->price;
-		return $this;
+		$items = $this->getAllBySymbolProductModel($symbol);
+		if ($items) return ObjectHelper::createArray($items, 'ProductAction', ['setData']);
 	}
 	
 	public function addData()
@@ -43,7 +31,7 @@ class ProductAction extends Model {
 	
 	public function editSymbol()
 	{
-		$this->editSymbolProduct();
+		$this->editSymbolProductModel();
 		return $this;
 	}
 	

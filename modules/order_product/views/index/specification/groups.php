@@ -8,7 +8,7 @@
     <div class="tab-content">
 		<h2>
 			<span>Заказ: </span><a href="/order?id_order=<?=$product->order->id?>" style="margin-right: 20px; color:green;"><?=$product->order->symbol?></a>
-			<?=$product->options->name?>: <span class="green"><?=$product->options->symbol?></span>
+			<?=$product->name?>: <span class="green"><?=$product->symbol?></span>
 		</h2>
         <table width="900">
 			<tr>

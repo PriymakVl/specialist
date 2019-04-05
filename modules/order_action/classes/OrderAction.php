@@ -14,19 +14,19 @@ class OrderAction extends OrderActionBase {
 	
 	public function getProduct()
 	{
-		$this->product = (new Product)->setData($this->id_prod)->getOptions();
+		$this->product = (new OrderProduct)->setData($this->id_prod);
 		return $this;
 	}
 	
-		public function getOrder()
+	public function getOrder()
 	{
 		$this->order = new Order($this->id_order);
 		return $this;
 	}
-
-	public function checkReadyOrder()
+	
+	public function checkStateProduct()
 	{
-		Order::CheckReadyStatic($this->id_order);
+		(new OrderProduct)->setData($this->id_prod)->checkState();
 		return $this;
 	}
 	

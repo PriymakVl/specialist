@@ -11,8 +11,8 @@ trait OrderActionState {
 	
 	public function isStates()
 	{
-		$params = ['id_action' => $this->id, 'type' => 'plan', 'status' => self::STATUS_ACTIVE];
-		$items = OrderActionState::getAllByIdAction($params);
+		$params = ['id_action' => $this->id, 'type' => 'base', 'status' => STATUS_ACTIVE];
+		$items = OrderActionState->getAllByIdAction($params);
 		if ($items) $this->states = true;
 		return $this;
 	}

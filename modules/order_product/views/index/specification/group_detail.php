@@ -4,13 +4,13 @@
 <? foreach($product->specificationGroup['detail'] as $detail): ?>
 	<tr>
 		<td>
-			<?=$detail->options->number?>
+			<?=$detail->number?>
 		</td>
 		<td>
-			<?=$detail->options->symbol?>
+			<?=$detail->symbol?>
 		</td>
 		<td>
-			<a href="/order_product?id_prod=<?=$detail->id?>"><?=$detail->options->name?></a>
+			<a href="/order_product?id_prod=<?=$detail->id?>"><?=$detail->name?></a>
 		</td>
 		<td><?=$detail->qty?></td>
 		<td>

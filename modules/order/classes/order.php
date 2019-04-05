@@ -45,12 +45,6 @@ class Order extends OrderBase {
 		return $this;
 	}
 	
-	public function getPositionsTable()
-	{
-		if ($this->positions) $this->positionsTable = (new OrderPosition)->convertPositionsToTable($this->positions);
-		return $this;
-	}
-	
 	public function delete()
 	{
 		parent::delete();
@@ -58,29 +52,11 @@ class Order extends OrderBase {
 		return $this;
 	}
 	
-	// public function getActions()
-	// {
-		// if ($this->state < OrderState::WORK) return $this;
-		// $items = OrderAction::getIdActionsByIdOrder($this->id);
-		// foreach ($items as $item) {
-			// $action = new OrderAction($item->id);
-			// $action->getProduct()->convertState()->setBgState()->isStates();
-			// $this->actions[] = $action;
-		// }
-		// return $this;
-	// }
-	
-	// public function getActionsUnplan()
-	// {
-		// if ($this->state < OrderState::WORK) return $this;
-		// $items = OrderActionUnplan::getByIdOrder($this->id); /***/ if (empty($items)) return $this;
-		// foreach ($items as $item) {
-			// $action_unplan = new OrderActionUnplan($item->id);
-			// $action_unplan->convertState()->setBgState();
-			// $this->actionsUnplan[] = $action_unplan;
-		// }
-		// return $this;
-	// }
+	public function getActions()
+	{
+		$this->actions = (new OrderAction)->getForOrder();
+		return $this;
+	}
 	
 	public function getProducts()
 	{

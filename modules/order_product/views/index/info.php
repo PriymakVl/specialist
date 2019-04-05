@@ -9,7 +9,7 @@
     <div class="tab-content">
 		<h2>
 			<span>Заказ: </span><a href="/order?id_order=<?=$product->order->id?>" style="margin-right: 20px; color:green;"><?=$product->order->symbol?></a>
-			<?=$product->options->name?>: <span class="green"><?=$product->options->symbol?></span>
+			<?=$product->name?>: <span class="green"><?=$product->symbol?></span>
 		</h2>
         <table width="900">
             <tr>
@@ -28,11 +28,7 @@
 				<td>3</td>
 				<td>Трудоемкость</td>
 				<td class="left">
-					<? if ($product->time_manuf): ?>
-						<?=$product->time_manuf?> мин.
-					<? else: ?>
-						<span class="red">Не указана</span>
-					<? endif; ?>
+					<span class="red">Не указана</span>
 				</td>
 			</tr>
 			
@@ -43,7 +39,7 @@
                     <td>Родитель</td>
                     <td class="left red">
 						<? if ($product->id_parent): ?>
-							<a href="/order_product?id_prod=<?=$product->id_parent?>"><?=$product->parent->options->name?> <span style="font-weight: bold;"><?=$product->parent->options->symbol?></span></a>
+							<a href="/order_product?id_prod=<?=$product->id_parent?>"><?=$product->parent->name?> <span style="font-weight: bold;"><?=$product->parent->symbol?></span></a>
 						<? else: ?>
 							<a href="/order?id_order=<?=$product->order->id?>">Заказ: <?=$product->order->symbol?></a>
 						<? endif; ?>

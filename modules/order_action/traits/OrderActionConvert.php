@@ -1,11 +1,18 @@
 <?php
 
 trait OrderActionConvert {
-
-	public function convertStateWork($state)
+	
+	public function convertState()
 	{
-		switch ($state) {
-			case OrderActionState::WAITING : return "Ожидает окончания другой операции";
+		$this->stateString = $this->setStateString();
+		$this->stateBg = $this->setStateBg();
+		return $this;
+	}
+	
+	public function setStateString()
+	{
+		switch ($this->state) {
+			case OrderActionState::WAITING : return "Не выдана";
 			case OrderActionState::PLANED : return "Запланирована";
 			case OrderActionState::PROGRESS : return "В работе";
 			case OrderActionState::STOPPED : return "Остановлена";
@@ -14,9 +21,9 @@ trait OrderActionConvert {
 		}
 	}
 	
-	public function getBgStateWork($state)
+	public function setStateBg()
 	{
-		switch ($state) {
+		switch ($this->state) {
 			case OrderActionState::WAITING : return "orange";
 			case OrderActionState::PLANED : return "#fff";
 			case OrderActionState::PROGRESS : return "yellow";
@@ -24,18 +31,6 @@ trait OrderActionConvert {
 			case OrderActionState::ENDED : return "green";
 			default: return "#000";
 		}
-	}
-	
-	public function convertState()
-	{
-		$this->convertState = OrderActionStatic::convertStateWork($this->state);
-		return $this;
-	}
-	
-	public function setBgState()
-	{
-		$this->bgState = OrderActionStatic::getBgStateWork($this->state);
-		return $this;
 	}
 	
 	public function setBgTerminalBox()

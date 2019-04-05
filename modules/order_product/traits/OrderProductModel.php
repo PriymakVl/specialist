@@ -12,9 +12,11 @@ trait OrderProductModel {
         return self::createArrayContent($items);
 	}
 
-	public function addOne($params)
+	public function addModel($product, $id_parent)
 	{
-        $sql = "INSERT INTO `order_products` (id_order, id_prod, qty, id_parent, state) VALUES (:id_order, :id_prod, :qty, :id_parent, :state)";
+		$params = $this->addModelParams($product, $id_parent);
+        $sql = "INSERT INTO `order_products` (id_order, name, symbol, type, number, note, qty, id_parent, state) 
+			VALUES (:id_order, :name, :symbol, :type, :number, :note, :qty, :id_parent, :state)";
         return self::insert($sql, $params);
 	}
 	
@@ -37,13 +39,6 @@ trait OrderProductModel {
 		$params = self::selectParams(['qty', 'id_prod', 'state']);
 		$sql = 'UPDATE `order_products` SET `qty` = :qty, `state` = :state WHERE `id` = :id_prod';
 		return self::update($sql, $params);
-	}
-	
-	public function getParentData()
-	{
-		$params = ['id_parent' => $this->id_parent];
-		$sql = 'SELECT * FROM `order_products` WHERE `id` = :id_parent';
-		return self::perform($sql, $params)->fetch();
 	}
 	
 	public function getAllOnOrder($id_order)

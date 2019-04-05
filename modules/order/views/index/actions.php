@@ -16,15 +16,15 @@
 					<? foreach($order->actions as $action): ?>
 						<tr>
 							<td><input type="radio" id_action="<?=$action->id?>" name="actions"></td>
-							<td><?=$action->product->symbol?></td>
-							<td><?=$action->product->name?></td>
+							<td><?=$action->product->options->symbol?></td>
+							<td><?=$action->product->options->name?></td>
 							<td><?=$action->qty?></td>
 							<td><?=$action->name?></td>
-							<td style="background:<?=$action->bgState?>">
+							<td style="background:<?=$action->stateBg?>">
 							<? if (!$action->states): ?>
-								<?=$action->convertState?>
+								<?=$action->stateString?>
 							<? else: ?>
-								<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->convertState?></a>
+								<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->stateString?></a>
 							<? endif; ?>
 							</td>
 						</tr>

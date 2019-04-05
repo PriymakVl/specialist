@@ -5,7 +5,10 @@
     <input type="radio" name="tabs" id="tab-5" <? if ($this->get->tab == 5 && $product->drawings) echo 'checked'; ?>>
     <label for="tab-5">Чертежи</label>
     <div class="tab-content">
-		<h2><?=$product->name?>: <span class="green"><?=$product->symbol?></span></h2>
+		<h2>
+			<span>Заказ: </span><a href="/order?id_order=<?=$product->order->id?>" style="margin-right: 20px; color:green;"><?=$product->order->symbol?></a>
+			<?=$product->name?>: <span class="green"><?=$product->symbol?></span>
+		</h2>
         <table width="900">
 			<tr>
 				<th width="40">№</th>

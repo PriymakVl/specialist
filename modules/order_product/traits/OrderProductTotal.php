@@ -7,7 +7,7 @@ trait OrderProductTotal  {
 	public function getMainParentOrder($id_order)
 	{
         $items = $this->getMainParentOrderModel($id_order);
-		$methods = ['setData', 'getSpecification', 'getOptions', 'convertState', 'getActions'];
+		$methods = ['setData', 'getSpecification', 'convertState', 'getActions'];
 		if ($items) return ObjectHelper::createArray($items, 'OrderProduct', $methods);
 	}
 
@@ -42,6 +42,23 @@ trait OrderProductTotal  {
 			// self::add($position->id_order, $items[0]->id, $position->qty);
 		// }
 	// }
+	
+	public function addProductList($products) 
+	{
+		foreach ($products as $product) {
+			$params = ['id_prod' => $product->id, 'qty' => $product->qty, 'id_parent' => self::ID_MAIN_PARENT, 'state' => self::STATE_WAITING, 'id_order' =>  $product->id_order];
+			$id_parent = $this->addOne($params);
+			(new self)->setData($id_parent)->addSpecification($product->id);
+		}
+		return $this;
+	}
+	
+	public function addActionList($id_order)
+	{
+		$products = $this->getAllForOrder($id_order);
+		if ($products) (new OrderAction)->addActions($products);
+		return $this;
+	}
 	
 
 	

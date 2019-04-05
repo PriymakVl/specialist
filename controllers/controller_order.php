@@ -13,8 +13,8 @@ class Controller_Order extends Controller_Base {
     public function action_index()
 	{
 		$order = new Order($this->get->id_order);
-		$order->getPositions()->convertProperties()->getProducts();
-		//->getActionsNotbase()->getActions();
+		$order->getPositions()->convertProperties()->getProducts();//->getActions();
+		//->getActionsNotbase();
 		$this->render('index/main', compact('order'));
 	}
 

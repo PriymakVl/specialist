@@ -11,8 +11,8 @@ class Controller_Order_Product extends Controller_Base {
 
 	public function action_index()
 	{
-		$product = (new OrderProduct)->setData($this->get->id_prod)->getOptions()->getParent()->getOrder()->getSpecification()->getActions();
-		$this->setTitle('Продукт '.$product->options->symbol)->render('index/main', compact('product'));
+		$product = (new OrderProduct)->setData($this->get->id_prod)->getParent()->getOrder()->getSpecification();//->getActions();
+		$this->setTitle('Продукт '.$product->symbol)->render('index/main', compact('product'));
 	}
 	
 	public function action_activate()
@@ -23,10 +23,8 @@ class Controller_Order_Product extends Controller_Base {
 	public function action_add()
 	{
 		if (!$this->session->id_order_active) $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
-		$product = (new OrderProduct)->addProduct()->addSpecification()->setStateOrder()->setMessage('success', 'add');
-		// $order = (new Order)->setData($product->id_order)->setState(OrderState::PREPARATION);
-		$this->redirect('order_action/add_product?id_prod='.$product->id);
-		//$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order.'&id_active='.$product->id);
+		$product = (new OrderProduct)->addProduct()->addSpecification()->setState(OrderState::PREPARATION)->setMessage('success', 'add');
+		$this->redirect('order_action/add_for_product?id_prod='.$product->id);
 	}
 	
 	// public function action_to_preparation()

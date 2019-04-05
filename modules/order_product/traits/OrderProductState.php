@@ -12,24 +12,33 @@ trait OrderProductState {
 		// if ($symbols) return $this->
 	}
 	
-	public function addProductList($products) 
+	public function setStateOrder()
 	{
-		foreach ($products as $product) {
-			$params = ['id_prod' => $product->id, 'qty' => $product->qty, 'id_parent' => self::ID_MAIN_PARENT, 'state' => self::STATE_WAITING, 'id_order' =>  $product->id_order];
-			$id_parent = $this->addOne($params);
-			(new self)->setData($id_parent)->addSpecification($product->id);
+		(new OrderState)->check($this->id_order);
+		return $this;
+	}
+	
+	public function editState($order)
+	{
+		if ($order->state == OrderState::PREPARATION) return $this->setStatePreparation($order);
+	}
+	
+	public function checkState()
+	{
+		if (!$this->actions || $this->checkStateActions(OrderActionState::WAITING)) $this->setState(self::STATE_WAITING);
+		else if ($this->checkStateActions(OrderActionState::ENDED)) $this->setState(self::STATE_ENDED);
+		else if ($this->checkStateActions(OrderActionState::STOPPED)) $this->setState(self::STATE_STOPPED);
+		else $this->setState(self::STATE_PROGRESS);
+		return $this;
+	}
+	
+	private function checkStateActions($state)
+	{
+		foreach ($this->actions as $action) {
+			if ($action->state != $state) return false;
 		}
-		return $this;
+		return true;
 	}
 	
-	public function addActionList($id_order)
-	{
-		$products = $this->getAllForOrder($id_order);
-		if ($products) (new OrderAction)->addActions($products);
-		return $this;
-	}
-	
-	
-
 
 }
