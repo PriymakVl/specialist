@@ -1,25 +1,37 @@
 <?php
-	$data_actions = DataAction::getAll('data_actions');
+	$items = Action::getAll('actions');
 ?>
 <div id="form-add-action-wrp">
-    <h2>Форма редактирования операции</h2>
-    <form action="/product_action/edit?id_action=<?=$action->id?>&id_prod=<?=$this->get->id_prod?>" method="post">
+    <h2 class="center">Форма редактирования операции</h2>
+    <form action="/product_action/edit?id_action=<?=$action->id?>" method="post">
 	
-			<div class="form-box product-action-wrp">
-				<label>Наименование:</label>
-				<select name="id_data">
-					<? foreach ($data_actions as $item): ?>
-						<option  value="<?=$item->id?>" <? if ($item->id == $action->id_data) echo "selected";?>><?=$item->name?></option>
+			<div class="form-box product-action-name-wrp">
+				<!-- action name -->
+				<label>Операции:</label>
+				<select id="actions">
+					<option value="">Не выбрана</option>
+					<? foreach ($items as $item): ?>
+						<option  value="<?=$item->name?>" price="<?=$item->price?>"><?=$item->name?></option>
 					<? endforeach; ?>
 				</select>
 				
+				<label>Наименование:</label>
+				<input type="text" name="name" value="<?=$action->name?>">
+			</div>
+			
+			<div class="form-box product-action-properties-wrp">
+				<!-- price action -->
+				<label>Стоимость:</label>
+				<input type="text" name="price" value="<?=$action->price?>"><span>грн/час.</span>
+				<!-- time preparation action -->
+				<label>Подгот-ное время:</label>
+				<input type="number" name="time_prepar" value="<?=$action->time_prepar?>"><span>мин.</span>
+				<!-- time production action -->
+				<label>Штучное время:</label>
+				<input type="number" name="time_prod" required value="<?=$action->time_prod?>"><span>мин.</span>
+				<!-- number action -->
 				<label>Номер:</label>
 				<input type="number" name="number" value="<?=$action->number?>">
-				<label>Подгот-ное время:</label>
-				<input type="number" name="time_prepar" value="<?=$action->time_prepar?>">
-				<label>Штучное время:</label>
-				<input type="number" name="time_prod" required value="<?=$action->time_prod?>">
-				
 			</div>
 
         <!-- buttons -->

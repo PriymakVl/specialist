@@ -6,7 +6,7 @@ class Controller_Product_Action extends Controller_Base {
     {
         parent::__construct();
         $this->view->pathFolder = './modules/product_action/views/';
-		$this->view->title = 'Операции обработки';
+		$this->view->title = 'Операции';
 		$this->message->section = 'product_action';
     }
 
@@ -25,10 +25,10 @@ class Controller_Product_Action extends Controller_Base {
 	
 	public function action_edit()
 	{
-		$action = (new ProductAction)->setData($this->get->id_action)->setProperties();
+		$action = (new ProductAction)->setData($this->get->id_action);
 		if (!$this->post->save) return $this->render('edit/main', compact('action'));
-		(new ProductAction)->editData()->setMessage('success', 'edit');
-		$this->redirect('product?id_prod='.$this->get->id_prod);
+		$action->editData()->setMessage('success', 'edit');
+		$this->redirect('product?tab='.self::PRODUCT_TAB_ACTIONS.'&id_prod='.$this->action->id_prod);
 	}
 	
 	

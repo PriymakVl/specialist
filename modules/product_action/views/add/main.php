@@ -1,10 +1,6 @@
-<?php
-
-?>
-
 <!-- css files -->
 <link rel="stylesheet" href="/web/css/total/form.css">
-<link rel="stylesheet" href="/modules/product/css/form_action.css">
+<link rel="stylesheet" href="/modules/product_action/css/form.css">
 
 <div id="content">
 

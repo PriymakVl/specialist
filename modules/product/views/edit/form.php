@@ -1,5 +1,7 @@
 <div id="form-product-wrp">
-    <h2>Форма для редактирования <span class="green"><?=$product->name?></span>:<span class="blue"><?=$product->symbol?></span></h2>
+    <h2>
+		<?=$product->name?>: <span class="green"><?=$product->symbol?></span>
+	</h2>
     <form action="/product/edit?id_prod=<?=$product->id?>&symbol_old=<?=$product->symbol?>" method="post">
         <!-- first box -->
         <div class="form-box">
@@ -49,7 +51,7 @@
 		<div class="form-box">
 			<!-- number -->
 			<label>Номер:</label>
-			<input type="number" name="number" value="<?=$product->number?>">
+			<input type="number" name="number" value="<?=$product->number?$product->number:1?>">
 		</div>
 
         <div class="form-box">

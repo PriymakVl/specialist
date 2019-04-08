@@ -6,7 +6,7 @@ class Controller_Product extends Controller_Base {
     {
         parent::__construct();
         $this->view->pathFolder = './modules/product/views/';
-		$this->view->title = 'Производство';
+		$this->view->title = 'Продукция';
 		$this->message->section = 'product';
     }
 

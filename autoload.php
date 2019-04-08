@@ -47,7 +47,7 @@ function autoload_class($class_name)
 function autoload_model($class_name)
 {
 	switch($class_name) {
-		case 'DataAction': return require './models/DataAction.php';
+		case 'Action': return require './models/Action.php';
 	}
 }
 
