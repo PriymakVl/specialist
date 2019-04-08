@@ -11,10 +11,16 @@ class OrderProduct extends OrderProductBase {
 		$this->message->section = 'order_product';
 	}
 	
-	public function addProduct()
+	public function addProductBase()
 	{
 		$product = (new Product)->setData($this->get->id_prod);
-		$id = $this->addModel($product, self::ID_MAIN_PARENT);
+		$id = $this->addDataModel($product, self::ID_MAIN_PARENT);
+		return $this->setData($id);
+	}
+	
+	public function addProductForm()
+	{
+		$id = $this->addFormModel();
 		return $this->setData($id);
 	}
 	

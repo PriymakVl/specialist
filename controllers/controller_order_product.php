@@ -11,7 +11,7 @@ class Controller_Order_Product extends Controller_Base {
 
 	public function action_index()
 	{
-		$product = (new OrderProduct)->setData($this->get->id_prod)->getParent()->getOrder()->getSpecification();//->getActions();
+		$product = (new OrderProduct)->setData($this->get->id_prod)->getParent()->getOrder()->getSpecification()->getActions();
 		$this->setTitle('Продукт '.$product->symbol)->render('index/main', compact('product'));
 	}
 	
@@ -20,13 +20,20 @@ class Controller_Order_Product extends Controller_Base {
         // $this->setSession('id_order_active', $this->get->id_order)->redirectPrevious();
     }
 
-	public function action_add()
+	public function action_add_base()
 	{
 		if (!$this->session->id_order_active) $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
-		$product = (new OrderProduct)->addProduct()->addSpecification()->setState(OrderState::PREPARATION)->setMessage('success', 'add');
+		$product = (new OrderProduct)->addProductBase()->addSpecification()->setState(OrderState::PREPARATION)->setMessage('success', 'add');
 		$this->redirect('order_action/add_for_product?id_prod='.$product->id);
 	}
 	
+	public function action_add_form()
+	{
+		$order = new Order($this->get->id_order);
+		if (!$this->post->save) return $this->render('add/main', compact('order'));
+		$product = (new OrderProduct)->addProductForm()->setMessage('success', 'add');
+		$this->redirect('order?id_order='.$order->id);	
+	}
 	// public function action_to_preparation()
 	// {
 		// $order = new Order($this->id_order);
@@ -37,7 +44,7 @@ class Controller_Order_Product extends Controller_Base {
 	
 	public function action_edit()
 	{
-		$product = (new OrderProduct)->setData($this->get->id_prod)->getOptions();
+		$product = (new OrderProduct)->setData($this->get->id_prod);
 		if (!$this->post->save) return $this->setTitle('Редактирование продукта')->render('edit/main', compact('product'));
 		$product->edit()->setMessage('success', 'edit');
 		//->checkStateOrder();

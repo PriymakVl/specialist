@@ -4,21 +4,30 @@ trait OrderProductModel {
 
 	use OrderProductParam;
 	
-	public function get($id_order)
-	{
-		$sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status';
-        $params = ['id_order' => $id_order, 'status' => STATUS_ACTIVE];
-        $items = self::perform($sql, $params)->fetchAll();
-        return self::createArrayContent($items);
-	}
+	// public function get($id_order)
+	// {
+		// $sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status';
+        // $params = ['id_order' => $id_order, 'status' => STATUS_ACTIVE];
+        // $items = self::perform($sql, $params)->fetchAll();
+        // return self::createArrayContent($items);
+	// }
 
-	public function addModel($product, $id_parent)
+	public function addDataModel($product, $id_parent)
 	{
-		$params = $this->addModelParams($product, $id_parent);
+		$params = $this->addDataModelParams($product, $id_parent);
         $sql = "INSERT INTO `order_products` (id_order, name, symbol, type, number, note, qty, id_parent, state) 
 			VALUES (:id_order, :name, :symbol, :type, :number, :note, :qty, :id_parent, :state)";
         return self::insert($sql, $params);
 	}
+	
+	public function addFormModel($product, $id_parent)
+	{
+		$params = $this->addFormModelParams();
+        $sql = "INSERT INTO `order_products` (id_order, name, symbol, type, number, note, qty, id_parent, state) 
+			VALUES (:id_order, :name, :symbol, :type, :number, :note, :qty, :id_parent, :state)";
+        return self::insert($sql, $params);
+	}
+	
 	
 	public function getMainParentOrderModel($id_order)
 	{
@@ -36,8 +45,10 @@ trait OrderProductModel {
 	
 	public function editModel()
 	{
-		$params = self::selectParams(['qty', 'id_prod', 'state']);
-		$sql = 'UPDATE `order_products` SET `qty` = :qty, `state` = :state WHERE `id` = :id_prod';
+		$params = $this->editModelParams();
+		debug($params);
+		$sql = 'UPDATE `order_products` SET `qty` = :qty, `state` = :state, `symbol` = :sybmol, `name` = :name, `type` = :type, `id_parent` = :id_parent,
+			`number` = :number, `note` = :note WHERE `id` = :id_prod';
 		return self::update($sql, $params);
 	}
 	

@@ -4,8 +4,8 @@ trait OrderActionTotal {
 	
 	public function addForProduct($product)
 	{
-		$actions = (new ProductAction)->getAllBySymbolProduct($product->symbol);
-		if ($actions) $this->addAction($actions, $product);
+		$actions = (new ProductAction)->getAllBySymbolProductModel($product->symbol);
+		if ($actions) $this->addActions($actions, $product);
 		return $this;
 	}
 	
@@ -16,17 +16,17 @@ trait OrderActionTotal {
 		}
 	}
 	
-	private function addAction($actions, $product)
+	private function addActions($actions, $product)
 	{
 		foreach ($actions as $action) {
-			self::addModel($action, $product);
+			$this->addDataModel($action, $product);
 		}
 	}
 	
 	public function getForProduct()
 	{
-		$items = $this->getAllByIdProduct();
-		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getProperties']);
+		$items = $this->getAllByIdProductModel();
+		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData']);
 	}
 	
 	// public function createArrayActions($ids)
@@ -55,8 +55,8 @@ trait OrderActionTotal {
 	
 	public function getForOrder()
 	{
-		$items = $this->getAllByIdOrder();
-		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState', 'getProduct', 'getProperties']);//'isStates'
+		$items = $this->getAllByIdOrderModel();
+		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState', 'getProduct']);//'isStates'
 	}
 	
 

@@ -1,6 +1,6 @@
 <div id="form-product-wrp">
-    <h2>Форма для добавления продукта в <span class="green"><?=$parent->name?></span>:<span class="blue"><?=$parent->symbol?></span></h2>
-    <form action="/product/add?id_parent=<?=$parent->id?>" method="post">
+    <h2>Форма для добавления продукта в заказ: <span class="green"><?=$order->symbol?></span></h2>
+    <form action="/order_product/add_form?id_order=<?=$this->get->id_order?>" method="post">
         <!-- first box -->
         <div class="form-box">
             <!-- product symbol-->
@@ -26,12 +26,6 @@
 			<div id="form-product-quantity-wrp">
 				<label>Количество:</label>
 				<input type="number" name="qty" value="1">
-			</div>
-			
-			<!-- product parent -->
-			<div id="form-product-parent-wrp">
-				<label>ID Parent:</label>
-				<input type="text" name="id_parent" value="<?=$this->get->id_parent?>">
 			</div>
         </div>
 		

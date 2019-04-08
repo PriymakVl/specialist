@@ -11,16 +11,16 @@ trait ProductActionModel {
 	public function addDataModel()
 	{
 		$params = $this->addDataModelParams();
-        $sql = 'INSERT INTO `product_actions` (symbol, name, price, time_prod, time_prepar, number) 
-			VALUES (:symbol, :name, :price, :id_data, :time_prod, :time_prepar, :number)';
+        $sql = 'INSERT INTO `product_actions` (symbol, name, price, time_prod, time_prepar, number, note) 
+			VALUES (:symbol, :name, :price, :time_prod, :time_prepar, :number, :note)';
         return self::insert($sql, $params); 
 	}
 	
 	public function editDataModel()
 	{
 		$params = $this->editDataModelParams();
-		$sql = 'UPDATE `product_actions` SET `time_prod` = :time_prod, `time_prepar` = :time_prepar, `number` = :number, 
-		`id_data` = :id_data WHERE `id` = :id_action';
+		$sql = 'UPDATE `product_actions` SET `name` = :name, `price` = :price, `time_prod` = :time_prod, `time_prepar` = :time_prepar, `number` = :number, 
+		`note` = :note WHERE `id` = :id_action';
 		return self::perform($sql, $params); 
 	}
 	

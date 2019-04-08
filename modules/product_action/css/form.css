@@ -1,5 +1,5 @@
 input[name="name"]  {
-	width: 530px;
+	width: 525px;
 }
 
 input[name="number"],  input[name="time_prepar"], input[name="time_prod"] {
@@ -7,17 +7,28 @@ input[name="number"],  input[name="time_prepar"], input[name="time_prod"] {
 	margin-right: 5px;
 }
 
-input[name="price"] {
-	
-	width: 80px;
-	margin-right: 5px;
+input[name="number"] {
+	margin-right: 20px;
 }
 
-.product-action-properties-wrp input ~ span {
+input[name="price"] {
+	margin-right: 5px;
+	width: 75px;
+}
+
+.product-action-properties-wrp input + span {
 	margin-right: 20px;
+}
+
+input[name="time_prod"]  + span {
+	margin-right: 0;
 }
 
 #actions {
 	width: 170px;
 	margin-right: 25px;
+}
+
+#form-product-action-wrp textarea {
+	width: 915px;
 }

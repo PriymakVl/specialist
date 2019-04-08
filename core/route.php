@@ -27,11 +27,11 @@ class Route
 		{
 			self::$action_name = $routes[2];
 		}
-
+		
 		// добавляем префиксы
 		self::$controller_name = 'Controller_'.self::$controller_name;
 		self::$action_name = 'action_'.self::$action_name;
-
+		
 		// подцепляем файл с классом контроллера
 		$controller_file = strtolower(self::$controller_name).'.php';
 		$controller_path = "controllers/".$controller_file;

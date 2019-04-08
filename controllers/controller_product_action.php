@@ -28,7 +28,7 @@ class Controller_Product_Action extends Controller_Base {
 		$action = (new ProductAction)->setData($this->get->id_action);
 		if (!$this->post->save) return $this->render('edit/main', compact('action'));
 		$action->editData()->setMessage('success', 'edit');
-		$this->redirect('product?tab='.self::PRODUCT_TAB_ACTIONS.'&id_prod='.$this->action->id_prod);
+		$this->redirect('product?tab='.self::PRODUCT_TAB_ACTIONS.'&id_prod='.$this->get->id_prod);
 	}
 	
 	

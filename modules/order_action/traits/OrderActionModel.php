@@ -2,15 +2,15 @@
 
 trait OrderActionModel {
 	
-	private function addModel($action, $product)
+	private function addDataModel($action, $product)
 	{
-		$params = $this->addOneParam($action, $product);
-        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, id_data, state, type_order, time_prepar, time_prod, note, rating) 
-		VALUES (:id_order, :id_prod, :qty, :id_data, :state, :type_order, :time_prepar, :time_prod, :note, :rating)";
+		$params = $this->addDataModelParams($action, $product);
+        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, name, price, number, state, type_order, time_prepar, time_prod, note, rating) 
+		VALUES (:id_order, :id_prod, :qty, :name, :price, :number, :state, :type_order, :time_prepar, :time_prod, :note, :rating)";
         return self::perform($sql, $params);
 	}
 	
-	public function getForTerminal()
+	public function getForTerminalModel()
 	{
 		if ($params['action'] == 'all' && $params['order'] == 'all') $ids = self::getAllNotReadyActions($params);
 		else if ($params['action'] != 'all' && $params['order'] == 'all' )$ids = self::getForAllOrders($params);
@@ -18,7 +18,7 @@ trait OrderActionModel {
 		return self::createArrayActions($ids);
 	}
 	
-	public function getForAllOrders()
+	public function getForAllOrdersModel()
 	{
 		$params = self::selectParams(['action', 'state', 'type_order', 'status']);
 		$sql = 'SELECT `id` FROM `order_actions` 
@@ -38,28 +38,28 @@ trait OrderActionModel {
 		// return self::perform($sql, $params)->fetchAll();
 	// }
 	
-	public function getAllByIdOrder()
+	public function getAllByIdOrderModel()
 	{
 		$params = ['id_order' => $this->get->id_order, 'status' => STATUS_ACTIVE];
 		$sql = 'SELECT * FROM `order_actions` WHERE`id_order` = :id_order AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public function getAllByIdProduct()
+	public function getAllByIdProductModel()
 	{
 		$params = ['id_prod' => $this->get->id_prod, 'status' => STATUS_ACTIVE];
 		$sql = 'SELECT * FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public function planWorker($params)
+	public function planWorkerModel($params)
 	{
 		$sql = 'SELECT * FROM `order_actions` WHERE `id_data` IN ('.$params['default_actions'].') AND `state` != :state AND `status` = :status';
 		unset($params['default_actions']);
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public function madeWorker($params)
+	public function madeWorkerModel($params)
 	{
 		$slq = 'SELECT * FROM `order_actions` 
 		WHERE `id_worker` = :id_worker AND `state` = :state AND `time_end` BETWEEN :period_start AND :period_end AND `status` = :status';
@@ -73,14 +73,14 @@ trait OrderActionModel {
 		// return self::perform($slq, $params)->fetchAll();
 	// }
 	
-	public function addNote()
+	public function addNoteModel()
 	{
 		$params = self::selectParams(['id', 'note']);
 		$sql = 'UPDATE `order_actions` SET `note` = :note WHERE `id` = :id';
 		return self::perform($sql, $params);
 	}
 	
-	public function updateRating($id_order, $rating)
+	public function updateRatingModel($id_order, $rating)
 	{
 		$sql = 'UPDATE `order_actions` SET `rating` = :rating WHERE `id_order` = :id_order';
 		$params = ['rating' => $rating, 'id_order' => $id_order];

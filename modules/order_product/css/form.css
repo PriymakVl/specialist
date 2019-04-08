@@ -1,0 +1,57 @@
+/*form add*/
+#form-product-wrp {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+
+#form-product-wrp h2 {
+	text-align: center;
+}
+
+#form-product-type-wrp {
+	position: absolute;
+	top: 11px;
+	left: 410px;
+}
+
+#form-product-type-wrp select {
+	width: 90px;
+}
+
+
+#form-product-quantity-wrp {
+	position: absolute;
+	top: 11px;
+	right: 190px;	
+}
+
+#form-product-quantity-wrp input {
+	width: 80px;
+}
+
+input[name='name'] {
+	width: 580px;
+	margin-right: 50px;
+}
+
+#form-product-note-wrp textarea {
+	width: 915px;
+}
+
+#form-product-parent-wrp {
+	position: absolute;
+	top: 11px;
+	right: 10px;
+}
+
+#form-product-parent-wrp input {
+	width: 80px;
+}
+
+#form-product-number-wrp  {
+	position: absolute;
+	top: 10px;
+	left: 750px;
+}

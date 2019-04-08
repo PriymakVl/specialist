@@ -16,8 +16,8 @@
 					<? foreach($order->actions as $action): ?>
 						<tr>
 							<td><input type="radio" id_action="<?=$action->id?>" name="actions"></td>
-							<td><?=$action->product->options->symbol?></td>
-							<td><?=$action->product->options->name?></td>
+							<td><?=$action->product->symbol?></td>
+							<td><?=$action->product->name?></td>
 							<td><?=$action->qty?></td>
 							<td><?=$action->name?></td>
 							<td style="background:<?=$action->stateBg?>">

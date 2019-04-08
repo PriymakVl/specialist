@@ -23,7 +23,7 @@ class Controller_Product extends Controller_Base {
 		$parent = new Product($this->get->id_parent);
 		if (!$this->post->save) return $this->render('add/main', compact('parent'));
 		$product = (new Product)->addData()->setMessage('success', 'add');
-		if ($parent->state == Product::TYPE_DETAIL) $parent->setState(Product::TYPE_UNIT);
+		if ($parent->type == Product::TYPE_DETAIL) $parent->setType(Product::TYPE_UNIT);
 		$this->setSession('id_prod_active', $product->id)->redirect('product?id_prod='.$product->id_parent);
     }
 	
@@ -49,7 +49,7 @@ class Controller_Product extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->delete();
+		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->deleteAll();
 		$this->setMessage('success', 'delete')->redirect('product?id_prod='.$product->id_parent);
 	}
 

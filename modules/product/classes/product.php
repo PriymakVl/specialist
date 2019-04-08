@@ -46,11 +46,10 @@ class Product extends ProductBase {
 		return $this;
 	}
 	
-	public function delete()
+	public function deleteAll()
 	{
-		parent::delete();
-		//if ($this->specification) self::deleteSpecification($this->specification);
-		//todo write method deleteSpecification;
+		$this->delete();
+		if ($this->specification) $this->deleteSpecification();
 		return $this;
 	}
 	

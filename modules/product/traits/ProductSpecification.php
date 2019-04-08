@@ -37,9 +37,14 @@ trait ProductSpecification  {
 		return $group;
 	}
 	
-	protected static function deleteSpecification($specification)
+	public function deleteSpecification()
 	{
-		throw new Exception('Method deleteSpecification do not write');
+		foreach ($this->specification as $product) {
+			$product->getSpecification();
+			if ($product->specification) $this->deleteSpecification();
+			$product->delete();
+		}
+		return $this;
 	}
 	
 	

@@ -16,8 +16,8 @@
 					<th width="150">Обозначение</th>
 					<th width="380">Наименование</th>
 					<th width="80">Кол-во</th>
-					<th >Труд-ть</th>
 					<th width="120">Состояние</th>
+					<th>Управление</th>
 				</tr>
                 <? foreach($order->products as $product): ?>
                     <tr>
@@ -27,10 +27,11 @@
 						</td>
 						<td><?=$product->name?></td>
 						<td><?=$product->qty?></td>
-						<td>
-							<span class="red">Не указана</span>
-						</td>
 						<td style="background:<?=$product->stateBg?>"><?=$product->stateString?></td>
+						<td class="control-link">
+							<a href="/order_product/delete?id_prod=<?=$product->id?>">Удалить</a><br>
+							<a href="/order_product/edit?id_prod=<?=$product->id?>">Редактировать</a>
+						</td>
 					</tr>
 					<? $number++; ?>
                 <? endforeach; ?>

@@ -1,6 +1,11 @@
-<? if ($order->actions): ?>
-	<ul id="menu-order-actions">
-		<li id="order-action-edit-state">Редакт. состояние</li>
-		<li id="order-action-delete" id_order="<?=$order->id?>">Удалить операцию</li>
-	</ul>
-<? endif; ?>
+<ul id="order-actions-menu-wrp" <? if (!$order->actions || $this->get->tab != 3) echo 'style="display:none;"'; ?>>
+	<li>
+		<a href="/order_products/add?<?=$order->id?>">Добавить операцию</a>
+	</li>
+	<li>
+		<a href="#" id="add-order-action" id_order="<?=$order->id?>">Редактир-ть операцию</a>
+	</li>
+	<li>
+		<a href="#" id_order="<?=$order->id?>" id="delete-order-action">Удалить операцию</a>
+	</li>
+</ul>

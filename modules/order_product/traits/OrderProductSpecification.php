@@ -16,7 +16,7 @@ trait OrderProductSpecification {
 		$this->specificationAll = $this->getByIdParent();
 		if ($this->specificationAll) {;
 			$this->getSpecificationRecursive($this->specificationAll);
-			$this->specificationAll = ObjectHelper::createArray($this->specificationAll, 'OrderProduct', ['setData', 'getOptions']);
+			$this->specificationAll = ObjectHelper::createArray($this->specificationAll, 'OrderProduct', ['setData']);
 		}
 		return $this;
 	}
@@ -47,7 +47,7 @@ trait OrderProductSpecification {
 	{
 		foreach ($specification as $product) {
 			$product->getSpecification();
-			$id_sub_parent = $this->addModel($product, $id_parent);
+			$id_sub_parent = $this->addDataModel($product, $id_parent);
 			if ($product->specification) $this->addSpecificationRecursive($product->specification, $id_sub_parent);
 		}
 		return $this;

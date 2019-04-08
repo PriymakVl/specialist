@@ -1,4 +1,4 @@
-#menu-order-wrp {
+#main-menu-order-wrp {
     position: absolute;
     top: 90px;
     left: -160px;
@@ -6,35 +6,26 @@
     /*border: 1px solid #000;*/
 }
 
-#menu-order-wrp ul li{
+#main-menu-order-wrp ul li{
     margin-top: 3px;
 	cursor: pointer;
 	color: #000;
 	text-decoration: underline;
 }
 
-#menu-order-wrp ul li:hover {
+#main-menu-order-wrp ul li:hover {
 	text-decoration: none;
 }
 
-#menu-order-wrp ul li a{
+#main-menu-order-wrp ul li a{
     color: #000;
 }
 
-#menu-order-wrp ul li a:hover {
+#main-menu-order-wrp ul li a:hover {
 	text-decoration: none;
 }
 
-#change-note-letter, .note-letter {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-#change-note-letter:hover, .note-letter {
-    text-decoration: none;
-}
-
-#menu-order-actions li:hover {
+#menu-order-actions-wrp li:hover {
 	cursor: pointer;
 	text-decoration: underline;
 }

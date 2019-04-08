@@ -11,8 +11,6 @@ class OrderActionBase extends Model {
 	public $action;//объект операции обработки
 	public $bgTerminalBox;
 	
-	public $name;
-	public $price;
 	public $timeMade;
 	
 	const BG_TERMINAL_BOX_PLAN = 'yellow';
@@ -20,13 +18,9 @@ class OrderActionBase extends Model {
 	const BG_TERMINAL_BOX_STOPPED = 'red';
 	const BG_TERMINAL_BOX_PRIORITY = 'Aqua';
 	
+	const RATING_DEFAULT = 1;
 	
-	public function getProperties()
-	{
-		$item = new DataAction($this->id_data);
-		$this->name = $item->name;
-		$this->price = $item->price;
-	}
+	
 
 	
 
