@@ -2,21 +2,15 @@
 
 trait OrderActionModel {
 	
-	private function addDataModel($action, $product)
-	{
-		$params = $this->addDataModelParams($action, $product);
-        $sql = "INSERT INTO `order_actions` (id_order, id_prod, qty, name, price, number, state, type_order, time_prepar, time_prod, note, rating) 
-		VALUES (:id_order, :id_prod, :qty, :name, :price, :number, :state, :type_order, :time_prepar, :time_prod, :note, :rating)";
-        return self::perform($sql, $params);
-	}
 	
-	public function getForTerminalModel()
-	{
-		if ($params['action'] == 'all' && $params['order'] == 'all') $ids = self::getAllNotReadyActions($params);
-		else if ($params['action'] != 'all' && $params['order'] == 'all' )$ids = self::getForAllOrders($params);
-		else $ids = self::getForOneOrder($params);
-		return self::createArrayActions($ids);
-	}
+	
+	// public function getForTerminalModel()
+	// {
+		// if ($params['action'] == 'all' && $params['order'] == 'all') $ids = self::getAllNotReadyActions($params);
+		// else if ($params['action'] != 'all' && $params['order'] == 'all' )$ids = self::getForAllOrders($params);
+		// else $ids = self::getForOneOrder($params);
+		// return self::createArrayActions($ids);
+	// }
 	
 	public function getForAllOrdersModel()
 	{
@@ -80,10 +74,18 @@ trait OrderActionModel {
 		return self::perform($sql, $params);
 	}
 	
-	public function updateRatingModel($id_order, $rating)
+	public function updateRatingOrderModel($id_order, $rating)
 	{
 		$sql = 'UPDATE `order_actions` SET `rating` = :rating WHERE `id_order` = :id_order';
 		$params = ['rating' => $rating, 'id_order' => $id_order];
+		return self::perform($sql, $params);
+	}
+	
+	public function editModel()
+	{
+		$params = $this->editModelParams();
+		$sql = 'UPDATE `order_actions` SET `qty` = :qty , `name` = :name, `price` = :price, `number` = :number, `state` = :state, `time_prepar` = :time_prepar,
+			`time_prod` = :time_prod, `rating` = :rating, `note` = :note WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}
 	

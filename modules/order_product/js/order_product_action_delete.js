@@ -6,7 +6,7 @@ $(document).ready(function() {
 		if (!id_action) return alert('Вы не выбрали операцию');
 		var agree = confirm('Вы действительно хотите удалить указанную операцию?');
 
-		if (agree) location.href = '/order_action/delete?sent=order&id_action=' + id_action;
+		if (agree) location.href = '/order_action/delete?sent=product&id_action=' + id_action;
 	});
 	
 });

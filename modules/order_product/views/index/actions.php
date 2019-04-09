@@ -26,7 +26,7 @@
 			<? foreach($product->actions as $action): ?>
 				<tr>
 					<td>
-						<input type="radio" name="action">
+						<input type="radio" name="actions" id_action="<?=$action->id?>">
 					</td>
 					<td><?=$action->name?></td>
 					<td>
@@ -45,7 +45,13 @@
 					</td>
 					<td>fact time</td>
 					<td><?=$action->note?></td>
-					<td>Не выдан</td>
+					<td style="background:<?=$action->stateBg?>">
+						<? if (!$action->states): ?>
+							<?=$action->stateString?>
+						<? else: ?>
+							<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->stateString?></a>
+						<? endif; ?>
+					</td>
 				</tr>
 			<? endforeach; ?>
         </table>

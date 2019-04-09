@@ -26,7 +26,7 @@ trait OrderActionTotal {
 	public function getForProduct()
 	{
 		$items = $this->getAllByIdProductModel();
-		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData']);
+		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState']);
 	}
 	
 	// public function createArrayActions($ids)

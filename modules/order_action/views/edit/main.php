@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!-- css files -->
 <link rel="stylesheet" href="/web/css/total/form.css">
 <link rel="stylesheet" href="/modules/order_action/css/form.css">
@@ -10,9 +6,9 @@
 
     <? include_once('form.php'); ?>
 
-</div><!-- id content -->
+</div>
 
 <!-- js files -->
-<script src="/modules/order_action/js/order_action_unplan.js"></script>
+<script src="/modules/product_action/js/select_action.js"></script>
 
 

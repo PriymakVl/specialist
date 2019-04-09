@@ -26,13 +26,13 @@
 	<!-- add order product -->
 	<? if (!$order->products): ?>
 		<li>
-			<a href="/order_product/add?id_order=<?=$order->id?>">Добавить продукт</a>
+			<a href="/order_product/add_form?id_order=<?=$order->id?>">Добавить продукт</a>
 		</li>
 	<? endif; ?>
 	<!-- add order action -->
 	<? if (!$order->actions): ?>
 		<li>
-			<a href="/order_action/add?id_order=<?=$order->id?>">Добавить операцию</a>
+			<a href="/order_action/add_form?id_order=<?=$order->id?>">Добавить операцию</a>
 		</li>
 	<? endif; ?>
 </ul>

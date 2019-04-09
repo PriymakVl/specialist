@@ -1,67 +1,39 @@
-/*form add action unplan*/
-#form-order-action-unplan-wrp #form-order-products-wrp {
-	margin-bottom: 15px;
+input[name="name"]  {
+	width: 525px;
 }
 
-#form-order-action-unplan-wrp #form-product-wrp {
-	position: relative;
+input[name="number"],  input[name="time_prepar"], input[name="time_prod"]{
+	width: 60px;
+	margin-right: 5px;
 }
 
-#form-order-action-unplan-wrp #form-product-name-wrp {
-	position: absolute;
-	top: 0;
-	left: 440px;
+input[name="number"] {
+	margin-right: 20px;
 }
 
-#form-order-action-unplan-wrp #form-product-symbol-wrp input {
-	width: 250px;
+input[name="price"] {
+	margin-right: 5px;
+	width: 75px;
 }
 
-#form-order-action-unplan-wrp #form-product-name-wrp input {
-	width: 360px;
+input[name="rating"],  input[name="qty"]{
+	margin-right: 40px;
 }
 
-#form-order-action-unplan-wrp #form-action-name-wrp {
-	position: absolute;
-	top: 10px;
-	left: 260px;
+
+.product-action-properties-wrp input + span {
+	margin-right: 20px;
 }
 
-#form-order-action-unplan-wrp #form-action-name-wrp input, #form-action-name-edit-wrp input  {
-	width: 375px;
+input[name="time_prod"]  + span {
+	margin-right: 0;
 }
 
-#form-order-action-unplan-wrp #form-action-time-wrp {
-	position: absolute;
-	top: 10px;
-	left: 765px;
+#actions {
+	width: 170px;
+	margin-right: 25px;
 }
 
-#form-order-action-unplan-wrp #form-action-time-wrp input, #form-action-time-edit-wrp input {
-	width: 100px;
-}
-
-#form-order-action-unplan-wrp textarea {
-	width: 912px;
-}
-
-#form-order-action-unplan-wrp  select[name="id_action"] {
-	width: 165px;
-}
-
-#form-action-time-edit-wrp {
-	position: absolute;
-	top: 10px;
-	left: 525px;
-}
-
-#form-action-unplan-state-wrp {
-	position: absolute;
-	top: 10px;
-	left: 215px;
-}
-
-#form-action-unplan-state-wrp select {
-	height: 34px;
-	width: 120px;
+#form-product-action-wrp textarea {
+	width: 915px;
 }

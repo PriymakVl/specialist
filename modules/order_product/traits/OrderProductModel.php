@@ -45,9 +45,8 @@ trait OrderProductModel {
 	
 	public function editModel()
 	{
-		$params = $this->editModelParams();
-		debug($params);
-		$sql = 'UPDATE `order_products` SET `qty` = :qty, `state` = :state, `symbol` = :sybmol, `name` = :name, `type` = :type, `id_parent` = :id_parent,
+		$params = $this->editModelParams(); 
+		$sql = 'UPDATE `order_products` SET `qty` = :qty, `state` = :state, `symbol` = :symbol, `name` = :name, `type` = :type, `id_parent` = :id_parent,
 			`number` = :number, `note` = :note WHERE `id` = :id_prod';
 		return self::update($sql, $params);
 	}

@@ -1,7 +1,8 @@
 <?
 	$hidden_order_actions_menu = true;
-	if (!$order->products && $order->actions) $hidden_order_menu = false;
-	if ($this->get->tab && $this->get->tab != 3) $hidden_order_menu = false;
+	if (!$order->products && $order->actions) $hidden_order_actions_menu = false;
+	if ($this->get->tab && $this->get->tab != 3) $hidden_order_actions_menu = false;
+	// debug($hidden_order_actions_menu);
 ?>
 
 <ul id="order-actions-menu-wrp" <? if ($hidden_order_actions_menu) echo 'style="display:none;"'; ?>>
