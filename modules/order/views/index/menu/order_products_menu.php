@@ -1,4 +1,12 @@
-<ul id="order-products-menu-wrp" <? if ($this->get->tab == 1 || $this->get->tab == 3) echo 'style="display:none;"'; ?>>
+<?
+	$hidden_order_products_menu = true;
+	if (!$order->products) $hidden_order_menu = false;
+	if ($this->get->tab && $this->get->tab != 2) $hidden_order_menu = false;
+
+	// debug($hidden_order_products_menu);
+?>
+
+<ul id="order-products-menu-wrp" <? if ($hidden_order_products_menu) echo 'style="display:none;"'; ?>>
 	<li>
 		<a href="/order_product/add_form?id_order=<?=$order->id?>">Добавить продукт</a>
 	</li>
