@@ -16,3 +16,4 @@ add name, symbol, type order_products delete time_manufac, id_prod (переноисть с
 add nam and price to order_actions delete id_data (pass table)
 add number in order_actions from product_actions
 add note in product_actions
+add id_prod in order_positions

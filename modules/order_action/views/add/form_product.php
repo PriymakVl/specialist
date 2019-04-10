@@ -2,10 +2,8 @@
 	$actions = Action::getAll('actions');
 ?>
 <div id="form-product-action-wrp">
-    <h2 class="center">Добавить операцию для 
-		<? if ($product): ?>
-			<?=$product->name?>: <span class="green"><?=$product->symbol?></span> 
-		<? endif; ?>
+    <h2 class="center">
+		Добавить операцию для <?=$product->name?>: <span class="green"><?=$product->symbol?></span> 
 	</h2>
     <form action="/order_action/add_for_product?id_prod=<?=$this->get->id_prod?>&id_order=<?=$this->get->id_order?>" method="post">
 	
@@ -40,7 +38,7 @@
 			<!-- product qty -->
 			<div class="form-box">
 				<label>Количеcтво:</label>
-				<input type="number" value="<?=$product->qty?>" required name="qty"> <span>шт.</span>
+				<input type="number" value="<?=$product?$product->qty:1?>" required name="qty"> <span>шт.</span>
 			</div>
 			<!-- action note -->
 			<div class="form-box">

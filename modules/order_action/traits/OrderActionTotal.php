@@ -2,7 +2,7 @@
 
 trait OrderActionTotal {
 	
-	public function addForProduct($product)
+	public function addForProductBase($product)
 	{
 		$actions = (new ProductAction)->getAllBySymbolProductModel($product->symbol);
 		if ($actions) $this->addActions($actions, $product);
@@ -12,7 +12,7 @@ trait OrderActionTotal {
 	public function addForSpecification($specification)
 	{
 		foreach ($specification as $product) {
-				$this->addForProduct($product);
+				$this->addForProductBase($product);
 		}
 	}
 	

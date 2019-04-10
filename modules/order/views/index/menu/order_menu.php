@@ -2,6 +2,7 @@
 	$hidden_order_menu = false;
 	if ($order->products || $order->actions) $hidden_order_menu = true;
 	if ($this->get->tab && $this->get->tab != 1) $hidden_order_menu = true;
+	if (!$order->products && !$order->actions) $hidden_order_menu = false;
 ?>
 
 <ul id="order-menu-wrp" <? if ($hidden_order_menu) echo 'style="display:none;"'; ?>>
@@ -32,7 +33,7 @@
 	<!-- add order action -->
 	<? if (!$order->actions): ?>
 		<li>
-			<a href="/order_action/add_form?id_order=<?=$order->id?>">Добавить операцию</a>
+			<a href="/order_action/add_for_order?id_order=<?=$order->id?>">Добавить операцию</a>
 		</li>
 	<? endif; ?>
 </ul>

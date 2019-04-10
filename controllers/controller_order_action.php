@@ -13,7 +13,7 @@ class Controller_Order_Action extends Controller_Base {
 	public function action_add_base()
 	{
 		$product = (new OrderProduct)->setData($this->get->id_prod)->getSpecificationAll();
-		(new OrderAction)->addForProduct($product)->addForSpecification($product->specificationAll);
+		(new OrderAction)->addForProductBase($product)->addForSpecification($product->specificationAll);
 		$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order.'&id_active='.$product->id);
 	}
 
@@ -22,7 +22,15 @@ class Controller_Order_Action extends Controller_Base {
 		$product = new OrderProduct($this->get->id_prod);
 		if (!$this->post->save) return $this->render('add/main', compact('product'));
 		$action = (new OrderAction)->addForProduct()->setMessage('success', 'add');
-		if ($product) $this->redirect('order_product?id_prod='.$product->id);
+		$this->redirect('order_product?id_prod='.$product->id);
+	}
+	
+	public function action_add_for_order()
+	{
+		$order = new Order($this->get->id_order); $product = false;
+		if (!$this->post->save) return $this->render('add/main', compact('order', 'product'));
+		$action = (new OrderAction)->addForOrder()->setMessage('success', 'add');
+		$this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$order->id);
 	}
 	
 	public function action_edit_state()
@@ -36,7 +44,7 @@ class Controller_Order_Action extends Controller_Base {
 	
 	public function action_edit()
 	{
-		$action = (new OrderAction)->setData($this->get->id_action)->getProduct();
+		$action = (new OrderAction)->setData($this->get->id_action)->getProduct()->getOrder();
 		if (!$this->post->save) return $this->render('edit/main', compact('action'));
 		$action->edit()->setMessage('success', 'edit');
 		// ->editTime($params)->checkReadyOrder()

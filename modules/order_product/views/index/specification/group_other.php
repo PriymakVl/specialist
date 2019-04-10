@@ -13,7 +13,7 @@
 			<a href="/product?id_prod=<?=$other->id?>"><?=$other->name?></a>
 		</td>
 		<td><?=$other->qty?></td>
-		<td class="red">Не изготав.</td>
-		<td><?=$other->note?></td>
+		<td><?=$detail->note?></td>
+		<td style="background:<?=$detail->stateBg?>"><?=$detail->stateString?></td>
 	</tr>
 <? endforeach; ?>

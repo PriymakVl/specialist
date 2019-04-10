@@ -32,16 +32,16 @@ class Order extends OrderBase {
 	public function editState()
 	{
 		if ($this->post->state == $this->state) return $this;
+		if ($this->state == OrderState::REGISTERED && $this->post->state == OrderState::PREPARATION && $this->positions) $this->addProductsByPositions();
+		if ($this->products) (new OrderProduct)->setStateAsInOrder($this->id, $this->post->state);
+		if ($this->actions) (new OrderAction)->setStateAsInOrder($this->id, $this->post->state);
 		$this->setState($this->post->state);
-		$order = (new Order)->setData($this->id)->getPositions()->getProducts(); //with new state
-		(new OrderProduct)->editState($order);
-		// (new OrderAction)->editState($this);
 		return $this;
 	}
 	
 	public function getPositions()
 	{
-		$this->positions = (new OrderPosition)->getAllByIdOrder($this->id);
+		$this->positions = (new OrderPosition)->getAllByIdOrderModel($this->id);
 		return $this;
 	}
 	
@@ -61,6 +61,7 @@ class Order extends OrderBase {
 	public function getProducts()
 	{
 		$this->products = (new OrderProduct)->getMainParentOrder($this->id);
+		// debug($this->products[0]->stateString);
 		return $this;
 	}
 	

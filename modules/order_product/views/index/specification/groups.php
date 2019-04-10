@@ -14,10 +14,10 @@
 			<tr>
 				<th width="40">№</th>
 				<th width="200">Обозначение</th>
-				<th width="340">Наименование</th>
-				<th width="100">Колич-во</th>
-				<th width="100">Трудоем-ть</th>
+				<th width="320">Наименование</th>
+				<th width="90">Колич-во</th>
 				<th>Примечание</th>
+				<th width="120">Состояние</th>
 			</tr>
 			
 			<!-- group product -->

@@ -13,9 +13,7 @@
 			<a href="/order_product?id_prod=<?=$unit->id?>"><?=$unit->name?></a>
 		</td>
 		<td><?=$unit->qty?></td>
-		<td>
-			<span class="red">Не указана</span>
-		</td>
-		<td><?=$unit->note?></td>
+		<td><?=$detail->note?></td>
+		<td style="background:<?=$detail->stateBg?>"><?=$detail->stateString?></td>
 	</tr>
 <? endforeach; ?>

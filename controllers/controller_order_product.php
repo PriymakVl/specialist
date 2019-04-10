@@ -22,9 +22,9 @@ class Controller_Order_Product extends Controller_Base {
 
 	public function action_add_base()
 	{
-		if (!$this->session->id_order_active) $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
+		if (!$this->session->id_order_active) return $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
 		$product = (new OrderProduct)->addProductBase()->addSpecification()->setState(OrderState::PREPARATION)->setMessage('success', 'add');
-		$this->redirect('order_action/add_for_product?id_prod='.$product->id);
+		$this->redirect('order_action/add_base?id_prod='.$product->id);
 	}
 	
 	public function action_add_form()
@@ -34,13 +34,6 @@ class Controller_Order_Product extends Controller_Base {
 		$product = (new OrderProduct)->addProductForm()->setMessage('success', 'add');
 		$this->redirect('order?id_order='.$order->id);	
 	}
-	// public function action_to_preparation()
-	// {
-		// $order = new Order($this->id_order);
-		// $order->getPositions()->toPreparation()->setState(OrderState::PREPARATION)->setMessage('success', 'preparation');
-		// Session::set('order-active', $this->id_order);
-		// $this->redirectPrevious();
-	// }
 	
 	public function action_edit()
 	{

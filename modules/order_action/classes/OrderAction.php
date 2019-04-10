@@ -2,7 +2,7 @@
 
 class OrderAction extends OrderActionBase {
 	
-	use OrderActionTotal, OrderActionModel, OrderActionParam, OrderActionModelState, OrderActionConvert, OrderActionModelAdd;
+	use OrderActionTotal, OrderActionModel, OrderActionParam, OrderActionStateTrait, OrderActionModelState, OrderActionConvert, OrderActionModelAdd;
 	//, OrderActionTime, , OrderActionTerminal, 
 	
 	public function __construct($id = false)
@@ -14,7 +14,7 @@ class OrderAction extends OrderActionBase {
 	
 	public function getProduct()
 	{
-		$this->product = (new OrderProduct)->setData($this->id_prod);
+		if ($this->id_prod) $this->product = (new OrderProduct)->setData($this->id_prod);
 		return $this;
 	}
 	
@@ -26,7 +26,7 @@ class OrderAction extends OrderActionBase {
 	
 	public function checkStateProduct()
 	{
-		(new OrderProduct)->setData($this->id_prod)->checkState();
+		if ($this->id_prod) (new OrderProduct)->setData($this->id_prod)->checkState();
 		return $this;
 	}
 	
@@ -38,7 +38,7 @@ class OrderAction extends OrderActionBase {
 	
 	public function addForOrder()
 	{
-		$this->addFormForProductModel();
+		$this->addForOrderModel();
 		return $this;
 	}
 	

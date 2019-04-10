@@ -11,6 +11,11 @@ trait OrderTotal {
 		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getPositions', 'getPositionsTable']);
 	}
 	
+	private function addProductsByPositions()
+	{
+		(new OrderProduct)->addProductsByPositions($this->positions);
+	}
+	
 	// public function checkReadyTotal()
 	// {
 		// $result = (new OrderAction)->getNotReadyActionOrder($this->id);

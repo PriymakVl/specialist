@@ -3,9 +3,14 @@
 ?>
 <div id="form-product-action-wrp">
     <h2 class="center">
-		Редактирования операции <?=$action->product->name?>: <span class="green"><?=$action->product->symbol?></span>
+		Редактирования операции
+		<? if ($action->product): ?> 
+			<?=$action->product->name?>: <span class="green"><?=$action->product->symbol?></span>
+		<? else: ?>
+			заказ: <span class="green"><?=$action->order->symbol?></span>
+		<? endif; ?>
 	</h2>
-    <form action="/order_action/edit?id_action=<?=$action->id?>" method="post">
+    <form action="/order_action/edit?id_action=<?=$action->id?>&sent=<?=$this->get->sent?>" method="post">
 	
 			<div class="form-box product-action-name-wrp">
 				<!-- action name -->

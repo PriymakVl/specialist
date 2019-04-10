@@ -13,9 +13,7 @@
 			<a href="/order_product?id_prod=<?=$detail->id?>"><?=$detail->name?></a>
 		</td>
 		<td><?=$detail->qty?></td>
-		<td>
-			<span class="red">Не указана</span>
-		</td>
 		<td><?=$detail->note?></td>
+		<td style="background:<?=$detail->stateBg?>"><?=$detail->stateString?></td>
 	</tr>
 <? endforeach; ?>

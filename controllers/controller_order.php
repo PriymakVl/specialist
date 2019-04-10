@@ -14,7 +14,6 @@ class Controller_Order extends Controller_Base {
 	{
 		$order = new Order($this->get->id_order);
 		$order->getPositions()->convertProperties()->getProducts()->getActions();
-		// debug($order->actions);
 		$this->render('index/main', compact('order'));
 	}
 
@@ -47,8 +46,7 @@ class Controller_Order extends Controller_Base {
 	{
 		$order = new Order($this->get->id_order);
 		if (!$this->post->save) return $this->render('edit_state/main', compact('order'));
-		$order->editState();
-		//->setEditStateMessage();
+		$order->getProducts()->getActions()->getPositions()->editState()->setMessage('success', 'edit_state');
 		$this->redirect('order?id_order='.$order->id);
 	}
 	

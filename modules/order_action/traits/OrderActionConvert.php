@@ -25,7 +25,7 @@ trait OrderActionConvert {
 	{
 		switch ($this->state) {
 			case OrderActionState::WAITING : return "orange";
-			case OrderActionState::PLANED : return "#fff";
+			case OrderActionState::PLANED : return "pink";
 			case OrderActionState::PROGRESS : return "yellow";
 			case OrderActionState::STOPPED : return "red";
 			case OrderActionState::ENDED : return "green";

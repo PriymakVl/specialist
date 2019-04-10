@@ -2,26 +2,13 @@
 
 class OrderProduct extends OrderProductBase {
 	
-	use OrderProductTotal, OrderProductConvert, OrderProductSpecification, OrderProductState;
+	use OrderProductTotal, OrderProductConvert, OrderProductSpecification, OrderProductState, OrderProductAdd;
 	
 	public function __construct($id = false)
 	{
 		$this->tableName = 'order_products';
 		parent::__construct($id);
 		$this->message->section = 'order_product';
-	}
-	
-	public function addProductBase()
-	{
-		$product = (new Product)->setData($this->get->id_prod);
-		$id = $this->addDataModel($product, self::ID_MAIN_PARENT);
-		return $this->setData($id);
-	}
-	
-	public function addProductForm()
-	{
-		$id = $this->addFormModel();
-		return $this->setData($id);
 	}
 	
 	public function edit()
@@ -55,6 +42,7 @@ class OrderProduct extends OrderProductBase {
 		$this->actions = (new OrderAction)->getForProduct($this);
 		return $this;
 	}
+	
 	
 	
 	

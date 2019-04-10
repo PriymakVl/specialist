@@ -15,14 +15,21 @@ trait OrderPositionModel {
 	{	
 		$params = self::selectParams(['id_position', 'symbol', 'qty', 'note']);
         $sql = 'UPDATE `order_positions` SET `symbol` = :symbol, `qty` = :qty, `note` = :note WHERE `id` = :id_position';
-        return self::insert($sql, $params);
+        return self::perform($sql, $params);
 	}
 	
-	public function getAllByIdOrder($id_order)
+	public function getAllByIdOrderModel($id_order)
 	{
 		$params = ['id_order' => $id_order, 'status' => STATUS_ACTIVE];
 		$sql = 'SELECT * FROM `order_positions` WHERE `id_order` = :id_order AND `status` = :status';
         return self::perform($sql, $params)->fetchAll();
+	}
+	
+	public function setIdProductModel($id_product)
+	{
+		$params = ['id_product' => $id_product, 'id_position' => $this->id];
+		$sql = 'UPDATE `order_positions` SET `id_prod` = :id_prod  WHERE `id` = :id_position';
+		return self::perform($sql, $params);
 	}
 
 	

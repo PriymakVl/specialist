@@ -4,24 +4,41 @@ trait OrderProductState {
 
 	
 	
-	public function setStatePreparation($order)
-	{
-		if ($order->products) return $this;
-		$products = (new OrderProductExtract)->getProducts($order);
-		if ($products) $this->addProductList($products);//->addActionList($order->id);
-		// if ($symbols) return $this->
-	}
+	// public function setStatePreparation($order)
+	// {
+		// if ($order->products) return $this;
+		// $products = (new OrderProductExtract)->getProducts($order);
+		// if ($products) $this->addProductList($products);//->addActionList($order->id);
+	// }
 	
-	public function setStateOrder()
+	public function setStateAsInOrder($id_order, $state_order)
 	{
-		(new OrderState)->check($this->id_order);
+		$state = $this->setStateByStateOrder($state_order);
+		$params = ['id_order' => $id_order, 'state' => $state, 'status' =>STATUS_ACTIVE];
+		$this->setStateAsInOrderModel($params);
 		return $this;
 	}
 	
-	public function editState($order)
+	private function setStateByStateOrder($state_order)
 	{
-		if ($order->state == OrderState::PREPARATION) return $this->setStatePreparation($order);
+		switch ($state_order) {
+			case OrderState::REGISTERED: return self::STATE_WAITING;
+			case OrderState::PREPARATION: return self::STATE_WAITING;
+			case OrderState::WORK: return self::STATE_PROGRESS;
+			case OrderState::MADE: return self::STATE_ENDED;
+		}
 	}
+	
+	public function setStateAsInOrderModel($params)
+	{
+		$sql = 'UPDATE `order_products` SET `state` = :state WHERE `id_order` = :id_order AND `status` = :status';
+		return self::update($sql, $params);
+	}
+	
+	// public function editState($order)
+	// {
+		// if ($order->state == OrderState::PREPARATION) return $this->setStatePreparation($order);
+	// }
 	
 	public function checkState()
 	{

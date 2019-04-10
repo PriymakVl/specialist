@@ -6,7 +6,7 @@ trait OrderProductSpecification {
 	{
 		$items = $this->getByIdParent();
 		if (!$items) return $this;
-		$this->specification = ObjectHelper::createArray($items, 'OrderProduct', ['setData']);
+		$this->specification = ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'convertState']);
 		$this->specificationGroup = (new Product)->getSpecificationGroup($this->specification);
 		return $this;
 	}

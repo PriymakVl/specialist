@@ -37,6 +37,18 @@ trait OrderActionParam {
 		return $params;
 	}
 	
+	public function addForOrderModelParams()
+	{
+		$params = self::selectParams(['id_order', 'price', 'number', 'time_prepar', 'time_prod', 'note', 'qty']);
+		$params['name'] = trim(self::getParam('name'));
+		$params['state'] = OrderActionState::WAITING;
+		$params['rating'] = self::RATING_DEFAULT;
+		$params['id_prod'] = 0;
+		$order = new Order($this->get->id_order);
+		$params['type_order'] = $order->type;
+		return $params;
+	}
+	
 	public function editModelParams()
 	{
 		$params = self::selectParams(['id_action', 'price', 'number', 'time_prepar', 'time_prod', 'note', 'qty', 'state', 'rating']);
