@@ -1,0 +1,86 @@
+#search-list-orders-wrp {
+    margin-left: 15px;
+}
+
+#order-filter-state {
+    font-size: 16px;
+    width: 200px;
+    height: 28px;
+}
+
+#order-filters-wrp {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px 0;
+}
+
+#order-filters-wrp span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* positions order */
+.order-positions-td {
+	padding: 0;
+}
+.order-positions-td table td {
+	border: none;
+}
+
+.order-positions-td table tr{
+	border-bottom: 1px solid #C0C0C0;
+}
+
+.order-positions-td table tr:last-child{
+	border-bottom: none;
+}
+
+.order-positions-td table td{
+	border-right: 1px solid #C0C0C0;
+}
+
+.order-positions-td table td:last-child{
+	border-right: none;
+}
+
+.order-positions-td table {
+	width: 100%;
+}
+
+.order-positions-td td:last-child{
+	border-right: 1px solid white!important;
+}
+
+.order-positions-td table td:first-child {
+	width: 210px;
+}
+
+.order-positions-td table td:nth-child(2) {
+	width: 50px;
+}
+
+.order-positions-td table td:nth-child(3) {
+	font-size: 12px;
+	text-align: left;
+}
+
+/* form search order */
+#form-order-search-wrp {
+    position: absolute;
+    top: 10px;
+    left: 657px;
+}
+
+#form-order-search-wrp input[type="submit"] {
+    padding: 4px 10px 4px 10px;
+	height: 30px;
+}
+
+#form-order-search-wrp input[type="text"] {
+    width: 205px;
+	height: 20px;
+}
+
+
+
+

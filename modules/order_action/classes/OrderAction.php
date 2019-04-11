@@ -2,8 +2,7 @@
 
 class OrderAction extends OrderActionBase {
 	
-	use OrderActionTotal, OrderActionModel, OrderActionParam, OrderActionStateTrait, OrderActionModelState, OrderActionConvert, OrderActionModelAdd;
-	//, OrderActionTime, , OrderActionTerminal, 
+	use OrderActionTotal, OrderActionModel, OrderActionStateTrait, OrderActionConvert, OrderActionTerminal;
 	
 	public function __construct($id = false)
     {

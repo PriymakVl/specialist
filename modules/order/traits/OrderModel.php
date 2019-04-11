@@ -2,19 +2,12 @@
 
 trait OrderModel {
 	
-	use OrderParam;
+	use OrderParam, OrderModelStateAndType;
 
-	public function getStateAll()
+	public function getAllOrdersModel()
 	{
 		$sql = 'SELECT * FROM `orders` WHERE `status` = :status ORDER BY rating DESC, date_exec ASC';
-		return self::perform($sql, ['status' => STATUS_ACTIVE])->fetchAll();	
-	}
-	
-	public function getStateOne($state)
-	{
-		$params = ['status' => STATUS_ACTIVE, 'state' => $state];
-		$sql = 'SELECT * FROM `orders` WHERE `state` = :state AND `status` = :status ORDER BY rating DESC, date_exec ASC';
-		return self::perform($sql, $params)->fetchAll();
+		return self::perform($sql, ['status' => STATUS_ACTIVE])->fetchAll();
 	}
 	
 	public function getBySymbol($symbol)

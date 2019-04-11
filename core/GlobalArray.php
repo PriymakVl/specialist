@@ -11,7 +11,7 @@ class GlobalArray {
 	
 	public function __set($name, $value) 
 	{
-		return null;
+		return $this->array[$name] = $value;
 	}
  
 	public function __get($name) 

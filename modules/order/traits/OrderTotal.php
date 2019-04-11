@@ -4,10 +4,16 @@ trait OrderTotal {
 	
 	use OrderModel;
 
-	public function getList($state)
+	public function getList()
 	{
-		if ($state == OrderState::ALL) $items = $this->getStateAll();
-		else $items = $this->getStateOne($state);
+		if ($this->get->state == OrderState::ALL) $items = $this->getAllOrdersModel();
+		else $items = $this->getByStateModel();
+		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getPositions', 'getPositionsTable']);
+	}
+	
+	public function getListForPlan()
+	{
+		$items = $this->getByStateAndTypeModel();
 		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getPositions', 'getPositionsTable']);
 	}
 	

@@ -5,7 +5,8 @@ trait OrderActionParam {
 	// use Param;
 	
 	public function addDataModelParams($action, $product) {
-		$order = new Order($this->session->id_order_active);
+		$id_order = $this->get->id_order ? $this->get->id_order : $this->session->id_order_active;
+		$order = new Order($id_order);
 		$params['id_order'] = $order->id;
 		$params['type_order'] = $order->type;
 		

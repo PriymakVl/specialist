@@ -2,35 +2,7 @@
 
 trait OrderActionModel {
 	
-	
-	
-	// public function getForTerminalModel()
-	// {
-		// if ($params['action'] == 'all' && $params['order'] == 'all') $ids = self::getAllNotReadyActions($params);
-		// else if ($params['action'] != 'all' && $params['order'] == 'all' )$ids = self::getForAllOrders($params);
-		// else $ids = self::getForOneOrder($params);
-		// return self::createArrayActions($ids);
-	// }
-	
-	public function getForAllOrdersModel()
-	{
-		$params = self::selectParams(['action', 'state', 'type_order', 'status']);
-		$sql = 'SELECT `id` FROM `order_actions` 
-		WHERE `id_data` = :action AND `state` != :state AND `type_order` = :type_order AND `status` = :status ORDER BY `rating` DESC';
-		return self::perform($sql, $params)->fetchAll();
-	}
-	
-	// public function getForOneOrder()
-	// {
-		// unset($params['type_order']);
-		// if ($params['action'] == 'all') {
-			// $where = 'WHERE `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC'; 
-			// unset($params['action']);
-		// }
-		// else $where = 'WHERE `id_data` = :action AND `state` != :state AND `id_order` = :order AND `status` = :status ORDER BY `rating` DESC, `state` DESC';
-		// $sql = 'SELECT `id` FROM `order_actions` '.$where;
-		// return self::perform($sql, $params)->fetchAll();
-	// }
+	use OrderActionModelAdd, OrderActionModelState, OrderActionParam;
 	
 	public function getAllByIdOrderModel()
 	{

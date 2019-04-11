@@ -1,10 +1,10 @@
 <?php
-    $selected_reg = ($this->get->state == OrderState::REGISTERED) ? 'selected' : '';
-    $selected_prep = ($this->get->state == OrderState::PREPARATION) ? 'selected' : '';
-	$selected_work = ($this->get->state == OrderState::WORK) ? 'selected' : '';
-	$selected_made = ($this->get->state == OrderState::MADE) ? 'selected' : '';
-	$selected_sent = ($this->get->state == OrderState::SENT) ? 'selected' : '';
-    $selected_all = ($this->get->state == OrderState::ALL) ? 'selected' : '';
+    $selected_reg = ($state == OrderState::REGISTERED) ? 'selected' : '';
+    $selected_prep = ($state == OrderState::PREPARATION) ? 'selected' : '';
+	$selected_work = ($state == OrderState::WORK) ? 'selected' : '';
+	$selected_made = ($state == OrderState::MADE) ? 'selected' : '';
+	$selected_sent = ($state == OrderState::SENT) ? 'selected' : '';
+    $selected_all = ($state == OrderState::ALL) ? 'selected' : '';
 ?>
 
 <div id="order-filters-wrp">

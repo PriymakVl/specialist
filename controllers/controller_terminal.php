@@ -15,9 +15,9 @@ class Controller_Terminal extends Controller_Base
     public function action_actions()
     {
 		$worker = $this->getWorker();
-		$params = ParamTerminal::getActions($worker);
-		$actions = OrderAction::getForTerminal($params);
-        $this->render('actions/main', compact('actions', 'worker', 'params'));
+		$actions = (new OrderAction)->getForTerminal();
+		debug($actions);
+        $this->render('actions/main', compact('actions', 'worker'));
     }
 	
 	public function action_actions_unplan()
@@ -52,8 +52,7 @@ class Controller_Terminal extends Controller_Base
 	
 	private function getWorker()
     {
-        $id_worker = Session::get('id_user');
-        if ($id_worker) return new Worker($id_worker);
+        if ($this->session->id_user) return new Worker($this->session->id_user);
         else $this->redirect('main/login');
     }
 }

@@ -28,6 +28,20 @@
             </div>
         </li>
 		
+		<!-- planning -->
+		<li class="drop">
+            <a href="#">Планирование</a>
+            <div class="dropdownContain">
+                <div class="dropOut">
+                    <div class="triangle"></div>
+                    <ul>
+                        <li><a href="/plan/orders?type=1">Пневмо</a></li>
+                        <li><a href="/plan/orders?type=2">Пресса и накатки</a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+		
         <!-- statistics -->
         <li><a href="/statistics/workers">Статистика</a></li>
         <!-- logout -->

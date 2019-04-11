@@ -12,7 +12,7 @@ trait OrderProductParam {
 		$params['id_parent'] = $id_parent;
 		$params['qty'] = $product->qty * $this->get->qty;
 		$params['state'] = self::STATE_WAITING;
-		$params['id_order'] = $this->session->id_order_active;
+		$params['id_order'] = $this->get->id_order ? $this->get->id_order : $this->session->id_order_active;
 		return $params;
 	}
 	

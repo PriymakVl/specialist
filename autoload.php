@@ -38,6 +38,7 @@ function autoload_class($class_name)
 	else if (strpos($class_name, 'Product') !== false) $module_name = 'product';
 	else if (strpos($class_name, 'Statistics') !== false) $module_name = 'statistics';
 	else if (strpos($class_name, 'User') !== false) $module_name = 'user';
+	else if (strpos($class_name, 'Worker') !== false) $module_name = 'user';
 	else if (strpos($class_name, 'Drawing') !== false) $module_name = 'drawing';
 	if (!$module_name) return;
 	if (file_exists('./modules/'.$module_name.'/classes/'.$class_name.'.php')) require './modules/'.$module_name.'/classes/'.$class_name.'.php';

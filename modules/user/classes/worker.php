@@ -1,10 +1,10 @@
 <?php
 
-class Worker extends UserBase {
+class Worker extends User {
 	
-	use WorkerStatic;
-
-	 //public $productsCut;
+	use WorkerTotal;
+	
+		 //public $productsCut;
 	 public $timePlan = 0;
 	 public $timeMade = 0;
 	 public $totalTimeMade = 0;
@@ -15,8 +15,7 @@ class Worker extends UserBase {
 	 public $costMade; //сколько заработал
 	 public $actions;
 	 public $actions_unplan;
-	 
- 
+
 	public function getActionsPlan($params)
 	{
 		$items = OrderAction::planWorker($params);

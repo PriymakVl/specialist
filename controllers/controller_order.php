@@ -19,10 +19,10 @@ class Controller_Order extends Controller_Base {
 
 	public function action_list()
 	{
-		$user = (new User)->setData($this->session->id_user)->getOptions()->getDefaultStateOrders();
-		$state = $this->get->state ? $this->get->state : $user->defaultStateOrders;
-		$orders = (new Order)->getList($state);
-		$this->setTitle('Заказы')->render('list/main', compact('orders', 'state'));
+		$user = (new User)->setData($this->session->id_user)->getOptions();
+		$this->get->state ? $this->get->state : $user->options->default_state_order;
+		$orders = (new Order)->getList();
+		$this->setTitle('Заказы')->render('list/main', compact('orders'));
 	}
 	
 	public function action_add()

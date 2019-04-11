@@ -19,10 +19,12 @@ trait OrderProductAdd {
 	{
 		foreach ($positions as $position) {
 			$product = (new Product)->extractProduct($position);
-			debug($product);
 			if ($product) {
+				$_GET['qty'] = $position->qty; $this->get->qty = $position->qty;
 				$id_prod = $this->addDataModel($product, self::ID_MAIN_PARENT);
-				$position->setIdProductModel($id_prod);
+				$order_product = (new self)->setData($id_prod)->addSpecification($product->id)->getSpecificationAll();
+				(new OrderAction)->addForProductBase($order_product)->addForSpecification($order_product->specificationAll);
+				(new OrderPosition)->setData($position)->setIdProductModel($id_prod);
 			}
 		}
 	}

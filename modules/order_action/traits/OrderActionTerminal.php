@@ -1,14 +1,18 @@
 <?php
 
 trait OrderActionTerminal {
+	
+	use OrderActionModelTerminal;
 
-	// public function getForTerminal($params)
-	// {
-		// if ($params['action'] == 'all' && $params['order'] == 'all') $ids = self::getAllNotReadyActions($params);
-		// else if ($params['action'] != 'all' && $params['order'] == 'all' ) $ids = self::getForAllOrders($params);
-		// else $ids = self::getForOneOrder($params);
-		// return self::createArrayActions($ids);
-	// }
+	public function getForTerminal()
+	{
+		// if ($this->get->action == 'all' && $this->get->order == 'all') $items = $this->getAllNotReadyForTerminalModel();
+		// else if ($this->get->action != 'all' && $this->get->order == 'all' ) $items = $this->getForAllOrdersForTerminalModel();
+		// else $items = self::getForOneOrderTerminalModel();
+		$items = $this->getForAllOrdersForTerminalModel();
+		debug($items);
+		return HelperObject::createArray($items, 'OrderAction', ['setData', 'getProduct']);
+	}
 	
 	// public function getOrdersForTerminal()
 	// {
@@ -22,15 +26,5 @@ trait OrderActionTerminal {
 		// }
 		// return $orders;
 	// }
-	
-	public function getOrdersForTerminal()
-	{
-		$orders = [];
-		$items = self::getOrdersWhereStateActionsNotEnded();
-		if (empty($items)) return $orders;
-		foreach ($items as $item) {
-			$orders[] = new Order($item->id_order);
-		}
-		return $orders;
-	}
+
 }

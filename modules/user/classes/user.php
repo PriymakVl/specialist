@@ -17,26 +17,19 @@ class User extends UserBase {
 		return $this;
 	}
 	
-	public function setOptions()
-	{
-		if ($this->position == POSITION_WORKER) return 
-		$this->defaultProductAction = $this->setOption('default_product_action', $options);
-	}
+	// public function setOptions()
+	// {
+		// if ($this->position == POSITION_WORKER) return 
+		// $this->defaultProductAction = $this->setOption('default_product_action', $options);
+	// }
 	
-	private function setOption($name_option, $options)
-	{
-		foreach ($options as $option) {
-			if ($option->name == $name_option) return $option->value;
-		}
-		return null;
-	}
-	
-	public function getDefaultStateOrders()
-	{
-		if (isset($this->options->default_state_orders)) $this->defaultStateOrders = $this->options->default_state_orders;
-		else $this->defaultStateOrders = OrderState::REGISTERED;
-		return $this;
-	}
+	// private function setOption($name_option, $options)
+	// {
+		// foreach ($options as $option) {
+			// if ($option->name == $name_option) return $option->value;
+		// }
+		// return null;
+	// }
 	
 	public function login()
 	{

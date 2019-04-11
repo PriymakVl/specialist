@@ -25,9 +25,9 @@ trait OrderPositionModel {
         return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public function setIdProductModel($id_product)
+	public function setIdProductModel($id_prod)
 	{
-		$params = ['id_product' => $id_product, 'id_position' => $this->id];
+		$params = ['id_prod' => $id_prod, 'id_position' => $this->id];
 		$sql = 'UPDATE `order_positions` SET `id_prod` = :id_prod  WHERE `id` = :id_position';
 		return self::perform($sql, $params);
 	}
