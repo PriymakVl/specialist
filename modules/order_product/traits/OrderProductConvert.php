@@ -30,5 +30,22 @@ trait OrderProductConvert {
 			default: return "#000";
 		}
 	}
+	
+	public function convertProductsToTable($products) 
+	{
+		$table = '<table>';
+		foreach ($products as $product) {
+			$table .= '<tr><td><a href="/order_product?id_prod='. $product->id .'">'.$product->symbol.'</a></td>';
+			$table .= '<td>'. $product->name .'</td>';
+			$table .= '<td>'.$product->qty.'шт.</td>';
+			$table .= '</tr>';
+		}
+		return $table .= '</table>';
+	}
+	
+	
+	
+	
+
 
 }

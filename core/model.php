@@ -72,6 +72,12 @@ class Model extends Core {
         return $this;
     }
 	
+	public function setRating($rating)
+    {
+        self::perform('UPDATE `'.$this->tableName.'` SET `rating` = ? WHERE id = ?', [$rating, $this->id]);
+        return $this;
+    }
+	
 	public function setMessage($type, $key)
 	{
 		if (!$this->message->section) exit('В классе не указан раздел сообщений');

@@ -13,8 +13,8 @@ trait OrderTotal {
 	
 	public function getListForPlan()
 	{
-		$items = $this->getByStateAndTypeModel();
-		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getPositions', 'getPositionsTable']);
+		$items = $this->getListForPlanModel();
+		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getProducts', 'getProductsTable', 'convertProperties']);
 	}
 	
 	private function addProductsByPositions()

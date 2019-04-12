@@ -8,6 +8,8 @@ class OrderState extends OrderBase {
     const MADE = 4;
     const SENT = 5;
     const ALL = 6;
+	const WAITING = 7;
+	
 	
 	public function __construct($id = false)
 	{
@@ -33,6 +35,19 @@ class OrderState extends OrderBase {
             case self::PREPARATION: return 'В подготовке';
             case self::WORK: return'В работе';
             case self::MADE: return 'Выполнен';
+            case self::WAITING: return 'Отложен';
+            default: throw new Exception('Состояние заказа указано неверно');
+        }
+    }
+	
+	 public function setStateBg($state)
+    {
+        switch($state){
+            case self::REGISTERED: return '#040404';
+            case self::PREPARATION: return '#040404';
+            case self::WORK: return 'yellow';
+            case self::MADE: return 'green';
+            case self::WAITING: return 'pink';
             default: throw new Exception('Состояние заказа указано неверно');
         }
     }

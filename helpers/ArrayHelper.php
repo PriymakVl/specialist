@@ -21,6 +21,14 @@ class ArrayHelper {
 		return $array;
 	}
 	
+	public static function getRandom($quantity, $min, $max)
+	{
+		for ($i = 0; $i < $quantity; $i++) {
+			$random[] = rand($min, $max);
+		}
+		return $random;
+	}
+	
 	
 	
 }

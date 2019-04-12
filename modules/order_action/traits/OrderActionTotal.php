@@ -59,6 +59,13 @@ trait OrderActionTotal {
 		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState', 'getProduct']);//'isStates'
 	}
 	
+	public function editRatingForProduct()
+	{
+		$items = $this->getAllByIdProductModel();
+
+		foreach ($actions as $actions'
+	}
+	
 
 	
 

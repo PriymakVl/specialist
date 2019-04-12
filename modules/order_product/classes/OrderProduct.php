@@ -43,6 +43,13 @@ class OrderProduct extends OrderProductBase {
 		return $this;
 	}
 	
+	public function editRating()
+	{
+		$this->setRating($this->get->rating);
+		(new OrderActions)->editRatingForProduct($this);
+		return $this;
+	}
+	
 	
 	
 	

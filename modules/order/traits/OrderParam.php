@@ -21,4 +21,12 @@ trait OrderParam {
 		return $params;
 	}
 	
+	public function getListForPlanParam()
+	{
+		$params = self::selectParams(['type', 'status']);
+		$params['waiting'] = OrderState::WAITING;
+		$params['work'] = OrderState::WORK;
+		return $params;
+	}
+	
 }

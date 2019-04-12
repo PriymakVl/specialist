@@ -3,6 +3,7 @@
     $selected_prep = ($this->get->state == OrderState::PREPARATION) ? 'selected' : '';
 	$selected_work = ($this->get->state == OrderState::WORK) ? 'selected' : '';
 	$selected_made = ($this->get->state == OrderState::MADE) ? 'selected' : '';
+	$selected_waiting = ($this->get->state == OrderState::WAITING) ? 'selected' : '';
 	$selected_sent = ($this->get->state == OrderState::SENT) ? 'selected' : '';
     $selected_all = ($this->get->state == OrderState::ALL) ? 'selected' : '';
 ?>
@@ -13,6 +14,7 @@
         <option value="<?=OrderState::REGISTERED?>" <?=$selected_reg?>>Зарегистрированы</option>
         <option value="<?=OrderState::PREPARATION?>" <?=$selected_prep?>>В подготовке</option>
 		<option value="<?=OrderState::WORK?>" <?=$selected_work?>>В работе</option>
+		<option value="<?=OrderState::WAITING?>" <?=$selected_waiting?>>Отложены</option>
 		<option value="<?=OrderState::MADE?>" <?=$selected_made?>>Выполнены</option>
 		<option value="<?=OrderState::SENT?>" <?=$selected_sent?>>Отправлены заказчику</option>
         <option value="<?=OrderState::ALL?>" <?=$selected_all?>>Все</option>

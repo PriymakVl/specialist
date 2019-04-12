@@ -35,7 +35,7 @@ class Order extends OrderBase {
 		if ($this->state == OrderState::REGISTERED && $this->post->state == OrderState::PREPARATION && $this->positions) $this->addProductsByPositions();
 		if ($this->products) (new OrderProduct)->setStateAsInOrder($this->id, $this->post->state);
 		if ($this->actions) (new OrderAction)->setStateAsInOrder($this->id, $this->post->state);
-		$this->setState($this->post->state);
+		$this->setState($this->post->state ? $this->post->state : $this->get->state);
 		return $this;
 	}
 	

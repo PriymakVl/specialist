@@ -15,16 +15,16 @@ trait OrderProductModel {
 	public function addDataModel($product, $id_parent)
 	{
 		$params = $this->addDataModelParams($product, $id_parent);
-        $sql = "INSERT INTO `order_products` (id_order, name, symbol, type, number, note, qty, id_parent, state) 
-			VALUES (:id_order, :name, :symbol, :type, :number, :note, :qty, :id_parent, :state)";
+        $sql = "INSERT INTO `order_products` (id_order, name, symbol, type, number, note, qty, id_parent, state, type_order) 
+			VALUES (:id_order, :name, :symbol, :type, :number, :note, :qty, :id_parent, :state, :type_order)";
         return self::insert($sql, $params);
 	}
 	
 	public function addFormModel($product, $id_parent)
 	{
 		$params = $this->addFormModelParams();
-        $sql = "INSERT INTO `order_products` (id_order, name, symbol, type, number, note, qty, id_parent, state) 
-			VALUES (:id_order, :name, :symbol, :type, :number, :note, :qty, :id_parent, :state)";
+        $sql = "INSERT INTO `order_products` (id_order, name, symbol, type, number, note, qty, id_parent, state, type_order) 
+			VALUES (:id_order, :name, :symbol, :type, :number, :note, :qty, :id_parent, :state, :type_order)";
         return self::insert($sql, $params);
 	}
 	
@@ -55,6 +55,15 @@ trait OrderProductModel {
 	{
 		$params = ['id_order' => $id_order, 'status' => STATUS_ACTIVE];
 		$sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status';
+		return self::perform($sql, $params)->fetchAll();
+	}
+	
+	//2 state waiting and work
+	public function getListForPlanModel()
+	{
+		$params = $this->getListForPlanParam();
+		$sql = 'SELECT * FROM `order_products` WHERE `type_order` = :type_order AND `state` <> :state AND `status` = :status
+			ORDER BY state DESC, rating DESC, date_exec DESC';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	

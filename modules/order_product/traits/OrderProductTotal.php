@@ -60,6 +60,12 @@ trait OrderProductTotal  {
 		return $this;
 	}
 	
+	public function getListForPlan()
+	{
+		$items = $this->getListForPlanModel();
+		if ($items) return ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'getOrder', 'convertState']);
+	}
+	
 
 	
 	

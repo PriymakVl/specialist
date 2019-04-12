@@ -1,0 +1,20 @@
+#search-list-orders-wrp {
+    margin-left: 15px;
+}
+
+#plan-level-filter {
+    font-size: 16px;
+    width: 120px;
+    height: 28px;
+}
+
+#plan-filters-wrp {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px 0;
+}
+
+#plan-filters-wrp label {
+    font-size: 16px;
+    font-weight: bold;
+}

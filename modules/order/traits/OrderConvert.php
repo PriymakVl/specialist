@@ -6,6 +6,7 @@ trait OrderConvert {
 	{
 		$this->ratingString = $this->setRatingString();
 		$this->stateString = (new OrderState)->setStateString($this->state);
+		$this->stateBg = (new OrderState)->setStateBg($this->state);
 		return $this;
 	}
 	
@@ -21,6 +22,12 @@ trait OrderConvert {
 	public function getPositionsTable()
 	{
 		if ($this->positions) $this->positionsTable = (new OrderPosition)->convertPositionsToTable($this->positions);
+		return $this;
+	}
+	
+	public function getProductsTable()
+	{
+		if ($this->products) $this->productsTable = (new OrderProduct)->convertProductsToTable($this->products);
 		return $this;
 	}
 	

@@ -13,9 +13,11 @@ class OrderBase extends Model {
 	public $positionsTable;
 	public $positions;
 	public $stateString;
+	public $stateBg;
 	public $actions;
 	public $actionsUnplan;
 	public $products;
+	public $productsTable;
 	public $ratingString;
 
     //date
