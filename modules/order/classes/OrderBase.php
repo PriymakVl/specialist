@@ -5,9 +5,9 @@ class OrderBase extends Model {
 	const TYPE_CYLINDER = 1;
     const TYPE_CAR_NUMBER = 2; //пресса и накатки
 	
-	const RATING_REGULAR = 1;
-	const RATING_IMPORTANT = 2;
-	const RATING_PRIORITY = 3;
+	const RATING_REGULAR = 0;
+	const RATING_IMPORTANT = 50;
+	const RATING_PRIORITY = 100;
 	
     public $content;
 	public $positionsTable;

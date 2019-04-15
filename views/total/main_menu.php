@@ -35,8 +35,8 @@
                 <div class="dropOut">
                     <div class="triangle"></div>
                     <ul>
-                        <li><a href="/plan/orders?type=<?=Order::TYPE_CYLINDER?>">Пневмо</a></li>
-                        <li><a href="/plan/orders?type=<?=Order::TYPE_CAR_NUMBER?>">Пресса и накатки</a></li>
+                        <li><a href="/plan/orders?type_order=<?=Order::TYPE_CYLINDER?>">Пневмо</a></li>
+                        <li><a href="/plan/orders?type_order=<?=Order::TYPE_CAR_NUMBER?>">Пресса и накатки</a></li>
                     </ul>
                 </div>
             </div>

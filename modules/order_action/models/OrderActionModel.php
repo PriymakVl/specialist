@@ -2,7 +2,7 @@
 
 trait OrderActionModel {
 	
-	use OrderActionModelAdd, OrderActionModelState, OrderActionParam;
+	use OrderActionModelAdd, OrderActionModelState, OrderActionModelStateSet, OrderActionParam;
 	
 	public function getAllByIdOrderModel()
 	{
@@ -60,6 +60,7 @@ trait OrderActionModel {
 			`time_prod` = :time_prod, `rating` = :rating, `note` = :note WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}
+	
 	
 	
 	

@@ -8,7 +8,7 @@
                  prod_name="<?=$action->product->name?>"
                  state="<?=$action->state?>"
 				 id_action="<?=$action->id?>"
-				 action="<?=$action->id_data?>"
+				 action_name="<?=$action->name?>"
 				 note="<?=$action->note?>"
 				 type_action="plan"
 			>

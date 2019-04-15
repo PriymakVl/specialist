@@ -57,6 +57,13 @@ trait OrderActionParam {
 		return $params;
 	}
 	
+	public function getAllNotStateEndedParam()
+	{
+		$params = self::selectParams(['type_order', 'status']);
+		$params['state'] = OrderActionState::ENDED;
+		return $params;
+	}
+	
 }
 
 

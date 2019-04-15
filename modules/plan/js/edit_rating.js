@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	//product
-	$('.product-rating').click(function() {
+	$('.product-rating').click(function(event) {
+		event.preventDefault();
 		var id_prod = $(this).attr('id_prod');
 		var rating = prompt('Укажите новый рейтинг');
 		if (+rating) location.href = '/plan/edit_rating?id_prod=' + id_prod + '&rating=' + rating;
@@ -8,7 +9,8 @@ $(document).ready(function() {
 	});
 	
 	//order
-	$('.order-rating').click(function() {
+	$('.order-rating').click(function(event) {
+		event.preventDefault();
 		var id_order = $(this).attr('id_order');
 		var rating = prompt('Укажите новый рейтинг');
 		if (+rating) location.href = '/plan/edit_rating?id_order=' + id_order + '&rating=' + rating;
@@ -16,10 +18,11 @@ $(document).ready(function() {
 	});
 	
 	//action
-	$('.action-rating').click(function() {
+	$('.action-rating').click(function(event) {
+		event.preventDefault();
 		var id_action = $(this).attr('id_action');
 		var rating = prompt('Укажите новый рейтинг');
-		if (+rating) location.href = '/plan/edit_rating?id_prod=' + id_action + '&rating=' + rating;
+		if (+rating) location.href = '/plan/edit_rating?id_action=' + id_action + '&rating=' + rating;
 		else alert('Вы указали рейтинг неверно');
 	});
 });

@@ -35,15 +35,13 @@ trait OrderActionConvert {
 	
 	public function setBgTerminalBox()
 	{
-		if ($this->state == OrderActionState::PROGRESS) $this->bgTerminalBox = self::BG_TERMINAL_BOX_PROGRESS;
+		if ($this->rating != Order::RATING_REGULAR && $this->state == OrderActionState::PLANED) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_PRIORITY;
+		else if ($this->state == OrderActionState::PROGRESS) $this->bgTerminalBox = self::BG_TERMINAL_BOX_PROGRESS;
 		else if ($this->state == OrderActionState::STOPPED) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_STOPPED;
 		else $this->bgTerminalBox = self::BG_TERMINAL_BOX_PLAN;
-		//only plan actions
-		if (get_class($this) == 'OrderAction' && $this->state == OrderActionState::PLANED) {
-			if ($this->rating == Order::RATING_IMPORTANT || $this->rating == Order::RATING_PRIORITY) $this->bgTerminalBox =  self::BG_TERMINAL_BOX_PRIORITY;
-		}
 		return $this;
 	}
+	
 
 
 

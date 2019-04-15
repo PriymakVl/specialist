@@ -38,9 +38,9 @@ trait OrderProductParam {
 		return $params;
 	}
 	
-	public function getListForPlanParam()
+	public function getAllNotStateEndedParam()
 	{
-		$params['type_order'] = $this->get->type;
+		$params['type_order'] = $this->get->type_order;
 		$params['state'] = OrderProduct::STATE_ENDED;
 		$params['status'] = STATUS_ACTIVE;
 		return $params;

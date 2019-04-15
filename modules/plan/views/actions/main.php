@@ -3,7 +3,6 @@
 	else $type_string = 'Пресса и накатки';
 ?>
 <!-- css files -->
-<link rel="stylesheet" href="/modules/plan/css/orders.css">
 <link rel="stylesheet" href="/modules/plan/css/filters.css">
 
 <div id="content">
@@ -17,8 +16,8 @@
     <!-- message -->
     <? include_once('./views/total/message.php'); ?>
 
-    <!-- order list -->
-    <? include_once('orders.php'); ?>
+    <!-- products plan -->
+    <? include_once('actions.php'); ?>
 
 	<!-- orders plan menu -->
     <? include_once('menu.php'); ?>
@@ -28,6 +27,6 @@
 <!-- js files -->
 <script src="/web/js/get_value_from_request.js"></script>
 <script src="/modules/plan/js/level_filters.js"></script>
-<script src="/modules/plan/js/edit_state_order.js"></script>
 <script src="/modules/plan/js/edit_rating.js"></script>
+<!--<script src="/modules/plan/js/edit_state_action.js"></script>-->
 

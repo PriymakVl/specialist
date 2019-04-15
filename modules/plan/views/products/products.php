@@ -15,7 +15,7 @@
 			</tr>
 			<? foreach($products as $product): ?>
 				<tr>
-					<td>
+					<td <?if ($this->session->id_prod_active == $product->id) echo 'class="bg-green"'; ?>>
 						<input type="radio" name="product" id_prod="<?=$product->id?>">
 					</td>
 					<td>

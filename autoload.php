@@ -27,7 +27,7 @@ function autoload_controller($class_name)
 	if (strpos($class_name, 'Controller_Base') !== false) require_once './controllers/controller_base.php';
 }
 
-function autoload_class($class_name)
+function autoload_module($class_name)
 {
 	$module_name = false;
 	if (strpos($class_name, 'OrderPosition') !== false) $module_name = 'order_position';
@@ -42,7 +42,9 @@ function autoload_class($class_name)
 	else if (strpos($class_name, 'Drawing') !== false) $module_name = 'drawing';
 	if (!$module_name) return;
 	if (file_exists('./modules/'.$module_name.'/classes/'.$class_name.'.php')) require './modules/'.$module_name.'/classes/'.$class_name.'.php';
-	else require './modules/'.$module_name.'/traits/'.$class_name.'.php';
+	else if (file_exists('./modules/'.$module_name.'/traits/'.$class_name.'.php')) require './modules/'.$module_name.'/traits/'.$class_name.'.php';
+	else if (file_exists('./modules/'.$module_name.'/models/'.$class_name.'.php')) require './modules/'.$module_name.'/models/'.$class_name.'.php';
+	else require './modules/'.$module_name.'/params/'.$class_name.'.php';
 }
 
 function autoload_model($class_name)
@@ -65,7 +67,7 @@ function autoload_helper($class_name)
 spl_autoload_register('autoload_core', true);
 spl_autoload_register('autoload_core_trait', true);
 spl_autoload_register('autoload_controller', true);
-spl_autoload_register('autoload_class', true);
+spl_autoload_register('autoload_module', true);
 spl_autoload_register('autoload_model', true);
 spl_autoload_register('autoload_helper', true);
 

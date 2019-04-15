@@ -1,4 +1,4 @@
- 	var state, id_action, action, type_action, note;
+ 	var state, id_action, action, note;
 	
 	const STATE_ACTION_PLANED = 1;
 	const STATE_ACTION_PROGRESS = 2;
@@ -7,10 +7,9 @@
 
 	function show_box_operations(elem) {
 		state = $(elem).attr('state');
+		action = $(elem).attr('action_name');
 		id_action = $(elem).attr('id_action');
-		action = $(elem).attr('action');
 		note = $(elem).attr('note');
-		type_action = $(elem).attr('type_action');
 		
 		$('#terminal-actions-wrp, #terminal-actions-unplan-wrp, #filters-wrp').hide();
 		$('#operations-box').show();
@@ -29,23 +28,20 @@
 		return false;
 	}
 	
+	//exit operation box
+	function exit_operations_box() {
+		$('#terminal-actions-wrp, #filters-wrp').show();
+		$('#operations-box').hide();
+		return false;
+	}
+	
 	//в работу
 	function action_state_work() {
 		if (state == STATE_ACTION_PROGRESS) {
 			alert('Операция уже выполняется');
 			return;
 		}
-		var path = getUrl();
-		path = path + '&id_action=' + id_action + '&state=' + STATE_ACTION_PROGRESS ;
-		location.href = path;
-		return false;
-	}
-
-	
-	//exit operation box
-	function exit_operations_box() {
-		$('#terminal-actions-wrp, #filters-wrp').show();
-		$('#operations-box').hide();
+		location.href = '/terminal/edit_state?action=' + action + '&state=' + STATE_ACTION_PROGRESS + '&id_action=' + id_action ;
 		return false;
 	}
 
@@ -59,9 +55,7 @@
 			alert('Сначала нужно выдать задание в работу');
 			return;
 		}
-		var path = getUrl();
-		path = path + '&id_action=' + id_action + '&state=' + STATE_ACTION_ENDED;
-		location.href = path;
+		location.href = '/terminal/edit_state=' + action + '&state=' + STATE_ACTION_ENDED + '&id_action=' + id_action;
 		return false;
 	}
 	
@@ -75,9 +69,7 @@
 			alert('Сначала нужно выдать задание в работу');
 			return;
 		}
-		var path = getUrl();
-		path = path + '&id_action=' + id_action + '&state=' + STATE_ACTION_STOPPED;
-		location.href = path;
+		location.href = '/terminal/edit_state=?action' + action + '&state=' + STATE_ACTION_STOPPED + '&id_action=' + id_action;
 		return false;
 	}
 	
@@ -90,13 +82,6 @@
 		request = request + '&action=' + action; 
 		location.href = request;
 		return false;
-	}
-	
-	function getUrl() {
-		var params = getObjectGetParams();
-		action = params.action ? params.action : action;
-		if (type_action == 'unplan') return '/terminal/edit_state_unplan?action=' + action;
-		else return '/terminal/edit_state?action=' + action;
 	}
 	
 

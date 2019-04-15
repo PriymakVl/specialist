@@ -60,9 +60,9 @@ trait OrderProductTotal  {
 		return $this;
 	}
 	
-	public function getListForPlan()
+	public function getAllNotStateEnded()
 	{
-		$items = $this->getListForPlanModel();
+		$items = $this->getAllNotStateEndedModel();
 		if ($items) return ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'getOrder', 'convertState']);
 	}
 	

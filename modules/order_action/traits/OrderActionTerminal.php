@@ -6,12 +6,17 @@ trait OrderActionTerminal {
 
 	public function getForTerminal()
 	{
-		// if ($this->get->action == 'all' && $this->get->order == 'all') $items = $this->getAllNotReadyForTerminalModel();
-		// else if ($this->get->action != 'all' && $this->get->order == 'all' ) $items = $this->getForAllOrdersForTerminalModel();
-		// else $items = self::getForOneOrderTerminalModel();
-		$items = $this->getForAllOrdersForTerminalModel();
-		debug($items);
-		return HelperObject::createArray($items, 'OrderAction', ['setData', 'getProduct']);
+		$items = $this->getItemsForTerminal();
+		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getProduct', 'getOrder', 'setBgTerminalBox']);
+	}
+	
+	private function getItemsForTerminal()
+	{
+		if (!$this->get->order) $this->get->order = 'all';
+		if ($this->get->action == 'all' && $this->get->order == 'all') $items = $this->getAllNotReadyForTerminalModel();
+		else if ($this->get->action != 'all' && $this->get->order == 'all' ) $items = $this->getForAllOrdersForTerminalModel();
+		else $items = $this->getAllForOneOrderTerminalModel();
+		return $items;
 	}
 	
 	// public function getOrdersForTerminal()

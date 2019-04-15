@@ -59,9 +59,9 @@ trait OrderProductModel {
 	}
 	
 	//2 state waiting and work
-	public function getListForPlanModel()
+	public function getAllNotStateEndedModel()
 	{
-		$params = $this->getListForPlanParam();
+		$params = $this->getAllNotStateEndedParam();
 		$sql = 'SELECT * FROM `order_products` WHERE `type_order` = :type_order AND `state` <> :state AND `status` = :status
 			ORDER BY state DESC, rating DESC, date_exec DESC';
 		return self::perform($sql, $params)->fetchAll();

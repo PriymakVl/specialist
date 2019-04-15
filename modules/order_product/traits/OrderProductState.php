@@ -4,14 +4,14 @@ trait OrderProductState {
 
 	
 	
-	// public function setStatePreparation($order)
-	// {
-		// if ($order->products) return $this;
-		// $products = (new OrderProductExtract)->getProducts($order);
-		// if ($products) $this->addProductList($products);//->addActionList($order->id);
-	// }
+	public function editState()
+	{
+		$this->setState($this->get->state);
+		(new OrderAction)->editStateForProduct($this->id, $this->get->state);
+		return $this;
+	}
 	
-	public function setStateAsInOrder($id_order, $state_order)
+	public function setStateForOrder($id_order, $state_order)
 	{
 		$state = $this->setStateByStateOrder($state_order);
 		$params = ['id_order' => $id_order, 'state' => $state, 'status' =>STATUS_ACTIVE];

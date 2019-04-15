@@ -10,7 +10,7 @@ $(document).ready(function() {
 			return;
 		}
 		var params = getObjectGetParams();
-		location.href = '/plan/edit_state_order?id_order=' + id_order + '&state=' + STATE_WAITING + '&type=' + params.type;
+		location.href = '/plan/edit_state_order?id_order=' + id_order + '&state=' + STATE_WAITING + '&type_order=' + params.type_order;
 	});
 	
 	$('#order-to-work').click(function(event) {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 			return;
 		}
 		var params = getObjectGetParams();
-		location.href = '/plan/edit_state_order?id_order=' + id_order + '&state=' + STATE_WORK + '&type=' + params.type;
+		location.href = '/plan/edit_state?id_order=' + id_order + '&state=' + STATE_WORK + '&type_order=' + params.type_order;
 	});
-
+	
 });

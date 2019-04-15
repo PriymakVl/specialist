@@ -2,14 +2,14 @@
 
 trait OrderActionParamTerminal {
 
-	private function getAllNotReadyForTerminalModelParams()
+	private function getAllNotReadyForTerminalParams()
 	{
 		$params = self::selectParams(['type_order', 'status']);
 		$params['state'] = OrderActionState::ENDED;
 		return $params;
 	}
 	
-	private function getForAllOrdersForTerminalModelParams()
+	private function getForAllOrdersForTerminalParams()
 	{
 		$worker = (new Worker)->setData($this->session->id_user)->getOptions();
 		$params['status'] = STATUS_ACTIVE;
@@ -20,7 +20,7 @@ trait OrderActionParamTerminal {
 		return $params;
 	}
 	
-	private function getForOneOrderForTerminalModelParams()
+	private function getForOneOrderForTerminalParams()
 	{
 		$params['status'] = STATUS_ACTIVE;
 		$params['ended'] = OrderActionState::ENDED;

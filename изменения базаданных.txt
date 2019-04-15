@@ -21,3 +21,4 @@ add type_orders in order_products
 add type_orders in order_actions
 add rating in order_products
 add date_exec in order_products
+add date_exec in order_actions

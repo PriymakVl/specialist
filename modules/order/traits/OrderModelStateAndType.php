@@ -28,7 +28,7 @@ trait OrderModelStateAndType {
 	public function getListForPlanModel()
 	{
 		$params = $this->getListForPlanParam();
-		$sql = 'SELECT * FROM `orders` WHERE `type` = :type AND (`state` = :waiting OR `state` = :work) AND `status` = :status 
+		$sql = 'SELECT * FROM `orders` WHERE `type` = :type_order AND (`state` = :waiting OR `state` = :work) AND `status` = :status 
 			ORDER BY state, rating DESC, date_exec ASC';
 		return self::perform($sql, $params)->fetchAll();
 	}

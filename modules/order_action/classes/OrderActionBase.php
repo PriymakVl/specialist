@@ -20,6 +20,13 @@ class OrderActionBase extends Model {
 	
 	const RATING_DEFAULT = 1;
 	
+	public function __construct($id = false)
+    {
+        $this->tableName = 'order_actions';
+        parent::__construct($id);
+		$this->message->section = 'order_action';
+    }
+	
 	
 
 	

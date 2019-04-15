@@ -2,10 +2,11 @@
 
 class OrderProductBase extends Model {
 	
-    const STATE_PROGRESS = 1; //работа выполняется
-    const STATE_STOPPED = 2; //работа остановлена по какой то причине
-    const STATE_ENDED = 3; //работа закончена
-    const STATE_WAITING = 4; //отложен или не выдан
+	const STATE_PLANED = 1; //работа запланирована
+    const STATE_PROGRESS = 2; //работа выполняется
+    const STATE_STOPPED = 3; //работа остановлена по какой то причине
+    const STATE_ENDED = 4; //работа закончена
+    const STATE_WAITING = 5; //отложен или не выдан
 	
 	const ID_MAIN_PARENT = 0;
 	
@@ -19,7 +20,12 @@ class OrderProductBase extends Model {
 	public $specificationGroup;
 	public $specificationAll; //on all levels
 	
-		//for convert specification
+	public function __construct($id = false)
+	{
+		$this->tableName = 'order_products';
+		parent::__construct($id);
+		$this->message->section = 'order_product';
+	}
 
 }
 

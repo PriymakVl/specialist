@@ -4,13 +4,6 @@ class OrderProduct extends OrderProductBase {
 	
 	use OrderProductTotal, OrderProductConvert, OrderProductSpecification, OrderProductState, OrderProductAdd;
 	
-	public function __construct($id = false)
-	{
-		$this->tableName = 'order_products';
-		parent::__construct($id);
-		$this->message->section = 'order_product';
-	}
-	
 	public function edit()
 	{
 		$this->editModel();
@@ -46,7 +39,7 @@ class OrderProduct extends OrderProductBase {
 	public function editRating()
 	{
 		$this->setRating($this->get->rating);
-		(new OrderActions)->editRatingForProduct($this);
+		(new OrderAction)->editRatingForProduct($this);
 		return $this;
 	}
 	

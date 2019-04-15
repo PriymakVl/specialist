@@ -62,13 +62,16 @@ trait OrderActionTotal {
 	public function editRatingForProduct()
 	{
 		$items = $this->getAllByIdProductModel();
-
-		foreach ($actions as $actions'
+		foreach ($items as $item) {
+			(new self)->setData($item)->setRating($this->get->rating);
+		}
 	}
 	
-
-	
-
+	public function getAllNotStateEnded()
+	{
+		$items = $this->getAllNotStateEndedModel();
+		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
+	}
 	
 	
 

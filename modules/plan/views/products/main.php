@@ -1,5 +1,5 @@
 <?php
-	if ($this->get->type == Order::TYPE_CYLINDER) $type_string = 'Пневмо';
+	if ($this->get->type_order == Order::TYPE_CYLINDER) $type_string = 'Пневмо';
 	else $type_string = 'Пресса и накатки';
 ?>
 <!-- css files -->
@@ -28,4 +28,5 @@
 <script src="/web/js/get_value_from_request.js"></script>
 <script src="/modules/plan/js/level_filters.js"></script>
 <script src="/modules/plan/js/edit_rating.js"></script>
+<script src="/modules/plan/js/edit_state_product.js"></script>
 

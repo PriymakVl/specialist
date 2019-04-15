@@ -1,18 +1,19 @@
 <?php
-	$all_actions = DataAction::getAll('data_actions');
-	$orders = OrderAction::getOrdersForTerminal();
-	$id_order = empty($params['order']) ? 'all' : $params['order'];
+	$default_actions = Action::getAll('actions');
+	//$orders = OrderAction::getOrdersForTerminal();
+	$orders = false;
+	$name_action = $this->get->action ? trim($this->get->action) : $worker->options->default_action;
 ?>
 <div id="filters-wrp">
 	<!-- filter actions -->
 	<div id="filter-actions-wrp">
 		<form action="/terminal/action">
 			<select id="filter-actions">
-				<option value="all">Все операции без дополн.</option>
-				<? foreach ($all_actions as $item): ?>
-					<option <? if ($item->id == $params['action']) echo 'selected'; ?> value="<?=$item->id?>"><?=$item->name?></option>
+				<option value="all">Все операции</option>
+				<? foreach ($default_actions as $item): ?>
+					<option <? if ($item->name == $name_action) echo 'selected'; ?> value="<?=$item->name?>"><?=$item->name?></option>
 				<? endforeach; ?>
-				<option value="unplan" <? if ($params['action'] == 'unplan') echo 'selected';?>>Дополнительные операц.</option>
+				<option value="other">Разные</option>
 			</select>
 		</form>
 	</div>

@@ -4,8 +4,14 @@ trait OrderActionStateTrait {
 
 	public function editState($params)
 	{
-		(new OrderActionState)->add($params);
-		self::setStateModel($params);
+		
+		$this->setTimeState()->setStateModel($params);
+		return $this;
+	}
+	
+	public function editStateWorker()
+	{
+		$this->setTimeState()->setStateWorkerModel($params);
 		return $this;
 	}
 	
@@ -45,6 +51,20 @@ trait OrderActionStateTrait {
 			case OrderState::WORK: return OrderActionState::PLANED;
 			case OrderState::MADE: return OrderActionState::ENDED;
 		}
+	}
+	
+	public function editStateForProduct($id_prod, $state)
+	{
+		$params = ['id_prod' => $id_prod, 'state' => $state, 'status' =>STATUS_ACTIVE];
+		$this->setStateForProductModel($params);
+		// OrderActionState::add($params);
+		return $this;
+	}
+	
+	private function setTimeState()
+	{
+		(new OrderActionState)->add();
+		return $this;
 	}
 
 

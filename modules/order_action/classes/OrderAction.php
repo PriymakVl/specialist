@@ -2,14 +2,7 @@
 
 class OrderAction extends OrderActionBase {
 	
-	use OrderActionTotal, OrderActionModel, OrderActionStateTrait, OrderActionConvert, OrderActionTerminal;
-	
-	public function __construct($id = false)
-    {
-        $this->tableName = 'order_actions';
-        parent::__construct($id);
-		$this->message->section = 'order_action';
-    }
+	use OrderActionModel, OrderActionStateTrait, OrderActionConvert, OrderActionTerminal, OrderActionTotal;
 	
 	public function getProduct()
 	{
