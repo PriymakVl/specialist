@@ -13,7 +13,7 @@ class Controller_Order extends Controller_Base {
     public function action_index()
 	{
 		$order = new Order($this->get->id_order);
-		$order->getPositions()->convertProperties()->getProducts()->getActions();
+		$order->getPositions()->convertProperties()->getMainProducts()->getActions();
 		$this->render('index/main', compact('order'));
 	}
 

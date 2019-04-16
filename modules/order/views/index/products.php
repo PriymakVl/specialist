@@ -1,7 +1,7 @@
 <? 
 	$number = 1;
 	$tab_active_products = false;
-	if  (!$this->get->tab & $order->products) $tab_active_products = true;
+	if  (!$this->get->tab & $order->productsMain) $tab_active_products = true;
 	if ($this->get->tab == 2) $tab_active_products = true;
 ?>
 <li id="order-products-wrp">
@@ -10,7 +10,7 @@
     <div class="tab-content">
 		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>
         <table width="940">
-            <? if ($order->products): ?>
+            <? if ($order->productsMain): ?>
 				<tr>
 					<th width="50">№</th>
 					<th width="150">Обозначение</th>
@@ -19,7 +19,7 @@
 					<th>Примечание</th>
 					<th width="120">Состояние</th>
 				</tr>
-                <? foreach($order->products as $product): ?>
+                <? foreach($order->productsMain as $product): ?>
                     <tr>
 						<td><?=$number?></td>
 						<td>

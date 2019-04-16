@@ -23,9 +23,10 @@ trait OrderActionTotal {
 		}
 	}
 	
-	public function getForProduct()
+	public function getForProduct($id_prod = false)
 	{
-		$items = $this->getAllByIdProductModel();
+		$id_prod = $id_prod ? $id_prod : $this->get->id_prod;
+		$items = $this->getAllByIdProductModel($id_prod);
 		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState']);
 	}
 	
@@ -57,14 +58,6 @@ trait OrderActionTotal {
 	{
 		$items = $this->getAllByIdOrderModel();
 		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState', 'getProduct']);//'isStates'
-	}
-	
-	public function editRatingForProduct()
-	{
-		$items = $this->getAllByIdProductModel();
-		foreach ($items as $item) {
-			(new self)->setData($item)->setRating($this->get->rating);
-		}
 	}
 	
 	public function getAllNotStateEnded()

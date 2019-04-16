@@ -18,14 +18,12 @@
             <!-- order  info -->
             <? include_once('info.php'); ?>
 
-            <!-- products -->
-			<? if ($order->products) include_once('products.php'); ?>
+            <!-- products main -->
+			<? if ($order->productsMain) include_once('products.php'); ?>
 
             <!-- actions -->
             <? if ($order->actions) include_once('actions.php'); ?>
 			
-			<!-- actions unplan -->
-			<? if ($order->actionsUnplan) include_once('actions_unplan.php'); ?>
         </ul>
     </div>
 

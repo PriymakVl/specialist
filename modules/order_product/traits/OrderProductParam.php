@@ -46,6 +46,14 @@ trait OrderProductParam {
 		return $params;
 	}
 	
+	public function getAllForOrderNotStateEndedParam()
+	{
+		$params['id_order'] = $this->get->id_order;
+		$params['state'] = OrderProduct::STATE_ENDED;
+		$params['status'] = STATUS_ACTIVE;
+		return $params;
+	}
+	
 
 	
 }

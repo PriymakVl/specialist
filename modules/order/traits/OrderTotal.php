@@ -14,7 +14,7 @@ trait OrderTotal {
 	public function getListForPlan()
 	{
 		$items = $this->getListForPlanModel();
-		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getProducts', 'getProductsTable', 'convertProperties']);
+		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getMainProducts', 'getProductsTable', 'convertProperties']);
 	}
 	
 	private function addProductsByPositions()

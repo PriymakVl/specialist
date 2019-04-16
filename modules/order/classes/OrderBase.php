@@ -9,14 +9,19 @@ class OrderBase extends Model {
 	const RATING_IMPORTANT = 50;
 	const RATING_PRIORITY = 100;
 	
-    public $content;
+    // public $content;
 	public $positionsTable;
 	public $positions;
+	
 	public $stateString;
 	public $stateBg;
+	
 	public $actions;
 	public $actionsUnplan;
-	public $products;
+	
+	public $productsMain;
+	public $productsAll;
+	public $productsNotReady;
 	public $productsTable;
 	public $ratingString;
 
@@ -31,6 +36,13 @@ class OrderBase extends Model {
 	public $timeManufacturingForWorker = 0;
 	
 	public $bgTerminalBox;
+	
+	public function __construct($id_order = false)
+    {
+        $this->tableName = 'orders';
+        parent::__construct($id_order);
+		$this->message->section = 'order';
+    }
 	
 	
 }

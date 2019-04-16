@@ -1,12 +1,13 @@
 <?php
 
-trait OrderActionStateTrait {
+trait OrderActionTraitState {
+	
+	use OrderActionDetermineStateProduct;
 
-	public function editState($params)
+	public function editState()
 	{
-		
-		$this->setTimeState()->setStateModel($params);
-		return $this;
+		$this->setStateModel();
+		return $this->setTimeState()->setStateProduct();
 	}
 	
 	public function editStateWorker()
@@ -53,19 +54,30 @@ trait OrderActionStateTrait {
 		}
 	}
 	
-	public function editStateForProduct($id_prod, $state)
+	public function editStateActionsWhenChangeStateProduct()
 	{
-		$params = ['id_prod' => $id_prod, 'state' => $state, 'status' =>STATUS_ACTIVE];
-		$this->setStateForProductModel($params);
-		// OrderActionState::add($params);
-		return $this;
+		$items = $this->getAllByIdProductNotStateEndedModel();
+		if (empty($items)) return;
+		foreach ($items as $item)
+		{
+			(new self)->setData($item)->setState($this->get->state);
+		}
 	}
 	
 	private function setTimeState()
 	{
-		(new OrderActionState)->add();
+		// (new OrderActionState)->add();
 		return $this;
 	}
-
+	
+	private function setStateProduct()
+	{
+		$product = (new OrderProduct)->setData($this->id_prod);
+		if ($product->state == $this->get->state) return $this;
+		$state_prod = $this->determineStateProductWhereChangeStateAction($product->id);
+		$product->setState($state_prod);
+		return $this;
+	}
+	
 
 }

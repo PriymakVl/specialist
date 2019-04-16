@@ -1,6 +1,6 @@
 <?
 	$hidden_order_products_menu = true;
-	if ($order->products) $hidden_order_products_menu = false;
+	if ($order->productsMain) $hidden_order_products_menu = false;
 	if ($this->get->tab && $this->get->tab != 2) $hidden_order_products_menu = true;
 	// debug($hidden_order_products_menu);
 ?>

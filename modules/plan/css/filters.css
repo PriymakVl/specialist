@@ -1,5 +1,10 @@
-#search-list-orders-wrp {
-    margin-left: 15px;
+#plan-filter-level-wrp span {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#plan-filter-level-wrp span.green {
+	margin-right: 30px;
 }
 
 #plan-level-filter {
@@ -8,13 +13,13 @@
     height: 28px;
 }
 
-#plan-filters-wrp {
+#plan-filter-level-wrp {
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
-    padding: 10px 0;
+    padding-bottom: 10px;
 }
 
-#plan-filters-wrp label {
+#plan-filter-level-wrp label {
     font-size: 16px;
     font-weight: bold;
 }

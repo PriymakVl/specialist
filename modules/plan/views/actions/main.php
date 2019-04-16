@@ -6,9 +6,8 @@
 <link rel="stylesheet" href="/modules/plan/css/filters.css">
 
 <div id="content">
-	<h2>Планирование - <span class="green"><?=$type_string?></span></h2>
-    <!-- filters plan -->
-    <? include_once('filters.php'); ?>
+    <!-- filter level plan -->
+    <? include_once('filter_level.php'); ?>
 
     <!-- order form search -->
     <? //include_once('search.php'); ?>
@@ -28,5 +27,6 @@
 <script src="/web/js/get_value_from_request.js"></script>
 <script src="/modules/plan/js/level_filters.js"></script>
 <script src="/modules/plan/js/edit_rating.js"></script>
-<!--<script src="/modules/plan/js/edit_state_action.js"></script>-->
+<script src="/modules/plan/js/edit_state_action.js"></script>
+
 

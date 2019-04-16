@@ -4,12 +4,12 @@ $(document).ready(function() {
 	
 	$('#action-to-work').click(function(event) {
 		event.preventDefault();
-		sentRequestAction(STATE_PLANED);
+		return sentRequestAction(STATE_PLANED);
 	});
 	
 	$('#action-to-waiting').click(function(event) {
 		event.preventDefault();
-		sentRequestAction(STATE_WAITING);
+		return sentRequestAction(STATE_WAITING);
 	});
 });
 

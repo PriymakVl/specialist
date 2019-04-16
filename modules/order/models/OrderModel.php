@@ -4,20 +4,6 @@ trait OrderModel {
 	
 	use OrderParam, OrderModelStateAndType;
 
-	public function getAllOrdersModel()
-	{
-		$sql = 'SELECT * FROM `orders` WHERE `status` = :status ORDER BY rating DESC, date_exec ASC';
-		return self::perform($sql, ['status' => STATUS_ACTIVE])->fetchAll();
-	}
-	
-	public function getBySymbol($symbol)
-	{
-	   if (empty($symbol)) return false;
-	   $sql = 'SELECT * FROM `orders` WHERE `symbol` = :symbol AND `status` = :status';
-	   $params = ['symbol' => $symbol, 'status' => STATUS_ACTIVE];
-	   return self::perform($sql, $params)->fetch();
-	}
-
     public function addDataModel()
     {
 		$params = $this->addDataParam(['symbol', 'note', 'date_exec', 'type', 'state', 'rating']);
@@ -33,14 +19,28 @@ trait OrderModel {
 		$sql = 'UPDATE `orders` SET `symbol` = :symbol, `date_exec` = :date_exec, `type` = :type, `note` = :note, `rating` = :rating WHERE `id` = :id_order';
 		return self::update($sql, $params);
 	}
-
-    public function searchBySymbol()
+	
+	public function getAllOrdersModel()
+	{
+		$sql = 'SELECT * FROM `orders` WHERE `status` = :status ORDER BY rating DESC, date_exec ASC';
+		return self::perform($sql, ['status' => STATUS_ACTIVE])->fetchAll();
+	}
+	
+	public function getBySymbol($symbol)
+	{
+	   if (empty($symbol)) return false;
+	   $sql = 'SELECT * FROM `orders` WHERE `symbol` = :symbol AND `status` = :status';
+	   $params = ['symbol' => $symbol, 'status' => STATUS_ACTIVE];
+	   return self::perform($sql, $params)->fetch();
+	}
+	
+	public function searchBySymbol()
     {
         $sql = 'SELECT * FROM `orders` WHERE `symbol` like concat("%", :symbol, "%") AND `status` = :status';
         $params = ['symbol' => trim($this->post->symbol), 'status' => STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
-    
+
 }
 
 

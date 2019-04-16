@@ -11,10 +11,17 @@ trait OrderActionModel {
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public function getAllByIdProductModel()
+	public function getAllByIdProductModel($id_prod)
 	{
-		$params = ['id_prod' => $this->get->id_prod, 'status' => STATUS_ACTIVE];
+		$params = ['id_prod' => $id_prod, 'status' => STATUS_ACTIVE];
 		$sql = 'SELECT * FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status';
+		return self::perform($sql, $params)->fetchAll();
+	}
+	
+	public function getAllByIdProductNotStateEndedModel($id_prod)
+	{
+		$params = ['id_prod' => $id_prod, 'status' => STATUS_ACTIVE, 'state' => OrderActionState::ENDED];
+		$sql = 'SELECT * FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status AND `state` <> :state';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	

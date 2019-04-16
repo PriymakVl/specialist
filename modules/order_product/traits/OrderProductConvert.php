@@ -12,7 +12,8 @@ trait OrderProductConvert {
 	public function getStateString()
 	{
 		switch ($this->state) {
-			case self::STATE_WAITING : return "Не выдан";
+			case self::STATE_WAITING : return "Отложен";
+			case self::STATE_PLANED : return "В работе";
 			case self::STATE_PROGRESS : return "Обрабатывается";
 			case self::STATE_STOPPED : return "Остановлен";
 			case self::STATE_ENDED : return "Изготовлен";
@@ -24,6 +25,7 @@ trait OrderProductConvert {
 	{
 		switch ($this->state) {
 			case self::STATE_WAITING : return "#FFE4B5";
+			case self::STATE_PLANED : return "pink";
 			case self::STATE_PROGRESS : return "yellow";
 			case self::STATE_STOPPED : return "red";
 			case self::STATE_ENDED : return "green";

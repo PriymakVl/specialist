@@ -27,7 +27,7 @@ trait OrderConvert {
 	
 	public function getProductsTable()
 	{
-		if ($this->products) $this->productsTable = (new OrderProduct)->convertProductsToTable($this->products);
+		if ($this->productsMain) $this->productsTable = (new OrderProduct)->convertProductsToTable($this->productsMain);
 		return $this;
 	}
 	

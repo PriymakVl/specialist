@@ -2,13 +2,7 @@
 
 class OrderProduct extends OrderProductBase {
 	
-	use OrderProductTotal, OrderProductConvert, OrderProductSpecification, OrderProductState, OrderProductAdd;
-	
-	public function edit()
-	{
-		$this->editModel();
-		return $this;
-	}
+	use OrderProductEdit, OrderProductTotal, OrderProductConvert, OrderProductSpecification, OrderProductState, OrderProductAdd;
 	
 	public function getParent()
 	{
@@ -32,23 +26,10 @@ class OrderProduct extends OrderProductBase {
 	
 	public function getActions()
 	{
-		$this->actions = (new OrderAction)->getForProduct($this);
+		$this->actions = (new OrderAction)->getForProduct($this->id);
 		return $this;
 	}
-	
-	public function editRating()
-	{
-		$this->setRating($this->get->rating);
-		(new OrderAction)->editRatingForProduct($this);
-		return $this;
-	}
-	
-	
-	
-	
-	
-	
-	
+
 	
 }
 

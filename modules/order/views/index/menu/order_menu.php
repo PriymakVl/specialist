@@ -1,8 +1,8 @@
 <?
 	$hidden_order_menu = false;
-	if ($order->products || $order->actions) $hidden_order_menu = true;
+	if ($order->productsMain || $order->actions) $hidden_order_menu = true;
 	if ($this->get->tab && $this->get->tab != 1) $hidden_order_menu = true;
-	if (!$order->products && !$order->actions) $hidden_order_menu = false;
+	if (!$order->productsMain && !$order->actions) $hidden_order_menu = false;
 ?>
 
 <ul id="order-menu-wrp" <? if ($hidden_order_menu) echo 'style="display:none;"'; ?>>
@@ -25,7 +25,7 @@
 		<a href="/order_position/add?id_order=<?=$order->id?>">Добавить позицию</a>
 	</li>
 	<!-- add order product -->
-	<? if (!$order->products): ?>
+	<? if (!$order->productsMain): ?>
 		<li>
 			<a href="/order_product/add_form?id_order=<?=$order->id?>">Добавить продукт</a>
 		</li>

@@ -66,6 +66,12 @@ trait OrderProductTotal  {
 		if ($items) return ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'getOrder', 'convertState']);
 	}
 	
+	public function getAllForOrderNotStateEnded()
+	{
+		$items = $this->getAllForOrderNotStateEndedModel();
+		if ($items) return ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'getActions']);
+	}
+	
 
 	
 	

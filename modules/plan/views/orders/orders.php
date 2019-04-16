@@ -19,7 +19,7 @@
                 <td>
                     <a href="/order?id_order=<?=$order->id?>"><?=$order->symbol?></a>
                 </td>
-				<? if ($order->products): ?>
+				<? if ($order->productsMain): ?>
 					<td class="order-products-td"><?=$order->productsTable?></td>
 				<? else: ?>
 					<td class="red">Нет позиций</td>

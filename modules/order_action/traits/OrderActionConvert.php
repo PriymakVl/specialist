@@ -12,9 +12,9 @@ trait OrderActionConvert {
 	public function setStateString()
 	{
 		switch ($this->state) {
-			case OrderActionState::WAITING : return "Не выдана";
+			case OrderActionState::WAITING : return "Отложена";
 			case OrderActionState::PLANED : return "Запланирована";
-			case OrderActionState::PROGRESS : return "В работе";
+			case OrderActionState::PROGRESS : return "Выполняется";
 			case OrderActionState::STOPPED : return "Остановлена";
 			case OrderActionState::ENDED : return "Выполнена";
 			default: return "Не известное состояние";
@@ -24,8 +24,8 @@ trait OrderActionConvert {
 	public function setStateBg()
 	{
 		switch ($this->state) {
-			case OrderActionState::WAITING : return "orange";
-			case OrderActionState::PLANED : return "pink";
+			case OrderActionState::WAITING : return "#FFE4B5";
+			case OrderActionState::PLANED : return "#F0FFF0";
 			case OrderActionState::PROGRESS : return "yellow";
 			case OrderActionState::STOPPED : return "red";
 			case OrderActionState::ENDED : return "green";

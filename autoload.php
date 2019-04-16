@@ -31,6 +31,7 @@ function autoload_module($class_name)
 {
 	$module_name = false;
 	if (strpos($class_name, 'OrderPosition') !== false) $module_name = 'order_position';
+	else if (strpos($class_name, 'OrderActionState') !== false) $module_name = 'order_action_state';
 	else if (strpos($class_name, 'OrderAction') !== false) $module_name = 'order_action';
 	else if (strpos($class_name, 'OrderProduct') !== false) $module_name = 'order_product';
 	else if (strpos($class_name, 'Order') !== false) $module_name = 'order';

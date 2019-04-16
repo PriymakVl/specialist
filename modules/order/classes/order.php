@@ -2,14 +2,7 @@
 
 class Order extends OrderBase {
 	
-	use OrderTotal, OrderConvert, OrderTime;
-	
-    public function __construct($id_order = false)
-    {
-        $this->tableName = 'orders';
-        parent::__construct($id_order);
-		$this->message->section = 'order';
-    }
+	use OrderEdit, OrderGetContent, OrderTotal, OrderConvert, OrderTime;
 	
 	public function addData()
 	{
@@ -23,45 +16,10 @@ class Order extends OrderBase {
 		return $this;
 	}
 	
-	public function edit()
-	{
-		$this->editData();
-		return $this;
-	}
-	
-	public function editState()
-	{
-		if ($this->post->state == $this->state) return $this;
-		if ($this->state == OrderState::REGISTERED && $this->post->state == OrderState::PREPARATION && $this->positions) $this->addProductsByPositions();
-		if ($this->products) (new OrderProduct)->setStateAsInOrder($this->id, $this->post->state);
-		if ($this->actions) (new OrderAction)->setStateAsInOrder($this->id, $this->post->state);
-		$this->setState($this->post->state ? $this->post->state : $this->get->state);
-		return $this;
-	}
-	
-	public function getPositions()
-	{
-		$this->positions = (new OrderPosition)->getAllByIdOrderModel($this->id);
-		return $this;
-	}
-	
 	public function delete()
 	{
 		parent::delete();
 		// self::deleteStatic($this->id);
-		return $this;
-	}
-	
-	public function getActions()
-	{
-		$this->actions = (new OrderAction)->getForOrder();
-		return $this;
-	}
-	
-	public function getProducts()
-	{
-		$this->products = (new OrderProduct)->getMainParentOrder($this->id);
-		// debug($this->products[0]->stateString);
 		return $this;
 	}
 	

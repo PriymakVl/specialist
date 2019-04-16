@@ -7,7 +7,8 @@ trait OrderProductState {
 	public function editState()
 	{
 		$this->setState($this->get->state);
-		(new OrderAction)->editStateForProduct($this->id, $this->get->state);
+		(new OrderAction)->editStateForProduct($this->id);
+		
 		return $this;
 	}
 	
@@ -49,13 +50,13 @@ trait OrderProductState {
 		return $this;
 	}
 	
-	private function checkStateActions($state)
-	{
-		foreach ($this->actions as $action) {
-			if ($action->state != $state) return false;
-		}
-		return true;
-	}
+	// private function checkStateActions($state)
+	// {
+		// foreach ($this->actions as $action) {
+			// if ($action->state != $state) return false;
+		// }
+		// return true;
+	// }
 	
 
 }
