@@ -1,6 +1,6 @@
 <?php
 
-trait OrderActionModelAdd {
+trait OrderActionModelInsert {
 
 	private function addDataModel($action, $product)
 	{
@@ -26,5 +26,5 @@ trait OrderActionModelAdd {
 		VALUES (:id_order, :id_prod, :qty, :name, :price, :number, :state, :type_order, :time_prepar, :time_prod, :note, :rating)";
         return self::insert($sql, $params);
 	}
-
+	
 }

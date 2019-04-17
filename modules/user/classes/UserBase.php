@@ -5,7 +5,7 @@ class UserBase extends Model
 
 	public $defaultTypeOrder;
 	public $defaultProductAction;
-	public $defaultStateOrders;//for show on list orders
+	public $defaultStateOrder;//for show on list orders
 	public $options;
 	
 	const POSITION_SUPER_ADMIN = 1;
@@ -20,6 +20,21 @@ class UserBase extends Model
 	 const ACTION_CHPU = 3;
 	 const ACTION_FREZ = 4;
 	 const ACTION_ASSEMB = 6;
+	 
+	public function __construct($id_user = false)
+    {
+        $this->tableName = 'users';
+        parent::__construct($id_user);
+		$this->message->section = 'user';
+    }
+	 
+	 public function setProperties()
+	 {
+		$this->options = UserOptions::get($this->id);
+		if (isset($this->options->default_type_order)) $this->defaultTypeOrder = $this->options->default_type_order; 
+		if (isset($this->options->default_state_order)) $this->defaultStateOrder = $this->options->default_state_order; 
+		return $this;
+	 }
 	
 
 }

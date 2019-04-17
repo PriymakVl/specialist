@@ -12,10 +12,28 @@ trait OrderEdit {
 	{
 		if ($this->post->state == $this->state) return $this;
 		if ($this->state == OrderState::REGISTERED && $this->post->state == OrderState::PREPARATION && $this->positions) $this->addProductsByPositions();
-		if ($this->products) (new OrderProduct)->setStateAsInOrder($this->id, $this->post->state);
-		if ($this->actions) (new OrderAction)->setStateAsInOrder($this->id, $this->post->state);
+		if ($this->productsAll) $this->editStateProducts();
+		if ($this->actions) $this->editStateActions();
 		$this->setState($this->post->state ? $this->post->state : $this->get->state);
 		return $this;
+	}
+	
+	public function editStateProducts()
+	{
+		foreach ($this->productsAll as $product) {
+			if ($product->state == OrderProduct::STATE_ENDED) continue;
+			$state = (new OrderProduct)->determineStateByStateOrder($this->post->state);
+			$product->setState($state);
+		}
+	}
+	
+	public function editStateActions()
+	{
+		foreach ($this->actions as $action) {
+			if ($action->state == OrderActionState::ENDED) continue;
+			$state = (new OrderAction)->determineStateByStateOrder($this->post->state);
+			$action->setState($state);
+		}
 	}
 	
 	public function editRating()

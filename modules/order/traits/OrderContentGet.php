@@ -1,6 +1,6 @@
 <?php
 
-trait OrderGetContent {
+trait OrderContentGet {
 
 	public function getPositions()
 	{
@@ -14,15 +14,15 @@ trait OrderGetContent {
 		return $this;
 	}
 	
-	public function getMainProducts()
+	public function getProductsMain()
 	{
-		$this->productsMain = (new OrderProduct)->getMainParentOrder($this->id);
+		$this->productsMain = (new OrderProduct)->getMainForOrder();
 		return $this;
 	}
 	
-	public function getAllProductsNotStateEnded()
+	public function getProductsAll()
 	{
-		$this->productsNotReady = (new OrderProduct)->getAllForOrderNotStateEnded();
+		$this->productsAll = (new OrderProduct)->getAllForOrder();
 		return $this;
 	}
 }

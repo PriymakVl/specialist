@@ -2,44 +2,22 @@
 
 trait OrderProductState {
 
-	
-	
 	public function editState()
 	{
 		$this->setState($this->get->state);
-		(new OrderAction)->editStateForProduct($this->id);
-		
+		$this->editStateActions();
 		return $this;
 	}
 	
-	public function setStateForOrder($id_order, $state_order)
+	public function determineStateByStateOrder($state)
 	{
-		$state = $this->setStateByStateOrder($state_order);
-		$params = ['id_order' => $id_order, 'state' => $state, 'status' =>STATUS_ACTIVE];
-		$this->setStateAsInOrderModel($params);
-		return $this;
-	}
-	
-	private function setStateByStateOrder($state_order)
-	{
-		switch ($state_order) {
+		switch ($state) {
 			case OrderState::REGISTERED: return self::STATE_WAITING;
 			case OrderState::PREPARATION: return self::STATE_WAITING;
-			case OrderState::WORK: return self::STATE_PROGRESS;
+			case OrderState::WORK: return self::STATE_PLANED;
 			case OrderState::MADE: return self::STATE_ENDED;
 		}
 	}
-	
-	public function setStateAsInOrderModel($params)
-	{
-		$sql = 'UPDATE `order_products` SET `state` = :state WHERE `id_order` = :id_order AND `status` = :status';
-		return self::update($sql, $params);
-	}
-	
-	// public function editState($order)
-	// {
-		// if ($order->state == OrderState::PREPARATION) return $this->setStatePreparation($order);
-	// }
 	
 	public function checkState()
 	{
@@ -49,14 +27,7 @@ trait OrderProductState {
 		else $this->setState(self::STATE_PROGRESS);
 		return $this;
 	}
-	
-	// private function checkStateActions($state)
-	// {
-		// foreach ($this->actions as $action) {
-			// if ($action->state != $state) return false;
-		// }
-		// return true;
-	// }
+
 	
 
 }

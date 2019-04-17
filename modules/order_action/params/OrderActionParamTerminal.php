@@ -11,12 +11,12 @@ trait OrderActionParamTerminal {
 	
 	private function getForAllOrdersForTerminalParams()
 	{
-		$worker = (new Worker)->setData($this->session->id_user)->getOptions();
+		$worker = (new Worker)->setData($this->session->id_user)->getProperties();
 		$params['status'] = STATUS_ACTIVE;
 		$params['ended'] = OrderActionState::ENDED;
 		$params['waiting'] = OrderActionState::WAITING;
-		$params['name'] = $this->get->action ? trim($this->get->action) : $worker->options->default_action;
-		$params['type_order'] = $this->get->type_order ? $this->get->type_order : $worker->options->default_type_order;
+		$params['name'] = $this->get->action ? trim($this->get->action) : $worker->defaultAction;
+		$params['type_order'] = $this->get->type_order ? $this->get->type_order : $worker->defaultTypeOrder;
 		return $params;
 	}
 	

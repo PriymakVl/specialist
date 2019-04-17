@@ -13,23 +13,22 @@ class Controller_Order extends Controller_Base {
     public function action_index()
 	{
 		$order = new Order($this->get->id_order);
-		$order->getPositions()->convertProperties()->getMainProducts()->getActions();
+		$order->getPositions()->convertProperties()->getProductsMain()->getActions();
 		$this->render('index/main', compact('order'));
 	}
 
 	public function action_list()
 	{
-		$user = (new User)->setData($this->session->id_user)->getOptions();
-		$this->get->state ? $this->get->state : $user->options->default_state_order;
-		$orders = (new Order)->getList();
+		$user = (new User)->setData($this->session->id_user)->setProperties();
+		$orders = (new Order)->getForList();
 		$this->setTitle('Заказы')->render('list/main', compact('orders'));
 	}
 	
 	public function action_add()
     {
 		if (!$this->post->save) return $this->setTitle('Добавить заказ')->render('add/main');
-        $order = Order::getBySymbol($this->post->symbol);
-        if ($order) return $this->setMessage('error', 'exist')->redirect('order/index?id_order='.$order->id);
+		$item = (new Order)->getBySymbol();
+        if ($item) return $this->setMessage('error', 'exist')->redirect('order/index?id_order='.$item->id);
 		$order = (new Order)->addData()->setActive();
 		$this->setMessage('success', 'add')->redirect('order?id_order='.$order->id);
     }
@@ -46,7 +45,7 @@ class Controller_Order extends Controller_Base {
 	{
 		$order = new Order($this->get->id_order);
 		if (!$this->post->save) return $this->render('edit_state/main', compact('order'));
-		$order->getProducts()->getActions()->getPositions()->editState()->setMessage('success', 'edit_state');
+		$order->getProductsAll()->getActions()->editState()->setMessage('success', 'edit_state');
 		$this->redirect('order?id_order='.$order->id);
 	}
 	

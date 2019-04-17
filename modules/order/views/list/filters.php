@@ -10,6 +10,7 @@
 
 <div id="order-filters-wrp">
     <span>Заказы:</span>
+	<label>Состояние:</label>
     <select id="order-filter-state">
         <option value="<?=OrderState::REGISTERED?>" <?=$selected_reg?>>Зарегистрированы</option>
         <option value="<?=OrderState::PREPARATION?>" <?=$selected_prep?>>В подготовке</option>
@@ -18,5 +19,11 @@
 		<option value="<?=OrderState::MADE?>" <?=$selected_made?>>Выполнены</option>
 		<option value="<?=OrderState::SENT?>" <?=$selected_sent?>>Отправлены заказчику</option>
         <option value="<?=OrderState::ALL?>" <?=$selected_all?>>Все</option>
+    </select>
+	<label>Тип</label>
+	<select id="order-filter-type">
+        <option value="<?=Order::TYPE_CYLINDER?>">Пневмо</option>
+        <option value="<?=Order::TYPE_CAR_NUMBER?>">Пресса и накатки</option>
+        <option value="<?=Order::TYPE_ALL?>">Все</option>
     </select>
 </div>

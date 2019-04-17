@@ -57,11 +57,35 @@ trait OrderActionParam {
 		return $params;
 	}
 	
-	public function getAllNotStateEndedParam()
+	// public function getAllNotStateEndedParam()
+	// {
+		// $params = self::selectParams(['type_order', 'status']);
+		// $params['state'] = OrderActionState::ENDED;
+		// return $params;
+	// }
+	
+	private function getTypeOrderParam()
 	{
-		$params = self::selectParams(['type_order', 'status']);
-		$params['state'] = OrderActionState::ENDED;
-		return $params;
+		$user = (new User)->setData($this->session->id_user)->setProperties();
+		if ($this->get->type_order) return $this->get->type_order;
+		else if ($user->defaultTypeOrder) return $user->defaultTypeOrder;
+		return Order::TYPE_CYLINDER;
+	}
+	
+	private function getActionParam()
+	{
+		$worker = (new Worker)->setData($this->session->id_user)->setProperties();
+		if ($this->get->action == 'all') return false;
+		else if ($this->get->action) return $this->get->action;
+		else if ($worker->defaultAction) return $worker->defaultAction;
+		return false;
+	}
+	
+	private function getIdOrderParam()
+	{
+		if ($this->get->id_order == 'all') return false;
+		if ($this->get->id_order) return $this->get->id_order;
+		return false;
 	}
 	
 }

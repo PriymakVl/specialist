@@ -8,7 +8,7 @@
     <input type="radio" name="tabs" id="tab-1" <? if ($tab_active_info) echo 'checked'; ?>>
     <label for="tab-1">Информация</label>
     <div class="tab-content">
-		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>
+		<h3>Заказ: <span class="green"><?=$order->symbol?></span></h3>
         <table>
             <tr>
                 <th width="50">№</th>

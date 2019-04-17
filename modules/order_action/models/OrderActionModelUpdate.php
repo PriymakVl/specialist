@@ -1,6 +1,6 @@
 <?php
 
-trait OrderActionModelStateSet {
+trait OrderActionModelUpdate {
 
 	public function setStateModel()
 	{

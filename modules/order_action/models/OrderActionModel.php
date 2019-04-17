@@ -2,42 +2,23 @@
 
 trait OrderActionModel {
 	
-	use OrderActionModelAdd, OrderActionModelState, OrderActionModelStateSet, OrderActionParam;
+	use OrderActionModelInsert, OrderActionModelSelect, OrderActionParam;
 	
-	public function getAllByIdOrderModel()
-	{
-		$params = ['id_order' => $this->get->id_order, 'status' => STATUS_ACTIVE];
-		$sql = 'SELECT * FROM `order_actions` WHERE`id_order` = :id_order AND `status` = :status';
-		return self::perform($sql, $params)->fetchAll();
-	}
 	
-	public function getAllByIdProductModel($id_prod)
-	{
-		$params = ['id_prod' => $id_prod, 'status' => STATUS_ACTIVE];
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status';
-		return self::perform($sql, $params)->fetchAll();
-	}
 	
-	public function getAllByIdProductNotStateEndedModel($id_prod)
-	{
-		$params = ['id_prod' => $id_prod, 'status' => STATUS_ACTIVE, 'state' => OrderActionState::ENDED];
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status AND `state` <> :state';
-		return self::perform($sql, $params)->fetchAll();
-	}
+	// public function getAllByIdProductNotStateEndedModel($id_prod)
+	// {
+		// $params = ['id_prod' => $id_prod, 'status' => STATUS_ACTIVE, 'state' => OrderActionState::ENDED];
+		// $sql = 'SELECT * FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status AND `state` <> :state';
+		// return self::perform($sql, $params)->fetchAll();
+	// }
 	
-	public function planWorkerModel($params)
-	{
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_data` IN ('.$params['default_actions'].') AND `state` != :state AND `status` = :status';
-		unset($params['default_actions']);
-		return self::perform($sql, $params)->fetchAll();
-	}
-	
-	public function madeWorkerModel($params)
-	{
-		$slq = 'SELECT * FROM `order_actions` 
-		WHERE `id_worker` = :id_worker AND `state` = :state AND `time_end` BETWEEN :period_start AND :period_end AND `status` = :status';
-		return self::perform($slq, $params)->fetchAll();
-	}
+	// public function planWorkerModel($params)
+	// {
+		// $sql = 'SELECT * FROM `order_actions` WHERE `id_data` IN ('.$params['default_actions'].') AND `state` != :state AND `status` = :status';
+		// unset($params['default_actions']);
+		// return self::perform($sql, $params)->fetchAll();
+	// }
 	
 	// public function getIdActionsByIdOrder($id_order)
 	// {

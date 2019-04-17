@@ -2,7 +2,7 @@
     <input type="radio" name="tabs" id="tab-3" <? if ($this->get->tab == 3) echo 'checked'; ?>>
     <label for="tab-3">Операциии</label>
     <div class="tab-content">
-		<h3>Заказ: <span class="red"><?=$order->symbol?></span></h3>
+		<h3>Заказ: <span class="green"><?=$order->symbol?></span></h3>
 		<!-- plan actions -->
 			<table width="940">
 					<tr>

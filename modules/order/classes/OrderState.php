@@ -2,12 +2,12 @@
 
 class OrderState extends OrderBase {
 
+    const ALL = 'all';
     const REGISTERED = 1;
     const PREPARATION = 2;
     const WORK = 3;
     const MADE = 4;
     const SENT = 5;
-    const ALL = 6;
 	const WAITING = 7;
 	
 	

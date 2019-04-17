@@ -4,7 +4,7 @@ trait OrderProductSpecification {
 	
 	public function getSpecification()
 	{
-		$items = $this->getByIdParent();
+		$items = $this->getByIdParentModel();
 		if (!$items) return $this;
 		$this->specification = ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'convertState']);
 		$this->specificationGroup = (new Product)->getSpecificationGroup($this->specification);
@@ -13,7 +13,7 @@ trait OrderProductSpecification {
 	
 	public function getSpecificationAll()
 	{
-		$this->specificationAll = $this->getByIdParent();
+		$this->specificationAll = $this->getByIdParentModel();
 		if ($this->specificationAll) {;
 			$this->getSpecificationRecursive($this->specificationAll);
 			$this->specificationAll = ObjectHelper::createArray($this->specificationAll, 'OrderProduct', ['setData']);
@@ -24,7 +24,7 @@ trait OrderProductSpecification {
 	public function getSpecificationRecursive($products)
 	{
 		foreach ($products as $product) {
-			$items= $this->getByIdParent($product->id);
+			$items= $this->getByIdParentModel($product->id);
 			if (!$items) continue;
 			$this->specificationAll = array_merge($this->specificationAll, $items);
 			$this->getSpecificationRecursive($items);

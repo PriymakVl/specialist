@@ -35,7 +35,7 @@ class Controller_Terminal extends Controller_Base
 	
 	private function getWorker()
     {
-        if ($this->session->id_user) return (new Worker)->setData($this->session->id_user)->getOptions();
+        if ($this->session->id_user) return (new Worker)->setData($this->session->id_user)->setProperties();
         else $this->redirect('main/login');
     }
 }

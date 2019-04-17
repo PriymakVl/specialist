@@ -21,12 +21,30 @@ trait OrderParam {
 		return $params;
 	}
 	
-	public function getListForPlanParam()
+	
+	public function getByStateAndTypeParam()
 	{
-		$params = self::selectParams(['type_order', 'status']);
-		$params['waiting'] = OrderState::WAITING;
-		$params['work'] = OrderState::WORK;
-		return $params;
+		$params['type'] = $this->getTypeParam();
+		$parems['state'] = $this->getStateParam();
+		$params['status'] = STATUS_ACTIVE;
+	}
+	
+	public function getTypeParam()
+	{
+		$user = (new User)->setData($this->session->id_user)->setProperties();
+		if ($this->get->type && $this->get->type != self::TYPE_ALL) return $this->get->type;
+		else if ($this->get->type == self::TYPE_ALL) return false;
+		else if ($user->defaultTypeOrder) return $user->defaultTypeOrder;
+		return self::TYPE_CYLINDER;
+	}
+	
+	public function getStateParam()
+	{
+		$user = (new User)->setData($this->session->id_user)->setProperties();
+		if ($this->get->state && $this->get->state != OrderState::ALL) return $this->get->state;
+		else if ($this->get->state == OrderState::ALL) return false;
+		else if ($user->defaultStateOrder) return $user->defaultStateOrder;
+		return OrderState::REGISTERED;
 	}
 	
 }

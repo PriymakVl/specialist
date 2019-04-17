@@ -35,34 +35,35 @@ trait OrderActionTraitState {
 		return $this;
 	}
 	
-	public function setStateAsInOrder($id_order, $state_order)
-	{
-		$state = $this->setStateByStateOrder($state_order);
-		$params = ['id_order' => $id_order, 'state' => $state, 'status' =>STATUS_ACTIVE];
-		$this->setStateAsInOrderModel($params);
+	// public function setStateAsInOrder($id_order, $state_order)
+	// {
+		// $state = $this->setStateByStateOrder($state_order);
+		// $params = ['id_order' => $id_order, 'state' => $state, 'status' =>STATUS_ACTIVE];
+		// $this->setStateAsInOrderModel($params);
 		// OrderActionState::add($params);
-		return $this;
-	}
+		// return $this;
+	// }
 	
-	private function setStateByStateOrder($state_order)
+	public function determineStateByStateOrder($state_order)
 	{
 		switch ($state_order) {
 			case OrderState::REGISTERED: return OrderActionState::WAITING;
 			case OrderState::PREPARATION: return OrderActionState::WAITING;
+			case OrderState::WAITING: return OrderActionState::WAITING;
 			case OrderState::WORK: return OrderActionState::PLANED;
 			case OrderState::MADE: return OrderActionState::ENDED;
 		}
 	}
 	
-	public function editStateActionsWhenChangeStateProduct()
-	{
-		$items = $this->getAllByIdProductNotStateEndedModel();
-		if (empty($items)) return;
-		foreach ($items as $item)
-		{
-			(new self)->setData($item)->setState($this->get->state);
-		}
-	}
+	// public function editStateActionsWhenChangeStateProduct()
+	// {
+		// $items = $this->getAllByIdProductNotStateEndedModel();
+		// if (empty($items)) return;
+		// foreach ($items as $item)
+		// {
+			// (new self)->setData($item)->setState($this->get->state);
+		// }
+	// }
 	
 	private function setTimeState()
 	{

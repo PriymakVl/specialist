@@ -14,13 +14,7 @@
 		<? foreach ($order->positions as $position): ?>
 			<tr>
 				<td><?=$number?></td>
-				<td >
-					<? if ($position->id_prod): ?>
-						<a href="/order_product?id_prod=<?=$position->id_prod?>"><?=$position->symbol?></a>
-					<? else: ?>
-						<?=$position->symbol?>
-					<? endif; ?>
-				</td>
+				<td ><?=$position->symbol?></td>
 				<td><?=$position->qty?>шт</td>
 				<td><?=$position->note?></td>
 				<td class="position-menagment-box">

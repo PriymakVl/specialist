@@ -2,7 +2,7 @@
 
 trait OrderModel {
 	
-	use OrderParam, OrderModelStateAndType;
+	use OrderParam, OrderModelSelect;
 
     public function addDataModel()
     {
@@ -20,27 +20,6 @@ trait OrderModel {
 		return self::update($sql, $params);
 	}
 	
-	public function getAllOrdersModel()
-	{
-		$sql = 'SELECT * FROM `orders` WHERE `status` = :status ORDER BY rating DESC, date_exec ASC';
-		return self::perform($sql, ['status' => STATUS_ACTIVE])->fetchAll();
-	}
-	
-	public function getBySymbol($symbol)
-	{
-	   if (empty($symbol)) return false;
-	   $sql = 'SELECT * FROM `orders` WHERE `symbol` = :symbol AND `status` = :status';
-	   $params = ['symbol' => $symbol, 'status' => STATUS_ACTIVE];
-	   return self::perform($sql, $params)->fetch();
-	}
-	
-	public function searchBySymbol()
-    {
-        $sql = 'SELECT * FROM `orders` WHERE `symbol` like concat("%", :symbol, "%") AND `status` = :status';
-        $params = ['symbol' => trim($this->post->symbol), 'status' => STATUS_ACTIVE];
-        return self::perform($sql, $params)->fetchAll();
-    }
-
 }
 
 

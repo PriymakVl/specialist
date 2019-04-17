@@ -2,6 +2,7 @@
 
 class OrderBase extends Model {
 	
+	const TYPE_ALL = 'all';
 	const TYPE_CYLINDER = 1;
     const TYPE_CAR_NUMBER = 2; //пресса и накатки
 	
@@ -21,8 +22,8 @@ class OrderBase extends Model {
 	
 	public $productsMain;
 	public $productsAll;
-	public $productsNotReady;
 	public $productsTable;
+	
 	public $ratingString;
 
     //date
