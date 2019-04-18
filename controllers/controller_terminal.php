@@ -21,7 +21,7 @@ class Controller_Terminal extends Controller_Base
 
     public function action_edit_state()
     {
-		$action = (new OrderAction)->editStateWorker();
+		$action = (new OrderAction)->editState();
 		//->checkReadyOrder();
         $this->redirectPrevious();
     }

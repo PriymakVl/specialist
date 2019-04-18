@@ -2,7 +2,7 @@
 
 class OrderAction extends OrderActionBase {
 	
-	use OrderActionModel, OrderActionTraitState, OrderActionConvert, OrderActionTerminal, OrderActionTotal;
+	use OrderActionModel, OrderActionMainState, OrderActionConvert, OrderActionTerminal, OrderActionAdd, OrderActionGet, OrderActionDelete;
 	
 	public function getProduct()
 	{
@@ -16,27 +16,9 @@ class OrderAction extends OrderActionBase {
 		return $this;
 	}
 	
-	public function checkStateProduct()
-	{
-		if ($this->id_prod) (new OrderProduct)->setData($this->id_prod)->checkState();
-		return $this;
-	}
-	
-	public function addForProduct()
-	{
-		$this->addForProductModel();
-		return $this;
-	}
-	
-	public function addForOrder()
-	{
-		$this->addForOrderModel();
-		return $this;
-	}
-	
 	public function edit()
 	{
-		$this->editModel();
+		$this->updateModel();
 		return $this;
 	}
 	

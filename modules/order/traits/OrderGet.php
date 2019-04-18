@@ -14,6 +14,12 @@ trait OrderGet {
 		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getMainProducts', 'getProductsTable', 'convertProperties']);
 	}
 	
+	public function getForTerminal()
+	{
+		$items = $this->getItemsForTerminal();
+		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData']);
+	}
+	
 	private function getItems()
 	{
 		$type = $this->getTypeParam();
@@ -30,9 +36,21 @@ trait OrderGet {
 		if (!$items) return;
 		$plan = [];
 		foreach ($items as $item) {
-			if ($item->state == OrderState::PREPARATION || $item->state == OrderState::WORK) $plan[] = $items;
+			if ($item->state == OrderState::WAITING || $item->state == OrderState::WORK) $plan[] = $items;
 		}
 		return $plan;
+	}
+	
+	private function getItemsForTerminal()
+	{
+		$type = $this->getTypeParam();
+		$items = $this->getByTypeModel($type);
+		if (!$items) return;
+		$terminal = [];
+		foreach ($items as $item) {
+			if ($item->state == OrderState::WORK) $terminal[] = $item;
+		}
+		return $terminal;
 	}
 	
 

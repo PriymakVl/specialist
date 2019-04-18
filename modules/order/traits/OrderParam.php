@@ -32,8 +32,9 @@ trait OrderParam {
 	public function getTypeParam()
 	{
 		$user = (new User)->setData($this->session->id_user)->setProperties();
-		if ($this->get->type && $this->get->type != self::TYPE_ALL) return $this->get->type;
-		else if ($this->get->type == self::TYPE_ALL) return false;
+		$type = $this->get->type ? $this->get->type : $this->get->type_order;
+		if ($type && $type != self::TYPE_ALL) return $type;
+		else if ($type == self::TYPE_ALL) return false;
 		else if ($user->defaultTypeOrder) return $user->defaultTypeOrder;
 		return self::TYPE_CYLINDER;
 	}

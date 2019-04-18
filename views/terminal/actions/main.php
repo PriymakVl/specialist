@@ -15,13 +15,13 @@
         </div>
 		
 		<!-- filters action -->
-		<? include_once('filters_box.php'); ?>
+		<? include_once('filters.php'); ?>
 		
 		<!-- actions box -->
-			<? include_once('actions_box.php'); ?>
+			<? include_once('actions.php'); ?>
 
 		<!-- operations box -->
-		<? include_once('operations_box.php'); ?>
+		<? include_once('operations.php'); ?>
 	</div>
 </div><!-- id content -->
 

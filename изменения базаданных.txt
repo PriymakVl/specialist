@@ -22,3 +22,5 @@ add type_orders in order_actions
 add rating in order_products
 add date_exec in order_products
 add date_exec in order_actions
+изменить в user_options default_action on default_product_action
+удалить из order_action time_start , time_end, id_worker

@@ -13,11 +13,20 @@
 	margin-left: 20px;
 }
 
-#filters-wrp #filter-orders {
+#filters-wrp #filter-type-order {
 	height: 35px;
 	width: 200px;
 	font-size: 14px;
 	position: absolute;
 	top: 0;
 	left: 255px;
+}
+
+#filters-wrp #filter-orders {
+	height: 35px;
+	width: 200px;
+	font-size: 14px;
+	position: absolute;
+	top: 0;
+	left: 490px;
 }

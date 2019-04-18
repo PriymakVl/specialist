@@ -1,8 +1,7 @@
 <?php
 	$default_actions = Action::getAll('actions');
-	//$orders = OrderAction::getOrdersForTerminal();
-	$orders = false;
-	$name_action = $this->get->action ? trim($this->get->action) : $worker->options->default_action;
+	$orders = (new Order)->getForTerminal();
+	$name_action = $this->get->action ? trim($this->get->action) : $worker->defaultProductAction;
 ?>
 <div id="filters-wrp">
 	<!-- filter actions -->
@@ -13,7 +12,7 @@
 				<? foreach ($default_actions as $item): ?>
 					<option <? if ($item->name == $name_action) echo 'selected'; ?> value="<?=$item->name?>"><?=$item->name?></option>
 				<? endforeach; ?>
-				<option value="other">Разные</option>
+				<option value="other" <? if ($this->get->action == 'other') echo 'selected'; ?>>Разные</option>
 			</select>
 		</form>
 	</div>
@@ -30,7 +29,7 @@
 			<option value="all">Все заказы</option>
 			<? if ($orders): ?>
 				<? foreach ($orders as $order): ?>
-					<option <? if ($order->id == $id_order) echo 'selected'; ?> value="<?=$order->id?>"><?=$order->symbol?></option>
+					<option <? if ($order->id == $this->get->id_order) echo 'selected'; ?> value="<?=$order->id?>"><?=$order->symbol?></option>
 				<? endforeach; ?>
 			<? endif; ?>
 		</select>

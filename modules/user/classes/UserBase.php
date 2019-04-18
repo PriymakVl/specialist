@@ -31,6 +31,7 @@ class UserBase extends Model
 	 public function setProperties()
 	 {
 		$this->options = UserOptions::get($this->id);
+		if (isset($this->options->default_product_action)) $this->defaultProductAction = $this->options->default_product_action;
 		if (isset($this->options->default_type_order)) $this->defaultTypeOrder = $this->options->default_type_order; 
 		if (isset($this->options->default_state_order)) $this->defaultStateOrder = $this->options->default_state_order; 
 		return $this;

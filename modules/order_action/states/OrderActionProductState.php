@@ -1,6 +1,6 @@
 <?php
 
-trait OrderActionDetermineStateProduct {
+trait OrderActionProductState {
 
 	private function determineStateProductWhereChangeStateAction($id_prod)
 	{
@@ -21,12 +21,21 @@ trait OrderActionDetermineStateProduct {
 		return $actions;
 	}
 	
-	private function checkStateProductWaiting($actions)
+	private function editStateProduct()
 	{
-		foreach ($actions as $action) {
-			if ($action->state != OrderActionState::WAITING) return false;
-		}
-		return true;
+		if (!$this->id_prod) return $this;
+		$product = (new OrderProduct)->setData($this->id_prod);
+		$edit = $this->checkNeedChangeStateProduct($product);
+		if ($product->state == $this->get->state) return $this;
+		$state_prod = $this->determineStateProductWhereChangeStateAction($product->id);
+		$product->setState($state_prod);
+		return $this;
+	}
+	
+	private function checkNeedChangeStateProduct()
+	{
+		if (!$this->
+		$items = $this->getByIdProductModel($this->id_prod
 	}
 
 }

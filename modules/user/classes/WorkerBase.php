@@ -13,14 +13,7 @@ class WorkerBase extends User {
 	 public $costMade; //сколько заработал
 	 public $actions;
 	 public $actions_unplan;
+	
 	 
-	 public $defaultAction;
-	 
-	 public function setPropeties()
-	 {
-		$this->options = UserOptions::get($this->id);
-		if (isset($this->options->default_action)) $this->defaultAction = $this->options->default_action; ; 
-		if (isset($this->options->default_type_order)) $this->defaultTypeOrder = $this->options->default_type_order;
-		return $this;
-	 }
+
 }

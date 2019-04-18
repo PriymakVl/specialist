@@ -55,7 +55,7 @@
 			alert('Сначала нужно выдать задание в работу');
 			return;
 		}
-		location.href = '/terminal/edit_state=' + action + '&state=' + STATE_ACTION_ENDED + '&id_action=' + id_action;
+		location.href = '/terminal/edit_state?action=' + action + '&state=' + STATE_ACTION_ENDED + '&id_action=' + id_action;
 		return false;
 	}
 	
@@ -69,7 +69,7 @@
 			alert('Сначала нужно выдать задание в работу');
 			return;
 		}
-		location.href = '/terminal/edit_state=?action' + action + '&state=' + STATE_ACTION_STOPPED + '&id_action=' + id_action;
+		location.href = '/terminal/edit_state?action=' + action + '&state=' + STATE_ACTION_STOPPED + '&id_action=' + id_action;
 		return false;
 	}
 	

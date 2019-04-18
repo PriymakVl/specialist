@@ -9,4 +9,10 @@ class Action extends Model {
 		$this->message->section = 'action';
     }
 	
+	public function getArrayNames()
+	{
+		$sql = 'SELECT `name` FROM `actions` WHERE `status` = :status';
+		return self::perform($sql, ['status' => STATUS_ACTIVE])->fetchAll(PDO::FETCH_COLUMN);
+	}
+	
 }
