@@ -62,21 +62,8 @@ class Controller_Order_Action extends Controller_Base {
 	
 	public function action_state_list()
 	{
-		$params = ParamOrderAction::stateList();
-		if ($params['type'] == 'plan') {
-			$action = new OrderAction($params['id_action']); /***/ $action->getAllStates($params)->getProduct();
-		} else {
-			$action = new OrderActionUnplan($params['id_action']); /***/ $action->getAllStates($params);
-		}
-		return $this->render('states/main', compact('action', 'params'));
+		$action = (new OrderAction)->setData($this->get->id_action)->getStates()->getProduct()->getOrder();
+		return $this->render('states/main', compact('action'));
 	}
-	
-	public function action_to_work()
-	{
-		$order = new Order($this->id_order);
-		$order->toWork()->setState(OrderState::WORK)->setMessage('success', 'work');
-		$this->redirectPrevious();
-	}
-
 	
 }

@@ -2,7 +2,7 @@
 
 class OrderProduct extends OrderProductBase {
 	
-	use OrderProductEdit, OrderProductGet, OrderProductConvert, OrderProductSpecification, OrderProductState, OrderProductAdd, OrderProductModel;
+	use OrderProductEdit, OrderProductSelectItems, OrderProductGet, OrderProductConvert, OrderProductSpecification, OrderProductState, OrderProductAdd, OrderProductModel;
 	
 	public function getParent()
 	{

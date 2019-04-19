@@ -17,7 +17,7 @@ function sentRequestProduct($state)
 {
 	var id_prod = $('#plan-products-wrp :radio:checked').attr('id_prod');
 	if (!id_prod) {
-		alert('Вы не выбрали операцию');
+		alert('Вы не выбрали продукт');
 		return;
 	}
 	var params = getObjectGetParams();

@@ -33,10 +33,10 @@
 							<td><?=$action->qty?></td>
 							<td><?=$action->name?></td>
 							<td style="background:<?=$action->stateBg?>">
-							<? if (!$action->states): ?>
-								<?=$action->stateString?>
+							<? if ($action->isStates): ?>
+								<a href="/order_action/state_list?id_action=<?=$action->id?>"><?=$action->stateString?></a>
 							<? else: ?>
-								<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->stateString?></a>
+								<?=$action->stateString?>
 							<? endif; ?>
 							</td>
 						</tr>

@@ -2,7 +2,7 @@
 
 class OrderActionState extends OrderActionStateBase {
 	
-    use OrderActionStateModel;
+    use OrderActionStateModel, OrderActionStateConvert;
 	
 	public function setDuration($states)
 	{
@@ -21,6 +21,29 @@ class OrderActionState extends OrderActionStateBase {
 		if (empty($states[$index + 1])) return false;
 		$duration = $states[$index + 1]->time - $states[$index]->time;
 		return Date::convertTimeToMinutes($duration);
+	}
+	
+	public function add()
+	{
+		$id = $this->insertModel();
+		return (new self)->setData($id);
+	}
+	
+	public function get()
+	{
+		$items = $this->getByIdActionModel();
+		if (!$items) return false;
+		foreach ($items as $item)
+		{
+			$states[] = (new OrderActionState)->setData($item)->setBg()->setName()->getUser()->setDuration($items);
+		}
+		return $states;
+	}
+	
+	public function getUser()
+	{
+		$this->user = (new User)->setData($this->id_user);
+		return $this;
 	}
 	
 	

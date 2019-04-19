@@ -22,12 +22,12 @@
 				<? if ($order->productsMain): ?>
 					<td class="order-products-td"><?=$order->productsTable?></td>
 				<? else: ?>
-					<td class="red">Нет позиций</td>
+					<td class="red">Нет продуктов</td>
 				<? endif; ?>
 				<td><?=$order->date_exec ? date('d.m.y', $order->date_exec) : 'Нет';?></td>
 				<td>Не определен</td>
 				<td>
-					<a href="#" class="order-rating" id_order="<?=$order->id?>"><?=$order->rating?></a>
+					<a href="#" class="order-rating" id_order="<?=$order->id?>"><?=$order->rating ? $order->rating : 0?></a>
 				</td>
 				<td style="background:<?=$order->stateBg?>"><?=$order->stateString?></td>
             </tr>

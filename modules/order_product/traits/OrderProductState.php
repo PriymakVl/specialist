@@ -9,6 +9,15 @@ trait OrderProductState {
 		return $this;
 	}
 	
+	public function editStateActions()
+	{
+		$items = (new OrderAction)->getByIdProductModel($this->id);
+		foreach ($items as $item) {
+			if ($item->state == OrderActionState::PLANED || $item->state == OrderActionState::WAITING) (new OrderAction)->setData($item)->setState($this->get->state);
+		}
+		return $this;
+	}
+	
 	public function determineStateByStateOrder($state)
 	{
 		switch ($state) {

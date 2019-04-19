@@ -24,21 +24,14 @@ trait OrderProductModelSelect {
         return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public function getAllForOrderModel()
+	public function getByIdOrderModel($id_order = false)
 	{
+		$id_order = $id_order ? $id_order : $this->get->id_order;
 		$params = ['id_order' => $this->get->id_order, 'status' => STATUS_ACTIVE];
 		$sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status ORDER BY state DESC, rating DESC, date_exec DESC';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	//2 state waiting and work
-	// public function getAllNotStateEndedModel()
-	// {
-		// $params = $this->getAllNotStateEndedParam();
-		// $sql = 'SELECT * FROM `order_products` WHERE `type_order` = :type_order AND `state` <> :state AND `status` = :status
-			// ORDER BY state DESC, rating DESC, date_exec DESC';
-		// return self::perform($sql, $params)->fetchAll();
-	// }
 	
 	
 }

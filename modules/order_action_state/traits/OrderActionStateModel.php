@@ -1,18 +1,21 @@
 <?php
 
 trait OrderActionStateModel {
+	
+	use OrderActionStateParam;
 
-	public static function add($params)
+	public function insertModel()
 	{
-		$params = self::selectParams($params, ['id_action', 'time', 'state', 'id_worker', 'type_action']);
-		$sql = "INSERT INTO `order_action_states` (id_action, time, state, id_worker, type_action) 
-			VALUES (:id_action, :time, :state, :id_worker, :type_action)";
+		$params = $this->insertParams();
+		$sql = "INSERT INTO `order_action_states` (id_action, time, state, id_user) VALUES (:id_action, :time, :state, :id_user)";
         return self::perform($sql, $params);
 	}
 	
-	public static function getAllByIdAction($params)
+	public function getByIdActionModel($id_action = false)
 	{
-		$sql = 'SELECT * FROM `order_action_states` WHERE `id_action` = :id_action AND `status` = :status AND `type_action` = :type';
+		$id_action = $id_action ? $id_action : $this->get->id_action;
+		$params = ['id_action' => $id_action, 'status' => STATUS_ACTIVE];
+		$sql = 'SELECT * FROM `order_action_states` WHERE `id_action` = :id_action AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
 

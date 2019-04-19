@@ -57,6 +57,10 @@ input[type="text"] {
     background: green;
 }
 
+.bold {
+	font-weight: bold;
+}
+
 #container {
     margin-left: auto;
     margin-right: auto;

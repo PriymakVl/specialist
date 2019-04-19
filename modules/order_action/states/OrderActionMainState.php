@@ -6,16 +6,11 @@ trait OrderActionMainState {
 
 	public function editState()
 	{
-		$this->updateStateModel()->editStateProduct();
+		$this->updateStateModel();
+		$this->setStartTimeState();
 		return $this;
 		// debug();
-		return $this->setStartTimeState()
-	}
-	
-	public function editStateWorker()
-	{
-		$this->setStartTimeState()->updateStateWorkerModel();
-		return $this;
+		return $this->setStartTimeState()->editStateProduct();
 	}
 	
 	public function determineStateByStateOrder($state_order)

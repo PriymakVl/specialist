@@ -9,11 +9,11 @@ class OrderActionStateBase extends OrderActionBase {
     const WAITING = 5; //ожидает окончание выполнения предыдущей операции
 	
 	public $duration;
-	public $worker;
+	public $user;
 	public $name; //name convert state
 	public $bg; // backgroun field table
 	
-	public function __construct($id)
+	public function __construct($id = false)
 	{
 		$this->tableName = 'order_action_states';
         parent::__construct($id);

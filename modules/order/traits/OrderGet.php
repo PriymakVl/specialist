@@ -11,7 +11,7 @@ trait OrderGet {
 	public function getForPlan()
 	{
 		$items = $this->getItemsForPlan();
-		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getMainProducts', 'getProductsTable', 'convertProperties']);
+		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getProductsMain', 'getProductsTable', 'convertProperties']);
 	}
 	
 	public function getForTerminal()
@@ -36,7 +36,7 @@ trait OrderGet {
 		if (!$items) return;
 		$plan = [];
 		foreach ($items as $item) {
-			if ($item->state == OrderState::WAITING || $item->state == OrderState::WORK) $plan[] = $items;
+			if ($item->state == OrderState::WAITING || $item->state == OrderState::WORK) $plan[] = $item;
 		}
 		return $plan;
 	}

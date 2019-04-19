@@ -15,7 +15,9 @@
             <tr>
 				<td><?=$number?></td>
                 <td style="background: <?=$state->bg?>;"><?=$state->name?></td>
-                <td><?=date('d.m.y h:i', $state->time)?></td>
+                <td>
+					<span class="green bold"><?=date('h:i', $state->time)?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?=date('d.m.y', $state->time)?> 
+				</td>
 				<td>
 					<? if ($state->duration): ?>
 						<?=$state->duration.'мин.'?>
@@ -25,7 +27,7 @@
 						<span>Меньше минуты</span>
 					<? endif; ?>
 				</td>
-				<td><?=$state->worker->title?></td>
+				<td><?=$state->user->title?></td>
             </tr>
 			<? $number++; ?>
         <? endforeach; ?>

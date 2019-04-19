@@ -7,9 +7,8 @@
 <link rel="stylesheet" href="/modules/plan/css/filters.css">
 
 <div id="content">
-	<h2>Планирование - <span class="green"><?=$type_string?></span></h2>
-    <!-- filters plan -->
-    <? include_once('filters.php'); ?>
+    <!-- filter level -->
+    <? include_once('filter_level.php'); ?>
 
     <!-- order form search -->
     <? //include_once('search.php'); ?>

@@ -12,7 +12,7 @@ class Controller_Plan extends Controller_Base {
 	
 	public function action_orders()
 	{
-		$orders = (new Order)->getListForPlan();
+		$orders = (new Order)->getForPlan();
 		$this->render('orders/main', compact('orders'));
 	}
 	
@@ -30,7 +30,7 @@ class Controller_Plan extends Controller_Base {
 	
 	public function action_actions()
 	{
-		$actions = (new OrderAction)->getAllNotStateEnded();
+		$actions = (new OrderAction)->getForPlan();
 		$this->render('actions/main', compact('actions'));
 	}
 	
