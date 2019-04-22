@@ -32,11 +32,12 @@ trait OrderGet {
 	
 	private function getItemsForPlan()
 	{
-		$items = $this->getItems();
+		$type = $this->getTypeParam();
+		$items = $this->getByTypeModel($type);
 		if (!$items) return;
 		$plan = [];
 		foreach ($items as $item) {
-			if ($item->state == OrderState::WAITING || $item->state == OrderState::WORK) $plan[] = $item;
+			if ($item->state == OrderState::WAITING || $item->state == OrderState::WORK || $item->state == OrderState::PLANED) $plan[] = $item;
 		}
 		return $plan;
 	}

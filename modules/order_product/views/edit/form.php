@@ -55,6 +55,13 @@
 				<option value="<?=OrderPRODUCT::STATE_WAITING?>" <? if ($product->state == OrderProduct::STATE_WAITING) echo "selected";?>>Не выдан</option>
 			</select>
 		</div>
+		
+			<!-- date execution -->
+		<div class="form-box">
+			<label>Срок выполнения:</label>
+			<? $date_exec = $product->date_exec ? $product->date_exec : $order->date->exec; ?>
+			<input type="text" name="date_exec" class="datepicker" value="<?if ($date_exec) echo date('d.m.y', $date_exec);?>" autocomplete="off">
+		</div>
 
         <div class="form-box">
 			<!-- note -->

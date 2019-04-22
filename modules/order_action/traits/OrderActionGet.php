@@ -5,6 +5,7 @@ trait OrderActionGet {
 	public function getForOrder()
 	{
 		$items = $this->getByIdOrderModel();
+		$items = ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState', 'getProduct']);
 		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState', 'getProduct', 'isStates']);
 	}
 	

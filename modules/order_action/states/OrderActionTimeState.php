@@ -8,6 +8,12 @@ trait OrderActionTimeState {
 		return $this;
 	}
 	
+	private function setStartTimeStateDown($state)
+	{
+		(new OrderActionState)->addDown($state, $this->id);
+		return $this;
+	}
+	
 	public function isStates()
 	{
 		$items = (new OrderActionState)->getByIdActionModel($this->id);

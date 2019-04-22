@@ -8,5 +8,8 @@
 
 </div><!-- id content -->
 
+<!-- js files -->
+<script src="/web/js/datepicker.js"></script>
+
 
 

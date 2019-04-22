@@ -8,7 +8,7 @@
 			<select name="state">
 				<option value="<?=OrderState::REGISTERED?>" <? if ($order->state == OrderState::REGISTERED) echo 'selected';?>>Зарегистрирован</option>
 				<option value="<?=OrderState::PREPARATION?>" <? if ($order->state == OrderState::PREPARATION) echo 'selected';?>>В подготовке</option>
-				<option value="<?=OrderState::WORK?>" <? if ($order->state == OrderState::WORK) echo 'selected';?>>В работе</option>
+				<option value="<?=OrderState::PLANED?>" <? if ($order->state == OrderState::WORK) echo 'selected';?>>Запланирован</option>
 				<option value="<?=OrderState::WAITING?>" <? if ($order->state == OrderState::WAITING) echo 'selected';?>>Отложен</option>
 				<option value="<?=OrderState::MADE?>" <? if ($order->state == OrderState::MADE) echo 'selected';?>>Выполнен</option>
 			</select>

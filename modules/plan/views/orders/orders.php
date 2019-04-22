@@ -34,7 +34,7 @@
         <? endforeach; ?>
     <? else: ?>
         <tr>
-            <td colspan="5" style="color: red;">Заказов нет</td>
+            <td colspan="7" style="color: red;">Заказов нет</td>
         </tr>
     <? endif; ?>
 </table>

@@ -17,7 +17,6 @@ trait OrderContentGet {
 	public function getProductsMain()
 	{
 		$this->productsMain = (new OrderProduct)->getMainForOrder($this->id);
-		debug($this->productsMain);
 		return $this;
 	}
 	

@@ -5,22 +5,20 @@ trait OrderProductGet {
 	public function getAllNotStateEnded()
 	{
 		$items = self::getAll('order_products');
-		$items = $this->selectItemsNotStateEnded($items);
+		if ($items) $not_ended = $this->selectItemsNotStateEnded($items);
 		if ($not_ended) return ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'getOrder', 'convertState']);
 	}
 	
-	public function getAllForOrder()
+	public function getAllForOrder($id_order = false)
 	{
-		$items = $this->getAllForOrderModel();
-		if ($items) return ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'getOrder', 'convertState']);
+		$items = $this->getByIdOrderModel($id_order);
+		if ($items) return ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'getOrder', 'convertState', 'getActions']);
 	}
 	
-	public function getMainForOrder($id_order)
+	public function getMainForOrder($id_order = false)
 	{
         $items = $this->getByIdOrderModel($id_order);
-		debug($items);
-		$items = $this->selectMainItems($items);
-		debug($items);
+		$main = $this->selectMainItems($items);
 		$methods = ['setData', 'getSpecification', 'convertState', 'getActions'];
 		if ($main) return ObjectHelper::createArray($items, 'OrderProduct', $methods);
 	}

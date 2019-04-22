@@ -17,6 +17,7 @@ trait OrderProductParam {
 		
 		$params['id_order'] = $order->id;
 		$params['type_order'] = $order->type;
+		$params['date_exec'] = $order->date_exec;
 		return $params;
 	}
 	
@@ -24,16 +25,17 @@ trait OrderProductParam {
 	{
 		$order = new Order($this->get->id_order);
 		$params = self::selectParams(['symbol', 'name', 'qty', 'type', 'note', 'number']);
-		$params['id_parent'] = self::ID_MAIN_PARENT;
+		$params['id_parent'] = self::ID_MAIN_ORDER;
 		$params['id_order'] = $order->id;
 		$params['type_order'] = $order->type;
+		$params['date_exec'] = $order->date_exec;
 		$params['state'] = self::STATE_WAITING;
 		return $params;
 	}
 	
 	public function editModelParams()
 	{
-		$params = self::selectParams(['qty', 'id_prod', 'state', 'symbol', 'name', 'type', 'number', 'note']);
+		$params = self::selectParams(['qty', 'id_prod', 'state', 'symbol', 'name', 'type', 'number', 'note', 'date_exec']);
 		if (!self::getParam('id_parent')) $params['id_parent'] = 0;
 		return $params;
 	}

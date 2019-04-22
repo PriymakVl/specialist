@@ -2,7 +2,7 @@
 
 class Order extends OrderBase {
 	
-	use OrderEdit, OrderContentGet, OrderContentAdd, OrderGet, OrderModel, OrderCheck, OrderConvert, OrderTime;
+	use OrderEdit, OrderDelete, OrderContentGet, OrderContentAdd, OrderGet, OrderModel, OrderCheck, OrderConvert, OrderTime;
 	
 	public function addData()
 	{
@@ -13,13 +13,6 @@ class Order extends OrderBase {
 	public function setActive()
 	{
 		$this->setSession('id_order_active', $this->id);
-		return $this;
-	}
-	
-	public function delete()
-	{
-		parent::delete();
-		// self::deleteStatic($this->id);
 		return $this;
 	}
 	

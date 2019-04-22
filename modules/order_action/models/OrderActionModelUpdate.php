@@ -2,9 +2,11 @@
 
 trait OrderActionModelUpdate {
 
-	public function updateStateModel()
+	public function updateStateModel($state = false)
 	{
-		$params = ['state' => $this->get->state, 'id_action' => $this->get->id_action];
+		$state = $state ? $state : $this->get->state;
+		$id_action = $this->get->id_action ? $this->get->id_action : $this->id;
+		$params = ['state' => $state, 'id_action' => $id_action];
 		$sql = 'UPDATE `order_actions` SET `state` = :state  WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}

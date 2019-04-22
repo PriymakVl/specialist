@@ -2,7 +2,7 @@
 
 trait OrderActionStateParam {
 
-	public function insertParams()
+	public function addParams()
 	{
 		$params = self::selectParams(['id_action', 'state']);
 		$params['time'] = time();

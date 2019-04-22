@@ -4,21 +4,21 @@ trait OrderModelSelect {
 
 	public function getAllOrdersModel()
 	{
-		$sql = 'SELECT * FROM `orders` WHERE `status` = :status ORDER BY rating DESC, date_exec ASC';
+		$sql = 'SELECT * FROM `orders` WHERE `status` = :status ORDER BY state DESC, rating DESC, date_exec ASC';
 		return self::perform($sql, ['status' => STATUS_ACTIVE])->fetchAll();
 	}
 	
 	public function getByStateAndTypeModel($type, $state)
 	{
 		$params = ['state' => $state, 'type' => $type, 'status' => STATUS_ACTIVE];
-		$sql = 'SELECT * FROM `orders` WHERE `type` = :type AND `state` = :state AND `status` = :status ORDER BY rating DESC, date_exec ASC';
+		$sql = 'SELECT * FROM `orders` WHERE `type` = :type AND `state` = :state AND `status` = :status ORDER BY state DESC, rating DESC, date_exec ASC';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
 	public function getByTypeModel($type)
 	{
 		$params = ['type' => $type, 'status' => STATUS_ACTIVE];
-		$sql = 'SELECT * FROM `orders` WHERE `type` = :type AND `status` = :status ORDER BY rating DESC, date_exec ASC';
+		$sql = 'SELECT * FROM `orders` WHERE `type` = :type AND `status` = :status ORDER BY state DESC, rating DESC, date_exec ASC';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	

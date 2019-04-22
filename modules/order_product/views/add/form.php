@@ -41,6 +41,11 @@
 				<input type="number" name="number" value="1">
 			</div>
 		</div>
+		<!-- date execution -->
+		<div class="form-box">
+			<label>Срок выполнения:</label>
+			<input type="text" name="date_exec" class="datepicker" value="<?if ($order->date_exec) echo date('d.m.y', $order->date_exec);?>" autocomplete="off">
+		</div>
 
         <div class="form-box">
 			<!-- note -->

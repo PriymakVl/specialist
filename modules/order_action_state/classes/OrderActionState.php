@@ -25,7 +25,13 @@ class OrderActionState extends OrderActionStateBase {
 	
 	public function add()
 	{
-		$id = $this->insertModel();
+		$id = $this->addModel();
+		return (new self)->setData($id);
+	}
+	
+	public function addDown($state, $id_action)
+	{
+		$id = $this->addDownModel($state, $id_action);
 		return (new self)->setData($id);
 	}
 	

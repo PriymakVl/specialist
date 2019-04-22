@@ -2,26 +2,32 @@
 
 trait OrderActionMainState {
 	
-	use OrderActionProductState, OrderActionTimeState, OrderActionCheckState;
+	use OrderActionProductState, OrderActionTimeState, OrderActionOrderState;
 
-	public function editState()
+	public function editStateUp()
 	{
 		$this->updateStateModel();
-		$this->setStartTimeState();
+		$this->setStartTimeState()->editStateProduct()->editStateOrder();
 		return $this;
-		// debug();
-		return $this->setStartTimeState()->editStateProduct();
 	}
 	
-	public function determineStateByStateOrder($state_order)
+	public function editStateDown($state)
 	{
-		switch ($state_order) {
-			case OrderState::REGISTERED: return OrderActionState::WAITING;
-			case OrderState::PREPARATION: return OrderActionState::WAITING;
-			case OrderState::WAITING: return OrderActionState::WAITING;
-			case OrderState::WORK: return OrderActionState::PLANED;
-			case OrderState::MADE: return OrderActionState::ENDED;
-		}
+		$this->updateStateModel($state);
+		$this->setStartTimeStateDown($state);
+		return $this;
 	}
+
+	
+	// public function determineStateByStateOrder($state_order)
+	// {
+		// switch ($state_order) {
+			// case OrderState::REGISTERED: return OrderActionState::WAITING;
+			// case OrderState::PREPARATION: return OrderActionState::WAITING;
+			// case OrderState::WAITING: return OrderActionState::WAITING;
+			// case OrderState::WORK: return OrderActionState::PLANED;
+			// case OrderState::MADE: return OrderActionState::ENDED;
+		// }
+	// }
 	
 }

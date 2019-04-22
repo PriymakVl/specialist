@@ -26,7 +26,7 @@ trait OrderActionParamAdd {
 	
 	public function addForProductModelParams()
 	{
-		$params = self::selectParams(['id_prod', 'id_order', 'price', 'number', 'time_prepar', 'time_prod', 'note', 'qty']);
+		$params = self::selectParams(['id_prod', 'id_order', 'price', 'number', 'time_prepar', 'time_prod', 'note', 'qty', 'date_exec']);
 		$params['name'] = trim(self::getParam('name'));
 		$params['state'] = OrderActionState::WAITING;
 		$params['rating'] = self::RATING_DEFAULT;
@@ -38,7 +38,7 @@ trait OrderActionParamAdd {
 	
 	public function addForOrderModelParams()
 	{
-		$params = self::selectParams(['id_order', 'price', 'number', 'time_prepar', 'time_prod', 'note', 'qty']);
+		$params = self::selectParams(['id_order', 'price', 'number', 'time_prepar', 'time_prod', 'note', 'qty', 'date_exec']);
 		$params['name'] = trim(self::getParam('name'));
 		$params['state'] = OrderActionState::WAITING;
 		$params['rating'] = self::RATING_DEFAULT;

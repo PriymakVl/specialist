@@ -55,3 +55,7 @@ input[name='name'] {
 	top: 10px;
 	left: 750px;
 }
+
+.datepicker {
+	width: 80px!important;
+}

@@ -2,18 +2,20 @@
 
 trait OrderProductState {
 
-	public function editState()
+	//when edit order
+	public function editStateDown($state = false)
 	{
-		$this->setState($this->get->state);
-		$this->editStateActions();
+		$state = $state ? $state : $this->get->state;
+		$this->setState($state);
+		$this->editStateActions($state);
 		return $this;
 	}
 	
-	public function editStateActions()
+	public function editStateActions($state)
 	{
 		$items = (new OrderAction)->getByIdProductModel($this->id);
 		foreach ($items as $item) {
-			if ($item->state == OrderActionState::PLANED || $item->state == OrderActionState::WAITING) (new OrderAction)->setData($item)->setState($this->get->state);
+			if ($item->state == OrderActionState::PLANED || $item->state == OrderActionState::WAITING) (new OrderAction)->setData($item)->editStateDown($state);
 		}
 		return $this;
 	}
@@ -23,8 +25,10 @@ trait OrderProductState {
 		switch ($state) {
 			case OrderState::REGISTERED: return self::STATE_WAITING;
 			case OrderState::PREPARATION: return self::STATE_WAITING;
-			case OrderState::WORK: return self::STATE_PLANED;
+			case OrderState::PLANED: return self::STATE_PLANED;
+			case OrderState::WORK: return self::STATE_PROGRESS;
 			case OrderState::MADE: return self::STATE_ENDED;
+			case OrderState::WAITING: return self::STATE_WAITING;
 		}
 	}
 	

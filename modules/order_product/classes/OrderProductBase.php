@@ -8,7 +8,7 @@ class OrderProductBase extends Model {
     const STATE_ENDED = 4; //работа закончена
     const STATE_WAITING = 5; //отложен или не выдан
 	
-	const ID_MAIN_ORDER = 0;
+	const ID_MAIN_ORDER = 0;//id_parent main contenr in order
 	
 	public $actions;
 	public $stateString;

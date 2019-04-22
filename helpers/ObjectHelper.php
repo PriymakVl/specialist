@@ -55,6 +55,13 @@ class ObjectHelper {
 		return $objects;
 	}
 	
+	public static function checkValuesProperty($objects, $name_property, $value_property) {
+		foreach ($objects as $object) {
+			if ($object->$name_property != $value_property) return false;
+		}
+		return true;
+	}
+	
 	
 	
 }

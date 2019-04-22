@@ -2,37 +2,25 @@
 
 trait OrderActionProductState {
 
-	// private function determineStateProductWhereChangeStateAction($id_prod)
-	// {
-		
-		// if (empty($actions)) return $this->get->state;
-		// if ($this->get->state == OrderActionState::WAITING) $state = $this->checkStateProductWaiting($actions);
-		// if ($state) return OrderProduct::STATE_WAITING;
-		// return OrderProduct::STATE_PLANED;
-	// }
+	private function determineStateProductWhenChangeStateAction($product)
+	{
+		if ($this->get->state == $product->state) return false;
+		if (ObjectHelper::checkValuesProperty($product->actions, 'state', OrderActionState::ENDED)) return OrderProduct::STATE_ENDED;
+		if (ObjectHelper::checkValuesProperty($product->actions, 'state', OrderActionState::WAITING)) return OrderProduct::STATE_WAITING;
+		if ($product->state == OrderProduct::STATE_PLANED && $this->get->state == OrderActionState::PROGRESS) return OrderProduct::STATE_PROGRESS;
+	}
 	
-	// private function editStateProduct()
-	// {
-		// if (!$this->id_prod) return $this;
-		// $product = (new OrderProduct)->setData($this->id_prod);
-		// $edit = $this->checkNeedChangeStateProduct($product);
-		// if ($product->state == $this->get->state) return $this;
-		// $state_prod = $this->determineStateProductWhereChangeStateAction($product->id);
-		// $product->setState($state_prod);
-		// return $this;
-	// }
+	private function editStateProduct()
+	{
+		if (!$this->id_prod) return $this;
+		$product = (new OrderProduct)->setData($this->id_prod)->getActions();
+		$state_prod = $this->determineStateProductWheNChangeStateAction($product);
+		if ($state_prod) $product->setState($state_prod);
+		return $this;
+	}
 	
-	// private function checkNeedChangeStateProduct()
-	// {
-		
-		// if (!$this->
-		// $items = $this->getByIdProductModel($this->id_prod
-	// }
+
 	
-	// private function getActionsProductForCheck()
-	// {
-		// $items = $this->selectNotEndedItems($this->getByIdProductModel($this->id_prod));
-		// if (!$items ) $this->
-	// }
+
 
 }

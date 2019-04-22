@@ -31,6 +31,7 @@ class Controller_Order_Product extends Controller_Base {
 	{
 		$order = new Order($this->get->id_order);
 		if (!$this->post->save) return $this->render('add/main', compact('order'));
+		if ($order->state == OrderState::REGISTERED) $order->setState(OrderState::PREPARATION);
 		$product = (new OrderProduct)->addProductForm()->setMessage('success', 'add');
 		$this->redirect('order?id_order='.$order->id);	
 	}
