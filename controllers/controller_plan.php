@@ -18,7 +18,7 @@ class Controller_Plan extends Controller_Base {
 	
 	public function action_products()
 	{
-		$products = (new OrderProduct)->getAllNotStateEnded();
+		$products = (new OrderProduct)->getForPlan();
 		$this->render('products/main', compact('products'));
 	}
 	
@@ -39,8 +39,8 @@ class Controller_Plan extends Controller_Base {
 	public function action_edit_state()
 	{
 		if ($this->get->id_order) (new Order)->setData($this->get->id_order)->getProductsMain()->getProductsAll()->editState()->setMessage('success', 'edit_state')->setSession('id_order_active', $this->get->id_order);
-		else if ($this->get->id_prod) (new OrderProduct)->setData($this->get->id_prod)->editState()->setMessage('success', 'edit_state')->setSession('id_prod_active', $this->get->id_prod);
-		else if ($this->get->id_action) (new OrderAction)->setData($this->get->id_action)->editState()->setMessage('success', 'edit_state')->setSession('id_action_active', $this->get->id_action);
+		else if ($this->get->id_prod) (new OrderProduct)->setData($this->get->id_prod)->editStateUpAndDown()->setMessage('success', 'edit_state')->setSession('id_prod_active', $this->get->id_prod);
+		else if ($this->get->id_action) (new OrderAction)->setData($this->get->id_action)->editStateUp()->setMessage('success', 'edit_state')->setSession('id_action_active', $this->get->id_action);
 		$this->redirectPrevious();
 	}
 

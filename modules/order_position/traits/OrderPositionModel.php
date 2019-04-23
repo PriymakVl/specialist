@@ -24,13 +24,6 @@ trait OrderPositionModel {
 		$sql = 'SELECT * FROM `order_positions` WHERE `id_order` = :id_order AND `status` = :status';
         return self::perform($sql, $params)->fetchAll();
 	}
-	
-	public function setIdProductModel($id_prod)
-	{
-		$params = ['id_prod' => $id_prod, 'id_position' => $this->id];
-		$sql = 'UPDATE `order_positions` SET `id_prod` = :id_prod  WHERE `id` = :id_position';
-		return self::perform($sql, $params);
-	}
 
 	
 }

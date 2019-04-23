@@ -29,7 +29,9 @@
 					<td><?=$action->name?></td>
 					<td><?=$action->qty?></td>
 					<td  width="50"><?=$action->date_exec ? date('d.m.y', $action->date_exec) : '<span class=red>Нет</span>'?></td>
-					<td width="50">Нет</td>
+					<td width="50" <? if ($action->date_exec + Date::DAY_WORKING_SECOND < $action->dateReady) echo 'class="bg-red"';?>>
+						<?=date('d.m.y', $action->dateReady)?>
+					</td>
 					<td>
 						<a href="#" class="action-rating" id_action="<?=$action->id?>"><?=$action->rating ? $action->rating : 0?></a>
 					</td>

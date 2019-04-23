@@ -20,6 +20,8 @@ class OrderProductBase extends Model {
 	public $specificationGroup;
 	public $specificationAll; //on all levels
 	
+	public $dateReady; 
+	
 	public function __construct($id = false)
 	{
 		$this->tableName = 'order_products';

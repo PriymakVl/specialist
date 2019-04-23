@@ -14,6 +14,7 @@
     <select id="order-filter-state">
         <option value="<?=OrderState::REGISTERED?>" <?=$selected_reg?>>Зарегистрированы</option>
         <option value="<?=OrderState::PREPARATION?>" <?=$selected_prep?>>В подготовке</option>
+		<option value="<?=OrderState::PLANED?>" <?=$selected_work?>>Запланированы</option>
 		<option value="<?=OrderState::WORK?>" <?=$selected_work?>>В работе</option>
 		<option value="<?=OrderState::WAITING?>" <?=$selected_waiting?>>Отложены</option>
 		<option value="<?=OrderState::MADE?>" <?=$selected_made?>>Выполнены</option>

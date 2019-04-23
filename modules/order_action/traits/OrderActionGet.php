@@ -2,10 +2,9 @@
 
 trait OrderActionGet {
 
-	public function getForOrder()
+	public function getForOrder($id_order = false)
 	{
-		$items = $this->getByIdOrderModel();
-		$items = ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState', 'getProduct']);
+		$items = $this->getByIdOrderModel($id_order);
 		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState', 'getProduct', 'isStates']);
 	}
 	
@@ -20,6 +19,7 @@ trait OrderActionGet {
 	{
 		$items = $this->getByTypeOrderModel();
 		$items = $this->selectItemsForPlan($items);
-		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
+		if ($items) $actions = ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
+		return $this->setDateReady($actions);
 	}
 }

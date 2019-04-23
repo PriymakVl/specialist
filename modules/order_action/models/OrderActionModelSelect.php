@@ -2,9 +2,10 @@
 
 trait OrderActionModelSelect {
 
-	public function getByIdOrderModel()
+	public function getByIdOrderModel($id_order = false)
 	{
-		$params = ['id_order' => $this->get->id_order, 'status' => STATUS_ACTIVE];
+		$id_order = $id_order ? $id_order : $this->get->id_order;
+		$params = ['id_order' => $id_order, 'status' => STATUS_ACTIVE];
 		$sql = 'SELECT * FROM `order_actions` WHERE`id_order` = :id_order AND `status` = :status ORDER BY state, rating DESC, date_exec';
 		return self::perform($sql, $params)->fetchAll();
 	}

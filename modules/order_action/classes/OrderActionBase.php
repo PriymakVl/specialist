@@ -15,6 +15,7 @@ class OrderActionBase extends Model {
 	public $bgTerminalBox;
 	
 	public $timeMade;
+	public $dateReady;
 	
 	const BG_TERMINAL_BOX_PLAN = 'yellow';
 	const BG_TERMINAL_BOX_PROGRESS = 'green';

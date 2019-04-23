@@ -26,8 +26,14 @@
 					</td>
 					<td><?=$product->name?></td>
 					<td><?=$product->qty?></td>
-					<td  width="50"><?=$product->date_exec ? date('d.m.y', $prodct->date_exec) : '<span class=red>Нет</span>'?></td>
-					<td width="50">Нет</td>
+					<td  width="50"><?=$product->date_exec ? date('d.m.y', $product->date_exec) : '<span class=red>Нет</span>'?></td>
+					<td width="50" <? if ($product->dateReady && $product->date_exec + Date::DAY_WORKING_SECOND < $product->dateReady) echo 'class="bg-red"';?>>
+						<? if ($product->dateReady): ?>
+							<?=date('d.m.y', $product->dateReady)?>
+						<? else: ?>
+							<span class="red">Нет</span>
+						<? endif; ?>
+					</td>
 					<td>
 						<a href="#" class="product-rating" id_prod="<?=$product->id?>"><?=$product->rating ? $product->rating : 0?></a>
 					</td>

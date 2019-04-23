@@ -2,7 +2,7 @@
 
 class Product extends ProductBase {
 	
-	use ProductTotal, ProductConvert, ProductSpecification, ProductTime, ProductExtract;
+	use ProductTotal, ProductConvert, ProductSpecification, ProductTimeTotal, ProductExtract;
 	
     public function __construct($id_prod = false)
     {

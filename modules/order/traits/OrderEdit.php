@@ -12,8 +12,15 @@ trait OrderEdit {
 	{
 		$state = $this->get->state ? $this->get->state : $this->post->state;
 		if ($state == $this->state) return $this;
-		if ($this->state == OrderState::REGISTERED && $this->post->state == OrderState::PREPARATION && $this->positions) $this->addProductsByPositions();
+		if ($this->state == OrderState::REGISTERED && $this->post->state == OrderState::PREPARATION && $this->positions) return $this->editStateWithAddProducts($state);
 		if ($this->productsAll) $this->editStateProducts($state);
+		$this->setState($state);
+		return $this;
+	}
+	//when pass in preparation from registration
+	private function editStateWithAddProducts($state)
+	{
+		$this->addProductsByPositions();
 		$this->setState($state);
 		return $this;
 	}

@@ -2,7 +2,15 @@
 
 trait OrderProductState {
 
-	//when edit order
+	public function editStateUpAndDown($state = false)
+	{
+		$state = $state ? $state : $this->get->state;
+		$this->setState($state);
+		$this->editStateActions($state);
+		$this->editStateOrder($state);
+		return $this;
+	}
+	
 	public function editStateDown($state = false)
 	{
 		$state = $state ? $state : $this->get->state;
@@ -32,12 +40,19 @@ trait OrderProductState {
 		}
 	}
 	
-	public function checkState()
+	// public function checkState()
+	// {
+		// if (!$this->actions || $this->checkStateActions(OrderActionState::WAITING)) $this->setState(self::STATE_WAITING);
+		// else if ($this->checkStateActions(OrderActionState::ENDED)) $this->setState(self::STATE_ENDED);
+		// else if ($this->checkStateActions(OrderActionState::STOPPED)) $this->setState(self::STATE_STOPPED);
+		// else $this->setState(self::STATE_PROGRESS);
+		// return $this;
+	// }
+	
+	public function editStateOrder($state)
 	{
-		if (!$this->actions || $this->checkStateActions(OrderActionState::WAITING)) $this->setState(self::STATE_WAITING);
-		else if ($this->checkStateActions(OrderActionState::ENDED)) $this->setState(self::STATE_ENDED);
-		else if ($this->checkStateActions(OrderActionState::STOPPED)) $this->setState(self::STATE_STOPPED);
-		else $this->setState(self::STATE_PROGRESS);
+		$state_order = (new OrderState)->determine($this->id_order);
+		if ($state_order) (new Order)->setData($this->id_order)->setState($state_order);
 		return $this;
 	}
 

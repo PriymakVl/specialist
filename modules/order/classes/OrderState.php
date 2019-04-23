@@ -55,5 +55,13 @@ class OrderState extends OrderBase {
             default: throw new Exception('Состояние заказа указано неверно');
         }
     }
-
+	
+	public function determine($id_order)
+	{
+		$order = (new Order)->setData($id_order)->getActions();
+		if (!$order->actions) return;
+		if (ObjectHelper::checkValuesProperty($order->actions, 'state', OrderActionState::ENDED)) return OrderState::MADE;
+		if (ObjectHelper::checkValuesProperty($order->actions, 'state', OrderActionState::WAITING)) return OrderState::WAITING;
+		if ($order->state == self::WAITING && $this->get->state == OrderProduct::STATE_PLANED) return OrderState::PLANED;
+	}
 }

@@ -11,7 +11,8 @@ trait OrderGet {
 	public function getForPlan()
 	{
 		$items = $this->getItemsForPlan();
-		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getProductsMain', 'getProductsTable', 'convertProperties']);
+		if ($items) $orders = ObjectHelper::createArray($items, 'Order', ['setData', 'getActions', 'getProductsMain', 'getProductsTable', 'convertProperties']);
+		return $this->setDateReady($orders);
 	}
 	
 	public function getForTerminal()

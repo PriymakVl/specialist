@@ -10,7 +10,7 @@ trait OrderContentGet {
 	
 	public function getActions()
 	{
-		$this->actions = (new OrderAction)->getForOrder();
+		$this->actions = (new OrderAction)->getForOrder($this->id);
 		return $this;
 	}
 	

@@ -12,7 +12,12 @@
             <tr>
                 <td>1</td>
                 <td>Номер в спецификации</td>
-                <td class="left"><?=$product->number?></td>
+                <td class="left">
+					<? if ($product->number): ?>
+						<?=$product->number?></td>
+					<? else: ?>
+						<span class="red">Не указан</span>
+					<? endif; ?>
             </tr>
 			<tr>
                 <td>2</td>
@@ -26,8 +31,8 @@
 					<td>3</td>
 					<td>Трудоемкость</td>
 					<td class="left">
-						<? if ($product->timeManufacturing): ?>
-							<?=$product->timeManufacturing?> мин.
+						<? if ($product->type == Product::TYPE_DETAIL && $product->timeManufacturingItem): ?>
+							<?=$product->timeManufacturingItem?> мин.
 						<? else: ?>
 							<span class="red">Не указана</span>
 						<? endif; ?>

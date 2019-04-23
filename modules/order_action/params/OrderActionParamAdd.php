@@ -10,6 +10,7 @@ trait OrderActionParamAdd {
 		
 		$params['id_prod'] = $product->id;
 		$params['qty'] = $product->qty;
+		$params['date_exec'] = $product->date_exec;
 		
 		
 		$params['name'] = $action->name; //for get options action

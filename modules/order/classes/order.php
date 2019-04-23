@@ -27,8 +27,8 @@ class Order extends OrderBase {
 		$items = $this->searchBySymbol();
 		if ($items) return ObjectHelper::createArray($items, 'Order', ['setData', 'getPositions', 'getPositionsTable']);
 	}
-    
 	
+
 }
 
 

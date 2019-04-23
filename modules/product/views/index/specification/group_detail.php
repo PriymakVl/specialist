@@ -14,8 +14,8 @@
 		</td>
 		<td><?=$detail->qty?></td>
 		<td>
-			<? if ($detail->timeActions): ?>
-				<?=$detail->timeActions?> мин.</td>
+			<? if ($detail->timeManufacturingItem): ?>
+				<?=$detail->timeManufacturingItem?> мин.</td>
 			<? else: ?>
 				<span class="red">Не указана</span>
 			<? endif; ?>
