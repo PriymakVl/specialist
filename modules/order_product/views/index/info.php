@@ -32,6 +32,13 @@
 				</td>
 			</tr>
 			
+			<!-- product state -->
+			<tr>
+				<td>4</td>
+				<td>Состояние</td>
+				<td style="background:<?=$product->stateBg?>"><?=$product->stateString?></td>
+			</tr>
+			
 			<!-- parent -->
 			<? if ($product->parent): ?>
 				<tr>

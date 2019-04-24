@@ -9,7 +9,17 @@
 				<th width="150">Обозначение</th>
 				<th>Наименование</th>
 				<th width="60">Кол-во</th>
-				<th width="100" colspan="2">Срок изгот.<br> план&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;факт</th>
+				<th colspan="2" >
+					<table class="table-date">
+						<tr>
+							<td colspan="2" class="table-date-header">Срок изгот.</td>
+						<tr>
+						<tr>
+							<td class="table-date-plan">план</td>
+							<td class="table-date-fact">факт</td>
+						<tr>
+					</table>
+				</th>
 				<th width="70">Рейтинг</th>
 				<th width="120">Состояние</th>
 			</tr>
@@ -26,8 +36,8 @@
 					</td>
 					<td><?=$product->name?></td>
 					<td><?=$product->qty?></td>
-					<td  width="50"><?=$product->date_exec ? date('d.m.y', $product->date_exec) : '<span class=red>Нет</span>'?></td>
-					<td width="50" <? if ($product->dateReady && $product->date_exec + Date::DAY_WORKING_SECOND < $product->dateReady) echo 'class="bg-red"';?>>
+					<td><?=$product->date_exec ? date('d.m.y', $product->date_exec) : '<span class=red>Нет</span>'?></td>
+					<td <? if ($product->dateReady && $product->date_exec + Date::DAY_WORKING_SECOND < $product->dateReady) echo 'class="bg-red"';?>>
 						<? if ($product->dateReady): ?>
 							<?=date('d.m.y', $product->dateReady)?>
 						<? else: ?>

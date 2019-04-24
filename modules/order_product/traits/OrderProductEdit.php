@@ -5,6 +5,7 @@ trait OrderProductEdit {
 	public function edit()
 	{
 		$this->editModel();
+		$this->editStateUpAndDown($this->post->state);
 		return $this;
 	}
 	

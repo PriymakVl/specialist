@@ -1,6 +1,8 @@
 <?php
 
 trait OrderTime {
+	
+	use OrderDateReady;
 
 	public function countTimeManufacturingOrder()
 	{

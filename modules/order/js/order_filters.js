@@ -9,7 +9,7 @@ $( document ).ready(function() {
     });
 
     //filter type
-    $('#filter-type').change(function() {
+    $('#order-filter-type').change(function() {
         var type = $(this).find('option:selected').val();
         var gets = buidGetString('type', type);
         if (type) location.href = 'http://' + location.host + '/order/list?' + gets;

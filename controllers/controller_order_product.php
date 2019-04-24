@@ -11,7 +11,7 @@ class Controller_Order_Product extends Controller_Base {
 
 	public function action_index()
 	{
-		$product = (new OrderProduct)->setData($this->get->id_prod)->getParent()->getOrder()->getSpecification()->getActions();
+		$product = (new OrderProduct)->setData($this->get->id_prod)->getParent()->getOrder()->getSpecification()->getActions()->convertState();
 		$this->setTitle('Продукт '.$product->symbol)->render('index/main', compact('product'));
 	}
 	

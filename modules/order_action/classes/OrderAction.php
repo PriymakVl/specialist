@@ -20,6 +20,7 @@ class OrderAction extends OrderActionBase {
 	public function edit()
 	{
 		$this->updateModel();
+		$this->editStateProduct();
 		return $this;
 	}
 	

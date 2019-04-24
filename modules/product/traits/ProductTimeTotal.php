@@ -7,14 +7,22 @@ trait ProductTimeTotal {
 	public function countTimeManufacturing()
 	{
 		$this->countTimeManufacturingItem();
+		$this->countTimeManufacturingSpecification();
+		$this->timeManufacturingUnit = $this->timeManufacturingItem + $this->timeManufacturingSpecification;
 		return $this;
 	}
 	
-	// private function countTimeSpecification()
-	// {
-		// if ($this->specification) $this->timeSpecification = ProductTime::countTimeProductSpecification($this);
-		// return $this;
-	// }
+	private function countTimeManufacturingSpecification()
+	{
+		$this->getSpecificationAll();
+		debug($this->specificationAll);
+		if (!$this->specificationAll) return;
+		foreach ($this->specificationAll as $product) {
+			$product->countTimeManufacturingItem();
+			$this->timeManufacturingSpecification += $product->timeManufacturingItem;
+		}
+		return $this;
+	}
 	
 	// public static function countTimeProductSpecification($product)
 	// {

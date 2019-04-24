@@ -1,6 +1,8 @@
 <?php
+	if (!$this->get->state) $this->get->state = (new Order)->getStateParam();
     $selected_reg = ($this->get->state == OrderState::REGISTERED) ? 'selected' : '';
     $selected_prep = ($this->get->state == OrderState::PREPARATION) ? 'selected' : '';
+    $selected_planed = ($this->get->state == OrderState::PLANED) ? 'selected' : '';
 	$selected_work = ($this->get->state == OrderState::WORK) ? 'selected' : '';
 	$selected_made = ($this->get->state == OrderState::MADE) ? 'selected' : '';
 	$selected_waiting = ($this->get->state == OrderState::WAITING) ? 'selected' : '';
@@ -14,7 +16,7 @@
     <select id="order-filter-state">
         <option value="<?=OrderState::REGISTERED?>" <?=$selected_reg?>>Зарегистрированы</option>
         <option value="<?=OrderState::PREPARATION?>" <?=$selected_prep?>>В подготовке</option>
-		<option value="<?=OrderState::PLANED?>" <?=$selected_work?>>Запланированы</option>
+		<option value="<?=OrderState::PLANED?>" <?=$selected_planed?>>Запланированы</option>
 		<option value="<?=OrderState::WORK?>" <?=$selected_work?>>В работе</option>
 		<option value="<?=OrderState::WAITING?>" <?=$selected_waiting?>>Отложены</option>
 		<option value="<?=OrderState::MADE?>" <?=$selected_made?>>Выполнены</option>
@@ -24,7 +26,7 @@
 	<label>Тип</label>
 	<select id="order-filter-type">
         <option value="<?=Order::TYPE_CYLINDER?>">Пневмо</option>
-        <option value="<?=Order::TYPE_CAR_NUMBER?>">Пресса и накатки</option>
-        <option value="<?=Order::TYPE_ALL?>">Все</option>
+        <option value="<?=Order::TYPE_CAR_NUMBER?>" <?if ($this->get->type == Order::TYPE_CAR_NUMBER) echo 'selected'; ?>>Пресса и накатки</option>
+        <option value="<?=Order::TYPE_ALL?>" <?if ($this->get->type == Order::TYPE_ALL) echo 'selected'; ?>>Все</option>
     </select>
 </div>

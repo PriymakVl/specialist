@@ -6,6 +6,13 @@
     font-size: 16px;
     width: 200px;
     height: 28px;
+	margin-right: 20px;
+}
+
+#order-filter-type  {
+	font-size: 16px;
+    width: 180px;
+    height: 28px;
 }
 
 #order-filters-wrp {

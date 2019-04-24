@@ -4,10 +4,11 @@ trait ProductModel  {
 
 	use ProductParam;
 	
-    public function getAllByIdParent()
+    public function getByIdParentModel($id_parent = false)
     {
+		$id_parent = $id_parent ? $id_parent : $this->id;
         $sql = 'SELECT * FROM `products` WHERE `id_parent` = :id_parent AND `status` = :status ORDER BY `number`';
-        $params = ['id_parent' => $this->id, 'status' => STATUS_ACTIVE];
+        $params = ['id_parent' => $id_parent, 'status' => STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
 	
@@ -35,7 +36,7 @@ trait ProductModel  {
 		return self::update($sql, $params);
 	}
 	
-	public function getAllBySymbol($symbol)
+	public function getAllBySymbolModel($symbol)
 	{
 		$sql = 'SELECT * FROM `products` WHERE `symbol` = :symbol AND `status` = :status';
         $params = ['symbol' => $symbol, 'status' => STATUS_ACTIVE];

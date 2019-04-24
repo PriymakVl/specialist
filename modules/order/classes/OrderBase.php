@@ -33,6 +33,7 @@ class OrderBase extends Model {
     public $dateWork; //дата выдачи в работу
     public $dateMade; //дата выполнения заказа
     public $dateShipment; //дата отгрузки заказа
+	public $dateReady; //дата готовности заказа расчетная
 	
 	public $timeManufacturingForWorker = 0;
 	

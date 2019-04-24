@@ -8,6 +8,7 @@ trait OrderProductState {
 		$this->setState($state);
 		$this->editStateActions($state);
 		$this->editStateOrder($state);
+		$this->editStateSpecification($state);
 		return $this;
 	}
 	
@@ -16,6 +17,7 @@ trait OrderProductState {
 		$state = $state ? $state : $this->get->state;
 		$this->setState($state);
 		$this->editStateActions($state);
+		$this->editStateSpecification($state);
 		return $this;
 	}
 	
@@ -40,14 +42,15 @@ trait OrderProductState {
 		}
 	}
 	
-	// public function checkState()
-	// {
-		// if (!$this->actions || $this->checkStateActions(OrderActionState::WAITING)) $this->setState(self::STATE_WAITING);
-		// else if ($this->checkStateActions(OrderActionState::ENDED)) $this->setState(self::STATE_ENDED);
-		// else if ($this->checkStateActions(OrderActionState::STOPPED)) $this->setState(self::STATE_STOPPED);
-		// else $this->setState(self::STATE_PROGRESS);
-		// return $this;
-	// }
+	public function editStateSpecification($state) 
+	{
+		$this->getSpecificationAll();
+		if (!$this->specificationAll) return;
+		foreach ($this->specificationAll as $product) {
+			
+			$product->editStateActions($state)->setState($state);
+		}
+	}
 	
 	public function editStateOrder($state)
 	{

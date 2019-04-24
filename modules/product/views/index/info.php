@@ -31,7 +31,9 @@
 					<td>3</td>
 					<td>Трудоемкость</td>
 					<td class="left">
-						<? if ($product->type == Product::TYPE_DETAIL && $product->timeManufacturingItem): ?>
+						<? if ($product->timeManufacturingUnit): ?>
+							<?=$product->timeManufacturingUnit?> мин.
+						<? elseif ($product->timeManufacturingItem): ?>
 							<?=$product->timeManufacturingItem?> мин.
 						<? else: ?>
 							<span class="red">Не указана</span>

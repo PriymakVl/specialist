@@ -4,7 +4,7 @@ trait ProductSpecification  {
 
 	public function getSpecification()
 	{
-		$items = $this->getAllByIdParent();
+		$items = $this->getByIdParentModel();
 		if (!$items) return $this;
 		$this->specification = ObjectHelper::createArray($items, 'Product', ['setData', 'getActions', 'countTimeManufacturing']); 
 		$this->specificationGroup = $this->getSpecificationGroup($this->specification);
@@ -44,6 +44,27 @@ trait ProductSpecification  {
 			$product->delete();
 		}
 		return $this;
+	}
+	
+	public function getSpecificationAll()
+	{
+		$this->specificationAll = $this->getByIdParentModel();
+		debug($this->specificationAll);
+		if ($this->specificationAll) {
+			$this->getSpecificationRecursive($this->specificationAll);
+		}
+		$this->specificationAll = ObjectHelper::createArray($this->specificationAll, 'Product', ['setData']);
+		return $this;
+	}
+	
+	public function getSpecificationRecursive($products)
+	{
+		foreach ($products as $product) {
+			$items = $this->getByIdParentModel($product->id);
+			if (!$items) continue;
+			$this->specificationAll = array_merge($this->specificationAll, $items);
+			$this->getSpecificationRecursive($items);
+		}
 	}
 	
 	

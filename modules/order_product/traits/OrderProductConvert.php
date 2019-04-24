@@ -37,7 +37,8 @@ trait OrderProductConvert {
 	{
 		$table = '<table>';
 		foreach ($products as $product) {
-			$table .= '<tr><td><a href="/order_product?id_prod='. $product->id .'">'.$product->symbol.'</a></td>';
+			$background = $product->getStateBackground();
+			$table .= '<tr><td style="background:'. $background .';"><a href="/order_product?id_prod='. $product->id .'">'.$product->symbol.'</a></td>';
 			$table .= '<td>'. $product->name .'</td>';
 			$table .= '<td>'.$product->qty.'шт.</td>';
 			$table .= '</tr>';

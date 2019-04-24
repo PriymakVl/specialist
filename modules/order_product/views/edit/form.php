@@ -49,10 +49,11 @@
 			<!-- order product state -->
 			<label>Состояние: </label>
 			<select name="state">
-				<option value="<?=OrderPRODUCT::STATE_PROGRESS?>" <? if ($product->state == OrderProduct::STATE_PROGRESS) echo "selected";?>>Обрабатывается</option>
-				<option value="<?=OrderPRODUCT::STATE_STOPPED?>" <? if ($product->state == OrderProduct::STATE_STOPPED) echo "selected";?>>Остановлен</option>
-				<option value="<?=OrderPRODUCT::STATE_ENDED?>" <? if ($product->state == OrderProduct::STATE_ENDED) echo "selected";?>>Изготовлен</option>
-				<option value="<?=OrderPRODUCT::STATE_WAITING?>" <? if ($product->state == OrderProduct::STATE_WAITING) echo "selected";?>>Не выдан</option>
+				<option value="<?=OrderProduct::STATE_PLANED?>" <? if ($product->state == OrderProduct::STATE_PLANED) echo "selected";?>>Запланирован</option>
+				<option value="<?=OrderProduct::STATE_PROGRESS?>" <? if ($product->state == OrderProduct::STATE_PROGRESS) echo "selected";?>>Обрабатывается</option>
+				<option value="<?=OrderProduct::STATE_STOPPED?>" <? if ($product->state == OrderProduct::STATE_STOPPED) echo "selected";?>>Остановлен</option>
+				<option value="<?=OrderProduct::STATE_ENDED?>" <? if ($product->state == OrderProduct::STATE_ENDED) echo "selected";?>>Изготовлен</option>
+				<option value="<?=OrderProduct::STATE_WAITING?>" <? if ($product->state == OrderProduct::STATE_WAITING) echo "selected";?>>Отложен</option>
 			</select>
 		</div>
 		

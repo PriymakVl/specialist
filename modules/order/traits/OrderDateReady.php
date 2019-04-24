@@ -17,7 +17,7 @@ trait OrderDateReady {
 		$time_manuf = 0;
 		if (!$order->actions) return $time_manuf;
 		foreach ($order->actions as $action) {
-			$time_manuf += (new OrderAction)->calculateTimeManufacturing($action);
+			if ($action->state != OrderActionState::ENDED) $time_manuf += (new OrderAction)->calculateTimeManufacturing($action);
 		}
 		return $time_manuf;
 	}

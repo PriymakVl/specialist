@@ -14,11 +14,14 @@
 		</td>
 		<td><?=$detail->qty?></td>
 		<td>
-			<? if ($detail->timeManufacturingItem): ?>
-				<?=$detail->timeManufacturingItem?> мин.</td>
+			<? if ($detail->timeManufacturingUnit): ?>
+				<?=$detail->timeManufacturingUnit?> мин.
+			<? elseif ($detail->timeManufacturingItem): ?>
+				<?=$detail->timeManufacturingItem?> мин.
 			<? else: ?>
 				<span class="red">Не указана</span>
 			<? endif; ?>
+		</td>
 		<td><?=$detail->note?></td>
 	</tr>
 <? endforeach; ?>

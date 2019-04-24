@@ -27,9 +27,9 @@ trait OrderEdit {
 	
 	public function editStateProducts($state)
 	{
+		$state = (new OrderProduct)->determineStateByStateOrder($state);
 		foreach ($this->productsAll as $product) {
 			if ($product->state == OrderProduct::STATE_ENDED) continue;
-			$state = (new OrderProduct)->determineStateByStateOrder($state);
 			$product->editStateDown($state);
 		}
 	}
