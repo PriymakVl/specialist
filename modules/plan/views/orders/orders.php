@@ -1,4 +1,5 @@
 <table class="list-orders" width="940">
+    <? if ($orders): ?>
     <tr>
         <th width="40">
             <input type="checkbox" disabled>
@@ -19,7 +20,6 @@
 		<th width="80">Рейтинг</th>
 		<th width="130">Состояние</th>
     </tr>
-    <? if ($orders): ?>
         <?foreach ($orders as $order): ?>
             <tr>
                 <td>
@@ -47,7 +47,7 @@
         <? endforeach; ?>
     <? else: ?>
         <tr>
-            <td colspan="7" style="color: red;">Заказов нет</td>
+            <td style="color: red;">Заказов нет</td>
         </tr>
     <? endif; ?>
 </table>

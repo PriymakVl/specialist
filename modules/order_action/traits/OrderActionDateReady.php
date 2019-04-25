@@ -6,6 +6,7 @@ trait OrderActionDateReady {
 	{
 		$time_manufacturing_total = 0;
 		foreach ($actions as $action) {
+			if ($action->state == OrderActionState::WAITING) continue;
 			$time_manufacturing_total += $this->calculateTimeManufacturing($action);
 			$action->dateReady = Date::calculateDateReady($time_manufacturing_total);
 		}

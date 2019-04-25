@@ -6,7 +6,9 @@ trait ProductSpecification  {
 	{
 		$items = $this->getByIdParentModel();
 		if (!$items) return $this;
-		$this->specification = ObjectHelper::createArray($items, 'Product', ['setData', 'getActions', 'countTimeManufacturing']); 
+		$methods = ['setData', 'getActions'];
+		if ($this->id != ID_CATEGORY_CYLINDER && $this->id != ID_CATEGORY_PRESS && $this->id != ID_CATEGORY_PRODUCTS) $methods[] = 'countTimeManufacturing';
+		$this->specification = ObjectHelper::createArray($items, 'Product', $methods);
 		$this->specificationGroup = $this->getSpecificationGroup($this->specification);
 		return $this;
 	}
@@ -49,11 +51,10 @@ trait ProductSpecification  {
 	public function getSpecificationAll()
 	{
 		$this->specificationAll = $this->getByIdParentModel();
-		debug($this->specificationAll);
 		if ($this->specificationAll) {
 			$this->getSpecificationRecursive($this->specificationAll);
+			$this->specificationAll = ObjectHelper::createArray($this->specificationAll, 'Product', ['setData']);
 		}
-		$this->specificationAll = ObjectHelper::createArray($this->specificationAll, 'Product', ['setData']);
 		return $this;
 	}
 	

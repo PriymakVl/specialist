@@ -71,6 +71,26 @@ trait OrderActionSelectItems {
 		}
 		if (isset($select)) return $select;
 	}
+	
+	public function selectItemsForWorker($items, $worker) {
+		if (!$items) return;
+		foreach ($items as $item) {
+			if ($items->id_worker == $worker->id) $actions[] = $action;
+			else {
+				$action = $this->selectItemsForWorkerByDefaultActions($item, $worker->defaultProductActions);
+				if ($action) $actions[] = $action;
+			}
+		}
+		return $actions;
+	}
+	
+	public function selectItemsForWorkerByDefaultActions($action, $worker_default_actions) 
+	{
+		if (!$worker_default_actions) return;
+		foreach ($worker_default_actions as $default_action) {
+			if ($action->name == $default_action) return $action; 
+		}
+	}
 
 
 

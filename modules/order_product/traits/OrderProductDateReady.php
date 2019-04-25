@@ -15,9 +15,10 @@ trait OrderProductDateReady {
 	private function calculateTimeManufacturing($product)
 	{
 		$time_manuf = 0;
-		if (!$product->actions) return $time_manuf;
-		foreach ($product->actions as $action) {
-			if ($action->state != OrderActionState::ENDED) $time_manuf += (new OrderAction)->calculateTimeManufacturing($action);
+		$product->getActionsAll();
+		if (!$product->actionsAll) return $time_manuf;
+		foreach ($product->actionsAll as $action) {
+			if ($action->state != OrderActionState::ENDED && $action->state != OrderActionState::WAITING) $time_manuf += (new OrderAction)->calculateTimeManufacturing($action);
 		}
 		return $time_manuf;
 	}

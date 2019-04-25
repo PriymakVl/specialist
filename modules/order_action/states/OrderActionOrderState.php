@@ -15,6 +15,6 @@ trait OrderActionOrderState {
 	{
 		if (ObjectHelper::checkValuesProperty($order->actions, 'state', OrderActionState::ENDED)) return OrderState::MADE;
 		if (ObjectHelper::checkValuesProperty($order->actions, 'state', OrderActionState::WAITING)) return OrderState::WAITING;
-		if ($product->state == Order::STATE_PLANED && $this->get->state == OrderActionState::PROGRESS) return OrderState::WORK;
+		if ($order->state == OrderState::PLANED && $this->get->state == OrderActionState::PROGRESS) return OrderState::WORK;
 	}
 }

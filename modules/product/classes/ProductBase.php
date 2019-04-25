@@ -2,9 +2,9 @@
 
 class ProductBase extends Model
 {
-	public $timeManufacturingUnit; //трудоемкость узла
-	public $timeManufacturingItem; //общее время на изготовление элемента(детали или сборки узла и т.д.)
-	public $timeManufacturingSpecification; //трудоемкость деталей в спецификации
+	public $timeManufacturingUnit = 0; //трудоемкость узла
+	public $timeManufacturingItem = 0; //общее время на изготовление элемента(детали или сборки узла и т.д.)
+	public $timeManufacturingSpecification = 0; //трудоемкость деталей в спецификации
 	
 	//order
     //public $order;

@@ -30,6 +30,18 @@ class OrderProduct extends OrderProductBase {
 		$this->actions = (new OrderAction)->getForProduct($this->id);
 		return $this;
 	}
+	//with specification product
+	public function getActionsAll()
+	{
+		$this->actionsAll = $this->actions;
+		$this->getSpecificationAll();
+		if (!$this->specificationAll) return $this;
+		foreach ($this->specificationAll as $product) {
+			$product->getActions();
+			if ($product->actions) $this->actionsAll = array_merge($this->actionsAll, $product->actions);
+		}
+		return $this;
+	}
 
 	
 }

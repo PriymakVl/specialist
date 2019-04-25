@@ -2,7 +2,7 @@
 
 class Worker extends WorkerBase {
 	
-	use WorkerTotal;
+	use WorkerTotal, WorkerList;
 	
 	public function getActionsPlan($params)
 	{

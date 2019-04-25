@@ -5,5 +5,6 @@
         <option value="orders" >Заказы</option>
         <option value="products" selected>Продукты</option>
 		<option value="actions">Операции</option>
+		<option value="workers">Рабочие</option>
     </select>
 </div>

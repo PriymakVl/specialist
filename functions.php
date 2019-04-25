@@ -10,3 +10,12 @@ function debug($array = false, $exit = true)
     echo '<br><span style="color: red;">end script</span><br>';
     if ($exit) exit();    
 }
+
+function debugProp($objects, $name_property) 
+{
+	$properties = [];
+    foreach ($objects as $object) {
+		$properties[] = $object->$name_property;
+	}  
+	debug($properties);
+}

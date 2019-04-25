@@ -1,13 +1,6 @@
 <?php
 
 trait OrderProductGet {
-
-	// public function getAllNotStateEnded()
-	// {
-		// $items = self::getAll('order_products');
-		// if ($items) $not_ended = $this->selectItemsNotStateEnded($items);
-		// if ($not_ended) return ObjectHelper::createArray($items, 'OrderProduct', ['setData', 'getOrder', 'convertState', 'getActions']);
-	// }
 	
 	public function getForPlan()
 	{

@@ -51,9 +51,7 @@
 				</tr>
 			<? endforeach; ?>
 		<? else: ?>
-			<tr>
-				<td>Нет содержимого</td>
-			</tr>
+			<tr><td class="red">Продуктов нет</td></tr>
 		<? endif; ?>
 	</table>
 </div>

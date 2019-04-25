@@ -11,6 +11,7 @@ class OrderProductBase extends Model {
 	const ID_MAIN_ORDER = 0;//id_parent main contenr in order
 	
 	public $actions;
+	public $actionsAll; //все операции продукта + спецификации 
 	public $stateString;
 	public $stateBg;
 	public $order;

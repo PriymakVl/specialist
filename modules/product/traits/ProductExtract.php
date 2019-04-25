@@ -5,7 +5,7 @@ trait ProductExtract {
 	public function extractProduct($position)
 	{
 		$symbol = $this->extractSymbol($position);
-		$items = $this->getAllBySymbol($symbol);
+		$items = $this->getAllBySymbolModel($symbol);
 		if ($items) return (new Product)->setData($items[0]);
 	}
 	

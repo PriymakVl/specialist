@@ -2,12 +2,12 @@
 
 class User extends UserBase {
 	
-	use UserStatic;
+	use UserAuthorization, UserModel;
 	
 	public function login()
 	{
 		try {
-			return self::loginStatic(trim($this->post->password));
+			return $this->getUserByLogin();
 		} catch (Exception $e) {;
 			$flag = explode('_', $e->getMessage())[1];//login or password
 			$this->setMessage($flag, $e->getMessage());

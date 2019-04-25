@@ -2,7 +2,7 @@
 
 trait UserModel {
     
-    public static function  getByPassword($password)
+    public function  getByPassword($password)
     {
         $sql = 'SELECT `id`  FROM `users` WHERE `password` = :password';
         $id = self::perform($sql, ['password' => $password])->fetchColumn();
@@ -10,14 +10,14 @@ trait UserModel {
         return false;
     }
 	
-	public static function getWorkers()
+	public function getWorkersModel()
 	{
 		$sql = 'SELECT `id`  FROM `users` WHERE `position` = :position AND `status` = :status';
 		$params =  ['position' => self::POSITION_WORKER, 'status' => self::STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
 	}
 	
-	public static function getUserByLogin()
+	public function getUserByLoginModel()
 	{
 		$params = self::selectParams(['login', 'status']);
 		$sql = 'SELECT *  FROM `users` WHERE `login` = :login AND `status` = :status';

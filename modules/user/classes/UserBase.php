@@ -4,7 +4,7 @@ class UserBase extends Model
 {
 
 	public $defaultTypeOrder;
-	public $defaultProductAction;
+	public $defaultProductActions = [];
 	public $defaultStateOrder;//for show on list orders
 	public $options;
 	
@@ -31,10 +31,19 @@ class UserBase extends Model
 	 public function setProperties()
 	 {
 		$this->options = UserOptions::get($this->id);
-		if (isset($this->options->default_product_action)) $this->defaultProductAction = $this->options->default_product_action;
+		if (isset($this->options->default_product_actions)) $this->setDefaultProductActions();
 		if (isset($this->options->default_type_order)) $this->defaultTypeOrder = $this->options->default_type_order; 
 		if (isset($this->options->default_state_order)) $this->defaultStateOrder = $this->options->default_state_order; 
 		return $this;
+	 }
+	 
+	 private function setDefaultProductActions()
+	 {
+		 $ids = unserialize($this->options->default_product_actions);
+		 foreach ($ids as $id) {
+			 $action = (new Action)->setData($id);
+			 if ($action->data) $this->defaultProductActions[] = $action->name;
+		 }
 	 }
 	
 

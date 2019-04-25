@@ -14,7 +14,6 @@ class Controller_Product extends Controller_Base {
 	{
 		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->getSpecificationChildren();
 		$product->getParent()->convertProperties()->getDrawings()->getActions()->countTimeManufacturing();
-		// debug($product->timeManufacturingUnit);
 		//->getStatistics()
 		$this->render('index/main', compact('product'));
 	}

@@ -28,6 +28,14 @@ class Controller_Plan extends Controller_Base {
 		$this->render('actions/main', compact('actions'));
 	}
 	
+	public function action_workers()
+	{
+		if ($this->get->id_user) $worker = (new Worker)->setData($this->get->id_user)->setProperties();
+		else 
+		$actions = (new OrderAction)->getForWorker($worker);
+		$this->render('workers/main', compact('acttions', 'worker'));
+	}
+	
 	public function action_edit_rating()
 	{
 		if ($this->get->id_prod) (new OrderProduct)->setData($this->get->id_prod)->getActions()->editRating()->setMessage('success', 'edit_rating')->setSession('id_prod_active', $this->get->id_prod);
