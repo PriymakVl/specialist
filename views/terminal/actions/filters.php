@@ -1,16 +1,16 @@
 <?php
 	$default_actions = Action::getAll('actions');
 	$orders = (new Order)->getForTerminal();
-	$name_action = $this->get->action ? trim($this->get->action) : $worker->defaultProductAction;
 ?>
 <div id="filters-wrp">
 	<!-- filter actions -->
 	<div id="filter-actions-wrp">
 		<form action="/terminal/action">
 			<select id="filter-actions">
-				<option value="all">Все операции</option>
+				<option value="my" <? if (!$this->get->action == 'my') echo 'selected'; ?>>Мои</option>
+				<option value="" <? if (!$this->get->action) echo 'selected'; ?>>Все операции</option>
 				<? foreach ($default_actions as $item): ?>
-					<option <? if ($item->name == $name_action) echo 'selected'; ?> value="<?=$item->name?>"><?=$item->name?></option>
+					<option <? if ($item->name == $this->get->action) echo 'selected'; ?> value="<?=$item->name?>"><?=$item->name?></option>
 				<? endforeach; ?>
 				<option value="other" <? if ($this->get->action == 'other') echo 'selected'; ?>>Разные</option>
 			</select>

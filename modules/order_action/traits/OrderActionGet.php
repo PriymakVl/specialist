@@ -29,7 +29,7 @@ trait OrderActionGet {
 		if ($items) $items = $this->selectItemsForTerminal($items);
 		if (!$items) return;
 		$select = $this->selectItemsForWorker($items, $worker);
-		if ($select) $actions = ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
+		if ($select) $actions = ObjectHelper::createArray($select, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
 		return $this->setDateReady($actions);
 	}
 }

@@ -75,20 +75,20 @@ trait OrderActionSelectItems {
 	public function selectItemsForWorker($items, $worker) {
 		if (!$items) return;
 		foreach ($items as $item) {
-			if ($items->id_worker == $worker->id) $actions[] = $action;
+			if ($item->id_worker == $worker->id) $actions[] = $item;
 			else {
-				$action = $this->selectItemsForWorkerByDefaultActions($item, $worker->defaultProductActions);
-				if ($action) $actions[] = $action;
+				$result = $this->compareWidthDefaultActionsWorker($item, $worker->defaultProductActions);
+				if ($result) $actions[] = $item;
 			}
 		}
-		return $actions;
+		if (isset($actions)) return $actions;
 	}
 	
-	public function selectItemsForWorkerByDefaultActions($action, $worker_default_actions) 
+	public function compareWidthDefaultActionsWorker($item, $worker_default_actions) 
 	{
-		if (!$worker_default_actions) return;
+		if (!$worker_default_actions) return false;
 		foreach ($worker_default_actions as $default_action) {
-			if ($action->name == $default_action) return $action; 
+			if ($item->name == $default_action) return true; 
 		}
 	}
 

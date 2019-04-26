@@ -75,6 +75,14 @@ class Date {
 		return round ($time / 60);
 	}
 	
+	public static function convertMinutesToHours($time)
+	{
+		$hours = floor($time / 60);
+		$minutes = $time % 60;
+		$minutes = $minutes ? $minutes : '00';
+		return (object)['hours' => $hours, 'minutes' => $minutes];
+	}
+	
 	public static function calculateDateReady($time_manufacturing_total)
 	{
 		$workin_daty_minutes = 360; // 6 hour

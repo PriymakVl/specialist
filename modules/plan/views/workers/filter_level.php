@@ -7,14 +7,4 @@
 		<option value="actions">Операции</option>
 		<option value="actions" selected>Рабочие</option>
     </select>
-	
-	<label>Рабочие:</label>
-    <select id="workers">
-        <option value="" >Не указан</option>
-		<? if ($workers): ?>
-			<? foreach ($workes as $worker): ?>
-				<option value="<?=$worker->id?>"><?=$worker->title?></option>
-			<? endforeach; ?>
-		<? endif; ?>
-    </select>
 </div>

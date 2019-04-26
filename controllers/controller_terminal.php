@@ -16,6 +16,7 @@ class Controller_Terminal extends Controller_Base
     {
 		$worker = $this->getWorker();
 		$actions = (new OrderAction)->getForTerminal();
+		$actions = $actions ? $actions : $worker->actions;
         $this->render('actions/main', compact('actions', 'worker'));
     }
 
@@ -35,7 +36,7 @@ class Controller_Terminal extends Controller_Base
 	
 	private function getWorker()
     {
-        if ($this->session->id_user) return (new Worker)->setData($this->session->id_user)->setProperties();
+        if ($this->session->id_user) return (new Worker)->setData($this->session->id_user)->setProperties()->getActions();
         else $this->redirect('main/login');
     }
 }

@@ -30,10 +30,9 @@ class Controller_Plan extends Controller_Base {
 	
 	public function action_workers()
 	{
-		if ($this->get->id_user) $worker = (new Worker)->setData($this->get->id_user)->setProperties();
-		else 
-		$actions = (new OrderAction)->getForWorker($worker);
-		$this->render('workers/main', compact('acttions', 'worker'));
+		if ($this->get->id_user) $worker = (new Worker)->setData($this->get->id_user)->setProperties()->getActions()->calculateTimePlan(); 
+		else $worker = false;
+		$this->render('workers/main', compact('worker'));
 	}
 	
 	public function action_edit_rating()

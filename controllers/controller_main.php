@@ -18,7 +18,7 @@ class Controller_Main extends Controller_Base {
     {
         if (!$this->session->id_user) return $this->redirect('main/login');
         $user = new User($this->session->id_user);
-        if ($user->position == User::POSITION_WORKER)return $this->redirect('terminal/actions');
+        if ($user->position == User::POSITION_WORKER)return $this->redirect('terminal/actions?action=my');
         return $this->redirect('order/list');
     }
 

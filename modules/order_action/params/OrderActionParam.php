@@ -21,18 +21,14 @@ trait OrderActionParam {
 	
 	private function getActionParam()
 	{
-		$worker = (new Worker)->setData($this->session->id_user)->setProperties();
 		if ($this->get->action == 'all') return false;
 		else if ($this->get->action) return $this->get->action;
-		else if ($worker->defaultProductAction) return $worker->defaultProductAction;
-		return false;
 	}
 	
 	private function getIdOrderParam()
 	{
 		if ($this->get->id_order == 'all') return false;
 		if ($this->get->id_order) return $this->get->id_order;
-		return false;
 	}
 	
 }

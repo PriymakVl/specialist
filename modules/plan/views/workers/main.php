@@ -4,23 +4,32 @@
 ?>
 <!-- css files -->
 <link rel="stylesheet" href="/modules/plan/css/filters.css">
+<link rel="stylesheet" href="/modules/plan/css/info.css">
 <link rel="stylesheet" href="/modules/plan/css/table_date_header.css">
 
 <div id="content">
     <!-- filter level plan -->
-    <? include_once('filter_level.php'); ?>
+	<? if ($worker): ?>
+		<? include 'info.php'; ?>
+	<? else: ?>
+		<? include('filter_level.php'); ?>
+	<? endif; ?>
 
     <!-- order form search -->
     <? //include_once('search.php'); ?>
 
     <!-- message -->
-    <? include_once('./views/total/message.php'); ?>
+    <? include('./views/total/message.php'); ?>
 
-    <!-- products plan -->
-    <? include_once('actions.php'); ?>
+    <!-- workers or actions worker plan -->
+	<? if ($worker): ?>
+		<? include('actions.php'); ?>
+	<? else: ?>
+		<? include('workers.php'); ?>
+	<? endif; ?>
 
 	<!-- orders plan menu -->
-    <? include_once('menu.php'); ?>
+    <? if ($worker) include_once('menu.php'); ?>
 
 </div><!-- id content -->
 

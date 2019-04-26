@@ -10,13 +10,6 @@ trait UserModel {
         return false;
     }
 	
-	public function getWorkersModel()
-	{
-		$sql = 'SELECT `id`  FROM `users` WHERE `position` = :position AND `status` = :status';
-		$params =  ['position' => self::POSITION_WORKER, 'status' => self::STATUS_ACTIVE];
-        return self::perform($sql, $params)->fetchAll();
-	}
-	
 	public function getUserByLoginModel()
 	{
 		$params = self::selectParams(['login', 'status']);

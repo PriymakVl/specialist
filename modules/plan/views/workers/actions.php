@@ -1,6 +1,6 @@
 <div id="plan-actions-wrp">
 	<table width="940">
-		<? if ($actions): ?>
+		<? if ($worker->actions): ?>
 			<tr>
 				<th width="50"><input type="checkbox" disabled></th>
 				<th width="100">Заказ</th>
@@ -19,7 +19,7 @@
 				<th width="70">Рейтинг</th>
 				<th>Состояние</th>
 			</tr>
-				<? foreach($actions as $action): ?>
+				<? foreach($worker->actions as $action): ?>
 					<tr>
 						<td <?if ($this->session->id_action_active == $action->id) echo 'class="bg-green"'; ?>>
 							<input type="radio" id_action="<?=$action->id?>" name="actions"></td>

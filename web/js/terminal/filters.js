@@ -3,10 +3,10 @@ $(document).ready(function() {
 	$('#filters-wrp #filter-actions').change(function() {
 		var action = $(this).val();
 		var params = getObjectGetParams();
-		if (params.type_order) location.href = '/terminal/actions?action=' + action + '&type_order=' + params.type_order;
+		if (!action) location.href = '/terminal/actions';
+		else if (params.type_order) location.href = '/terminal/actions?action=' + action + '&type_order=' + params.type_order;
 		else if (params.id_order) location.href = '/terminal/actions?action=' + action + '&id_order=' + params.id_order;
 		else location.href = '/terminal/actions?action=' + action;
-		
 	});
 	
 	//orders
