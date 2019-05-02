@@ -35,11 +35,16 @@
 				<label>Штучное время:</label>
 				<input type="text" name="time_prod" required><span>мин.</span>
 			</div>
-			<!-- product qty -->
+			
 			<div class="form-box">
+				<!-- product qty -->
 				<label>Количеcтво:</label>
-				<input type="number" value="<?=$product?$product->qty:1?>" required name="qty"> <span>шт.</span>
+				<input type="number" value="" required name="qty"> <span>шт.</span>
+				<!-- date execution-->
+				 <label>Срок выполнения:</label>
+                <input type="text" name="date_exec" class="datepicker" value="<?=$order->date_exec ? date('d.m.y', $order->date_exec) : ''?>" autocomplete="off">
 			</div>
+			
 			<!-- action note -->
 			<div class="form-box">
 				<label>Примесание:</label>

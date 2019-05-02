@@ -16,5 +16,12 @@ trait OrderActionDelete {
 			$action->delete();
 		}
 	}
+	
+	public function delete()
+	{
+		parent::delete();
+		$this->editStateProduct()->editStateOrder();
+		return $this;
+	}
 
 }

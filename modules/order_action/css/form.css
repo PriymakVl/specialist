@@ -8,7 +8,7 @@ input[name="number"],  input[name="time_prepar"], input[name="time_prod"]{
 }
 
 input[name="number"] {
-	margin-right: 20px;
+	margin-right: 40px;
 }
 
 input[name="price"] {
@@ -16,7 +16,11 @@ input[name="price"] {
 	width: 75px;
 }
 
-input[name="rating"],  input[name="qty"]{
+input[name="rating"] {
+	margin-right: 40px;
+}
+
+input[name="qty"] + span {
 	margin-right: 40px;
 }
 
@@ -27,6 +31,10 @@ input[name="rating"],  input[name="qty"]{
 
 input[name="time_prod"]  + span {
 	margin-right: 0;
+}
+
+.datepicker {
+	width: 80px!important;
 }
 
 #actions {

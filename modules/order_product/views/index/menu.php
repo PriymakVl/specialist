@@ -12,10 +12,10 @@
 		</li>
 		<? if ($product->actions): ?>
 			<li>
-				<a href="#" id="order-action-edit">Редакт-ть операцию</a>
+				<a href="#" id="order-product-action-edit">Редакт-ть операцию</a>
 			</li>
 			<li>
-				<a href="#" id="order-action-delete">Удалить операцию</a>
+				<a href="#" id="order-product-action-delete">Удалить операцию</a>
 			</li>
 		<? endif; ?>
     </ul>

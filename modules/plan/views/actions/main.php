@@ -29,5 +29,8 @@
 <script src="/modules/plan/js/level_filters.js"></script>
 <script src="/modules/plan/js/edit_rating.js"></script>
 <script src="/modules/plan/js/edit_state_action.js"></script>
+<script src="/modules/order_action/js/order_action_delete.js"></script>
+<script src="/modules/order_action/js/order_action_edit.js"></script>
+<script src="/modules/order_action/js/order_action_add_worker.js"></script>
 
 

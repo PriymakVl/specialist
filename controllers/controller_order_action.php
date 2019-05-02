@@ -5,7 +5,7 @@ class Controller_Order_Action extends Controller_Base {
 	public function __construct()
     {
         parent::__construct();
-		$this->view->title = 'Заказ';
+		$this->view->title = 'Операция';
         $this->view->pathFolder = './modules/order_action/views/';
 		$this->message->section = 'order_action';
     }
@@ -29,9 +29,16 @@ class Controller_Order_Action extends Controller_Base {
 	public function action_add_for_order()
 	{
 		$order = new Order($this->get->id_order); $product = false;
-		if (!$this->post->save) return $this->render('add/main', compact('order', 'product'));
+		if (!$this->post->save) return $this->render('add/main', compact('order'));
 		$action = (new OrderAction)->addForOrder()->setMessage('success', 'add');
 		$this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$order->id);
+	}
+	//add without order and product
+	public function action_add_for_other()
+	{
+		if (!$this->post->save) return $this->render('add/main');
+		$action = (new OrderAction)->addForOther()->setMessage('success', 'add');
+		$this->redirect('plan/actions?type_order='.$this->get->type_order.'&id_active='.$action->id);
 	}
 	
 	public function action_edit_state()
@@ -48,16 +55,17 @@ class Controller_Order_Action extends Controller_Base {
 		$action = (new OrderAction)->setData($this->get->id_action)->getProduct()->getOrder();
 		if (!$this->post->save) return $this->render('edit/main', compact('action'));
 		$action->edit()->setMessage('success', 'edit');
-		// ->editTime($params)->checkReadyOrder()
 		if ($this->get->sent == 'order') $this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$action->id_order);
-		else $this->redirect('order_product?id_prod='.$action->id_prod);
+		else if ($this->get->sent == 'product') $this->redirect('order_product?id_prod='.$action->id_prod);
+		else $this->redirect('plan/actions?id_active='.$action->id);
 	}
 	
 	public function action_delete()
 	{
-		$action = (new OrderAction)->setData($this->get->id_action)->delete()->checkStateProduct()->setMessage('success', 'delete');
+		$action = (new OrderAction)->setData($this->get->id_action)->delete()->setMessage('success', 'delete');
 		if ($this->get->sent == 'order') $this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$action->id_order);
-		else $this->redirect('order_product?id_prod='.$action->id_prod);
+		else if ($this->get->sent == 'product') $this->redirect('order_product?id_prod='.$action->id_prod);
+		else $this->redirectPrevious();
 	}
 	
 	
@@ -65,6 +73,15 @@ class Controller_Order_Action extends Controller_Base {
 	{
 		$action = (new OrderAction)->setData($this->get->id_action)->getStates()->getProduct()->getOrder();
 		return $this->render('states/main', compact('action'));
+	}
+	
+	public function action_add_worker()
+	{
+		$action = (new OrderAction)->setData($this->get->id_action);
+		$workers = (new Worker)->getWorkers();
+		if (!$this->post->save) return $this->render('add_worker/main', compact('action', 'workers'));
+		$action->addWorker()->setMessage('success', 'add_worker');
+		return $this->redirectPrevious();
 	}
 	
 }

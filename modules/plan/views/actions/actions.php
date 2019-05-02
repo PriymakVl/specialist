@@ -24,7 +24,11 @@
 						<td <?if ($this->session->id_action_active == $action->id) echo 'class="bg-green"'; ?>>
 							<input type="radio" id_action="<?=$action->id?>" name="actions"></td>
 						<td>
-							<a href="/order?id_order=<?=$action->order->id?>"><?=$action->order->symbol?></a>
+							<? if ($action->id_order): ?>
+								<a href="/order?id_order=<?=$action->order->id?>"><?=$action->order->symbol?></a>
+							<? else: ?>
+								<span class="red">Нет заказа</span>
+							<? endif; ?>
 						</td>
 						<td>
 							<? if ($action->product): ?>
@@ -37,8 +41,8 @@
 						</td>
 						<td><?=$action->name?></td>
 						<td><?=$action->qty?></td>
-						<td><?=$action->date_exec ? date('d.m.y', $action->date_exec) : '<span class=red>Нет</span>'?></td>
-						<td <? if ($action->date_exec + Date::DAY_WORKING_SECOND < $action->dateReady) echo 'class="bg-red"';?>>
+						<td width="56"><?=$action->date_exec ? date('d.m.y', $action->date_exec) : '<span class=red>Нет</span>'?></td>
+						<td width="56" <? if ($action->date_exec + Date::DAY_WORKING_SECOND < $action->dateReady) echo 'class="bg-red"';?>>
 							<?=$action->dateReady ? date('d.m.y', $action->dateReady) : ''?>
 						</td>
 						<td>

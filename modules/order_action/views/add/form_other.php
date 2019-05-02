@@ -3,9 +3,9 @@
 ?>
 <div id="form-product-action-wrp">
     <h2 class="center">
-		Добавить операцию для <?=$product->name?>: <span class="green"><?=$product->symbol?></span> 
+		Добавить операцию</span> 
 	</h2>
-    <form action="/order_action/add_for_product?id_prod=<?=$this->get->id_prod?>&id_order=<?=$this->get->id_order?>" method="post">
+    <form action="/order_action/add_for_other?type_order=<?=$this->get->type_order?>" method="post">
 	
 			<div class="form-box product-action-name-wrp">
 				<!-- name action -->
@@ -35,19 +35,17 @@
 				<label>Штучное время:</label>
 				<input type="text" name="time_prod" required><span>мин.</span>
 			</div>
-			
+			<!-- product qty -->
 			<div class="form-box">
-				<!-- product qty -->
 				<label>Количеcтво:</label>
-				<input type="number" value="<?=$product?$product->qty:1?>" required name="qty"> <span>шт.</span>
+				<input type="number" value="1" required name="qty"><span>шт.</span>
 				<!-- date execution-->
 				 <label>Срок выполнения:</label>
-                <input type="text" name="date_exec" class="datepicker" value="<?=$product->date_exec ? date('d.m.y', $product->date_exec) : ''?>" autocomplete="off">
+                <input type="text" name="date_exec" class="datepicker" autocomplete="off">
 			</div>
-			
 			<!-- action note -->
 			<div class="form-box">
-				<label>Примесание:</label>
+				<label>Примечание:</label>
 				<textarea name="note"></textarea>
 			</div>
 

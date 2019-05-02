@@ -4,14 +4,17 @@
 
 <div id="content">
 
-	<? if ($product): ?>
+	<? if (isset($product)): ?>
 		<? include_once('form_product.php'); ?>
-	<? else: ?>
+	<? elseif (isset($order)): ?>
 		<? include_once('form_order.php'); ?>
+	<? else: ?>
+		<? include_once('form_other.php'); ?>
 	<? endif; ?>
 	
 </div><!-- id content -->
 
 <!-- js files -->
 <script src="/modules/order_action/js/select_action.js"></script>
+<script src="/web/js/datepicker.js"></script>
 

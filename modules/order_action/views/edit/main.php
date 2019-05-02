@@ -4,8 +4,14 @@
 
 <div id="content">
 
-    <? include_once('form.php'); ?>
-
+	<? if ($action->id_prod): ?>
+		<? include_once('form_product.php'); ?>
+	<? elseif ($action->id_order): ?>
+		<? include_once('form_product.php'); ?>
+	<? else: ?>
+		<? include_once('form_other.php'); ?>
+	<? endif; ?>
+	
 </div>
 
 <!-- js files -->

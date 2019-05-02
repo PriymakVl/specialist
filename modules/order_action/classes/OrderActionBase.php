@@ -22,7 +22,7 @@ class OrderActionBase extends Model {
 	const BG_TERMINAL_BOX_STOPPED = 'red';
 	const BG_TERMINAL_BOX_PRIORITY = 'Aqua';
 	
-	const RATING_DEFAULT = 1;
+	const RATING_DEFAULT = 0;
 	
 	public function __construct($id = false)
     {

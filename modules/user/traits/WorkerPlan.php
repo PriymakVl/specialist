@@ -5,7 +5,7 @@ trait WorkerPlan {
 
 	public function calculateTimePlan()
 	{
-		if (!$this->actions) return;
+		if (!$this->actions) return $this;
 		foreach ($this->actions as $action) {
 			$this->timePlan += (new OrderAction)->calculateTimeManufacturing($action);
 		}

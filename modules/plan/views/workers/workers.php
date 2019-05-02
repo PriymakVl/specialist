@@ -1,7 +1,5 @@
 <?php
 	$number = 1;
-	$workers = (new Worker)->getWorkers();
-	// debug($this->get);
 ?>
 <table class="list-orders" width="940">
     <tr>

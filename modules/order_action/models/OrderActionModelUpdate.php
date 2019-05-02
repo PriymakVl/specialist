@@ -32,6 +32,13 @@ trait OrderActionModelUpdate {
 			`time_prod` = :time_prod, `rating` = :rating, `note` = :note WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}
+	
+	private function updateIdWorkerModel()
+	{
+		$params = ['id_action' => $this->get->id_action, 'id_worker' => $this->post->id_worker];
+		$sql = 'UPDATE `order_actions` SET `id_worker` = :id_worker WHERE `id` = :id_action';
+		return self::perform($sql, $params);
+	}
 
 
 }
