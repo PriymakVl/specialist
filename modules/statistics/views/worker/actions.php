@@ -23,22 +23,32 @@
     <tr>
         <th width="50">№</th>
         <th width="100">Заказ</th>
-        <th width="250">Деталь</th>
+        <th width="200">Продукт</th>
 		<th width="180">Операция</th>
+		<th width="80">Кол-во</th>
 		<th width="100">Труд. планов</th>
 		<th width="100">Труд. фактич</th>
+		<th>Примечание</th>
     </tr>
-    <? if ($worker->actions): ?>
-        <?foreach ($worker->actions as $action): ?>
+    <? if ($worker->actionsFact): ?>
+        <?foreach ($worker->actionsFact as $action): ?>
             <tr>
                 <td><?=$number?></td>
                 <td>
-					<a href="/order?id_order=<?=$action->order->id?>"><?=$action->order->symbol?></a>
+					<? if ($action->id_order): ?>
+						<a href="/order?id_order=<?=$action->order->id?>"><?=$action->order->symbol?></a>
+					<? else: ?>
+						<span class="red">Нет заказа</span>
+					<? endif; ?>
 				</td>
                 <td>
-					<a href="/product?id_prod=<?=$action->product->id?>"><?=$action->product->symbol?></a> 
-					<?=$action->product->name?> 
-					(<?=$action->qty?> шт.)
+					<? if ($action->product): ?>
+						<a href="/order_product?id_prod=<?=$action->product->id?>">
+							<?=$action->product->symbol, ' : ', $action->product->name?>
+						</a>
+					<? else: ?>
+						<span class="red">Нет продукта</span>
+					<? endif; ?>
 				</td>
 				<td><?=$action->name?></td>
 				<td><?=$action->time_manufac?> мин.</td>
@@ -50,16 +60,14 @@
 					<? else: ?>
 						<span class="red">Нет</span>
 					<? endif; ?>
-					<? if ($action->note): ?>
-						<a href="#" class="show-action-note" note="<?=$action->note?>">Примечание</a>
-					<? endif; ?>
 				</td>
+				<td><?=$action->note?></td>
             </tr>
 			<? $number++; ?>
         <? endforeach; ?>
     <? else: ?>
         <tr>
-            <td colspan="6" class="red">Простой</td>
+            <td colspan="8" class="red">Простой</td>
         </tr>
     <? endif; ?>
 </table>

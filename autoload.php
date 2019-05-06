@@ -19,6 +19,7 @@ function autoload_core_trait ($class_name)
 		case 'DB': return require './core/traits/DB.php';
 		case 'ModelStatic': return require './core/traits/ModelStatic.php';
 		case 'Param': return require './core/traits/Param.php';
+		case 'SelectProperty': return require './core/traits/SelectProperty.php';
 	}
 }
 

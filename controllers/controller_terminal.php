@@ -16,7 +16,6 @@ class Controller_Terminal extends Controller_Base
     {
 		$worker = $this->getWorker();
 		$actions = (new OrderAction)->getForTerminal();
-		$actions = $actions ? $actions : $worker->actions;
         $this->render('actions/main', compact('actions', 'worker'));
     }
 

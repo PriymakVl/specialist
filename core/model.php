@@ -2,7 +2,7 @@
 
 class Model extends Core {
 
-	use ModelStatic;
+	use ModelStatic, SelectProperty;
 	
 	public $data;
 	protected $tableName;

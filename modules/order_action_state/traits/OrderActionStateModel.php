@@ -26,6 +26,13 @@ trait OrderActionStateModel {
 		$sql = 'SELECT * FROM `order_action_states` WHERE `id_action` = :id_action AND `status` = :status';
 		return self::perform($sql, $params)->fetchAll();
 	}
+	
+	public function getIdUsersActionModel($id_action)
+	{
+		$params = ['id_action' => $id_action, 'status' => STATUS_ACTIVE];
+		$sql = 'SELECT `id_user` FROM `order_action_states` WHERE `id_action` = :id_action AND `status` = :status  GROUP BY `id_user`';	
+		return self::perform($sql, $params)->fetchAll(PDO::FETCH_COLUMN);
+	}
 
 
 }

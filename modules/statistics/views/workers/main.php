@@ -13,7 +13,7 @@
     <? //include_once('./views/total/message.php'); ?>
 
     <!-- worker list -->
-    <? include_once('list.php'); ?>
+    <? include_once('workers.php'); ?>
 
     <!-- worker list menu -->
     <? include_once('menu.php'); ?>

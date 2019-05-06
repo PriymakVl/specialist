@@ -9,12 +9,9 @@
     <!-- info box -->
     <? include_once('filters.php'); ?>
 
-    <!-- actions made -->
-	<? if (empty($params['period_start'])): ?>
-		<? include_once('actions_plan.php'); ?>
-	<? else: ?>
-		<? include_once('actions_made.php'); ?>
-	<? endif; ?>
+    <!-- actions -->
+	<? include_once('actions.php'); ?>
+
 
     <!-- worker list menu -->
     <? //include_once('menu.php'); ?>

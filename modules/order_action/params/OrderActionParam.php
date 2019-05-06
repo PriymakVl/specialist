@@ -31,6 +31,16 @@ trait OrderActionParam {
 		if ($this->get->id_order) return $this->get->id_order;
 	}
 	
+	private function getByDateEndParams()
+	{
+		$period_start = $this->get->period_start ? Date::convertStringToTime($this->get->period_start) : time();
+		$params['start'] = floor ($period_start / 86400) * 86400;
+		$period_end = $this->get->period_end ?  Date::convertStringToTime($this->get->period_end) : time();
+		$params['end'] = ceil ($period_end / 86400) * 86400;
+		$params['status'] = STATUS_ACTIVE;
+		return $params;
+	}
+	
 }
 
 

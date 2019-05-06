@@ -11,11 +11,15 @@ class Worker extends WorkerBase {
 		return $this;
 	}
 	
+	public function getActionsFact()
+	{
+		$this->actionsFact = (new OrderAction)->getForWorkerFact($this);
+		return $this;
+	}
+	
 	public function getCurrentActions()
 	{
-		$current_actions = (new OrderAction)->selectItemsByState($this->actions, OrderActionState::PROGRESS);
-		if (!$current_actions) return;
-		$this->currentActions = $current_actions;
+		$this->currentActions = $this->selectProperty($this->actions, 'state', OrderActionState::PROGRESS, true);
 		$this->getCurrentActionsString();
 		return $this;
 	}

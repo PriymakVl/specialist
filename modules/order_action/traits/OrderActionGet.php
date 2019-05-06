@@ -17,21 +17,32 @@ trait OrderActionGet {
 	
 	public function getForPlan()
 	{
-		$items = $this->selectItemsByState($this->getByTypeOrderModel(), OrderActionState::ENDED, true);
+		$items = $this->getByTypeOrderModel();
 		if (!$items) return;
-		if ($this->get->action == 'other') $items = $this->selectItemsByDefaultNames($items, false);
-		else if ($this->get->action) $items = $this->selectItemsByName($items, $this->get->action);
+		$items = $this->selectProperty($items, 'state', OrderActionState::ENDED, true);
+		if (!$items) return;
+		if ($this->get->action == 'other') $items = $this->selectByDefaultNames($items, false);
+		else if ($this->get->action) $items = $this->selectProperty($items, 'name', $this->get->action);
 		$actions = ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
 		if (isset($actions)) return $this->setDateReady($actions);
 	}
-	
+	//for plan page
 	public function getForWorker($worker)
 	{
 		$items = $this->getByTypeOrderModel();
-		if ($items) $items = $this->selectItemsByStates($items, [OrderActionState::ENDED, OrderActionState::WAITING], true);
 		if (!$items) return;
-		$select = $this->selectItemsForWorker($items, $worker);
+		$items = $this->selectProperties($items, 'state', [OrderActionState::ENDED, OrderActionState::WAITING], true);
+		if (!$items) return;
+		$select = $this->selectForWorker($items, $worker);
 		if ($select) $actions = ObjectHelper::createArray($select, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
 		if (isset($actions)) return $this->setDateReady($actions);
+	}
+	//for statistics page
+	public function getForWorkerFact($worker)
+	{
+		$items = $this->getByDateEndModel();
+		if (!$items) return;
+		$select = $this->selectForWorkerFact($items, $worker->id);
+		if ($select) return ObjectHelper::createArray($select, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'countFactTimeManufact']);
 	}
 }

@@ -4,7 +4,7 @@ trait OrderActionTime {
 
 	public function countFactTimeManufact()
 	{
-		$params = ['id_action' => $this->id, 'status' => self::STATUS_ACTIVE, 'type' => 'plan'];
+		$params = ['id_action' => $this->id, 'status' => STATUS_ACTIVE, 'type' => 'plan'];
 		$this->states = OrderActionState::getAllByIdAction($params);
 		$this->timeMade = $this->countTimeManufactByTimeStates();
 		return $this;
@@ -36,13 +36,6 @@ trait OrderActionTime {
 		if ($params['state'] == OrderActionState::PROGRESS && !$this->time_start) self::setTimeStart($params);
 		if ($params['state'] == OrderActionState::ENDED) self::setTimeEnd($params);
 		return $this;
-	}
-	
-	public function setTimeStart()
-	{
-		$params = self::selectParams(['time', 'id_worker', 'id_action']);
-		$sql = 'UPDATE `order_actions` SET `time_start` = :time, `id_worker` = :id_worker WHERE `id` = :id_action';
-		return self::perform($sql, $params);
 	}
 	
 	public function setTimeEnd()

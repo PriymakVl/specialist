@@ -34,15 +34,22 @@ trait OrderActionModelSelect {
 	public function getByTypeOrderModel()
 	{
 		$params = ['type_order' => $this->getTypeOrderParam(), 'status' => STATUS_ACTIVE];
-		$sql = 'SELECT * FROM `order_actions` WHERE `type_order` = :type_order AND `status` = :status ORDER BY state, rating DESC, date_exec';
+		$sql = 'SELECT * FROM `order_actions` WHERE `type_order` = :type_order AND `status` = :status ORDER BY state DESC, rating DESC, date_exec';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	//if $but false select all but not this state
 	public function getByStateModel($state, $not = false)
 	{
 		$params = ['state' => $state, 'status' => STATUS_ACTIVE];
-		if ($not) $sql = 'SELECT * FROM `order_actions` WHERE `state` <> :state AND `status` = :status ORDER BY state, rating DESC, date_exec';
+		if ($not) $sql = 'SELECT * FROM `order_actions` WHERE `state` <> :state AND `status` = :status ORDER BY state DESC, rating DESC, date_exec';
 		else $sql = 'SELECT * FROM `order_actions` WHERE `state` = :state AND `status` = :status ORDER BY state, rating DESC, date_exec';
+		return self::perform($sql, $params)->fetchAll();
+	}
+	
+	public function getByDateEndModel()
+	{
+		$params = $this->getByDateEndParams();
+		$sql = 'SELECT * FROM `order_actions` WHERE `date_end` > :start AND `date_end` < :end AND `status` = :status ORDER BY `date_end`';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	

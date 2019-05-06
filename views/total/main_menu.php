@@ -43,7 +43,18 @@
         </li>
 		
         <!-- statistics -->
-        <li><a href="/statistics/workers">Статистика</a></li>
+        <li class="drop">
+			<a href="#">Статистика</a>
+			<div class="dropdownContain">
+                <div class="dropOut">
+                    <div class="triangle"></div>
+                    <ul>
+                        <li><a href="/statistics/workers?type_order=<?=Order::TYPE_CYLINDER?>">Пневмо</a></li>
+                        <li><a href="/statistics/workers?type_order=<?=Order::TYPE_CAR_NUMBER?>">Пресса и накатки</a></li>
+                    </ul>
+                </div>
+            </div>
+		</li>
         <!-- logout -->
         <li><a href="/main/logout">Выход</a></li>
     </ul>
