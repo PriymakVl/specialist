@@ -10,8 +10,10 @@ class WorkerBase extends User {
 	//public $loadFullFlage; //если указана трудоемкость для всех деталей
 	//public $defaultActions;
 	public $costMade; //сколько заработал
-	public $actions;
 	
+	public $actions;
+	public $currentActions;
+	public $currentActionsString = '';
 	 
 
 }

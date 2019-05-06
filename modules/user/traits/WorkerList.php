@@ -2,25 +2,16 @@
 
 trait WorkerList {
 
-	public function getWorkers()
+	public function getWorkers($all = false)
 	{
 		$items= $this->selectItemsWorkers();
-        // if ($items)  $workers = ObjectHelper::createArray($items, 'Worker', 'setData', 'setProperties', 'getActions', 'calculateTimePlan');
 		foreach ($items as $item) {
 			$workers[] = (new self)->setData($item)->setProperties()->getActions()->calculateTimePlan();
 		}
-		if (isset($workers)) return $this->selectWorkersByTypeOrder($workers);
+		if (isset($workers) && $all === false) return $this->selectWorkersByTypeOrder($workers);
+		else if (isset($workers)) return $workers;
 	}
 	
-	// public function getWorkers()
-	// {
-		// $items = $this->selectItemsWorkers();
-		// if (!$items) return;
-		// foreach ($items as $item) {
-			// $workers[] = (new self)->setData($item)->setProperties()->getActions()->calculateTimePlan();
-		// }
-		// return $this->selectWorkersByTypeOrder($workers);
-	// }
 	
 	
 

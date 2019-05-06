@@ -19,25 +19,12 @@
                     <a href="/statistics/worker_made?id_worker=<?=$worker->id?>"><?=$worker->title?></a>
                 </td>
                 <td>
-					<? if ($worker->loadPercent): ?>
-						<span><?=$worker->loadPercent?>%</span>
-					<? else: ?>
 						<span class="red">Простой</span>
-					<? endif; ?>
 				</td>
                 <td>
-					<? if ($worker->timePlan): ?>
-						<span><?=$worker->timePlan?> мин.</span>
-					<? else: ?>
 						<span class="red">Простой</span>
-					<? endif; ?>
 				</td>
-				<td>
-					<? if ($worker->timeMade): ?>
-						<span><?=$worker->timeMade?> мин.</span>
-					<? else: ?>
-						<span class="red">Нет</span>
-					<? endif; ?>
+				<td><span class="red">Нет</span></td>
 				<td><?=$worker->costMade ? $worker->costMade : '0'?> грн.</td>
             </tr>
         <? endforeach; ?>

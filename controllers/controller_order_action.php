@@ -77,11 +77,11 @@ class Controller_Order_Action extends Controller_Base {
 	
 	public function action_add_worker()
 	{
-		$action = (new OrderAction)->setData($this->get->id_action);
-		$workers = (new Worker)->getWorkers();
+		$action = (new OrderAction)->setData($this->get->id_action)->getWorker();
+		$workers = (new Worker)->getWorkers(true);
 		if (!$this->post->save) return $this->render('add_worker/main', compact('action', 'workers'));
 		$action->addWorker()->setMessage('success', 'add_worker');
-		return $this->redirectPrevious();
+		return $this->redirect('plan/actions?id_active='.$action->id.'&type_order='.$this->get->type_order);
 	}
 	
 }

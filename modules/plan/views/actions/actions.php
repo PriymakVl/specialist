@@ -21,7 +21,7 @@
 			</tr>
 				<? foreach($actions as $action): ?>
 					<tr>
-						<td <?if ($this->session->id_action_active == $action->id) echo 'class="bg-green"'; ?>>
+						<td <?if ($this->get->id_active == $action->id) echo 'class="bg-green"'; ?>>
 							<input type="radio" id_action="<?=$action->id?>" name="actions"></td>
 						<td>
 							<? if ($action->id_order): ?>

@@ -52,7 +52,7 @@ trait OrderActionAdd {
 	
 	public function addWorker()
 	{
-		$this->addWorkerModel();
+		$this->updateIdWorkerModel();
 		return $this;
 	}
 

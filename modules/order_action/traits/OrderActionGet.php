@@ -17,19 +17,21 @@ trait OrderActionGet {
 	
 	public function getForPlan()
 	{
-		$items = $this->selectItemsForPlan($this->getByTypeOrderModel());
+		$items = $this->selectItemsByState($this->getByTypeOrderModel(), OrderActionState::ENDED, true);
 		if (!$items) return;
+		if ($this->get->action == 'other') $items = $this->selectItemsByDefaultNames($items, false);
+		else if ($this->get->action) $items = $this->selectItemsByName($items, $this->get->action);
 		$actions = ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
-		return $this->setDateReady($actions);
+		if (isset($actions)) return $this->setDateReady($actions);
 	}
 	
 	public function getForWorker($worker)
 	{
 		$items = $this->getByTypeOrderModel();
-		if ($items) $items = $this->selectItemsForTerminal($items);
+		if ($items) $items = $this->selectItemsByStates($items, [OrderActionState::ENDED, OrderActionState::WAITING], true);
 		if (!$items) return;
 		$select = $this->selectItemsForWorker($items, $worker);
 		if ($select) $actions = ObjectHelper::createArray($select, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
-		return $this->setDateReady($actions);
+		if (isset($actions)) return $this->setDateReady($actions);
 	}
 }

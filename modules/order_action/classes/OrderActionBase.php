@@ -4,6 +4,7 @@ class OrderActionBase extends Model {
 
 	public $product;
 	public $order;
+	public $worker;
 	
 	public $isStates = false;
 	public $states;

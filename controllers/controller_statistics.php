@@ -10,7 +10,7 @@ class Controller_Statistics extends Controller_Base {
 
     public function action_workers()
 	{
-		$workers = Worker::getAllWithStatistics();
+		$workers = (new Worker)->getWorkers();
         $this->view->title = 'Статистика по рабочим';
 		$this->render('workers/main', compact('workers'));
 	}

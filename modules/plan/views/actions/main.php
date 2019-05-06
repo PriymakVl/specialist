@@ -32,5 +32,6 @@
 <script src="/modules/order_action/js/order_action_delete.js"></script>
 <script src="/modules/order_action/js/order_action_edit.js"></script>
 <script src="/modules/order_action/js/order_action_add_worker.js"></script>
+<script src="/modules/plan/js/plan_filter_actions.js"></script>
 
 

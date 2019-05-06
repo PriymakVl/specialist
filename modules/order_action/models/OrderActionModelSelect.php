@@ -37,6 +37,14 @@ trait OrderActionModelSelect {
 		$sql = 'SELECT * FROM `order_actions` WHERE `type_order` = :type_order AND `status` = :status ORDER BY state, rating DESC, date_exec';
 		return self::perform($sql, $params)->fetchAll();
 	}
+	//if $but false select all but not this state
+	public function getByStateModel($state, $not = false)
+	{
+		$params = ['state' => $state, 'status' => STATUS_ACTIVE];
+		if ($not) $sql = 'SELECT * FROM `order_actions` WHERE `state` <> :state AND `status` = :status ORDER BY state, rating DESC, date_exec';
+		else $sql = 'SELECT * FROM `order_actions` WHERE `state` = :state AND `status` = :status ORDER BY state, rating DESC, date_exec';
+		return self::perform($sql, $params)->fetchAll();
+	}
 	
 	
 

@@ -7,10 +7,15 @@
 	margin-right: 30px;
 }
 
-#plan-level-filter {
+#plan-level-filter , #plan-filter-actions{
     font-size: 16px;
     width: 120px;
     height: 28px;
+	margin-right: 25px;
+}
+
+#plan-filter-actions {
+	width: 200px;
 }
 
 #plan-filter-level-wrp {

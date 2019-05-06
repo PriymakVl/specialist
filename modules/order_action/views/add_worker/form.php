@@ -1,15 +1,14 @@
 <div id="form-add-worker-wrp">
-    <h2>Форма для закрепления операции за рабочим</h2>
-    <form action="/order_action/add_worker?id_action=<?=$action->id?>" method="post">
+    <form action="/order_action/add_worker?id_action=<?=$action->id?>&type_order=<?=$this->get->type_order?>" method="post">
 		
 		<!-- workers -->
 		<div class="form-box">
 			<label>Рабочие:</label>
-			<select name="state">
+			<select name="id_worker">
 				<option value="">Не выбран</option>
 				<? if ($workers): ?>
 					<? foreach ($workers as $worker): ?>
-						<option value="<?=$worker->id?>"><?=$worker->title?></option>
+						<option value="<?=$worker->id?>" <?if($worker->id == $action->id_worker) echo 'selected';?>><?=$worker->title?></option>
 					<? endforeach; ?>
 				<? endif; ?>
 			</select>

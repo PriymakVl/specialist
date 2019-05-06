@@ -21,10 +21,14 @@
 			</tr>
 				<? foreach($worker->actions as $action): ?>
 					<tr>
-						<td <?if ($this->session->id_action_active == $action->id) echo 'class="bg-green"'; ?>>
+						<td>
 							<input type="radio" id_action="<?=$action->id?>" name="actions"></td>
 						<td>
-							<a href="/order?id_order=<?=$action->order->id?>"><?=$action->order->symbol?></a>
+							<? if ($action->id_order): ?>
+								<a href="/order?id_order=<?=$action->order->id?>"><?=$action->order->symbol?></a>
+							<? else: ?>
+								<span class="red">Нет заказа</span>
+							<? endif; ?>
 						</td>
 						<td>
 							<? if ($action->product): ?>

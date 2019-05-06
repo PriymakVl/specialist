@@ -5,8 +5,6 @@ trait OrderActionTerminal {
 	public function getForTerminal()
 	{
 		$items = $this->getItemsForTerminal();
-		debugProp($items, 'name');
-		if ($items) $items = $this->selectItemsForTerminal($items);
 		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getProduct', 'getOrder', 'setBgTerminalBox']);
 	}
 	
@@ -24,15 +22,36 @@ trait OrderActionTerminal {
 		// else return $this->getByIdOrderModel($id_order);
 	// }
 	
-		private function getItemsForTerminal()
+		// private function getItemsForTerminal()
+	// {
+		// if ($this->get->action == 'my') return false;
+		// else if ($this->get->id_order && $this->get->action == 'other') return $this->selectItemsByNamesForOrder(false);//for other actions
+		// else if ($this->get->id_order && $this->get->action) return $this->selectItemsByNameForOrder();
+		// else if ($this->get->id_order) return $this->getByIdOrderModel();
+		// else if (!$this->get->id_order && $this->get->action == 'other') return $this->selectItemsByNames($this->getByTypeOrderModel(), false);//for other actions
+		// else if (!$this->get->id_order && $this->get->action) return $this->getByActionNameModel($this->get->action);
+		// else return $this->getByTypeOrderModel();//for all actions
+	// }
+	
+	private function getItemsForTerminal()
 	{
-		if ($this->get->action == 'my') return false;
-		else if ($this->get->id_order && $this->get->action == 'other') return $this->selectItemsByNamesForOrder(false);//for other actions
-		else if ($this->get->id_order && $this->get->action) return $this->selectItemsByNameForOrder();
-		else if ($this->get->id_order) return $this->getByIdOrderModel();
-		else if (!$this->get->id_order && $this->get->action == 'other') return $this->selectItemsByNames($this->getByTypeOrderModel(), false);//for other actions
-		else if (!$this->get->id_order && $this->get->action) return $this->getByActionNameModel($this->get->action);
-		else return $this->getByTypeOrderModel();//for all actions
+		if ($this->get->id_order) $items = $this->getByIdOrderModel();
+		else $items = $this->getByStateModel(OrderActionState::ENDED, true);
+		if (!$items) return;
+		$items = $this->selectItemsByStates($items, [OrderActionState::ENDED, OrderActionState::WAITING], true);
+		if (!$items) return;
+		$items = $this->selectItemsByTypeOrder($items);
+		if (!$items) return;
+		return $this->getItemsByGetRequest($items);
+	}
+	
+	public function getItemsByGetRequest($items)
+	{
+		if (!$items) return;
+		if ($this->get->action == 'my') return $this->selectItemsForWorker($items);
+		else if ($this->get->action == 'other') return $this->selectItemsByDefaultNames($items, false);//for other actions
+		else if ($this->get->action) return $this->selectItemsByName($items, $this->get->action);
+		return $items;
 	}
 	
 
