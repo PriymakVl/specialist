@@ -12,11 +12,13 @@ class OrderActionBase extends Model {
 	public $stateString;
 	public $stateBg;
 	
-	public $action;//объект операции обработки
+	// public $action;//объект операции обработки
 	public $bgTerminalBox;
 	
-	public $timeMade;
+	// public $timeMade;
 	public $dateReady;
+	public $timePlan; //time preparation + time production
+	public $timeFact; //summa of states action
 	
 	const BG_TERMINAL_BOX_PLAN = 'yellow';
 	const BG_TERMINAL_BOX_PROGRESS = 'green';

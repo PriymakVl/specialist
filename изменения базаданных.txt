@@ -26,3 +26,4 @@ add date_exec in order_actions
 удалить из order_action time_start , time_end, id_worker
 удалить из order_action_states type_action, изменить id_worker on id_user
 измениеть состояние заказов существующих (добавлен запланированный заказ)
+добавлена колонка date_end in order_actions 

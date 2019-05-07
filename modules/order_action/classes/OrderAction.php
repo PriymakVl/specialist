@@ -3,7 +3,7 @@
 class OrderAction extends OrderActionBase {
 	
 	use OrderActionModel, OrderActionSelect, OrderActionMainState, OrderActionConvert, OrderActionTerminal, OrderActionAdd, OrderActionGet, OrderActionDelete;
-	use OrderActionDateReady, OrderActionTime;
+	use OrderActionTime;
 	
 	public function getProduct()
 	{

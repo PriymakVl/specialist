@@ -2,7 +2,7 @@
 
 class Worker extends WorkerBase {
 	
-	use WorkerTotal, WorkerList, WorkerSelect, WorkerPlan, WorkerConvert; //WorkerStatistics
+	use WorkerTotal, WorkerList, WorkerSelect, WorkerTimeBase, WorkerConvert;
 	
 	public function getActions()
 	{
@@ -11,15 +11,15 @@ class Worker extends WorkerBase {
 		return $this;
 	}
 	
-	public function getActionsFact()
+	public function getActionsMade()
 	{
-		$this->actionsFact = (new OrderAction)->getForWorkerFact($this);
+		$this->actionsMade = (new OrderAction)->getForWorkerMade($this);
 		return $this;
 	}
 	
 	public function getCurrentActions()
 	{
-		$this->currentActions = $this->selectProperty($this->actions, 'state', OrderActionState::PROGRESS, true);
+		$this->currentActions = $this->selectProperty($this->actions, 'state', OrderActionState::PROGRESS);
 		$this->getCurrentActionsString();
 		return $this;
 	}

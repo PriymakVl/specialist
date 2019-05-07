@@ -39,6 +39,13 @@ trait OrderActionModelUpdate {
 		$sql = 'UPDATE `order_actions` SET `id_worker` = :id_worker WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}
+	
+	public function updateDateEndModel()
+	{
+		$params = ['id_action' => $this->id, 'date_end' => time()];
+		$sql = 'UPDATE `order_actions` SET `date_end` = :date_end WHERE `id` = :id_action';
+		return self::perform($sql, $params);
+	}
 
 
 }

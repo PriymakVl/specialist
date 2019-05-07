@@ -38,11 +38,11 @@ trait OrderActionGet {
 		if (isset($actions)) return $this->setDateReady($actions);
 	}
 	//for statistics page
-	public function getForWorkerFact($worker)
+	public function getForWorkerMade($worker)
 	{
 		$items = $this->getByDateEndModel();
 		if (!$items) return;
 		$select = $this->selectForWorkerFact($items, $worker->id);
-		if ($select) return ObjectHelper::createArray($select, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'countFactTimeManufact']);
+		if ($select) return ObjectHelper::createArray($select, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'getStates', 'setTimePlan', 'setTimeFact']);
 	}
 }

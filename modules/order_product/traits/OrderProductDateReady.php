@@ -6,19 +6,19 @@ trait OrderProductDateReady {
 	{
 		$time_manufacturing_total = 0;
 		foreach ($products as $product) {
-			$time_manufacturing_total += $this->calculateTimeManufacturing($product);
+			$time_manufacturing_total += $this->calculateTimePlan($product);
 			$product->dateReady = Date::calculateDateReady($time_manufacturing_total);
 		}
 		return $products;
 	}
 	
-	private function calculateTimeManufacturing($product)
+	private function calculateTimePlan($product)
 	{
 		$time_manuf = 0;
 		$product->getActionsAll();
 		if (!$product->actionsAll) return $time_manuf;
 		foreach ($product->actionsAll as $action) {
-			if ($action->state != OrderActionState::ENDED && $action->state != OrderActionState::WAITING) $time_manuf += (new OrderAction)->calculateTimeManufacturing($action);
+			if ($action->state != OrderActionState::ENDED && $action->state != OrderActionState::WAITING) $time_manuf += (new OrderAction)->calculateTimePlan($action);
 		}
 		return $time_manuf;
 	}

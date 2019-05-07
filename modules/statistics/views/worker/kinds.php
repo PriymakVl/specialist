@@ -22,16 +22,13 @@
 <table class="action-list" width="940">
     <tr>
         <th width="50">№</th>
-        <th width="100">Заказ</th>
-        <th width="200">Продукт</th>
-		<th width="180">Операция</th>
+		<th width="180">Наименование операция</th>
 		<th width="80">Кол-во</th>
 		<th width="100">Труд. планов</th>
 		<th width="100">Труд. фактич</th>
-		<th>Примечание</th>
     </tr>
-    <? if ($worker->actionsMade): ?>
-        <?foreach ($worker->actionsMade as $action): ?>
+    <? if ($worker->actionsFact): ?>
+        <?foreach ($worker->actionsFact as $action): ?>
             <tr>
                 <td><?=$number?></td>
 				<!-- order -->
@@ -69,7 +66,7 @@
 					<? if ($action->timeFact && $action->states): ?>
 						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->timeFact.'мин.'?></a>
 					<? elseif ($action->states): ?>
-						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan">~ 1 мин.</a>
+						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan">Меньше минуты</a>
 					<? else: ?>
 						<span class="red">Нет</span>
 					<? endif; ?>

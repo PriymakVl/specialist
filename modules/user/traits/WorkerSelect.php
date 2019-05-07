@@ -2,7 +2,7 @@
 
 trait WorkerSelect {
 	
-	public function selectItemsWorkers()
+	public function selectWorkers()
 	{
 		$items = self::getAll('users');
 		if (!$items) return;

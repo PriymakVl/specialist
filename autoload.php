@@ -47,6 +47,7 @@ function autoload_module($class_name)
 	else if (file_exists('./modules/'.$module_name.'/traits/'.$class_name.'.php')) require './modules/'.$module_name.'/traits/'.$class_name.'.php';
 	else if (file_exists('./modules/'.$module_name.'/models/'.$class_name.'.php')) require './modules/'.$module_name.'/models/'.$class_name.'.php';
 	else if (file_exists('./modules/'.$module_name.'/states/'.$class_name.'.php')) require './modules/'.$module_name.'/states/'.$class_name.'.php';
+	else if (file_exists('./modules/'.$module_name.'/times/'.$class_name.'.php')) require './modules/'.$module_name.'/times/'.$class_name.'.php';
 	else require './modules/'.$module_name.'/params/'.$class_name.'.php';
 }
 

@@ -38,7 +38,7 @@ trait OrderActionSelect {
 	{
 		foreach ($items as $item) {
 			$users = (new OrderActionState)->getIdUsersActionModel($item->id);
-			if (in_array($id_worker, $users)); $select[] = $item;
+			if (in_array($id_worker, $users)) $select[] = $item;
 		}
 		if (isset($select)) return $select;
 	}

@@ -4,7 +4,7 @@
             <input type="checkbox" disabled>
         </th>
         <th width="180">ФИО</th>
-        <th width="180">Загрузка</th>
+        <th width="180">Разница</th>
         <th width="180">Трудоемкость план</th>
 		<th width="180">Трудоемкость факт</th>
 		<th>Заработал</th>
@@ -19,10 +19,14 @@
                     <a href="/statistics/worker?id_worker=<?=$worker->id?>"><?=$worker->title?></a>
                 </td>
                 <td>
-						<span class="red">Простой</span>
+					<span class="red">Нет</span>
 				</td>
                 <td>
+					<? if ($worker->timeFact): ?>
+						<?=$worker->timeFact?> мин.
+					<? else: ?>
 						<span class="red">Простой</span>
+					<? endif; ?>
 				</td>
 				<td><span class="red">Нет</span></td>
 				<td><?=$worker->costMade ? $worker->costMade : '0'?> грн.</td>

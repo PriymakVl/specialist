@@ -35,9 +35,9 @@ class OrderActionState extends OrderActionStateBase {
 		return (new self)->setData($id);
 	}
 	
-	public function get()
+	public function getForAction($id_action)
 	{
-		$items = $this->getByIdActionModel();
+		$items = $this->getByIdActionModel($id_action);
 		if (!$items) return false;
 		foreach ($items as $item)
 		{

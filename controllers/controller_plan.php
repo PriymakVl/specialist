@@ -30,8 +30,8 @@ class Controller_Plan extends Controller_Base {
 	
 	public function action_workers()
 	{
-		$worker = $this->get->id_user ? (new Worker)->setData($this->get->id_user)->setProperties()->getActions()->calculateTimePlan() : false ; 
-		$workers = (new Worker)->getWorkers();
+		$worker = $this->get->id_user ? (new Worker)->setData($this->get->id_user)->setProperties()->getActions()->getTimePlan() : false ; 
+		$workers = (new Worker)->getWorkersForPlan();
 		$this->render('workers/main', compact('worker', 'workers'));
 	}
 	

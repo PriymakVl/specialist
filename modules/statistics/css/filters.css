@@ -33,7 +33,7 @@
 .statistics-period-filter-wrp {
 	position: absolute;
 	top: 7px;
-	left: 375px;
+	left: 115px;
 }
 
 .statistics-period-filter-wrp [name="period_start"],  .statistics-period-filter-wrp [name="period_end"], .statistics-period-filter-wrp [name="today"] {
@@ -45,8 +45,14 @@
 #show-statistics-worker {
 	position: absolute;
 	top: 7px;
-	left: 865px;
+	left: 350px;
 	height: 30px;
 	padding: 5px;
+}
+
+#link-list-workers {
+	position: absolute;
+	top: 15px;
+	right: 5px;
 }
 

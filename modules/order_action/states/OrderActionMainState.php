@@ -3,11 +3,24 @@
 trait OrderActionMainState {
 	
 	use OrderActionProductState, OrderActionTimeState, OrderActionOrderState;
+	
+	public function isStates()
+	{
+		$items = (new OrderActionState)->getByIdActionModel($this->id);
+		if ($items) $this->isStates = true;
+		return $this;
+	}
+	
+	public function getStates()
+	{
+		$this->states = (new OrderActionState)->getForAction($this->id);
+		return $this;
+	}
 
 	public function editStateUp()
 	{
 		$this->updateStateModel();
-		$this->setStartTimeState()->editStateProduct()->editStateOrder();
+		$this->setStartTimeState()->editStateProduct()->editStateOrder()->editDateEnd();
 		return $this;
 	}
 	
@@ -15,19 +28,8 @@ trait OrderActionMainState {
 	{
 		$this->updateStateModel($state);
 		$this->setStartTimeStateDown($state);
+		$this->editDateEnd($state);
 		return $this;
 	}
-
-	
-	// public function determineStateByStateOrder($state_order)
-	// {
-		// switch ($state_order) {
-			// case OrderState::REGISTERED: return OrderActionState::WAITING;
-			// case OrderState::PREPARATION: return OrderActionState::WAITING;
-			// case OrderState::WAITING: return OrderActionState::WAITING;
-			// case OrderState::WORK: return OrderActionState::PLANED;
-			// case OrderState::MADE: return OrderActionState::ENDED;
-		// }
-	// }
 	
 }
