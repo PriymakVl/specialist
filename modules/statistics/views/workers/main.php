@@ -24,5 +24,5 @@
 </div><!-- id content -->
 
 <!-- js files -->
-<!-- <script src="/modules/order/js/order_activate.js"></script> -->
+<script src="/web/js/datepicker.js"></script>
 

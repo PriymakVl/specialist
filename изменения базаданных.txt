@@ -1,29 +1,78 @@
 добавить rating in order_actions
 добавить таблицу чертежей
+add note in product_actions
+add type_orders in order_actions
+изменить в user_options default_action on default_product_action
+
+
+/* current change */
+#products
 изменить таблицу order_content on order_products
 изменить quntity on qty products
-id_user in table drawings
-изменить quntity on qty order_products
-добавить time_manuf in order_products
-add note in order_products
-change id_prod on symbol in table of drawings
-delete time_manuf in order_actions add time_prepar and time_prod
 
+#product_actions
+add name
+add price
+delete id_data
+
+#drawings
+id_user in table drawings
+change id_prod on symbol in table of drawings
+
+#order_products
+изменить quntity on qty order_products
+add note in order_products
 add number in order_products
-add name, symbol, type order_products delete time_manufac, id_prod (переноисть с таблицы)ж
-изменить data_actions on actions
-изменить id_data in product_actions and order_actions on name and add price (переносить с таблицы)
-add nam and price to order_actions delete id_data (pass table)
-add number in order_actions from product_actions
-add note in product_actions
-add id_prod in order_positions
-add type_orders in order_products
-add type_orders in order_actions
-add rating in order_products
 add date_exec in order_products
+add rating in order_products
+add type_orders in order_products
+add name
+add symbol
+add id_parent
+delete id_prod
+add state
+delete time_manufac
+add type ???
+
+#order_actions
+удалить из order_action time_start
+delete time_manuf in order_actions add time_prepar and time_prod
 add date_exec in order_actions
-изменить в user_options default_action on default_product_action
-удалить из order_action time_start , time_end, id_worker
+переименовать time_end in date_end in order_actions
+add name, price, number
+
+#actions
+изменить data_actions on actions
+
+#user_options 
+add worker option
+delete price_woker_hour
+
+#order_action_states
 удалить из order_action_states type_action, изменить id_worker on id_user
+
+
+#sql
+add number in order_actions from product_actions
+изменить id_data in product_actions and order_actions on name and add price (переносить с таблицы)
+UPDATE `order_actions` as ord_act SET name = (select name from actions WHERE id = ord_act.id_data)
+UPDATE `order_actions` as ord_act SET price = (select price from actions WHERE id = ord_act.id_data)
+
+add name, symbol, type order_products(переноисть с таблицы)ж
+UPDATE `order_products` as t SET name = (select name from products where id = t.id_prod)
+UPDATE `order_products` as t SET symbol = (select symbol from products where id = t.id_prod)
+
 измениеть состояние заказов существующих (добавлен запланированный заказ)
-добавлена колонка date_end in order_actions 
+UPDATE `orders` SET state = '6' where state = '4' (готовые)
+UPDATE `orders` SET state = '4' where state = '3'(в работе)
+
+обновить id_prod order_actions 
+UPDATE `order_actions` as ord SET id_prod = (SELECT id FROM order_products WHERE id_prod = ord.id_prod AND id_order = ord.id_order LIMIT 1);
+
+перенести из actions name and symbol
+
+перенести данные из tab unplan_actions in order_actions
+
+проверить
+добавить time_manuf in order_products
+add id_prod in order_positions

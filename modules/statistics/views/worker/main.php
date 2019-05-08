@@ -20,7 +20,5 @@
 </div><!-- id content -->
 
 <!-- js files -->
-<script src="/modules/statistics/js/filters_worker.js"></script>
-<script src="/modules/statistics/js/show_note.js"></script>
 <script src="/web/js/datepicker.js"></script>
 

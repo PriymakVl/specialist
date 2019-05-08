@@ -11,8 +11,8 @@ trait OrderActionTimeFact {
 	public function calculateTimeFact($action)
 	{
 		$time_fact = 0;
-		if (!$this->states || count($this->states) == 1) return $time_fact;
-		foreach ($this->states as $state) {
+		if (!$action->states || count($action->states) == 1) return $time_fact;
+		foreach ($action->states as $state) {
 			if ($state->state == OrderActionState::PROGRESS) $time_fact += $state->duration;
 		}
 		return $time_fact;
