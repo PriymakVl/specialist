@@ -46,6 +46,19 @@ trait OrderActionModelUpdate {
 		$sql = 'UPDATE `order_actions` SET `date_end` = :date_end WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}
+	//for transfer from the old base
+	public function updateIdProdOrderModel($params)
+	{
+		$sql = 'UPDATE `order_actions` SET `id_prod_ord` = :id_prod_ord WHERE `id` = :id_action';
+		return self::perform($sql, $params);
+	}
+	//for transfer from the old base
+	public function updateDateExeModel($date_exec)
+	{
+		$params = ['id_action' => $this->id, 'date_exec' => $date_exec];
+		$sql = 'UPDATE `order_actions` SET `date_exec` = :date_exec WHERE `id` = :id_action';
+		return self::perform($sql, $params);
+	}
 
 
 }

@@ -54,15 +54,24 @@ class ObjectHelper {
 		}
 		return $objects;
 	}
-	
-	public static function checkValuesProperty($objects, $name_property, $value_property) {
+	//checks that all values are the same in array objects
+	public static function checkValuesProperty($objects, $name_property, $value_property) 
+	{
 		if (!$objects) return false;
 		foreach ($objects as $object) {
 			if ($object->$name_property != $value_property) return false;
 		}
 		return true;
 	}
-	
+	//checks if there is a property value in an array of objects
+	public static function inPropertyValue($objects, $name_property, $value_property)
+	{
+		if (!$objects) return false;
+		foreach ($objects as $object) {
+			if ($object->$name_property == $value_property) return true;
+		}
+		return false;
+	}
 	
 	
 }

@@ -27,7 +27,20 @@ trait OrderProductModel {
 			`number` = :number, `note` = :note, `date_exec` = :date_exec WHERE `id` = :id_prod';
 		return self::update($sql, $params);
 	}
-	
+	//for edit base 
+	public function setIdProdModel($id_prod)
+	{
+		$params = ['id' => $this->id, 'id_prod' => $id_prod];
+		$sql = 'UPDATE `order_products` SET `id_prod` = :id_prod WHERE `id` = :id';
+		return self::update($sql, $params);
+	}
+	//for edit base 
+	public function updateDateExeModel($date_exec)
+	{
+		$params = ['id' => $this->id, 'date_exec' => $date_exec];
+		$sql = 'UPDATE `order_products` SET `date_exec` = :date_exec WHERE `id` = :id';
+		return self::update($sql, $params);
+	}
 	
 }
 

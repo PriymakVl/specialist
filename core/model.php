@@ -23,10 +23,16 @@ class Model extends Core {
 		if ($this->data->$name) return $this->data->$name;
 	}
 
-    public function getData($id)
+    public function getData($id, $status = true)
     {
-        $sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
-		$params = ['id' => $id, 'status' => STATUS_ACTIVE];
+        if ($status) {
+			$sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id AND `status` = :status';
+			$params = ['id' => $id, 'status' => STATUS_ACTIVE];
+		}
+		else {
+			$sql = 'SELECT * FROM `'.$this->tableName.'` WHERE `id` = :id';
+			$params = ['id' => $id];
+		}			
         return self::perform($sql, $params)->fetch();
     }
 	

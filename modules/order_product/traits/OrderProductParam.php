@@ -17,7 +17,7 @@ trait OrderProductParam {
 		
 		$params['id_order'] = $order->id;
 		$params['type_order'] = $order->type;
-		$params['date_exec'] = $order->date_exec;
+		$params['date_exec'] = $order->date_exec ? $order->date_exec : '';
 		return $params;
 	}
 	

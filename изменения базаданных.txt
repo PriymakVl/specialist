@@ -32,7 +32,7 @@ add id_parent
 delete id_prod
 add state
 delete time_manufac
-add type ???
+add type (type product)
 
 #order_actions
 удалить из order_action time_start
