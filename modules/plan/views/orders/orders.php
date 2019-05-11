@@ -35,7 +35,7 @@
 				<? endif; ?>
 				<!-- date execution -->
 				<td><?=$order->date_exec ? date('d.m.y', $order->date_exec) : '<span class=red>Нет</span>'?></td>
-				<td <? if ($order->date_exec + Date::DAY_WORKING_SECOND < $order->dateReady) echo 'class="bg-red"';?>>
+				<td <? if ($order->date_exec && $order->dateReady && ($order->date_exec + Date::DAY_WORKING_SECOND < $order->dateReady)) echo 'class="bg-red"';?>>
 					<?=date('d.m.y', $order->dateReady)?>
 				</td>
 				<!-- rating -->

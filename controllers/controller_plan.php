@@ -40,6 +40,7 @@ class Controller_Plan extends Controller_Base {
 		if ($this->get->id_prod) (new OrderProduct)->setData($this->get->id_prod)->getActions()->editRating()->setMessage('success', 'edit_rating')->setSession('id_prod_active', $this->get->id_prod);
 		if ($this->get->id_order) (new Order)->setData($this->get->id_order)->editRating()->setMessage('success', 'edit_rating');
 		if ($this->get->id_action) (new OrderAction)->setData($this->get->id_action)->setRating($this->get->rating)->setMessage('success', 'edit_rating')->setSession('id_action_active', $this->get->id_action);
+		if ($this->get->id_prod) $id_active = $this->get->id_prod;
 		$this->redirectPrevious();
 	}
 	

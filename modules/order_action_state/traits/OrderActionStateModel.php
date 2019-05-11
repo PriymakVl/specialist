@@ -4,9 +4,9 @@ trait OrderActionStateModel {
 	
 	use OrderActionStateParam;
 
-	public function addModel()
+	public function addModel($params = false)
 	{
-		$params = $this->addParams();
+		$params = $params ? $params : $this->addParams();
 		$sql = "INSERT INTO `order_action_states` (id_action, time, state, id_user) VALUES (:id_action, :time, :state, :id_user)";
         return self::perform($sql, $params);
 	}

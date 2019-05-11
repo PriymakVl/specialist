@@ -75,7 +75,7 @@ class Controller_Debug extends Controller_Base {
 		if (!$order->date_exec) return;
 		if (!$actions) return;
 		foreach ($actions as $action) {
-			(new OrderProduct)->setData($action)->updateDateExeModel($order->date_exec);
+			(new OrderAction)->setData($action)->updateDateExeModel($order->date_exec);
 		}
 	}
 

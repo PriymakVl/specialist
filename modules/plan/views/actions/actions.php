@@ -42,7 +42,7 @@
 						<td><?=$action->name?></td>
 						<td><?=$action->qty?></td>
 						<td width="56"><?=$action->date_exec ? date('d.m.y', $action->date_exec) : '<span class=red>Нет</span>'?></td>
-						<td width="56" <? if ($action->date_exec + Date::DAY_WORKING_SECOND < $action->dateReady) echo 'class="bg-red"';?>>
+						<td width="56" <? if ($action->date_exec && $action->dateReady && ($action->date_exec + Date::DAY_WORKING_SECOND < $action->dateReady)) echo 'class="bg-red"';?>>
 							<?=$action->dateReady ? date('d.m.y', $action->dateReady) : ''?>
 						</td>
 						<td>

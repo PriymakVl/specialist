@@ -28,12 +28,8 @@
 		<div class="form-box">
 			<!-- rating order -->
 			<div>
-				<label>Приоритет:</label>
-				<select name="rating">
-					<option value="<?=Order::RATING_REGULAR?>" <? if ($order->rating == Order::RATING_REGULAR) echo 'selected';?>>Обычный</option>
-					<option value="<?=Order::RATING_IMPORTANT?>" <? if ($order->rating == Order::RATING_IMPORTANT) echo 'selected';?>>Важный</option>
-					<option value="<?=Order::RATING_PRIORITY?>" <? if ($order->rating == Order::RATING_PRIORITY) echo 'selected';?>>Первоочередной</option>
-				</select>
+				<label>Рейтинг:</label>
+				<input type="text" name="rating" value="<?=$order->rating?$order->rating:0?>">
 			</div>
 		</div>
 

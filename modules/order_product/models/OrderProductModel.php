@@ -42,6 +42,14 @@ trait OrderProductModel {
 		return self::update($sql, $params);
 	}
 	
+	//for add from action unplan
+	public function addFromActionUnplanModel($params)
+	{
+        $sql = "INSERT INTO `order_products` (id_order, name, symbol, type, number, note, qty, id_parent, state, type_order, date_exec) 
+			VALUES (:id_order, :name, :symbol, :type, :number, :note, :qty, :id_parent, :state, :type_order, :date_exec)";
+        return self::insert($sql, $params);
+	}
+	
 }
 
 

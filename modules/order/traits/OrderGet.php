@@ -13,7 +13,7 @@ trait OrderGet {
 		$items = $this->getItemsForPlan();
 		// debug($items, false);
 		if (!$items) return;
-		$orders = ObjectHelper::createArray($items, 'Order', ['setData', 'getActions']);//, 'getProductsMain', 'getProductsTable', 'convertProperties'
+		$orders = ObjectHelper::createArray($items, 'Order', ['setData', 'getActions', 'getProductsMain', 'getProductsTable', 'convertProperties']);
 		// debug($orders);
 		// debugProp($orders, 'symbol');
 		return $this->setDateReady($orders);

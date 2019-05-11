@@ -40,9 +40,10 @@ trait OrderActionModelUpdate {
 		return self::perform($sql, $params);
 	}
 	
-	public function updateDateEndModel()
+	public function updateDateEndModel($date_end = false)
 	{
-		$params = ['id_action' => $this->id, 'date_end' => time()];
+		$date_end = $date_end ? $date_end : time(); 
+		$params = ['id_action' => $this->id, 'date_end' => $date_end];
 		$sql = 'UPDATE `order_actions` SET `date_end` = :date_end WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}

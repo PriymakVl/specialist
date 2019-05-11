@@ -55,5 +55,10 @@ trait OrderActionAdd {
 		$this->updateIdWorkerModel();
 		return $this;
 	}
+	//for unplan
+	public function addUnplan($params)
+	{
+		return $this->addActionModel($params);
+	}
 
 }

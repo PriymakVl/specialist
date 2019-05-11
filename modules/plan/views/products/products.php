@@ -37,7 +37,7 @@
 					<td><?=$product->name?></td>
 					<td><?=$product->qty?></td>
 					<td><?=$product->date_exec ? date('d.m.y', $product->date_exec) : '<span class=red>Нет</span>'?></td>
-					<td <? if ($product->dateReady && $product->date_exec + Date::DAY_WORKING_SECOND < $product->dateReady) echo 'class="bg-red"';?>>
+					<td <? if ($product->dateReady && $product->date_exec && ($product->date_exec + Date::DAY_WORKING_SECOND < $product->dateReady)) echo 'class="bg-red"';?>>
 						<? if ($product->dateReady): ?>
 							<?=date('d.m.y', $product->dateReady)?>
 						<? else: ?>

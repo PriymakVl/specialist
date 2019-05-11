@@ -27,7 +27,7 @@
 		
 		<!-- rating order -->
 		<div id="rating-order-wrp" class="form-box">
-			<label>Приоритет:</label>
+			<label>Рейтинг:</label>
 			<select name="rating">
 				<option value="<?=Order::RATING_REGULAR?>">Обычный</option>
 				<option value="<?=Order::RATING_IMPORTANT?>">Важный</option>
