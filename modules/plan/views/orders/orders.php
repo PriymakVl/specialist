@@ -1,4 +1,4 @@
-<table class="list-orders" width="940">
+<table class="plan-table" >
     <? if ($orders): ?>
     <tr>
         <th width="40">
@@ -6,7 +6,7 @@
         </th>
         <th width="120">Обозначение</th>
         <th width="350">Содержание</th>
-		<th colspan="2" >
+		<th colspan="2" style="padding:0;">
 			<table class="table-date">
 				<tr>
 					<td colspan="2" class="table-date-header">Срок изгот.</td>

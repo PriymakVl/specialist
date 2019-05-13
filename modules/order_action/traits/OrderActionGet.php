@@ -23,7 +23,7 @@ trait OrderActionGet {
 		if (!$items) return;
 		if ($this->get->action == 'other') $items = $this->selectByDefaultNames($items, false);
 		else if ($this->get->action) $items = $this->selectProperty($items, 'name', $this->get->action);
-		$actions = ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState']);
+		$actions = ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState', 'getWorker']);
 		if (isset($actions)) return $this->setDateReady($actions);
 	}
 	//for plan page

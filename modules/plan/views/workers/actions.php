@@ -1,5 +1,5 @@
 <div id="plan-actions-wrp">
-	<table width="940">
+	<table class="plan-table">
 		<? if ($worker->actions): ?>
 			<tr>
 				<th width="50"><input type="checkbox" disabled></th>
@@ -7,7 +7,7 @@
 				<th width="200">Продукт</th>
 				<th width="180">Операция</th>
 				<th width="80">Кол-во</th>
-				<th colspan="2" >
+				<th colspan="2" style="padding:0;">
 					<table class="table-date">
 						<tr><td colspan="2" class="table-date-header">Срок изгот.</td></tr>
 						<tr>

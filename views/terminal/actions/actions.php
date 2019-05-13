@@ -12,9 +12,9 @@
 				 note="<?=$action->note?>"
 			>
 				 
-                <span class="info-order">№<?=$number?> заказ: <?=$action->id_order ? $action->order->symbol : ''?></span>
-                <span class="info-product"><?=$action->id_prod ? $action->product->symbol : ''?><br>
-                    <?=$action->id_prod ? $action->product->name : ''?> (<?=$action->qty?>шт.)
+                <span class="info-order">№<?=$number?> заказ: <?=$action->order ? $action->order->symbol : ''?></span>
+                <span class="info-product"><?=$action->product ? $action->product->symbol : ''?><br>
+                    <?=$action->product ? $action->product->name : ''?> (<?=$action->qty?>шт.)
                 </span>
                 <span class="info-state"><?=$action->name?></span>
             </div>

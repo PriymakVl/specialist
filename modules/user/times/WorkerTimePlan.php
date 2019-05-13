@@ -6,7 +6,7 @@ trait WorkerTimePlan {
 	public function getTimePlan()
 	{
 		$this->timePlan = $this->calculateTimePlan();
-		$this->convertTimePlanToHours();
+		if ($this->timePlan >= Date::HOUR_MINUTES) $this->timePlanHour = Date::convertMinutesToHours($this->timePlan);
 		$this->calculateTimePlanPercent();
 		return $this;
 	}

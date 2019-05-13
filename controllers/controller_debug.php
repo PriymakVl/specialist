@@ -10,6 +10,7 @@ class Controller_Debug extends Controller_Base {
 			$order_products = (new OrderProduct)->getByIdOrderModel($order->id);
 			$this->addProductContent($order_products, $order_actions);
 			$this->setDateExecution($order, $order_actions);
+			// debug('exit');
 		}
 		debug('exit');
 	}
@@ -51,6 +52,7 @@ class Controller_Debug extends Controller_Base {
 		$order_product->get->id_prod = $product_base->id;
 		if ($parent_ord->qty) $order_product->get->qty = $parent_ord->qty;
 		$order_product->addProductBase()->setIdProdModel($product_base->id);
+		$order_product->updateIdParentModel($parent_ord->id);
 		return (new OrderProduct)->setData($order_product->id);
 	}
 	

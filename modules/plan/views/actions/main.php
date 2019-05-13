@@ -4,7 +4,7 @@
 ?>
 <!-- css files -->
 <link rel="stylesheet" href="/modules/plan/css/filters.css">
-<link rel="stylesheet" href="/modules/plan/css/table_date_header.css">
+<link rel="stylesheet" href="/modules/plan/css/table.css">
 
 <div id="content">
     <!-- filter level plan -->

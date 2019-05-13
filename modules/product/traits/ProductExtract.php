@@ -11,8 +11,9 @@ trait ProductExtract {
 	
 	public function extractSymbol($position)
 	{
-		if (strpos($position->symbol, 'x') === false) return $position->symbol;
-		return explode('x', $position->symbol)[0];
+		$symbol = mb_strtolower($position->symbol);
+		if (strpos($symbol, 'x') === false) return $position->symbol;
+		return explode('x', $symbol)[0];
 	}
 
 }

@@ -5,6 +5,7 @@ class Date {
 	const DAY_SECOND = 86400;
 	const DAY_MINUTES = 1440;
 	const DAY_WORKING_SECOND = 21600; //6 hours
+	const HOUR_MINUTES = 60;
 
     public static function convertStringToTime($str)
     {

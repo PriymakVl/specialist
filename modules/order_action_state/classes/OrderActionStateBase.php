@@ -9,6 +9,7 @@ class OrderActionStateBase extends OrderActionBase {
     const WAITING = 5; //ожидает окончание выполнения предыдущей операции
 	
 	public $duration;
+	public $durationHour;
 	public $user;
 	public $name; //name convert state
 	public $bg; // backgroun field table

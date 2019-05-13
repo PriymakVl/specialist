@@ -29,6 +29,7 @@
 						<input type="radio" name="actions" id_action="<?=$action->id?>">
 					</td>
 					<td><?=$action->name?></td>
+					<!-- time preparation -->
 					<td>
 						<? if ($action->time_prepar): ?>
 							<?=$action->time_prepar?> мин.
@@ -36,6 +37,7 @@
 							<span class="red">Нет</span>
 						<? endif; ?>
 					</td>
+					<!-- time production -->
 					<td>
 						<? if ($action->time_prod): ?>
 							<?=$action->time_prod?> мин.
@@ -43,8 +45,11 @@
 							<span class="red">Нет</span>
 						<? endif; ?>
 					</td>
-					<td>fact time</td>
+					<!-- fact time -->
+					<td><span class="red">Нет</span></td>
+					<!-- note -->
 					<td><?=$action->note?></td>
+					<!-- state -->
 					<td style="background:<?=$action->stateBg?>">
 						<? if (!$action->states): ?>
 							<?=$action->stateString?>

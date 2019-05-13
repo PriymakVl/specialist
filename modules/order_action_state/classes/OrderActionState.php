@@ -13,6 +13,7 @@ class OrderActionState extends OrderActionStateBase {
 			else if ($states[$i]->state == OrderActionState::ENDED && empty($states[$i + 1])) $this->duration = false;//операция выполнена
 			else $this->duration = self::countDuration($states, $i);
 		}
+		if ($this->duration >= Date::HOUR_MINUTES) $this->durationHour = Date::convertMinutesToHours($this->duration);
 		return $this;
 	}
 	

@@ -20,7 +20,11 @@
 				</td>
 				<td>
 					<? if ($state->duration): ?>
-						<?=$state->duration.'мин.'?>
+						<? if ($state->durationHour): ?>
+							<?=$state->durationHour->hours?> час. <?=$state->durationHour->minutes?> мин.
+						<? else: ?>
+							<?=$state->duration.'мин.'?>
+						<? endif; ?>
 					<? elseif ($state->duration === false): ?>
 						<span>Работа закончена</span>
 					<? else: ?>

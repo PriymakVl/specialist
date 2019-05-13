@@ -50,6 +50,13 @@ trait OrderProductModel {
         return self::insert($sql, $params);
 	}
 	
+	//for edit base
+	public function updateIdParentModel($id_parent)
+	{
+		$params = ['id_parent' => $id_parent, 'id' => $this->id];
+		$sql = 'UPDATE `order_products` SET `id_parent` = :id_parent WHERE `id` = :id';
+		return self::update($sql, $params);
+	}
 }
 
 

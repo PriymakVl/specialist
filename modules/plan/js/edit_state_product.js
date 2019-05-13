@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	const STATE_PLANED = 1;
 	const STATE_WAITING = 5;
+	const STATE_ENDED = 4;
 
 	$('#product-to-work').click(function(event) {
 		event.preventDefault();
@@ -10,6 +11,11 @@ $(document).ready(function() {
 	$('#product-to-waiting').click(function(event) {
 		event.preventDefault();
 		sentRequestProduct(STATE_WAITING);
+	});
+	
+	$('#product-to-ended').click(function(event) {
+		event.preventDefault();
+		sentRequestProduct(STATE_ENDED);
 	});
 });
 

@@ -27,13 +27,21 @@
 				</td>
 				<td>
 					<? if ($worker->timePlanMade): ?>
-						<?=$worker->timePlanMade?> мин.
+						<? if ($worker->timePlanMadeHour): ?>
+							<?=$worker->timePlanMadeHour->hours?> ч. <?=$worker->timePlanMadeHour->minutes?> мин.
+						<? else: ?>
+							<?=$worker->timePlanMade?> мин.
+						<? endif; ?>
 					<? else: ?>
 						<span class="red">Нет</span></td>
 					<? endif; ?>
                 <td>
 					<? if ($worker->timeFact): ?>
-						<?=$worker->timeFact?> мин.
+						<? if ($worker->timeFactHour): ?>
+							<?=$worker->timeFactHour->hours?> ч. <?=$worker->timeFactHour->minutes?> мин.
+						<? else: ?>
+							<?=$worker->timeFact?> мин.
+						<? endif; ?>
 					<? else: ?>
 						<span class="red">Нет</span>
 					<? endif; ?>

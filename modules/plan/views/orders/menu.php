@@ -6,5 +6,8 @@
 		<li>
 			<a href="#" class="edit-order-state" state="<?=OrderState::WAITING?>">Отложить заказ</a>
 		</li>
+		<li>
+			<a href="#" class="edit-order-state" state="<?=OrderState::MADE?>">Заказ изготовлен</a>
+		</li>
 	</ul>
 </div>

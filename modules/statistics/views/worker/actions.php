@@ -36,7 +36,7 @@
                 <td><?=$number?></td>
 				<!-- order -->
                 <td>
-					<? if ($action->id_order): ?>
+					<? if ($action->order): ?>
 						<a href="/order?id_order=<?=$action->order->id?>"><?=$action->order->symbol?></a>
 					<? else: ?>
 						<span class="red">Нет заказа</span>

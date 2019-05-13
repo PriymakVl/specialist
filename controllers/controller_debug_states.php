@@ -15,7 +15,7 @@ class Controller_Debug_States extends Controller_Base {
 	{
 		if (ObjectHelper::checkValuesProperty($product->actions, 'state', OrderActionState::ENDED)) return OrderProduct::STATE_ENDED;
 		if (ObjectHelper::checkValuesProperty($product->actions, 'state', OrderActionState::WAITING)) return OrderProduct::STATE_WAITING;
-		if (ObjectHelper::checkValuesProperty($product->actions, 'state', OrderActionState::STATE_PLANED)) return OrderProduct::STATE_PLANNED;
+		if (ObjectHelper::checkValuesProperty($product->actions, 'state', OrderActionState::PLANED)) return OrderProduct::STATE_PLANED;
 		
 		if (ObjectHelper::inPropertyValue($product->actions, 'state', OrderActionState::PROGRESS)) return OrderProduct::STATE_PROGRESS;
 		return 0;

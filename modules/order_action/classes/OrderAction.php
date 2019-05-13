@@ -7,13 +7,15 @@ class OrderAction extends OrderActionBase {
 	
 	public function getProduct()
 	{
-		if ($this->id_prod) $this->product = (new OrderProduct)->setData($this->id_prod);
+		$data = (new OrderProduct)->getData($this->id_prod);
+		if ($data && $data->status == STATUS_ACTIVE) $this->product = (new OrderProduct)->setData($data);
 		return $this;
 	}
 	
 	public function getOrder()
 	{
-		$this->order = new Order($this->id_order);
+		$data = (new Order)->getData($this->id_order);
+		if ($data && $data->status == STATUS_ACTIVE) $this->order = (new Order)->setData($data);
 		return $this;
 	}
 	
