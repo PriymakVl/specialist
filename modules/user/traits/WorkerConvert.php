@@ -7,9 +7,21 @@ trait WorkerConvert {
 	{
 		if (!$this->currentActions) return;
 		foreach ($this->currentActions as $action) {
-			$order = $action->id_order ? 'заказ: '.$action->order->symbol : '';
-			$product = $action->id_prod ? $action->product->symbol: '';
-			$this->currentActionsString .= $order.' '.$product.' <span class="green">'.$action->name.'</span><br>';
+			$this->currentActionsString[] = $this->convertActionToString($action);
 		}
+		return $this;
+	}
+	
+	private function convertActionToString($action)
+	{
+		$product_symbol = $action->id_prod ? $action->product->symbol: '';
+		return $product_symbol.' <span class="green">'.$action->name.'</span>';
+	}
+	
+	public function getFirstActionPlanString()
+	{
+		if (!$this->actions) return;
+		$this->firstActionPlanString = $this->convertActionToString($this->actions[0]);
+		return $this;
 	}
 }

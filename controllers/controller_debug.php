@@ -6,11 +6,11 @@ class Controller_Debug extends Controller_Base {
 	{
 		$orders = Order::getAll('orders');
 		foreach ($orders as $order) {
+			// debug($order->id, false);
 			$order_actions = (new OrderAction)->getByIdOrderModel($order->id);
 			$order_products = (new OrderProduct)->getByIdOrderModel($order->id);
 			$this->addProductContent($order_products, $order_actions);
 			$this->setDateExecution($order, $order_actions);
-			// debug('exit');
 		}
 		debug('exit');
 	}

@@ -7,6 +7,7 @@ class Worker extends WorkerBase {
 	public function getActions()
 	{
 		$this->actions = (new OrderAction)->getForWorker($this);
+		$this->getFirstActionPlanString();
 		$this->getCurrentActions();
 		return $this;
 	}

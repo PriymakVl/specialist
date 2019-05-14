@@ -3,6 +3,20 @@
 add note in product_actions
 add type_orders in order_actions
 изменить в user_options default_action on default_product_action
+id_user in table drawings
+add name
+add symbol
+add id_parent
+add type (type product)
+add state
+add number in order_products
+add date_exec in order_products
+add rating in order_products
+add type_orders in order_products
+add note in order_products
+add date_exec in order_actions
+add name, price, number
+add time_prepar and time_prod
 
 
 /* current change */
@@ -10,43 +24,29 @@ add type_orders in order_actions
 изменить таблицу order_content on order_products
 изменить quntity on qty products
 
-#product_actions
-add name
-add price
-delete id_data
-
-#drawings
-id_user in table drawings
-change id_prod on symbol in table of drawings
-
-#order_products
-изменить quntity on qty order_products
-add note in order_products
-add number in order_products
-add date_exec in order_products
-add rating in order_products
-add type_orders in order_products
-add name
-add symbol
-add id_parent
-delete id_prod
-add state
-delete time_manufac
-add type (type product)
-
-#order_actions
-удалить из order_action time_start
-delete time_manuf in order_actions add time_prepar and time_prod
-add date_exec in order_actions
-переименовать time_end in date_end in order_actions
-add name, price, number
-
 #actions
 изменить data_actions on actions
 
-#user_options 
-add worker option
-delete price_woker_hour
+#product_actions
+delete id_data после перенесения данных из actions 
+
+
+#order_products
+delete time_manufac
+изменить quntity on qty order_products
+delete id_prod
+delete id_data после перенесения данных из actions 
+
+
+#order_actions
+удалить из order_action time_start
+delete time_manuf in order_actions 
+переименовать time_end in date_end in order_actions
+перенести данные по name and price
+
+#user 
+перенести таблицу use_options из локальной базы
+перенести таблицу users из локальной базы
 
 #order_action_states
 удалить из order_action_states type_action, изменить id_worker on id_user
@@ -66,10 +66,6 @@ UPDATE `order_products` as t SET symbol = (select symbol from products where id 
 UPDATE `orders` SET state = '6' where state = '4' (готовые)
 UPDATE `orders` SET state = '4' where state = '3'(в работе)
 
-обновить id_prod order_actions 
-UPDATE `order_actions` as ord SET id_prod = (SELECT id FROM order_products WHERE id_prod = ord.id_prod AND id_order = ord.id_order LIMIT 1);
-
-перенести из actions name and symbol
 
 перенести данные из tab unplan_actions in order_actions
 

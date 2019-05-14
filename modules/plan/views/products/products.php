@@ -5,7 +5,7 @@
 	<table class="plan-table">
 		<? if ($products): ?>
 			<tr>
-				<th width="50">
+				<th width="40">
 					<input type="checkbox" onlyread >
 				</th>
 				<th width="50">№</th>

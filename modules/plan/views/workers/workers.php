@@ -4,8 +4,9 @@
 <table class="list-orders" width="940">
     <tr>
         <th width="40">№</th>
-        <th width="250">ФИО</th>
+        <th width="120">ФИО</th>
 		<th>Текущая операция</th>
+		<th>Следующая операция</th>
         <th>Загрузка в часах</th>
         <th>Загрузка в %</th>
     </tr>
@@ -19,7 +20,17 @@
                 <!-- current actions -->
 				<td class="left">
 					<? if ($worker_one->currentActions): ?>
-						<?=$worker_one->currentActionsString?>
+						<? foreach ($worker_one->currentActionsString as $action_current_str): ?>
+							<?=$action_current_str?><br>
+						<? endforeach; ?>
+					<? else: ?>
+						<span class="red">Простой</span>
+					<? endif; ?>
+				</td>
+				<!-- plan action -->
+				<td class="left">
+					<? if ($worker_one->firstActionPlanString): ?>
+						<?=$worker_one->firstActionPlanString?>
 					<? else: ?>
 						<span class="red">Простой</span>
 					<? endif; ?>

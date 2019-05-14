@@ -27,7 +27,7 @@
 		<th width="180">Операция</th>
 		<th width="80">Кол-во</th>
 		<th width="100">Труд. планов</th>
-		<th width="100">Труд. фактич</th>
+		<th>Труд. фактич</th>
 		<th>Примечание</th>
     </tr>
     <? if ($worker->actionsMade): ?>
@@ -67,7 +67,13 @@
 				<!-- time fact -->
 				<td>
 					<? if ($action->timeFact && $action->states): ?>
-						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->timeFact.'мин.'?></a>
+						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan">
+							<? if ($action->timeFactHour): ?>
+								<? printf("%uчас. %uмин.", $action->timeFactHour->hours, $action->timeFactHour->minutes); ?>
+							<? else: ?>
+								<? printf('%uмин.', $action->timeFact); ?>
+							<? endif; ?>
+						</a>
 					<? elseif ($action->states): ?>
 						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan">~ 1 мин.</a>
 					<? else: ?>

@@ -13,8 +13,8 @@ trait OrderActionModelUpdate {
 	
 	public function updateNoteModel()
 	{
-		$params = self::selectParams(['id', 'note']);
-		$sql = 'UPDATE `order_actions` SET `note` = :note WHERE `id` = :id';
+		$params = self::selectParams(['id_action', 'note']);
+		$sql = 'UPDATE `order_actions` SET `note` = :note WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}
 	
@@ -58,6 +58,14 @@ trait OrderActionModelUpdate {
 	{
 		$params = ['id_action' => $this->id, 'date_exec' => $date_exec];
 		$sql = 'UPDATE `order_actions` SET `date_exec` = :date_exec WHERE `id` = :id_action';
+		return self::perform($sql, $params);
+	}
+	
+	//for edit base 
+	public function updateTimeModel($data)
+	{
+		$params = ['id_action' => $this->id, 'time_prepar' => $data->time_prepar, 'time_prod' => $data->time_prod];
+		$sql = 'UPDATE `order_actions` SET `time_prepar` = :time_prepar, time_prod = :time_prod WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}
 

@@ -5,8 +5,8 @@
 	<table class="plan-table">
 		<? if ($actions): ?>
 			<tr>
-				<th width="50"><input type="checkbox" disabled></th>
-				<th width="50">№</th>
+				<th width="40"><input type="checkbox" disabled></th>
+				<th width="40">№</th>
 				<th width="100">Заказ</th>
 				<th width="200">Продукт</th>
 				<th>Операция</th>
@@ -22,7 +22,7 @@
 				</th>
 				<th width="70">Рейтинг</th>
 				<th>Состояние</th>
-				<th>Работник</th>
+				<th width="90">Раб-ник</th>
 			</tr>
 				<? foreach($actions as $action): ?>
 					<tr>
@@ -46,7 +46,14 @@
 								<span class="red">Нет продукта</span>
 							<? endif; ?>
 						</td>
-						<td><?=$action->name?></td>
+						<!-- action name -->
+						<td>
+							<?=$action->name?>
+							<? if ($action->note): ?>
+								<br><span class="action-note"><?=$action->note?></span>
+							<? endif; ?>
+						</td>
+						<!-- quantity -->
 						<td><?=$action->qty?></td>
 						<!-- date plan -->
 						<td style="width:75px;padding:0;"><?=$action->date_exec ? date('d.m.y', $action->date_exec) : '<span class=red>Нет</span>'?></td>
@@ -64,7 +71,7 @@
 							<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->stateString?></a>
 						<? endif; ?>
 						</td>
-						<td><?=$action->worker?$action->worker->title:''?></td>
+						<td id="worker-cell"><?=$action->worker?$action->worker->title:''?></td>
 					</tr>
 					<? $number++; ?>
 				<? endforeach; ?>

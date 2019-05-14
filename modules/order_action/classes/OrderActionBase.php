@@ -19,6 +19,7 @@ class OrderActionBase extends Model {
 	public $dateReady;
 	public $timePlan; //time preparation + time production
 	public $timeFact; //summa of states action
+	public $timeFactHour;
 	
 	const BG_TERMINAL_BOX_PLAN = 'yellow';
 	const BG_TERMINAL_BOX_PROGRESS = 'green';

@@ -22,15 +22,14 @@ class Controller_Terminal extends Controller_Base
     public function action_edit_state()
     {
 		$action = (new OrderAction)->setData($this->get->id_action)->editStateUp();
-		//->checkReadyOrder();
         $this->redirectPrevious();
     }
 	
 	public function action_add_note()
 	{
-		$params = ParamTerminal::addNote();
-		OrderAction::addNote($params);
-		$this->redirect('terminal/actions?action=' . $params['action']);
+		(new OrderAction)->updateNoteModel();
+		$this->redirectPrevious();
+		// $this->redirect('terminal/actions?action=' . $params['action']);
 	}
 	
 	private function getWorker()

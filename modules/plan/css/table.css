@@ -2,10 +2,6 @@
 	min-width: 940px;
 }
 
-.plan-table td {
-	max-height: 60px;
-}
-
 /* tabel header date */
 table th[colspan] {
 	padding: 0;
@@ -30,4 +26,13 @@ table th[colspan] {
 	border-top: 1px solid #fff!important;
 	padding: 2px;
 	width: 50%;
+}
+
+#worker-cell {
+	font-size: 10px;
+}
+
+.action-note {
+	color: red;
+	font-size: 12px;
 }

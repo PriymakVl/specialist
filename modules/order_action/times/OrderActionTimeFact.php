@@ -5,6 +5,7 @@ trait OrderActionTimeFact {
 	public function setTimeFact()
 	{
 		$this->timeFact = $this->calculateTimeFact($this);
+		if ($this->timeFact && $this->timeFact > Date::HOUR_MINUTES) $this->timeFactHour = Date::convertMinutesToHours($this->timeFact);
 		return $this;
 	}
 	

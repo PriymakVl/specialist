@@ -19,6 +19,7 @@ class WorkerBase extends User {
 	public $actions;
 	public $currentActions;
 	public $currentActionsString = '';
+	public $firstActionPlanString;
 	public $actionsMade;
 	 
 
