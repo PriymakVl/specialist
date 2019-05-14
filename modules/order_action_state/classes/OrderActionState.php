@@ -49,7 +49,9 @@ class OrderActionState extends OrderActionStateBase {
 	
 	public function getUser()
 	{
-		$this->user = (new User)->setData($this->id_user);
+		if (!$this->id_user) return $this;
+		$data = (new User)->getData($this->id_user);
+		if ($data && $data->status == STATUS_ACTIVE) $this->user = (new User)->setData($data);
 		return $this;
 	}
 	

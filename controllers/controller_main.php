@@ -25,7 +25,7 @@ class Controller_Main extends Controller_Base {
     public function action_login()
     {
 		if (!$this->post->save) return $this->render('main/login');
-        $user = (new User)->login();
+        $user = (new User)->login();		
         if (!$user) return $this->redirect('main/login?login_error='.$this->post->login);
 		return $this->setSession('id_user', $user->id)->redirect('main/index');
     }

@@ -15,10 +15,7 @@ trait WorkerList {
 	{
 		$items= $this->selectWorkers();
 		if (!$items) return;
-		// foreach ($items as $item) {
-			// $workers[] = (new self)->setData($item)->setProperties()->getActionsFact()->calculateTimeFact();
-		// }
-		$workers = ObjectHelper::createArray($items, 'Worker', ['setData', 'setProperties', 'getActionsMade', 'getTimeFact', 'calculateCost']);
+		$workers = ObjectHelper::createArray($items, 'Worker', ['setData', 'setProperties', 'getActionsMade']);//, 'getTimeFact', 'calculateCost'
 		if (isset($workers) && $all === false) return $this->selectWorkersByTypeOrder($workers);
 		else if (isset($workers)) return $workers;
 	}

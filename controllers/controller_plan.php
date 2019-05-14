@@ -20,7 +20,7 @@ class Controller_Plan extends Controller_Base {
 	{
 		$products = (new OrderProduct)->getForPlan();
 		// debugProp($products, 'name');
-		 $products = array_slice($products, 0, 150);
+		 // $products = array_slice($products, 0, 150);
 		$this->render('products/main', compact('products'));
 	}
 	
