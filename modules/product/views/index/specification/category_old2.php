@@ -27,9 +27,21 @@
 						</td>
 						<!-- content category -->
                         <td class="content-category">
-							<? if ($category->specification): ?>
-								<? foreach ($category->specification as $item): ?>
+							<? if (isset($category->specificationGroup['category'])): ?>
+								<? foreach ($category->specificationGroup['category'] as $item): ?>
 									<a href="/product?id_prod=<?=$item->id?>" class="category-links"><?=$item->name?$item->name:$item->symbol?></a>
+								<? endforeach; ?>
+							<? elseif (isset($category->specificationGroup['product'])): ?>
+								<? foreach ($category->specificationGroup['product'] as $item): ?>
+									<a href="/product?id_prod=<?=$item->id?>" class="category-links"><?=$item->name?$item->name:$item->symbol?></a>
+								<? endforeach; ?>
+							<? elseif (isset($category->specificationGroup['unit'])): ?>
+								<? foreach ($category->specificationGroup['unit'] as $item): ?>
+									<a href="/product?id_prod=<?=$item->id?>" class="category-links"><?=$item->name?$item->name:$item->symbol?></a>
+								<? endforeach; ?>
+							<? elseif (isset($category->specificationGroup['detail'])): ?>
+								<? foreach ($category->specificationGroup['detail'] as $item): ?>
+									<a href="/product?id_prod=<?=$item->id?>" class="category-links"><?=$item->symbol?></a>
 								<? endforeach; ?>
 							<? endif; ?>
 						</td>
