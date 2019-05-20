@@ -30,7 +30,7 @@ class Controller_Order extends Controller_Base {
 		$item = (new Order)->getBySymbol();
         if ($item) return $this->setMessage('error', 'exist')->redirect('order/index?id_order='.$item->id);
 		$order = (new Order)->addData()->setActive();
-		$this->setMessage('success', 'add')->redirect('order?id_order='.$order->id);
+		$this->setMessage('success', 'add')->redirect('order_position/add?id_order='.$order->id);
     }
 	
 	public function action_edit()

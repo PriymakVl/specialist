@@ -11,7 +11,7 @@ trait OrderDelete {
 	
 	private function deleteProducts()
 	{
-		if (!$this->productsAll) return;
+		if (!$this->productsAll) return $this;
 		foreach ($this->productsAll as $product) {
 			$product->delete();
 		}
@@ -20,7 +20,7 @@ trait OrderDelete {
 	
 	private function deleteActions()
 	{
-		if (!$this->actions) return;
+		if (!$this->actions) return $this;
 		foreach ($this->actions as $action) {
 			$action->delete();
 		}

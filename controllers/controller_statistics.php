@@ -12,6 +12,7 @@ class Controller_Statistics extends Controller_Base {
     public function action_workers()
 	{
 		$workers = (new Worker)->getWorkersForStatistics();
+		// debug($workers[0]->timePlanMadeDivision);
 		// debugProp($workers, 'timePlanMade');
 		$this->render('workers/main', compact('workers'));
 	}

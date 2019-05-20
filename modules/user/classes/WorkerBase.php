@@ -8,9 +8,9 @@ class WorkerBase extends User {
 	public $timePlanPercent = 0;
 	public $timePlanHour = 0; //time actions for worker in hours
 	public $timePlanMade; //time plan made actions 
-	public $timePlanMadeHour;
-	public $timeFact = 0;
-	public $timeFactHour;
+	public $timePlanMadeDivision;//time plan made in hours and minutes
+	public $timeFact = 0;//time fact in minutes
+	public $timeFactDivision; //time fact in hours and minutes;
 	public $differenceTime; //between plan time and fact time
 	//public $loadFullFlage; //если указана трудоемкость для всех деталей
 	//public $defaultActions;

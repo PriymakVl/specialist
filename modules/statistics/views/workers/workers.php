@@ -27,8 +27,8 @@
 				</td>
 				<td>
 					<? if ($worker->timePlanMade): ?>
-						<? if ($worker->timePlanMadeHour): ?>
-							<?=$worker->timePlanMadeHour->hours?> ч. <?=$worker->timePlanMadeHour->minutes?> мин.
+						<? if ($worker->timePlanMadeDivision && $worker->timePlanMadeDivision->hours): ?>
+							<?=$worker->timePlanMadeDivision->hours?> ч. <?=$worker->timePlanMadeDivision->minutes?> мин.
 						<? else: ?>
 							<?=$worker->timePlanMade?> мин.
 						<? endif; ?>
@@ -37,8 +37,8 @@
 					<? endif; ?>
                 <td>
 					<? if ($worker->timeFact): ?>
-						<? if ($worker->timeFactHour): ?>
-							<?=$worker->timeFactHour->hours?> ч. <?=$worker->timeFactHour->minutes?> мин.
+						<? if ($worker->timeFactDivision && $worker->timeFactDivision->hours): ?>
+							<?=$worker->timeFactDivision->hours?> ч. <?=$worker->timeFactDivision->minutes?> мин.
 						<? else: ?>
 							<?=$worker->timeFact?> мин.
 						<? endif; ?>

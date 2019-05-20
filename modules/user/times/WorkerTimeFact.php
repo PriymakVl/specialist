@@ -5,9 +5,9 @@ trait WorkerTimeFact {
 	public function getTimeFact()
 	{
 		$this->timeFact = $this->calculateTimeFact();
-		if ($this->timeFact >= Date::HOUR_MINUTES) $this->timeFactHour = Date::convertMinutesToHours($this->timeFactHour);
+		if ($this->timeFact >= Date::HOUR_MINUTES) $this->timeFactDivision = Date::convertMinutesToHours($this->timeFact);
 		$this->timePlanMade = $this->calculateTimePlanMadeActions();
-		if ($this->timePlanMade >= Date::HOUR_MINUTES) $this->timePlanMadeHour = Date::convertMinutesToHours($this->timePlanMade);
+		if ($this->timePlanMade >= Date::HOUR_MINUTES) $this->timePlanMadeDivision = Date::convertMinutesToHours($this->timePlanMade);
 		$this->differenceTime = $this->calculateDifferenceTime();
 	}
 	
