@@ -4,7 +4,7 @@ trait OrderActionModelUpdate {
 
 	public function updateStateModel($state = false)
 	{
-		$state = $state ? $state : $this->get->state;
+		$state = $state ? $state : $this->params->state;
 		$id_action = $this->get->id_action ? $this->get->id_action : $this->id;
 		$params = ['state' => $state, 'id_action' => $id_action];
 		$sql = 'UPDATE `order_actions` SET `state` = :state  WHERE `id` = :id_action';
