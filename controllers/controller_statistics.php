@@ -12,14 +12,12 @@ class Controller_Statistics extends Controller_Base {
     public function action_workers()
 	{
 		$workers = (new Worker)->getWorkersForStatistics();
-		// debug($workers[0]->timePlanMadeDivision);
-		// debugProp($workers, 'timePlanMade');
 		$this->render('workers/main', compact('workers'));
 	}
 	
 	public function action_worker()
 	{
-		$worker = (new Worker)->setData($this->get->id_worker)->setProperties()->getActionsMade();
+		$worker = (new Worker)->setData($this->get->id_worker)->setProperties()->getActionsMade()->getTimeFact()->calculateCost();
 		// debug	Prop($worker->actionsFact, 'name');
 		$this->render('worker/main', compact('worker'));
 	}

@@ -13,7 +13,7 @@ class View extends Core {
 		$this->message->get();
 	}
 
-	public function render($content, $data, $view)
+	public function render($content, $data)
 	{
         $content = $this->pathFolder.$content.'.php';
         $title = $this->title;

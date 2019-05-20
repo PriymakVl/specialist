@@ -42,15 +42,6 @@
 				<!-- action quantity -->
 				<label>Количество:</label>
 				<input type="number" name="qty" value="<?=$action->qty?>">
-				<!-- action state -->
-				<label>Состояние:</label>
-				<select name="state">
-					<option value="<?=OrderActionState::PLANED?>" <? if ($action->state == OrderActionState::PLANED) echo "selected";?>>Запланирована</option>
-					<option value="<?=OrderActionState::PROGRESS?>" <? if ($action->state == OrderActionState::PROGRESS) echo "selected";?>>Выполняется</option>
-					<option value="<?=OrderActionState::STOPPED?>" <? if ($action->state == OrderActionState::STOPPED) echo "selected";?>>Остановлена</option>
-					<option value="<?=OrderActionState::WAITING?>" <? if ($action->state == OrderActionState::WAITING) echo "selected";?>>Отложена</option>
-					<option value="<?=OrderActionState::ENDED?>" <? if ($action->state == OrderActionState::ENDED) echo "selected";?>>Выполнена</option>
-				</select>
 			</div>
 			<!-- action note -->
 			<div class="form-box">

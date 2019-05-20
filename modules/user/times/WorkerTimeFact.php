@@ -9,6 +9,7 @@ trait WorkerTimeFact {
 		$this->timePlanMade = $this->calculateTimePlanMadeActions();
 		if ($this->timePlanMade >= Date::HOUR_MINUTES) $this->timePlanMadeDivision = Date::convertMinutesToHours($this->timePlanMade);
 		$this->differenceTime = $this->calculateDifferenceTime();
+		return $this;
 	}
 	
 	private function calculateTimeFact()

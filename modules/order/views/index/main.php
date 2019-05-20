@@ -38,6 +38,6 @@
 <script src="/modules/order/js/order_delete.js"></script>
 <script src="/modules/order_product/js/delete_product.js"></script>
 <script src="/modules/order_action/js/order_action_delete.js"></script>
-<!--<script src="/modules/order_action/js/order_action_edit_state.js"></script>-->
+<script src="/modules/order_action/js/order_action_edit_state.js"></script>
 <script src="/modules/order_action/js/order_action_edit.js"></script>
 <script src="/modules/order_position/js/order_position_delete.js"></script>

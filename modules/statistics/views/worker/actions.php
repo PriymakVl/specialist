@@ -1,24 +1,8 @@
 <?php 
 	$number = 1;
 ?>
-<!-- total time -->
-<? if ($worker->actions): ?>
-	<table width="940">
-		<tr>
-			<th width="300">Общая трудоемкость плановая</th>
-			<th width="300">Общая трудоемкость фактическая</th>
-			<th>Заработал</th>
-		</tr>
-		<tr>
-			<td><?=$worker->totalTimePlan?></td>
-			<td><?=$worker->totalTimeMade?></td>
-			<td><?=$worker->costMade?></td>
-		<tr>
-	<table>
-	<br>
-<? endif; ?>
 
-<!-- list actions -->
+<h2>Статистика по операциям</h2>
 <table class="action-list" width="940">
     <tr>
         <th width="50">№</th>
@@ -59,15 +43,17 @@
 				<!-- time plan -->
 				<td>
 					<? if ($action->timePlan): ?>
-						<?=$action->timePlan?> мин.
+						<? printf('%uмин.', $action->timePlan); ?>
 					<? else: ?>
 						<span class="red">Нет</span>
 					<? endif; ?>
 				</td>
 				<!-- time fact -->
+				<!-- determine color time fact -->
+				<? $color = ($action->timePlan && $action->timeFact && $action->timeFact > $action->timePlan) ? 'red' : 'green'; ?>
 				<td>
 					<? if ($action->timeFact && $action->states): ?>
-						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan">
+						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan" style="color:<?=$color?>">
 							<? if ($action->timeFactHour): ?>
 								<? printf("%uчас. %uмин.", $action->timeFactHour->hours, $action->timeFactHour->minutes); ?>
 							<? else: ?>

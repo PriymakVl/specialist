@@ -4,10 +4,10 @@
 
 <div id="content">
 
-	<? if ($action->id_prod): ?>
+	<? if ($action->product): ?>
 		<? include_once('form_product.php'); ?>
-	<? elseif ($action->id_order): ?>
-		<? include_once('form_product.php'); ?>
+	<? elseif ($action->order): ?>
+		<? include_once('form_order.php'); ?>
 	<? else: ?>
 		<? include_once('form_other.php'); ?>
 	<? endif; ?>

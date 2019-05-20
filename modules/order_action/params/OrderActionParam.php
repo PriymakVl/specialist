@@ -6,7 +6,7 @@ trait OrderActionParam {
 	
 	public function updateModelParams()
 	{
-		$params = self::selectParams(['id_action', 'price', 'number', 'time_prepar', 'time_prod', 'note', 'qty', 'state', 'rating']);
+		$params = self::selectParams(['id_action', 'price', 'number', 'time_prepar', 'time_prod', 'note', 'qty', 'rating']);
 		$params['name'] = trim(self::getParam('name'));
 		return $params;
 	}

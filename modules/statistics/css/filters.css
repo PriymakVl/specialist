@@ -56,3 +56,17 @@
 	right: 5px;
 }
 
+/* filter actions */
+#statistics-filter-actions-wrp {
+	position: absolute;
+	top: 8px;
+	left: 470px;
+}
+
+#statistics-filter-actions {
+    font-size: 16px;
+    width: 200px;
+    height: 28px;
+}
+
+

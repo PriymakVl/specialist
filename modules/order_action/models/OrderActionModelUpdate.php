@@ -28,7 +28,7 @@ trait OrderActionModelUpdate {
 	public function updateModel()
 	{
 		$params = $this->updateModelParams();
-		$sql = 'UPDATE `order_actions` SET `qty` = :qty , `name` = :name, `price` = :price, `number` = :number, `state` = :state, `time_prepar` = :time_prepar,
+		$sql = 'UPDATE `order_actions` SET `qty` = :qty , `name` = :name, `price` = :price, `number` = :number, `time_prepar` = :time_prepar,
 			`time_prod` = :time_prod, `rating` = :rating, `note` = :note WHERE `id` = :id_action';
 		return self::perform($sql, $params);
 	}

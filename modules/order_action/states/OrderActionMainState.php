@@ -32,4 +32,17 @@ trait OrderActionMainState {
 		return $this;
 	}
 	
+	public function editStateGroup()
+	{
+		$ids = explode(',', $this->post->ids);
+		if (!$ids[0]) return;
+		foreach ($ids as $id) {
+			// $_GET['id_action'] = $id;
+			$action = (new self)->setData($id);
+			$action->get->id_action = $id;
+			// debug($action->get);
+			$action->editStateUp();
+		}
+	}
+	
 }
