@@ -29,7 +29,13 @@
                         <td class="content-category">
 							<? if ($category->specification): ?>
 								<? foreach ($category->specification as $item): ?>
-									<a href="/product?id_prod=<?=$item->id?>" class="category-links"><?=$item->name?$item->name:$item->symbol?></a>
+										<a href="/product?id_prod=<?=$item->id?>" class="category-links">
+											<? if ($this->get->id_prod == ID_CATEGORY_CYLINDER): ?>
+												<?=$item->name?$item->name:$item->symbol?>
+											<? else: ?>
+												<?=$item->name.': '.$item->symbol?><!-- for press category -->
+											<? endif; ?>
+										</a>
 								<? endforeach; ?>
 							<? endif; ?>
 						</td>
