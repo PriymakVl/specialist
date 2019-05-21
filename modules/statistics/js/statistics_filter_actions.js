@@ -3,7 +3,6 @@ $(document).ready(function() {
 	$('#statistics-filter-actions').change(function() {
 		var action = $(this).val();
 		var request_str = getRequestString(action);
-		console.log(request_str); return;
 		location.href = request_str;
 	});
 	

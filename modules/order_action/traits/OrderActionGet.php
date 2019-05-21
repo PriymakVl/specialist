@@ -43,6 +43,8 @@ trait OrderActionGet {
 		$items = $this->getByDateEndModel();
 		if (!$items) return;
 		$select = $this->selectForWorkerFact($items, $worker->id);
+		if ($this->get->action && $this->get->action == 'other') $select = $this->selectByDefaultNames($select, false);
+		if ($this->get->action && $this->get->action != 'other') $select = ObjectHelper::selectByValueProperty($select, 'name', $this->get->action);
 		if ($select) return ObjectHelper::createArray($select, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'getStates', 'setTimePlan', 'setTimeFact']);
 	}
 }

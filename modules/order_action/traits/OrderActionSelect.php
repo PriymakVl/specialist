@@ -8,9 +8,11 @@ trait OrderActionSelect {
 		$default_names = (new Action)->getArrayNames();
 		foreach ($items as $item) {
 			if ($default) { 
-				if (in_array($item->name, $default_names)) $select[] = $item; }
+				if (in_array($item->name, $default_names)) $select[] = $item; 
+			}
 			else {
-				if (!in_array($item->name, $default_names)) $select[] = $item; }
+				if (!in_array($item->name, $default_names)) $select[] = $item; 
+			}
 		}
 		if (isset($select)) return $select;
 	}

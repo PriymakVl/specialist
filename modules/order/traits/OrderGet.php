@@ -54,7 +54,7 @@ trait OrderGet {
 		if (!$items) return;
 		$terminal = [];
 		foreach ($items as $item) {
-			if ($item->state == OrderState::WORK) $terminal[] = $item;
+			if ($item->state == OrderState::WORK || $item->state == OrderState::PLANED) $terminal[] = $item;
 		}
 		return $terminal;
 	}

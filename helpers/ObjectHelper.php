@@ -73,6 +73,15 @@ class ObjectHelper {
 		return false;
 	}
 	
+	public static function selectByValueProperty($objects, $name_property, $value_property) 
+	{
+		if (!$objects) return false;
+		foreach ($objects as $object) {
+			if ($object->$name_property == $value_property) $select[] = $object;
+		}
+		if (isset($select)) return $select;
+	}
+	
 	
 }
 
