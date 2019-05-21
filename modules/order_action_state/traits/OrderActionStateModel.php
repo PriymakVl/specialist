@@ -7,7 +7,6 @@ trait OrderActionStateModel {
 	public function addModel($params = false)
 	{
 		$params = $params ? $params : $this->addParams();
-		debug($params);
 		$sql = "INSERT INTO `order_action_states` (id_action, time, state, id_user) VALUES (:id_action, :time, :state, :id_user)";
         return self::perform($sql, $params);
 	}

@@ -54,8 +54,8 @@ class Controller_Order_Action extends Controller_Base {
 	{
 		if (!$this->post->save) return $this->render('edit_state/main');
 		if (!$this->post->state) return $this->setMessage('error', 'not_state', 'order_action')->redirectPrevious();
-		(new OrderAction)->editStateGroup()->setMessage('success', 'edit_state');
-		$this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$action->id_order);
+		(new OrderAction)->editStateGroup();
+		$this->setMessage('success', 'edit_state', 'order_action')->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$this->post->id_order);
 	}
 	
 	public function action_edit()

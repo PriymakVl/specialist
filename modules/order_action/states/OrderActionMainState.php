@@ -20,7 +20,7 @@ trait OrderActionMainState {
 	public function editStateUp()
 	{
 		$this->updateStateModel();
-		$this->setStartTimeState();//->editStateProduct()->editStateOrder()->editDateEnd();
+		$this->setStartTimeState()->editStateProduct()->editStateOrder()->editDateEnd();
 		return $this;
 	}
 	
@@ -37,10 +37,10 @@ trait OrderActionMainState {
 		$ids = explode(',', $this->post->ids);
 		if (!$ids[0]) return;
 		foreach ($ids as $id) {
-			$_GETхэшв_фсешщтэъ = $id;
 			$action = (new self)->setData($id);
-			// $action->get->id_action = $id;
-			$action->editStateUp();
+			$action->updateStateModel();
+			(new OrderActionState)->addModel(['id_action' => $id, 'time' => time(), 'state' => $this->post->state, 'id_user' => $this->session->id_user]);
+			$action->editStateProduct()->editStateOrder()->editDateEnd();
 		}
 	}
 	

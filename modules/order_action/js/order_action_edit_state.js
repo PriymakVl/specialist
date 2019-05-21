@@ -3,11 +3,12 @@ $(document).ready(function() {
 	//edit state order actions
 	$('#order-action-edit-state').click(function() {
 		event.preventDefault();
+		var id_order = $(this).attr('id_order');
 		var actions = $('[name="actions"]:checked');
 		ids_str = get_ids_str(actions);
 
 		if (!ids_str) return alert('Вы не выбрали операцию');
-		location.href = '/order_action/edit_state_group?ids=' + ids_str;
+		location.href = '/order_action/edit_state_group?ids=' + ids_str + '&id_order=' + id_order;
 	});
 });
 

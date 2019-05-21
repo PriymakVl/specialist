@@ -17,6 +17,9 @@
 			
 			<!-- id action for multi edit state -->
 			<input type="hidden" value="<?=$this->get->ids?>" name="ids">
+			
+			<!-- id order actions -->
+			<input type="hidden" value="<?=$this->get->id_order?>" name="id_order">
 
         <!-- buttons -->
         <div class="button-box">
