@@ -5,7 +5,7 @@ trait OrderActionDelete {
 	public function deleteFromProducts($products)
 	{
 		foreach ($products as $product) {
-			$actions = $this->getForProduct($product);
+			$actions = $this->getForProduct($product->id);
 			if ($actions) $this->deleteActions($actions);
 		}
 	}
@@ -17,7 +17,7 @@ trait OrderActionDelete {
 		}
 	}
 	
-	public function delete()
+	public function deleteAndEditState()
 	{
 		parent::delete();
 		$this->editStateProduct()->editStateOrder();

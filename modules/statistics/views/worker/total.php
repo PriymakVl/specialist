@@ -7,7 +7,15 @@
 		<th>Заработал</th>
 	</tr>
 	<tr>
-		<td>Все</td>
+		<td>
+			<? if ($this->get->action && $this->get->action == 'other'): ?>
+				<span>Разные</span>
+			<? elseif ($this->get->action): ?>
+				<?=$this->get->action?>
+			<? else: ?>
+				<span>Все</span>
+			<? endif; ?>
+		</td>
 		<!-- time plan all -->
 		<td>
 			<? if ($worker->timePlanMade): ?>
@@ -17,7 +25,7 @@
 					<? printf('%uмин.', $worker->timePlanMade); ?>
 				<? endif; ?>
 			<? else: ?>
-				<span class="red">Нет</span></td>
+				<span class="red"></span></td>
 			<? endif; ?>
 		</td>
 		

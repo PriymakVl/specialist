@@ -2,10 +2,13 @@ $(document).ready(function() {
 
 	$('#order-action-delete, #order-product-action-delete, #plan-action-delete').click(function(event) {
 		event.preventDefault();
-		var id_action = $('[name="actions"]:checked').attr('id_action');
+		var action = $('[name="actions"]:checked');
 		var id_name = $(this).attr('id');
 
+		if (action.length > 1) return alert('Удалить можно только одну операцию');
+		var id_action = action.attr('id_action');
 		if (!id_action) return alert('Вы не выбрали операцию');
+		
 		var agree = confirm('Вы действительно хотите удалить указанную операцию?');
 		if (!agree) return;
 		
