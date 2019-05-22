@@ -26,4 +26,5 @@
 <script src="/web/js/datepicker.js"></script>
 <script src="/web/js/get_value_from_request.js"></script>
 <script src="/modules/statistics/js/statistics_filter_actions.js"></script>
+<script src="/modules/statistics/js/save_file.js"></script>
 

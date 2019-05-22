@@ -22,4 +22,12 @@ class Controller_Statistics extends Controller_Base {
 		$this->render('worker/main', compact('worker'));
 	}
 	
+	public function action_save_file()
+	{
+		$worker = (new Worker)->setData($this->get->id_worker)->setProperties()->getActionsMade()->getTimeFact()->calculateCost();
+		if (!$worker->actionsMade) return $this->setMessage('error', 'not-data-file', 'statistics')->redirectPreviously();
+		$excel = new StatisticsWorkerExcel($worker);
+		return $excel->bildSheet()->uploadFile('statistics.xls');
+	}
+	
 }
