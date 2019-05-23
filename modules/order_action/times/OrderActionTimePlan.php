@@ -5,6 +5,7 @@ trait OrderActionTimePlan {
 	public function setTimePlan()
 	{
 		$this->timePlan = $this->calculateTimePlan($this);
+		if ($this->timePlan && $this->timePlan > Date::HOUR_MINUTES) $this->timePlanDivision = Date::convertMinutesToHours($this->timePlan);
 		return $this;
 	}
 	

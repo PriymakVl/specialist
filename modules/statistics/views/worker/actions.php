@@ -43,7 +43,11 @@
 				<!-- time plan -->
 				<td>
 					<? if ($action->timePlan): ?>
-						<? printf('%uмин.', $action->timePlan); ?>
+						<? if ($action->timePlanDivision): ?>
+								<? printf("%uчас. %uмин.", $action->timePlanDivision->hours, $action->timePlanDivision->minutes); ?>
+							<? else: ?>
+								<? printf('%uмин.', $action->timePlan); ?>
+							<? endif; ?>
 					<? else: ?>
 						<span class="red">Нет</span>
 					<? endif; ?>
@@ -54,8 +58,8 @@
 				<td>
 					<? if ($action->timeFact && $action->states): ?>
 						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan" style="color:<?=$color?>">
-							<? if ($action->timeFactHour): ?>
-								<? printf("%uчас. %uмин.", $action->timeFactHour->hours, $action->timeFactHour->minutes); ?>
+							<? if ($action->timeFactDivision): ?>
+								<? printf("%uчас. %uмин.", $action->timeFactDivision->hours, $action->timeFactDivision->minutes); ?>
 							<? else: ?>
 								<? printf('%uмин.', $action->timeFact); ?>
 							<? endif; ?>

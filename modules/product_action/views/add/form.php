@@ -35,7 +35,7 @@
 			</div>
 			<!-- action note -->
 			<div class="form-box">
-				<label>Примесание:</label>
+				<label>Примечание:</label>
 				<textarea name="note"></textarea>
 			</div>
 

@@ -7,7 +7,13 @@
 			<?=$unit->number?>
 		</td>
 		<td>
-			<?=$unit->symbol?>
+			<? if (!$unit->drawings): ?>
+				<?=$unit->symbol?>
+			<? elseif (count($unit->drawings) == 1): ?>
+				<a href="/web/drawings/<?=$unit->drawings[0]->filename?>" target="_blank"><?=$unit->symbol?></a>
+			<? else: ?>
+				<a href="/product?id_prod=<?=$unit->id?>&tab=<?=Controller_Base::PRODUCT_TAB_DRAWINGS?>"><?=$unit->symbol?></a>
+			<? endif; ?>
 		</td>
 		<td>
 			<a href="/product?id_prod=<?=$unit->id?>"><?=$unit->name?></a>
