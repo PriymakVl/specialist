@@ -7,10 +7,16 @@
 			<?=$prod_specif->number?>
 		</td>
 		<td>
-			<?=$prod_specif->symbol?>
+			<? if (!$prod_specif->drawings): ?>
+				<?=$prod_specif->symbol?>
+			<? elseif (count($prod_specif->drawings) == 1): ?>
+				<a href="/web/drawings/<?=$prod_specif->drawings[0]->filename?>" target="_blank"><?=$prod_specif->symbol?></a>
+			<? else: ?>
+				<a href="/product?id_prod=<?=$prod_specif->id?>"><?=$prod_specif->symbol?></a>
+			<? endif; ?>
 		</td>
 		<td>
-			<a href="/product?id_prod=<?=$prod_specif->id?>"><?=$prod_specif->name?></a>
+			<a href="/product?id_prod=<?=$prod_specif->id?>&tab=<?=Controller_Base::PRODUCT_TAB_DRAWINGS?>"><?=$prod_specif->name?></a>
 		</td>
 		<td><?=$prod_specif->qty?></td>
 		<td>

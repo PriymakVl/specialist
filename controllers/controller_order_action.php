@@ -70,7 +70,7 @@ class Controller_Order_Action extends Controller_Base {
 	
 	public function action_delete()
 	{
-		$action = (new OrderAction)->setData($this->get->id_action)->delete()->setMessage('success', 'delete');
+		$action = (new OrderAction)->setData($this->get->id_action)->deleteAndEditState()->setMessage('success', 'delete');
 		if ($this->get->sent == 'order') $this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$action->id_order);
 		else if ($this->get->sent == 'product') $this->redirect('order_product?id_prod='.$action->id_prod);
 		else $this->redirectPrevious();

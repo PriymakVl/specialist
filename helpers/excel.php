@@ -1,4 +1,5 @@
 <?php
+include_once('./libraries/phpexcel/Classes/PHPExcel.php');
 
 class Excel
 {
@@ -11,10 +12,8 @@ class Excel
 
 	public function __construct()
 	{
-		//$this->objPHPExcel = new PHPExcel();
-		//$this->setStyleTotalProperties();
-        $file = file('http://helpers/test.txt');
-        debug($file);
+		$this->objPHPExcel = new PHPExcel();
+		$this->setStyleTotalProperties();
 	}
 	
 	public function bildSheet()

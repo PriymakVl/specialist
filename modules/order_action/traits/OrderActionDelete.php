@@ -17,7 +17,7 @@ trait OrderActionDelete {
 		}
 	}
 	
-	public function delete()
+	public function deleteAndEditState()
 	{
 		parent::delete();
 		$this->editStateProduct($this->id_prod)->editStateOrder($this->id_order);
