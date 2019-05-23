@@ -74,8 +74,8 @@ input[type="text"] {
 
 #content-wrp {
     padding: 5px 10px 10px;
-    /*background: #fff url(../images/gradient.png) repeat-x 0 -12px;
-    background: #fff; */
+    background: #fff;
+	/* height: 2000px; */
 }
 
 /* .black-overlay{
