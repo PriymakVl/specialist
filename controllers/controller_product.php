@@ -52,6 +52,14 @@ class Controller_Product extends Controller_Base {
 		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->deleteAll();
 		$this->setMessage('success', 'delete')->redirect('product?id_prod='.$product->id_parent);
 	}
+	
+	 public function action_search()
+	 {
+		 $products = (new Product)->search();
+		 if (count($products) == 1) return $this->setMessage('success', 'found', 'product_search')->redirect('product?id_prod='.$products[0]->id);
+		 else if (count($products ) > 1) $this->setMessage('success', 'found_next', 'product_search')->render('search/main', compact('products'));
+		 else $this->setMessage('error', 'not_found', 'product_search')->redirectPrevious();
+	 }
 
     
 	
