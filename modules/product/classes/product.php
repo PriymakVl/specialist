@@ -65,6 +65,12 @@ class Product extends ProductBase {
 		$this->CopyTotal();
 		return $this;
 	}
+	
+	public function search()
+	{
+		if ($this->post->symbol) return $this->searchBySymbol();
+		// if ($items) return ObjectHelper::createArray($items, 'Product');
+	}
 			
     
 	

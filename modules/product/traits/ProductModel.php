@@ -43,4 +43,11 @@ trait ProductModel  {
         return self::perform($sql, $params)->fetchAll();
 	}
 	
+	public function searchBySymbol()
+    {
+        $sql = 'SELECT * FROM `products` WHERE `symbol` like concat("%", :symbol, "%") AND `status` = :status';
+        $params = ['symbol' => trim($this->post->symbol), 'status' => STATUS_ACTIVE];
+        return self::perform($sql, $params)->fetchAll();
+    }
+	
 }

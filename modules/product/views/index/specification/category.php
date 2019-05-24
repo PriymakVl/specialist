@@ -6,6 +6,10 @@
     <label for="tab-2">Спецификация</label>
     <div class="tab-content">
 		<h2><?=$product->name?></h2>
+		
+		<!-- search product -->
+		<? include '/modules/product/views/index/search.php' ?>
+		
         <table width="900" id="product-categories">
             <? if ($product->specification): ?>
                 <tr>

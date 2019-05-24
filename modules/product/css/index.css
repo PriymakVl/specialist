@@ -19,3 +19,21 @@
 .tab-content h2 {
 	margin-top: -15px;
 }
+
+/* form search order */
+#form-product-search-wrp {
+	position: absolute;
+	top: -35px;
+	right: 0;
+}
+
+
+#form-product-search-wrp input[type="submit"] {
+    padding: 4px 10px 4px 10px;
+	height: 30px;
+}
+
+#form-product-search-wrp input[type="text"] {
+    width: 205px;
+	height: 20px;
+}

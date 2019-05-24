@@ -13,6 +13,9 @@
 		
 			<!-- message -->
 			<? include './views/total/message.php'; ?>
+			
+			<!-- search product -->
+			<!-- файл подключен в specification/category -->
 
             <!-- order  info -->
             <? include_once('info.php'); ?>

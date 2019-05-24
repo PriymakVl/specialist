@@ -3,6 +3,7 @@
     <label for="tab-1">Информация</label>
     <div class="tab-content">
 		<h2><?=$product->name?>: <span class="green"><?=$product->symbol?></span></h2>
+		
         <table width="900">
             <tr>
                 <th width="50">№</th>
