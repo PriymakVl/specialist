@@ -8,7 +8,7 @@
 		<h2><?=$product->name?></h2>
 		
 		<!-- search product -->
-		<? include '/modules/product/views/index/search.php' ?>
+		<? include './modules/product/views/index/search.php' ?>
 		
         <table width="900" id="product-categories">
             <? if ($product->specification): ?>
