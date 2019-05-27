@@ -41,3 +41,4 @@
 <script src="/modules/order_action/js/order_action_edit_state.js"></script>
 <script src="/modules/order_action/js/order_action_edit.js"></script>
 <script src="/modules/order_position/js/order_position_delete.js"></script>
+<script src="/modules/order_product/js/add_to_order_from_position_manual.js"></script>

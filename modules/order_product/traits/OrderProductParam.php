@@ -2,7 +2,7 @@
 
 trait OrderProductParam {
 	
-	public function addDataModelParams($product, $id_parent)
+	public function getParamsFromProduct($product, $id_parent)
 	{
 		$id_order = $this->get->id_order ? $this->get->id_order : $this->session->id_order_active;
 		$order = new Order($id_order);
@@ -20,8 +20,26 @@ trait OrderProductParam {
 		$params['date_exec'] = $order->date_exec ? $order->date_exec : '';
 		return $params;
 	}
+
+	public function getParamsFromPosition()
+	{
+		$position = (new OrderPosition)->setData($this->get->id_position)->getOrder();
+		$params['name'] = $this->get->name ? $this->get->name : 'не указано';
+		$params['symbol'] = $position->symbol;
+		$params['number'] =  0;
+		$params['type'] = Product::TYPE_DETAIL;
+		$params['note'] = $position->note ? $position->note : '';
+		$params['id_parent'] = self::ID_MAIN_ORDER;
+		$params['qty'] = $position->qty ? $position->qty : 1;
+		$params['state'] = self::STATE_WAITING;
+		
+		$params['id_order'] = $position->id_order;
+		$params['type_order'] = $position->order->type;
+		$params['date_exec'] = $position->order->date_exec ? $position->order->date_exec : '';
+		return $params;
+	}
 	
-	public function addFormModelParams()
+	public function getParamsFromForm()
 	{
 		$order = new Order($this->get->id_order);
 		$params = self::selectParams(['symbol', 'name', 'qty', 'type', 'note', 'number', 'date_exec']);

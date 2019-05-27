@@ -47,7 +47,8 @@ trait OrderProductSpecification {
 	{
 		foreach ($specification as $product) {
 			$product->getSpecification();
-			$id_sub_parent = $this->addDataModel($product, $id_parent);
+			$params = $this->getParamsFromProduct($product, $id_parent);
+			$id_sub_parent = $this->addDataModel($params);
 			if ($product->specification) $this->addSpecificationRecursive($product->specification, $id_sub_parent);
 		}
 		return $this;

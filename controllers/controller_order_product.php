@@ -26,6 +26,12 @@ class Controller_Order_Product extends Controller_Base {
 		$product = (new OrderProduct)->addProductBase()->addSpecification()->setMessage('success', 'add');
 		$this->redirect('order_action/add_base?id_prod='.$product->id);
 	}
+	//create order product from position if not created automat
+	public function action_add_position()
+	{
+		$product = (new OrderProduct)->addProductPosition()->setMessage('success', 'add');
+		$this->redirect('order?id_order='.$product->id_order.'&tab='.self::ORDER_TAB_PRODUCTS);
+	}
 	
 	public function action_add_form()
 	{

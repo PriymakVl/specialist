@@ -20,6 +20,7 @@
 				<td class="position-menagment-box">
 					<a href="#" class="order-position-delete" id_position="<?=$position->id?>">Удалить</a><br>
 					<a href="/order_position/edit?id_position=<?=$position->id?>">Редактировать</a>
+					<a href="#" id="add-product-position" id_position="<?=$position->id?>">Создать прод.</a>
 				</td>
 			</tr>
 			<? $number++ ?>

@@ -1,4 +1,4 @@
-input[name="name"]  {
+input[name="name"] {
 	width: 525px;
 }
 
@@ -41,6 +41,7 @@ input[name="time_prod"]  + span {
 	width: 170px;
 	margin-right: 25px;
 }
+
 
 #form-product-action-wrp textarea {
 	width: 915px;

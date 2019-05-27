@@ -28,7 +28,7 @@ class Controller_Order_Action extends Controller_Base {
 	
 	public function action_add_for_order()
 	{
-		$order = new Order($this->get->id_order); $product = false;
+		$order = (new Order)->setData($this->get->id_order)->getProductsMain(); //$product = false;
 		if (!$this->post->save) return $this->render('add/main', compact('order'));
 		$action = (new OrderAction)->addForOrder()->setMessage('success', 'add');
 		$this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$order->id);

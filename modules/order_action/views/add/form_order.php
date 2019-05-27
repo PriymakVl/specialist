@@ -6,7 +6,7 @@
 		Добавить операцию для заказа: <span class="green"><?=$order->symbol?></span>
 	</h2>
     <form action="/order_action/add_for_order?id_order=<?=$this->get->id_order?>" method="post">
-	
+
 			<div class="form-box product-action-name-wrp">
 				<!-- name action -->
 				<label>Операции:</label>
