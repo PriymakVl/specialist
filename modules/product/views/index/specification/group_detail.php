@@ -20,6 +20,7 @@
 		</td>
 		<td><?=$detail->qty?></td>
 		<td>
+			<?//debug($detail->timeManufacturingUnit);?>
 			<? if ($detail->timeManufacturingUnit): ?>
 				<?=$detail->timeManufacturingUnit?> мин.
 			<? elseif ($detail->timeManufacturingItem): ?>
