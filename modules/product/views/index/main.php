@@ -32,7 +32,7 @@
             <? if ($product->actions) include_once('actions.php'); ?>
 			
 			<!-- statistics -->
-			<? if ($product->statistics) include_once('statistics.php'); ?>
+			<? if ($product->orderProducts) include_once('statistics.php'); ?>
 			
 			<!-- drawings -->
 			<? if ($product->drawings) include_once('drawings.php'); ?>

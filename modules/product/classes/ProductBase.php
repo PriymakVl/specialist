@@ -32,12 +32,13 @@ class ProductBase extends Model
 	public $parent;
 	public $typeViewSpecification;
 	public $actions;
-	public $statistics;
+	public $orderProducts; //for statistics
 	public $specificationGroup;//divided on group detail, unit and other
 	public $drawings;
 	public $specification;
 	public $specificationAll;
 	public $typeString;
+	
 
 
 }
