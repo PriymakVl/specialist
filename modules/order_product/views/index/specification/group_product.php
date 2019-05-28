@@ -13,7 +13,7 @@
 			<a href="/order_product?id_prod=<?=$prod_specif->id?>"><?=$prod_specif->name?></a>
 		</td>
 		<td><?=$prod_specif->qty?></td>
-		<td><?=$detail->note?></td>
-		<td style="background:<?=$detail->stateBg?>"><?=$detail->stateString?></td>
+		<td><?=$prod_specif->note?></td>
+		<td style="background:<?=$prod_specif->stateBg?>"><?=$prod_specif->stateString?></td>
 	</tr>
 <? endforeach; ?>

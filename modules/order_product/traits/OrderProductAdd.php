@@ -30,6 +30,9 @@ trait OrderProductAdd {
 		foreach ($positions as $position) {
 			$product = (new Product)->extractProduct($position);
 			if ($product) {
+				//for specification
+				$_GET['qty'] = $position->qty; 
+				//for product
 				$this->get->qty = $position->qty;
 				$params = $this->getParamsFromProduct($product, self::ID_MAIN_ORDER);
 				$id_prod = $this->addDataModel($params);
