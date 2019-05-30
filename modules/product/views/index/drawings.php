@@ -18,7 +18,7 @@
 				<tr>
 					<td><?=$number?></td>
 					<td>
-						<a href="/web/drawings/<?=$dwg->filename?>" target="_blank"><?=$product->symbol?></a>
+						<a href="/drawings/<?=$dwg->filename?>" target="_blank"><?=$product->symbol?></a>
 					</td>
 					<td><?=date('d.m.y', $dwg->date_add)?></td>
 					<td><?=$dwg->note?></td>

@@ -12,7 +12,7 @@ trait DrawingFile {
 	
 	private function moveFile($filename)
 	{
-		$destination = './web/drawings/'.$filename;
+		$destination = './drawings/'.$filename;
 		return move_uploaded_file($_FILES['file']['tmp_name'], $destination);
 	}
 	

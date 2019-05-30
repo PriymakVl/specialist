@@ -10,7 +10,7 @@
 			<? if (!$prod_specif->drawings): ?>
 				<?=$prod_specif->symbol?>
 			<? elseif (count($prod_specif->drawings) == 1): ?>
-				<a href="/web/drawings/<?=$prod_specif->drawings[0]->filename?>" target="_blank"><?=$prod_specif->symbol?></a>
+				<a href="/drawings/<?=$prod_specif->drawings[0]->filename?>" target="_blank"><?=$prod_specif->symbol?></a>
 			<? else: ?>
 				<a href="/product?id_prod=<?=$prod_specif->id?>"><?=$prod_specif->symbol?></a>
 			<? endif; ?>
