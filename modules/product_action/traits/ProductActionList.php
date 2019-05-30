@@ -1,6 +1,6 @@
 <?php
 
-trait ProductActionList()
+trait ProductActionList
 {
 	public function copy()
 	{

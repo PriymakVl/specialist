@@ -26,6 +26,9 @@
 		<li>
             <a href="/product/copy?id_prod=<?=$product->id?>">Скопир. продукт</a>
         </li>
+        <li>
+            <a href="/product/move?id_prod=<?=$product->id?>">Переместить продукт</a>
+        </li>
         <br><hr>
         
 		<!-- form add product actions -->

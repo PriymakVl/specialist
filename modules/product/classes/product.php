@@ -64,6 +64,12 @@ class Product extends ProductBase {
 		$this->CopyTotal();
 		return $this;
 	}
+
+	public function move()
+	{
+		$this->updateIdParenModel($this->session->id_prod_active);
+		return $this;
+	}
 	
 	public function search()
 	{

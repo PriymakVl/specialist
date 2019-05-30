@@ -2,7 +2,7 @@
 
 class ProductAction extends Model {
 
-	use ProductActionModel, ProductActionParam, Param;
+	use ProductActionModel, ProductActionParam, ProductActionList;
 	
 	public function __construct($id_action = false)
     {
