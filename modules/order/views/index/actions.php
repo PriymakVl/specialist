@@ -7,7 +7,7 @@
 			<table width="940">
 					<tr>
 						<th width="50"><input type="checkbox" disabled></th>
-						<th width="150">Обозначение</th>
+						<th width="220">Обозначение</th>
 						<th width="200">Наименование</th>
 						<th width="80">Кол-во</th>
 						<th width="200">Операция</th>
