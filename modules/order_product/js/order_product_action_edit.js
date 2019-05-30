@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$('#order-action-edit').click(function() {
+	$('#order-product-action-edit').click(function() {
 	var id_action = $('[name="actions"]:checked').attr('id_action');
 	
 		if (!id_action) return alert('Вы не выбрали операцию');
