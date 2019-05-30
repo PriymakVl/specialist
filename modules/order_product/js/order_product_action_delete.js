@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-	$('#order-action-delete').click(function() {
-	var id_action = $('[name="actions"]:checked').attr('id_action');
+	$('#order-product-action-delete').click(function() {
+		var id_action = $('[name="actions"]:checked').attr('id_action');
 	
 		if (!id_action) return alert('Вы не выбрали операцию');
 		var agree = confirm('Вы действительно хотите удалить указанную операцию?');

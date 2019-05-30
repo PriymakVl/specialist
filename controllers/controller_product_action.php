@@ -16,6 +16,13 @@ class Controller_Product_Action extends Controller_Base {
 		(new ProductAction)->addData()->setMessage('success', 'add');
 		$this->redirect('product?tab='.self::PRODUCT_TAB_ACTIONS.'&id_prod='.$this->get->id_prod);
 	}
+
+	public function action_copy()
+	{
+		if (!$this->session->id_prod_active) return $this->message->set('error', 'not-active', 'product')->redirectPrevious(); 
+		(new ProductAction)->copy()->setMessage('success', 'copy');
+		$this->redirect('product?tab='.self::PRODUCT_TAB_ACTIONS.'&id_prod='.$this->session->id_prod_active);
+	}
 	
 	public function action_delete()
 	{

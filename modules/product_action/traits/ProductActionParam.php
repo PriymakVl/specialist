@@ -16,5 +16,19 @@ trait ProductActionParam {
 		$params['name'] = trim($params['name']);
 		return $params;
 	}
+
+	public function getParamsForCopy($action)
+	{
+		$product = new Product($this->session->id_prod_active);
+		if (!$product) throw new Exception("Нет данных на активынй продукт");
+		$params['symbol'] = $product->symbol;
+		$params['name'] = $action->name;
+		$params['price'] = $action->price;
+		$params['time_prod'] = $action->time_prod;
+		$params['time_prepar'] = $action->time_prepar;
+		$params['number'] = $action->number;
+		$params['note'] = $action->note;
+		return $params;
+	}
 	 
 }

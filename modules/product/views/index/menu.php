@@ -11,11 +11,9 @@
         </li>
 		<br><hr>
 		
-		<? if ($product->type != Product::TYPE_DETAIL): ?>
-			<li>
-				<a href="/product/activate?id_prod=<?=$product->id?>">Сделать активным</a>
-			</li>
-		<? endif; ?>
+		<li>
+			<a href="/product/activate?id_prod=<?=$product->id?>">Сделать активным</a>
+		</li>
 		<li>
 			<a href="drawing/add?symbol=<?=$product->symbol?>&id_prod=<?=$product->id?>">Добавить чертеж</a>
 		</li>
@@ -26,12 +24,17 @@
             <a href="#" id_prod="<?=$product->id?>" id="add-to-order">Добавить в заказ</a>
         </li>
 		<li>
-            <a href="/product/copy?id_prod=<?=$product->id?>">Скопировать</a>
+            <a href="/product/copy?id_prod=<?=$product->id?>">Скопир. продукт</a>
         </li>
+        <br><hr>
+        
 		<!-- form add product actions -->
 		<? if ($product->type == Product::TYPE_DETAIL || $product->type == Product::TYPE_UNIT || $product->type == Product::TYPE_PRODUCT): ?>
 			<li>
 				<a href="/product_action/add?id_prod=<?=$product->id?>&symbol=<?=$product->symbol?>">Добавить операцию</a>
+			</li>
+			<li>
+				<a href="/product_action/copy?symbol=<?=$product->symbol?>">Скопир. операции</a>
 			</li>
 		<? endif; ?>
     </ul>
