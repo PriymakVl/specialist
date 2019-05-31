@@ -13,10 +13,10 @@
             <? if ($order->productsMain): ?>
 				<tr>
 					<th width="50">№</th>
-					<th width="150">Обозначение</th>
-					<th width="380">Наименование</th>
+					<th width="250">Обозначение</th>
+					<th width="300">Наименование</th>
 					<th width="80">Кол-во</th>
-					<th>Примечание</th>
+					<th>Приме-ние</th>
 					<th width="120">Состояние</th>
 				</tr>
                 <? foreach($order->productsMain as $product): ?>
