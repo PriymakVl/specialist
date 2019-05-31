@@ -1,21 +1,6 @@
 <?php
 
 trait OrderProductModelSelect {
-
-	// public function get($id_order)
-	// {
-		// $sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status';
-        // $params = ['id_order' => $id_order, 'status' => STATUS_ACTIVE];
-        // $items = self::perform($sql, $params)->fetchAll();
-        // return self::createArrayContent($items);
-	// }
-	
-	// public function getMainParentOrderModel($id_order)
-	// {
-		// $sql = 'SELECT * FROM `order_products` WHERE `id_order` = :id_order AND `status` = :status AND `id_parent` = :id_parent';
-        // $params = ['id_order' => $id_order, 'status' => STATUS_ACTIVE, 'id_parent' => self::ID_MAIN_PARENT];
-        // return self::perform($sql, $params)->fetchAll();
-	// }
 	
 	public function getByIdParentModel($id_parent = false)
 	{

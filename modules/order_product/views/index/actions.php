@@ -16,10 +16,11 @@
 				<th width="40">
 					<input type="checkbox" disabled>
 				</th>
+				<th width="40">№</th>
 				<th width="200">Наименование</th>
-				<th width="120">Подг. время</th>
-				<th width="120">Штуч. время</th>
-				<th width="120">Факт. время</th>
+				<th width="100">Подг. время</th>
+				<th width="100">Штуч. время</th>
+				<th width="100">Факт. время</th>
 				<th>Примечание</th>
 				<th width="100">Состояние</th>
 			</tr>
@@ -28,6 +29,9 @@
 					<td>
 						<input type="radio" name="actions" id_action="<?=$action->id?>">
 					</td>
+					<!-- number -->
+					<td><?=$action->number?></td>
+					<!-- name -->
 					<td><?=$action->name?></td>
 					<!-- time preparation -->
 					<td>

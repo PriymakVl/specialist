@@ -14,7 +14,7 @@ trait OrderActionModelSelect {
 	{
 		$id_prod = $id_prod ? $id_prod : $this->get->id_prod;
 		$params = ['id_prod' => $id_prod, 'status' => STATUS_ACTIVE];
-		$sql = 'SELECT * FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status ORDER BY state, rating DESC, date_exec';
+		$sql = 'SELECT * FROM `order_actions` WHERE `id_prod` = :id_prod AND `status` = :status ORDER BY state, rating DESC, date_exec, number';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
