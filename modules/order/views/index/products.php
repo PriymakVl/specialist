@@ -16,7 +16,7 @@
 					<th width="250">Обозначение</th>
 					<th width="300">Наименование</th>
 					<th width="80">Кол-во</th>
-					<th>Приме-ние</th>
+					<th>Прим-ние</th>
 					<th width="120">Состояние</th>
 				</tr>
                 <? foreach($order->productsMain as $product): ?>
