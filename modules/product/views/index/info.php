@@ -32,10 +32,10 @@
 					<td>3</td>
 					<td>Трудоемкость</td>
 					<td class="left">
-						<? if ($product->timeManufacturingUnit): ?>
-							<?=$product->timeManufacturingUnit?> мин.
-						<? elseif ($product->timeManufacturingItem): ?>
-							<?=$product->timeManufacturingItem?> мин.
+						<? if ($product->timePlanUnit): ?>
+							<?=$product->timePlanUnit?> мин.
+						<? elseif ($product->timePlanProduct): ?>
+							<?=$product->timePlanProduct?> мин.
 						<? else: ?>
 							<span class="red">Не указана</span>
 						<? endif; ?>

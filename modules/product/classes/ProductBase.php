@@ -2,25 +2,9 @@
 
 class ProductBase extends Model
 {
-	public $timeManufacturingUnit = 0; //трудоемкость узла
-	public $timeManufacturingItem = 0; //общее время на изготовление элемента(детали или сборки узла и т.д.)
-	public $timeManufacturingSpecification = 0; //трудоемкость деталей в спецификации
-	
-	//order
-    //public $order;
-    //public $orderQtyAll; //количество деталей в заказе
-	//public $orderQtyDone; //количество деталей сделанных по заказу на данный момент
-	//public $typeOrder;
-	
-	//work
-	//public $startWork;
-	//public $endWork;
-	//public $kindWork; //порезка, обработка, сборка
-	//public $stateWork; //выдана, обрабатывается, готова и др.
-	//public $stateWorkConvert;
-	//public $idWorker;
-	
-	//public $id_item; //для редактирования количества в заказе (контент)
+	public $timePlanUnit; //трудоемкость одного изделия с спецификацией
+	public $timePlanProduct; //трудоемкость без спецификации
+	public $timePlanSpecification; //трудоемкость деталей в спецификации
 
 	const TYPE_CATEGORY = 1;
     const TYPE_PRODUCT = 2;

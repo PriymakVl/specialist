@@ -20,10 +20,10 @@
 		</td>
 		<td><?=$detail->qty?></td>
 		<td>
-			<? if ($detail->timeManufacturingUnit): ?>
-				<?=$detail->timeManufacturingUnit?> мин.
-			<? elseif ($detail->timeManufacturingItem): ?>
-				<?=$detail->timeManufacturingItem?> мин.
+			<? if ($detail->timePlanUnit): ?>
+				<?=$detail->timePlanUnit?> мин.
+			<? elseif ($detail->timePlanProduct): ?>
+				<?=$detail->timePlanProduct?> мин.
 			<? else: ?>
 				<span class="red">Не указана</span>
 			<? endif; ?>
