@@ -26,16 +26,24 @@
                 <td class="left"><? if ($product->qty) echo $product->qty.' шт.'?></td>
             </tr>
 			
-			<!-- time manufacturing -->
-			<? if ($product->type != Product::TYPE_CATEGORY): ?>
+			<!-- time plan -->
+			<? if ($product->type == Product::TYPE_PRODUCT || $product->type == Product::TYPE_UNIT || $product->type == Product::TYPE_DETAIL): ?>
 				<tr>
 					<td>3</td>
-					<td>Трудоемкость</td>
+					<td>Трудоемкость одного</td>
 					<td class="left">
-						<? if ($product->timePlanUnit): ?>
-							<?=$product->timePlanUnit?> мин.
-						<? elseif ($product->timePlanProduct): ?>
-							<?=$product->timePlanProduct?> мин.
+						<? if ($product->timePlanUnitOne): ?>
+							<? if ($product->timePlanUnitDivision): ?>
+								<? printf('%uчас. %uмин.', $product->timePlanUnitOneDivision['hour'], $product->timePlanUnitOneDivision['minutes']); ?>
+							<? else: ?>
+								<? printf('%uмин.', $product->timePlanUnitOne); ?>
+							<? endif; ?>
+						<? elseif ($product->timePlanDetailOne): ?>
+							<? if ($product->timePlanDetailOneDivision): ?>
+								<? printf('%uчас. %uмин.', $product->timePlanDetailOneDivision['hour'], $product->timePlanDetailOneDivision['minutes']); ?>
+							<? else: ?>
+								<? printf('%uмин.', $product->timePlanDetailOne); ?>
+							<? endif; ?>
 						<? else: ?>
 							<span class="red">Не указана</span>
 						<? endif; ?>

@@ -1,8 +1,8 @@
 <?php
 
-trait ProductTimeProduct {
+trait ProductTimeDetail {
 
-	public function calculateTimePlanProduct($qty = true)
+	public function calculateTimePlanDetail($qty = true)
 	{
 		$time_prod = $this->calculateTimePlanProduction();
 		if ($qty) $time_prod = $time_prod * $this->qty;

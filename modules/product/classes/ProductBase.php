@@ -2,8 +2,16 @@
 
 class ProductBase extends Model
 {
-	public $timePlanUnit; //трудоемкость одного изделия с спецификацией
-	public $timePlanProduct; //трудоемкость без спецификации
+	public $timePlanUnitOne; //трудоемкость одного изделия с спецификацией
+	public $timePlanUnitAll; //трудоемкость всех изделий с спецификацией
+	public $timePlanUnitOneDivision; //в часах
+	public $timePlanUnitAllDivision; //в часах
+
+	public $timePlanDetailOne; //трудоемкость без спецификации
+	public $timePlanDetailAll; //трудоемкость без спецификации
+	public $timePlanDetailOneDivision; //в часах
+	public $timePlanDetailAllDivision; //в часах
+
 	public $timePlanSpecification; //трудоемкость деталей в спецификации
 
 	const TYPE_CATEGORY = 1;

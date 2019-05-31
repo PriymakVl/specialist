@@ -19,15 +19,15 @@
 			<a href="/product?id_prod=<?=$unit->id?>"><?=$unit->name?></a>
 		</td>
 		<td><?=$unit->qty?></td>
-		<td>
-			<? if ($unit->timePlanUnit): ?>
-				<?=$unit->timePlanUnit?> мин.
-			<? elseif ($unit->timePlanProduct): ?>
-				<?=$unit->timePlanProduct?> мин.
-			<? else: ?>
-				<span class="red">Не указана</span>
-			<? endif; ?>
-		</td>
+		<!-- time plan -->
+		<?php
+			$time_plan_unit = $unit->timePlanUnitAll ? $unit->timePlanUnitAll : $unit->timePlanUnitOne;
+			$time_plan_unit_division = $unit->timePlanUnitAllDivision ? $unit->timePlanUnitAllDivision : $unit->timePlanUnitOneDivision;
+			$time_plan_detail = $unit->timePlanDetailAll ? $unit->timePlanDetailAll : $unit->timePlanDetailOne;
+			$time_plan_detail_division = $unit->timePlanDetailAllDivision ? $unit->timePlanDetailAllDivision : $unit->timePlanDetailOneDivision;
+			include 'time_plan.php';
+		?>
+		<!-- note -->
 		<td><?=$unit->note?></td>
 	</tr>
 <? endforeach; ?>
