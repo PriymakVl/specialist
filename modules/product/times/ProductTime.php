@@ -8,7 +8,7 @@ trait ProductTime {
 	{
 		$this->setTimePlanDetail();
 		$this->timePlanSpecification = $this->calculateTimePlanSpecification();
-		if ($this->timePlanSpecification) $this->setTimeUnit();
+		if ($this->timePlanSpecification) $this->setTimePlanUnit();
 		return $this;
 	}
 
@@ -30,14 +30,14 @@ trait ProductTime {
 	
 	private function calculateTimePlanSpecification()
 	{
-		$timePlanSpecification = 0;
+		$time_plan_specification = 0;
 		$this->getSpecificationAll();
 		if (!$this->specificationAll) return;
 		foreach ($this->specificationAll as $product) {
-			$product->getActions()->calculateTimePlanDetail();
-			$timePlanSpecification += $product->timePlanDetailAll ? $product->timePlanDetailAll : $product->timePlanDetailOne;
+			$time_plan_detail = $product->getActions()->calculateTimePlanDetail();
+			$time_plan_specification += $time_plan_detail;
 		}
-		return $timePlanSpecification;
+		return $time_plan_specification;
 	}
 
 }

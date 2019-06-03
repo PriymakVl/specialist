@@ -4,6 +4,12 @@ trait OrderProductParam {
 	
 	public function addDataModelParams($product, $id_parent)
 	{
+		if ($id_parent == self::ID_MAIN_ORDER) $qty = $this->get->qty;
+		else {
+			$parent = (new OrderProduct)->getData($id_parent);
+			$qty = $product->qty * $parent->qty;
+		}
+
 		$id_order = $this->get->id_order ? $this->get->id_order : $this->session->id_order_active;
 		$order = new Order($id_order);
 		$params['name'] = $product->name;
@@ -12,7 +18,7 @@ trait OrderProductParam {
 		$params['type'] = $product->type;
 		$params['note'] = $product->note ? $product->note : '';
 		$params['id_parent'] = $id_parent;
-		$params['qty'] = $product->qty * $this->get->qty;
+		$params['qty'] = $qty;
 		$params['state'] = self::STATE_WAITING;
 		
 		$params['id_order'] = $order->id;

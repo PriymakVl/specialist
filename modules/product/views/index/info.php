@@ -33,14 +33,14 @@
 					<td>Трудоемкость одного</td>
 					<td class="left">
 						<? if ($product->timePlanUnitOne): ?>
-							<? if ($product->timePlanUnitDivision): ?>
-								<? printf('%uчас. %uмин.', $product->timePlanUnitOneDivision['hour'], $product->timePlanUnitOneDivision['minutes']); ?>
+							<? if ($product->timePlanUnitOneDivision): ?>
+								<? printf('%uчас. %uмин.', $product->timePlanUnitOneDivision->hours, $product->timePlanUnitOneDivision->minutes); ?>
 							<? else: ?>
 								<? printf('%uмин.', $product->timePlanUnitOne); ?>
 							<? endif; ?>
 						<? elseif ($product->timePlanDetailOne): ?>
 							<? if ($product->timePlanDetailOneDivision): ?>
-								<? printf('%uчас. %uмин.', $product->timePlanDetailOneDivision['hour'], $product->timePlanDetailOneDivision['minutes']); ?>
+								<? printf('%uчас. %uмин.', $product->timePlanDetailOneDivision->hours, $product->timePlanDetailOneDivision->minutes); ?>
 							<? else: ?>
 								<? printf('%uмин.', $product->timePlanDetailOne); ?>
 							<? endif; ?>

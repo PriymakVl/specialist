@@ -23,8 +23,12 @@ class Controller_Order_Product extends Controller_Base {
 	public function action_add_base()
 	{
 		if (!$this->session->id_order_active) return $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
-		$product = (new OrderProduct)->addProductBase()->addSpecification()->setMessage('success', 'add');
-		$this->redirect('order_action/add_base?id_prod='.$product->id);
+		$product = new Product($this->get->id_prod);
+		if ($product->type == Product::TYPE_DETAIL || $product->type == Product::TYPE_UNIT || $product->type == Product::TYPE_PRODUCT) {
+			$order_product = (new OrderProduct)->addProductBase()->addSpecification()->setMessage('success', 'add');
+		}
+		else return $this->setMessage('error', 'type_error', 'product')->redirectPrevious();
+		$this->redirect('order_action/add_base?id_prod='.$order_product->id);
 	}
 	
 	public function action_add_form()
