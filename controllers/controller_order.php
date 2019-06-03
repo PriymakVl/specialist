@@ -29,8 +29,9 @@ class Controller_Order extends Controller_Base {
 		if (!$this->post->save) return $this->setTitle('Добавить заказ')->render('add/main');
 		$item = (new Order)->getBySymbol();
         if ($item) return $this->setMessage('error', 'exist')->redirect('order/index?id_order='.$item->id);
-		$order = (new Order)->addData()->setActive();
-		$this->setMessage('success', 'add')->redirect('order_position/add?id_order='.$order->id);
+		$order = (new Order)->addData()->setActive()->setMessage('success', 'add');
+		if ($this->post->type == Order::TYPE_CYLINDER) $this->redirect('order_position/add?id_order='.$order->id);
+		else $this->redirect('order?id_order='.$order->id);
     }
 	
 	public function action_edit()

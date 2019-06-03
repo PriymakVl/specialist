@@ -1,6 +1,13 @@
 <?php
 
 trait OrderProductModelSelect {
+
+	public function getAllBySymbolModel($symbol)
+	{
+		$sql = 'SELECT * FROM `order_products` WHERE `symbol` = :symbol AND `status` = :status';
+        $params = ['symbol' => $symbol, 'status' => STATUS_ACTIVE];
+        return self::perform($sql, $params)->fetchAll();
+	}
 	
 	public function getByIdParentModel($id_parent = false)
 	{

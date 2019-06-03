@@ -13,8 +13,9 @@ class Controller_Product extends Controller_Base {
     public function action_index()
 	{
 		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->getSpecificationChildren();
-		$product->getParent()->convertProperties()->getDrawings()->getActions()->countTimeManufacturing();
-		//->getStatistics()
+		$product->getParent()->convertProperties()->getDrawings()->getActions()->calculateTimePlan();
+		// debug($product->timePlanDetailOne, false);
+		if ($product->symbol) $product->getOrderProducts();
 		$this->render('index/main', compact('product'));
 	}
 
@@ -39,6 +40,13 @@ class Controller_Product extends Controller_Base {
 	{
 		if (!$this->session->id_prod_active) return $this->message->set('error', 'copy-not-parent')->redirectPrevious(); 
 		(new Product)->setData($this->get->id_prod)->copy()->setMessage('success', 'copy');
+		$this->redirect('product?id_prod='.$this->session->id_prod_active);
+	}
+
+	public function action_move()
+	{
+		if (!$this->session->id_prod_active) return $this->message->set('error', 'copy-not-parent')->redirectPrevious(); 
+		(new Product)->setData($this->get->id_prod)->move()->setMessage('success', 'move');
 		$this->redirect('product?id_prod='.$this->session->id_prod_active);
 	}
 	

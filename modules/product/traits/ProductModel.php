@@ -49,5 +49,12 @@ trait ProductModel  {
         $params = ['symbol' => trim($this->post->symbol), 'status' => STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
     }
+
+    public function updateIdParenModel($id_parent)
+    {
+    	$params = ['id_parent' => $id_parent, 'id' => $this->id];
+		$sql = 'UPDATE `products` SET `id_parent` = :id_parent WHERE `id` = :id';
+		return self::update($sql, $params);
+    }
 	
 }

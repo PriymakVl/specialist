@@ -46,6 +46,7 @@ trait OrderProductSpecification {
 	public function addSpecificationRecursive($specification, $id_parent)
 	{
 		foreach ($specification as $product) {
+			if ($product->type == Product::TYPE_CATEGORY || $product->type == Product::TYPE_STANDARD || $product->type == Product::TYPE_OTHER) continue;
 			$product->getSpecification();
 			$params = $this->getParamsFromProduct($product, $id_parent);
 			$id_sub_parent = $this->addDataModel($params);

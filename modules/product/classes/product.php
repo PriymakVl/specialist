@@ -2,7 +2,7 @@
 
 class Product extends ProductBase {
 	
-	use ProductTotal, ProductConvert, ProductSpecification, ProductTimeTotal, ProductExtract;
+	use ProductTotal, ProductConvert, ProductSpecification, ProductTime, ProductExtract;
 	
     public function __construct($id_prod = false)
     {
@@ -29,13 +29,12 @@ class Product extends ProductBase {
 		return $this;
 	}
 	
-	public function getStatistics()
+	public function getOrderProducts()
 	{
-		$items = OrderAction::getAllOrdersByIdProduct($this->id);
-		if (empty($items)) return $this;
-		for ($i = 0; $i < count($items); $i++) {
-				$this->statistics[$i]['order'] = new Order($items[$i]->id_order);
-				$this->statistics[$i]['time'] = Statistics::countTimeFactMadeProductInOrder($items[$i]->id_order, $this->id);
+		$order_products = (new OrderProduct)->getAllBySymbolModel($this->symbol);
+		if (!$order_products) return $this;
+		foreach ($order_products as $product) {
+			$this->orderProducts[] = (new OrderProduct)->setData($product)->getOrder()->calculateTimeFact()->convertState();
 		}
 		return $this;
 	}
@@ -63,6 +62,12 @@ class Product extends ProductBase {
 	public function copy()
 	{
 		$this->CopyTotal();
+		return $this;
+	}
+
+	public function move()
+	{
+		$this->updateIdParenModel($this->session->id_prod_active);
 		return $this;
 	}
 	

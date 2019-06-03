@@ -21,7 +21,8 @@ class OrderProductBase extends Model {
 	public $specificationGroup;
 	public $specificationAll; //on all levels
 	
-	public $dateReady; 
+	public $dateReady;
+	public $timeFact;
 	
 	public function __construct($id = false)
 	{

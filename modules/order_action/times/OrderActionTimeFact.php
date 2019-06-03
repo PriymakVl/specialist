@@ -19,6 +19,18 @@ trait OrderActionTimeFact {
 		return $time_fact;
 	}
 	
+	public function calculateTimeFactProduct($id_prod)
+	{
+		$product_time = 0;
+		$actions = $this->getByIdProductModel($id_prod);
+		if (!$actions) return $product_time;
+		foreach ($actions as $action) {
+			$action = (new self)->setData($action)->getStates();
+			$product_time += $this->calculateTimeFact($action);
+		}
+		return $product_time;
+	}
+	
 
 	
 

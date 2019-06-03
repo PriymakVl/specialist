@@ -10,14 +10,21 @@
 			<tr>
 				<th width="40">№</th>
 				<th width="200">Заказ</th>
+				<th width="100">Кол-во</th>
+				<th width="150">Состояние</th>
 				<th width="200">Фактическое время</th>
 				<th>Примечание</th>
 			</tr>
-			<? foreach($product->statistics as $item): ?>
+			<? foreach($product->orderProducts as $item): ?>
 				<tr>
 					<td><?=$number?></td>
-					<td><?=$item['order']->symbol?></td>
-					<td><?=$item['time'].'мин.'?></td>
+					<td>
+						<a href="/order?id_order=<?=$item->order->id?>"><?=$item->order->symbol?></a>
+					</td>
+					<td><?=$item->qty, 'шт.'?></td>
+					<td style="background:<?=$item->stateBg?>"><?=$item->stateString?></td>
+					<td>
+						<?=$item->timeFact.'мин.'?></td>
 					<td></td>
 				</tr>
 				<? $number++; ?>

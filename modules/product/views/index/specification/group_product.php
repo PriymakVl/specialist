@@ -19,15 +19,15 @@
 			<a href="/product?id_prod=<?=$prod_specif->id?>&tab=<?=Controller_Base::PRODUCT_TAB_DRAWINGS?>"><?=$prod_specif->name?></a>
 		</td>
 		<td><?=$prod_specif->qty?></td>
-		<td>
-			<? if ($prod_specif->timeManufacturingUnit): ?>
-				<?=$prod_specif->timeManufacturingUnit?> мин.
-			<? elseif ($prod_specif->timeManufacturingItem): ?>
-				<?=$prod_specif->timeManufacturingItem?> мин.
-			<? else: ?>
-				<span class="red">Не указана</span>
-			<? endif; ?>
-		</td>
+		<!-- time plan -->
+		<?php
+			$time_plan_unit = $prod_specif->timePlanUnitAll ? $prod_specif->timePlanUnitAll : $prod_specif->timePlanUnitOne;
+			$time_plan_unit_division = $prod_specif->timePlanUnitAllDivision ? $prod_specif->timePlanUnitAllDivision : $prod_specif->timePlanUnitOneDivision;
+			$time_plan_detail = $prod_specif->timePlanDetailAll ? $prod_specif->timePlanDetailAll : $prod_specif->timePlanDetailOne;
+			$time_plan_detail_division = $prod_specif->timePlanDetailAllDivision ? $prod_specif->timePlanDetailAllDivision : $prod_specif->timePlanDetailOneDivision;
+			include 'time_plan.php';
+		?>
+		<!-- note -->
 		<td><?=$prod_specif->note?></td>
 	</tr>
 <? endforeach; ?>

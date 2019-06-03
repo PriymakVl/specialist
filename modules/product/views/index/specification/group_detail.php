@@ -6,6 +6,7 @@
 		<td class="<?=($this->session->id_prod_active == $detail->id)?'bg-green':''?>">
 			<?=$detail->number?>
 		</td>
+		<!-- product symmbol -->
 		<td>
 			<? if (!$detail->drawings): ?>
 				<?=$detail->symbol?>
@@ -15,20 +16,21 @@
 				<a href="/product?id_prod=<?=$detail->id?>&tab=<?=Controller_Base::PRODUCT_TAB_DRAWINGS?>"><?=$detail->symbol?></a>
 			<? endif; ?>
 		</td>
+		<!-- product name -->
 		<td>
 			<a href="/product?id_prod=<?=$detail->id?>"><?=$detail->name?></a>
 		</td>
+		<!-- quntity -->
 		<td><?=$detail->qty?></td>
-		<td>
-			<?//debug($detail->timeManufacturingUnit);?>
-			<? if ($detail->timeManufacturingUnit): ?>
-				<?=$detail->timeManufacturingUnit?> мин.
-			<? elseif ($detail->timeManufacturingItem): ?>
-				<?=$detail->timeManufacturingItem?> мин.
-			<? else: ?>
-				<span class="red">Не указана</span>
-			<? endif; ?>
-		</td>
+		<!-- time plan -->
+		<?php
+			$time_plan_unit = $detail->timePlanUnitAll ? $detail->timePlanUnitAll : $detail->timePlanUnitOne;
+			$time_plan_unit_division = $detail->timePlanUnitAllDivision ? $detail->timePlanUnitAllDivision : $detail->timePlanUnitOneDivision;
+			$time_plan_detail = $detail->timePlanDetailAll ? $detail->timePlanDetailAll : $detail->timePlanDetailOne;
+			$time_plan_detail_division = $detail->timePlanDetailAllDivision ? $detail->timePlanDetailAllDivision : $detail->timePlanDetailOneDivision;
+			include 'time_plan.php';
+		?>
+		<!-- note -->
 		<td><?=$detail->note?></td>
 	</tr>
 <? endforeach; ?>

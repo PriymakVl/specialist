@@ -8,9 +8,9 @@ trait ProductActionModel {
         return self::perform($sql, ['symbol' => $symbol, 'status' => STATUS_ACTIVE])->fetchAll();
     }
 	
-	public function addDataModel()
+	public function addDataModel($params = false)
 	{
-		$params = $this->addDataModelParams();
+		$params = $params ? $params : $this->addDataModelParams();
         $sql = 'INSERT INTO `product_actions` (symbol, name, price, time_prod, time_prepar, number, note) 
 			VALUES (:symbol, :name, :price, :time_prod, :time_prepar, :number, :note)';
         return self::insert($sql, $params); 
