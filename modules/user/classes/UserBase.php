@@ -33,7 +33,6 @@ class UserBase extends Model
 		$this->options = UserOptions::get($this->id);
 		if (isset($this->options->default_product_actions)) $this->setDefaultProductActions();
 		if (isset($this->options->default_type_order)) $this->defaultTypeOrder = $this->options->default_type_order; 
-		if (isset($this->options->default_state_order)) $this->defaultStateOrder = $this->options->default_state_order; 
 		return $this;
 	 }
 	 

@@ -1,7 +1,9 @@
 <?php
 	$default_actions = Action::getAll('actions');
 	$orders = (new Order)->getForTerminal();
+	$type_order = $this->get->type_order ? $this->get->type_order : $worker->defaultTypeOrder;
 ?>
+
 <div id="filters-wrp">
 	<!-- filter actions -->
 	<div id="filter-actions-wrp">
@@ -16,13 +18,15 @@
 			</select>
 		</form>
 	</div>
+
 	<!-- filter type order -->
 	<div id="filter-type-order-wrp">
 		<select id="filter-type-order">
 			<option value="<?=Order::TYPE_CYLINDER?>">Пневмо</option>
-			<option value="<?=Order::TYPE_CAR_NUMBER?>" <? if ($this->get->type_order == Order::TYPE_CAR_NUMBER) echo 'selected';?>>Пресса и накатки</option>
+			<option value="<?=Order::TYPE_CAR_NUMBER?>" <? if ($type_order == Order::TYPE_CAR_NUMBER) echo 'selected';?>>Пресса и накатки</option>
 		</select>
 	</div>
+
 	<!-- filter orders -->
 	<div id="filter-orders-wrp">
 		<select id="filter-orders">

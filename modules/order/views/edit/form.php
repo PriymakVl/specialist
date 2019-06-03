@@ -13,8 +13,8 @@
             <div id="form-order-type-wrp">
                 <label>Тип заказа:</label>
                 <select name="type">
-                    <option value="<?=Order::TYPE_CYLINDER?>" <? if ($order->symbol == Order::TYPE_CYLINDER) echo 'selected';?>>Пневмоцилиндры</option>
-                    <option value="<?=Order::TYPE_CAR_NUMBER?>" <? if ($order->symbol == Order::TYPE_CAR_NUMBER) echo 'selected';?>>Пресса и накатки</option>
+                    <option value="<?=Order::TYPE_CYLINDER?>" <? if ($order->type == Order::TYPE_CYLINDER) echo 'selected';?>>Пневмоцилиндры</option>
+                    <option value="<?=Order::TYPE_CAR_NUMBER?>" <? if ($order->type == Order::TYPE_CAR_NUMBER) echo 'selected';?>>Пресса и накатки</option>
                 </select>
             </div>
 

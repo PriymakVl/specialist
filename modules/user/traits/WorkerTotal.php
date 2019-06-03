@@ -20,21 +20,21 @@ trait WorkerTotal  {
 		return  $worker;
 	}
 	
-	private function setMadeStatistics($worker)
-	{
-		$params = ParamOrderAction::madeWorker($worker->id);
-		$actions = OrderAction::madeWorker($params);
-		$worker->timeMade = Statistics::countTimeMadeWorker($actions);
-	}
+	// private function setMadeStatistics($worker)
+	// {
+	// 	$params = ParamOrderAction::madeWorker($worker->id);
+	// 	$actions = OrderAction::madeWorker($params);
+	// 	$worker->timeMade = Statistics::countTimeMadeWorker($actions);
+	// }
 	
-	public function setDefaultActions($login)
-	{
-		switch ($login) {
-			case 'Logvinov': return [self::ACTION_CHPU, self::ACTION_UNIVER];
-			case 'Kovbasa': return [self::ACTION_FREZ, self::ACTION_ASSEMB];
-			default: exit('Не указаны операции по обработке по умолчанию');
-		}
-	}
+	// public function setDefaultActions($login)
+	// {
+	// 	switch ($login) {
+	// 		case 'Logvinov': return [self::ACTION_CHPU, self::ACTION_UNIVER];
+	// 		case 'Kovbasa': return [self::ACTION_FREZ, self::ACTION_ASSEMB];
+	// 		default: exit('Не указаны операции по обработке по умолчанию');
+	// 	}
+	// }
 	
 	private function countLoadTimePlan($actions)
 	{
