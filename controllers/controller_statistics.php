@@ -18,7 +18,6 @@ class Controller_Statistics extends Controller_Base {
 	public function action_worker()
 	{
 		$worker = (new Worker)->setData($this->get->id_worker)->setProperties()->getActionsMade()->getTimeFact()->calculateCost();
-		// debug	Prop($worker->actionsFact, 'name');
 		$this->render('worker/main', compact('worker'));
 	}
 	
@@ -29,6 +28,12 @@ class Controller_Statistics extends Controller_Base {
 		$excel = new StatisticsWorkerExcel($worker);
 		$excel->period = (object) ['end' => $this->get->period_end, 'start' => $this->get->period_start];
 		return $excel->setActionName($this->get->action)->bildSheet()->uploadFile('statistics.xls');
+	}
+
+	public function action_product()
+	{
+		$product = (new OrderProduct)->setData($this->get->id_order_prod)->getOrder()->getActions()->calculateTimeFactActions();
+		$this->render('product/main', compact('product'));
 	}
 	
 }

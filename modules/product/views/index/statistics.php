@@ -24,8 +24,9 @@
 					<td><?=$item->qty, 'шт.'?></td>
 					<td style="background:<?=$item->stateBg?>"><?=$item->stateString?></td>
 					<td>
-						<?=$item->timeFact.'мин.'?></td>
-					<td></td>
+						<a href="/statistics/product?id_order_prod=<?=$item->id?>&id_prod=<?=$product->id?>"><?=$item->timeFact.'мин.'?></a>
+					</td>
+					<td><?=$item->note?></td>
 				</tr>
 				<? $number++; ?>
 			<? endforeach; ?>
