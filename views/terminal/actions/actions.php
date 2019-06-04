@@ -11,11 +11,17 @@
 				 action_name="<?=$action->name?>"
 				 note="<?=$action->note?>"
 			>
-				 
+				<!-- order symbol --> 
                 <span class="info-order">№<?=$number?> заказ: <?=$action->order ? $action->order->symbol : ''?></span>
-                <span class="info-product"><?=$action->product ? $action->product->symbol : ''?><br>
+                <!-- product name and symbol -->
+                <span class="info-product">
+                    <?=$action->product ? $action->product->symbol : ''?>
+                    <br>
                     <?=$action->product ? $action->product->name : ''?> (<?=$action->qty?>шт.)
                 </span>
+                <!-- note -->
+                <span class="action-note"><?=$action->note?></span>
+                <!-- action name -->
                 <span class="info-state"><?=$action->name?></span>
             </div>
             <? $number++; ?>
