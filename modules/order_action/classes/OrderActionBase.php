@@ -19,8 +19,10 @@ class OrderActionBase extends Model {
 	public $dateReady;
 	public $timePlan; //time preparation + time production
 	public $timeFact; //summa of states action
+	public $timeAverage; //среднее время для одинаковых операций продукта изготовленого в разных заказах
 	public $timeFactDivision; // time fact in hour
 	public $timePlanDivision; // time plna in hour
+	public $timeAverageDivision;
 	
 	const BG_TERMINAL_BOX_PLAN = 'yellow';
 	const BG_TERMINAL_BOX_PROGRESS = 'green';

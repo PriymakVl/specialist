@@ -17,6 +17,7 @@ trait OrderActionTimePlan {
 		if ($action->time_prod) $time_plan = ($action->time_prod * $qty) + $time_prepar;
 		return $time_plan;
 	}
+
 	
 
 }

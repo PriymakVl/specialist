@@ -12,7 +12,8 @@ trait OrderActionGet {
 	{
 		$id_prod = $id_prod ? $id_prod : $this->get->id_prod;
 		$items = $this->getByIdProductModel($id_prod);
-		if ($items) return ObjectHelper::createArray($items, 'OrderAction', ['setData', 'convertState']);
+		$methods = ['setData', 'convertState', 'getStates', 'setTimePlan', 'setTimeFact'];
+		if ($items) return ObjectHelper::createArray($items, 'OrderAction', $methods);
 	}
 	
 	public function getForPlan()
