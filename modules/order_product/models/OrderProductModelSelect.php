@@ -4,7 +4,7 @@ trait OrderProductModelSelect {
 
 	public function getAllBySymbolModel($symbol)
 	{
-		$sql = 'SELECT * FROM `order_products` WHERE `symbol` = :symbol AND `status` = :status';
+		$sql = 'SELECT * FROM `order_products` WHERE `symbol` = :symbol AND `status` = :status ORDER BY `id` DESC';
         $params = ['symbol' => $symbol, 'status' => STATUS_ACTIVE];
         return self::perform($sql, $params)->fetchAll();
 	}

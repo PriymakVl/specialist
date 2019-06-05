@@ -14,7 +14,6 @@ class Controller_Product extends Controller_Base {
 	{
 		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->getSpecificationChildren();
 		$product->getParent()->convertProperties()->getDrawings()->getActions()->calculateTimePlan();
-		// debug($product->timePlanDetailOne, false);
 		if ($product->symbol) $product->getOrderProducts();
 		$this->render('index/main', compact('product'));
 	}

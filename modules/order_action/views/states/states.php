@@ -31,7 +31,13 @@
 						<span>Меньше минуты</span>
 					<? endif; ?>
 				</td>
-				<td><?=$state->user->title?></td>
+				<td>
+					<? if ($state->user): ?>
+						<?=$state->user->title?>
+					<? else: ?>
+						<span class="red">Не указан</span>
+					<? endif; ?>
+				</td>
             </tr>
 			<? $number++; ?>
         <? endforeach; ?>

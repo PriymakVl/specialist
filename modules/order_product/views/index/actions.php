@@ -17,9 +17,8 @@
 					<input type="checkbox" disabled>
 				</th>
 				<th width="200">Наименование</th>
-				<th width="120">Подг. время</th>
-				<th width="120">Штуч. время</th>
-				<th width="120">Факт. время</th>
+				<th width="150">План. время</th>
+				<th width="150">Факт. время</th>
 				<th>Примечание</th>
 				<th width="100">Состояние</th>
 			</tr>
@@ -29,33 +28,41 @@
 						<input type="radio" name="actions" id_action="<?=$action->id?>">
 					</td>
 					<td><?=$action->name?></td>
-					<!-- time preparation -->
+					<!-- time plan -->
 					<td>
-						<? if ($action->time_prepar): ?>
-							<?=$action->time_prepar?> мин.
-						<? else: ?>
-							<span class="red">Нет</span>
-						<? endif; ?>
-					</td>
-					<!-- time production -->
-					<td>
-						<? if ($action->time_prod): ?>
-							<?=$action->time_prod?> мин.
+						<? if ($action->timePlan): ?>
+						<? if ($action->timePlanDivision): ?>
+								<? printf("%uчас. %uмин.", $action->timePlanDivision->hours, $action->timePlanDivision->minutes); ?>
+							<? else: ?>
+								<? printf('%uмин.', $action->timePlan); ?>
+							<? endif; ?>
 						<? else: ?>
 							<span class="red">Нет</span>
 						<? endif; ?>
 					</td>
 					<!-- fact time -->
-					<td><span class="red">Нет</span></td>
+					<!-- determine color time fact -->
+					<? $color = ($action->timePlan && $action->timeFact && $action->timeFact > $action->timePlan) ? 'red' : 'green'; ?>
+					<td>
+						<? if ($action->timeFact && $action->states): ?>
+							<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan" style="color:<?=$color?>">
+								<? if ($action->timeFactDivision): ?>
+									<? printf("%uчас. %uмин.", $action->timeFactDivision->hours, $action->timeFactDivision->minutes); ?>
+								<? else: ?>
+									<? printf('%uмин.', $action->timeFact); ?>
+								<? endif; ?>
+							</a>
+						<? elseif ($action->states): ?>
+							<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan">~ 1 мин.</a>
+						<? else: ?>
+							<span class="red">Нет</span>
+						<? endif; ?>
+					</td>
 					<!-- note -->
 					<td><?=$action->note?></td>
 					<!-- state -->
 					<td style="background:<?=$action->stateBg?>">
-						<? if (!$action->states): ?>
-							<?=$action->stateString?>
-						<? else: ?>
-							<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan"><?=$action->stateString?></a>
-						<? endif; ?>
+						<?=$action->stateString?>
 					</td>
 				</tr>
 			<? endforeach; ?>
