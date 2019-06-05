@@ -32,7 +32,7 @@ class Controller_Statistics extends Controller_Base {
 
 	public function action_product()
 	{
-		$product = (new OrderProduct)->setData($this->get->id_order_prod)->getOrder()->getActions()->calculateTimeFactActions();
+		$product = (new OrderProduct)->setData($this->get->id_order_prod)->getOrder()->getActions()->calculateTimeActions();
 		$this->render('product/main', compact('product'));
 	}
 	

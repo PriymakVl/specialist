@@ -7,8 +7,9 @@
         <th width="50">№</th>
 		<th width="220">Операция</th>
 		<th width="70">Кол-во</th>
-		<th width="150">Труд. планов</th>
-		<th width="150">Труд. фактич</th>
+		<th width="120">Время план.</th>
+		<th width="120">Время факт.</th>
+		<th width="120">Время сред.</th>
 		<th>Примечание</th>
     </tr>
     <? if ($product->actions): ?>
@@ -20,7 +21,7 @@
 					<?=$action->name?>
 				</td>
 				<!-- action quantity -->
-				<td><?=$action->qty?></td>
+				<td><?printf('%uшт.',$action->qty)?></td>
 				<!-- time plan -->
 				<td>
 					<? if ($action->timePlan): ?>
@@ -47,6 +48,17 @@
 						</a>
 					<? elseif ($action->states): ?>
 						<a href="/order_action/state_list?id_action=<?=$action->id?>&type=plan">~ 1 мин.</a>
+					<? else: ?>
+						<span class="red">Нет</span>
+					<? endif; ?>
+				</td>
+				<td>
+					<? if ($action->timeAverage): ?>
+						<? if ($action->timeAverageDivision): ?>
+								<? printf("%uчас. %uмин.", $action->timeAverageDivision->hours, $action->timeAverageDivision->minutes); ?>
+							<? else: ?>
+								<? printf('%uмин.', $action->timeAverage); ?>
+							<? endif; ?>
 					<? else: ?>
 						<span class="red">Нет</span>
 					<? endif; ?>

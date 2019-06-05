@@ -21,10 +21,18 @@
 					<td>
 						<a href="/order?id_order=<?=$item->order->id?>"><?=$item->order->symbol?></a>
 					</td>
-					<td><?=$item->qty, 'шт.'?></td>
+					<td><?printf('%uшт.', $item->qty ? $item->qty : 1);?></td>
 					<td style="background:<?=$item->stateBg?>"><?=$item->stateString?></td>
 					<td>
-						<a href="/statistics/product?id_order_prod=<?=$item->id?>&id_prod=<?=$product->id?>"><?=$item->timeFact.'мин.'?></a>
+						<a href="/statistics/product?id_order_prod=<?=$item->id?>&id_prod=<?=$product->id?>">
+							<? if ($item->timeFactDivision): ?>
+								<?printf('%uчас. %uмин.', $item->timeFactDivision->hours, $item->timeFactDivision->minutes)?>
+							<? elseif ($item->timeFact): ?>
+								<?printf('%uмин', $item->timeFact)?>
+							<? else: ?>
+								<span class="red">Нет</span>	
+							<? endif; ?>
+						</a>
 					</td>
 					<td><?=$item->note?></td>
 				</tr>

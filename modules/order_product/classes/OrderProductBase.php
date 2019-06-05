@@ -23,6 +23,7 @@ class OrderProductBase extends Model {
 	
 	public $dateReady;
 	public $timeFact;
+	public $timeFactDivision;
 	public $timePlan;
 	
 	public function __construct($id = false)

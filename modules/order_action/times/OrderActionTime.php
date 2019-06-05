@@ -2,7 +2,7 @@
 
 trait OrderActionTime {
 
-	use OrderActionTimePlan, OrderActionTimeFact;
+	use OrderActionTimePlan, OrderActionTimeFact, OrderActionTimeAverage;
 	
 	private function setDateReady($actions)
 	{
