@@ -10,13 +10,5 @@ trait OrderProductSelectItems {
 		}
 		if (isset($select)) return $select;
 	}
-	
-	public function selectItemsNotStateEnded($items)
-	{
-		if (!$items) return;
-		foreach ($items as $item) {
-			if ($item->state != self::STATE_ENDED) $select[] = $item;
-		}
-		if (isset($select)) return $select;
-	}
+
 }

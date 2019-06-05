@@ -19,15 +19,12 @@ class Controller_Plan extends Controller_Base {
 	public function action_products()
 	{
 		$products = (new OrderProduct)->getForPlan();
-		// debugProp($products, 'name');
-		 // $products = array_slice($products, 0, 150);
 		$this->render('products/main', compact('products'));
 	}
 	
 	public function action_actions()
 	{
 		$actions = (new OrderAction)->getForPlan();
-		// $actions = array_slice($actions, 0, 3);
 		$this->render('actions/main', compact('actions'));
 	}
 	

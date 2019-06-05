@@ -17,14 +17,25 @@ trait OrderActionGet {
 	
 	public function getForPlan()
 	{
-		$items = $this->getByTypeOrderModel();
-		if (!$items) return;
-		$items = $this->selectProperty($items, 'state', OrderActionState::ENDED, true);
-		if (!$items) return;
-		if ($this->get->action == 'other') $items = $this->selectByDefaultNames($items, false);
-		else if ($this->get->action) $items = $this->selectProperty($items, 'name', $this->get->action);
-		$actions = ObjectHelper::createArray($items, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState', 'getWorker']);
-		if (isset($actions)) return $this->setDateReady($actions);
+		$orders = (new Order)->getItemsForPlan();
+		if (!$orders) return;
+		$actions = $this->getActionsForPlan($orders);
+		if ($this->get->action == 'other') $actions = $this->selectByDefaultNames($actions, false);
+		else if ($this->get->action) $actions = $this->selectProperty($actions, 'name', $this->get->action);
+		if (!$actions) return;
+		$actions = ObjectHelper::createArray($actions, 'OrderAction', ['setData', 'getOrder', 'getProduct', 'convertState', 'getWorker']);
+		return $this->setDateReady($actions);
+	}
+
+	private function getActionsForPlan($orders)
+	{
+		$actions_total = [];
+		foreach ($orders as $order)
+		{
+			$actions = $this->getByIdOrderModel($order->id);
+			if ($actions) $actions_total = array_merge($actions_total, $actions);
+		}
+		return $this->selectProperty($actions_total, 'state', OrderActionState::ENDED, true);
 	}
 	//for plan page
 	public function getForWorker($worker)

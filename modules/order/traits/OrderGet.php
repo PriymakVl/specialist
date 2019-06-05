@@ -11,11 +11,8 @@ trait OrderGet {
 	public function getForPlan()
 	{
 		$items = $this->getItemsForPlan();
-		// debug($items, false);
 		if (!$items) return;
 		$orders = ObjectHelper::createArray($items, 'Order', ['setData', 'getActions', 'getProductsMain', 'getProductsTable', 'convertProperties']);
-		// debug($orders);
-		// debugProp($orders, 'symbol');
 		return $this->setDateReady($orders);
 	}
 	
@@ -35,7 +32,7 @@ trait OrderGet {
 		else return $this->getByStateAndTypeModel($type, $state);
 	}
 	
-	private function getItemsForPlan()
+	public function getItemsForPlan()
 	{
 		$type = $this->getTypeParam();
 		$items = $this->getByTypeModel($type);

@@ -18,7 +18,7 @@ trait OrderModelSelect {
 	public function getByTypeModel($type)
 	{
 		$params = ['type' => $type, 'status' => STATUS_ACTIVE];
-		$sql = 'SELECT * FROM `orders` WHERE `type` = :type AND `status` = :status ORDER BY state DESC, rating DESC, date_exec ASC';
+		$sql = 'SELECT * FROM `orders` WHERE `type` = :type AND `status` = :status ORDER BY rating DESC, date_exec ASC';
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
