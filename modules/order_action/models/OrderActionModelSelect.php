@@ -53,6 +53,5 @@ trait OrderActionModelSelect {
 		return self::perform($sql, $params)->fetchAll();
 	}
 	
-	
 
 }

@@ -7,8 +7,9 @@
 			<tr>
 				<th width="40">№</th>
 				<th width="200">Наименование</th>
-				<th width="150">Подготов. время</th>
-				<th width="150">Штучное время</th>
+				<th width="120">Подгот. время</th>
+				<th width="120">Штучное время</th>
+				<th width="120">Сред. время</th>
 				<th>Примечание</th>
 				<th width="100">Управление</th>
 			</tr>
@@ -26,6 +27,17 @@
 					<td>
 						<? if ($action->time_prod): ?>
 							<?=$action->time_prod?> мин.
+						<? else: ?>
+							<span class="red">Нет</span>
+						<? endif; ?>
+					</td>
+					<td>
+						<? if ($action->timeAverage): ?>
+						<? if ($action->timeAverageDivision): ?>
+								<? printf("%uчас. %uмин.", $action->timeAverageDivision->hours, $action->timeAverageDivision->minutes); ?>
+							<? else: ?>
+								<? printf('%uмин.', $action->timeAverage); ?>
+							<? endif; ?>
 						<? else: ?>
 							<span class="red">Нет</span>
 						<? endif; ?>

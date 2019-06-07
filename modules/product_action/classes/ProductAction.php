@@ -2,7 +2,10 @@
 
 class ProductAction extends Model {
 
-	use ProductActionModel, ProductActionParam, ProductActionList;
+	use ProductActionModel, ProductActionParam, ProductActionList, ProductActionTime;
+
+	public $timeAverage; //averate time order profuct
+	public $timeAverageDivision;
 	
 	public function __construct($id_action = false)
     {
@@ -14,7 +17,7 @@ class ProductAction extends Model {
 	public function getForProduct($symbol)
 	{
 		$items = $this->getAllBySymbolProductModel($symbol);
-		if ($items) return ObjectHelper::createArray($items, 'ProductAction', ['setData']);
+		if ($items) return ObjectHelper::createArray($items, 'ProductAction', ['setData', 'setTimeAverage']);
 	}
 	
 	public function addData()
