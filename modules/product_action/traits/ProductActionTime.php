@@ -4,8 +4,10 @@ trait ProductActionTime {
 	
 	public function setTimeAverage()
 	{
-		$product = (new OrderProduct)->getAllBySymbolModel($this->symbol)[0];
-		$product = (new OrderProduct)->setData($product)->getActions()->calculateTimeActions();
+		$result = (new OrderProduct)->getAllBySymbolModel($this->symbol);
+		if (!$result) return;
+		$product = (new OrderProduct)->setData($result[0])->getActions()->calculateTimeActions();
+		if (!$product->actions) return;
 		foreach ($product->actions as $action) {
 			if ($this->name == $action->name && $this->note == $action->note) {
 				$this->timeAverage = $action->timeAverage;

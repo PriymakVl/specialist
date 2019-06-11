@@ -19,7 +19,6 @@
 
             <!-- order  info -->
             <? include_once('info.php'); ?>
-
             <!-- specifications -->
 			<? 
 				if ($product->specification) {

@@ -12,9 +12,11 @@ class Controller_Product extends Controller_Base {
 
     public function action_index()
 	{
-		$product = (new Product)->setData($this->get->id_prod)->getSpecification()->getSpecificationChildren();
-		$product->getParent()->convertProperties()->getDrawings()->getActions()->calculateTimePlan();
-		if ($product->symbol) $product->getOrderProducts();
+		$product = (new Product)->setData($this->get->id_prod)->getParent()->getSpecification()->getSpecificationChildren();
+		if ($product->id != ID_CATEGORY_PRODUCTS && $product->id != ID_CATEGORY_CYLINDER && $product->id != ID_CATEGORY_PRESS) {
+			$product->convertProperties()->getDrawings()->getActions()->calculateTimePlan();
+			if ($product->symbol) $product->getOrderProducts();
+		}
 		$this->render('index/main', compact('product'));
 	}
 

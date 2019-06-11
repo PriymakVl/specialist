@@ -27,7 +27,7 @@ trait OrderActionTimeAverage {
 			$product = (new OrderProduct)->setData($product)->getActions();
 			if (!$product->actions) continue;
 			$same = $this->selectProperty($product->actions, 'name', $action->name);
-			$actions_same = array_merge($actions_same, $same);
+			if (is_array($same)) $actions_same = array_merge($actions_same, $same);
 		}
 		return $actions_same;
 	}
