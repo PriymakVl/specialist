@@ -12,11 +12,14 @@ class Controller_Product extends Controller_Base {
 
     public function action_index()
 	{
+		// $start = microtime(true);
 		$product = (new Product)->setData($this->get->id_prod)->getParent()->getSpecification()->getSpecificationChildren();
 		if ($product->id != ID_CATEGORY_PRODUCTS && $product->id != ID_CATEGORY_CYLINDER && $product->id != ID_CATEGORY_PRESS) {
 			$product->convertProperties()->getDrawings()->getActions()->calculateTimePlan();
 			if ($product->symbol) $product->getOrderProducts();
 		}
+		// echo 'Время выполнения скрипта: '.round(microtime(true) - $start, 4).' сек.';
+		// debug('exit');
 		$this->render('index/main', compact('product'));
 	}
 
