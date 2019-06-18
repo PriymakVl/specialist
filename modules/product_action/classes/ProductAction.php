@@ -17,7 +17,7 @@ class ProductAction extends Model {
 	public function getForProduct($symbol)
 	{
 		$items = $this->getAllBySymbolProductModel($symbol);
-		if ($items) return ObjectHelper::createArray($items, 'ProductAction', ['setData', 'setTimeAverage']);
+		if ($items) return ObjectHelper::createArray($items, 'ProductAction', ['setData']);//, 'setTimeAverage'
 	}
 	
 	public function addData()

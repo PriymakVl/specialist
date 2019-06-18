@@ -29,6 +29,13 @@ trait ProductTimeDetail {
 		}
 		return $time_prepar_total;
 	}
+
+	public function calculateTimeAverage()
+	{
+		if (!$this->actions) return $this;
+		$this->callMethods($this->actions, ['setTimeAverage']);
+		return $this;
+	}
 	
 	
 

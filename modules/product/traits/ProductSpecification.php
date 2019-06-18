@@ -7,8 +7,8 @@ trait ProductSpecification  {
 		$items = $this->getByIdParentModel();
 		if (!$items) return $this;
 		$methods = ['setData', 'getActions'];
-		//if ($this->id != ID_CATEGORY_CYLINDER && $this->id != ID_CATEGORY_PRESS && $this->id != ID_CATEGORY_PRODUCTS) 
-		if ($this->type != self::TYPE_CATEGORY) $methods = array_merge($methods, ['calculateTimePlan', 'getDrawings']);
+		if ($this->id != ID_CATEGORY_CYLINDER && $this->id != ID_CATEGORY_PRESS && $this->id != ID_CATEGORY_PRODUCTS) 
+		$methods = array_merge($methods, ['calculateTimePlan', 'getDrawings']);
 		$this->specification = ObjectHelper::createArray($items, 'Product', $methods);
 		$this->specificationGroup = $this->getSpecificationGroup($this->specification);
 		return $this;

@@ -91,5 +91,23 @@ class Model extends Core {
 		return $this;
 	}
 
+	public function callMethods(array $objects, array $methods)
+	{
+		foreach ($objects as $object)
+		{
+			$this->callMethod($object , $methods);
+		}
+		return $objects;
+	}
+
+	public function callMethod($object, $methods)
+	{
+		foreach ($methods as $method)
+		{
+			$object->$method();
+		}
+		return $object;
+	}
+
 	
 }
