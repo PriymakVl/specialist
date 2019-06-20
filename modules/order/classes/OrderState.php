@@ -64,4 +64,11 @@ class OrderState extends OrderBase {
 		if (ObjectHelper::checkValuesProperty($order->actions, 'state', OrderActionState::WAITING)) return OrderState::WAITING;
 		if ($order->state == self::WAITING && $this->get->state == OrderProduct::STATE_PLANED) return OrderState::PLANED;
 	}
+
+	public function setWhenAddProduct($id_order)
+	{
+		$order = new Order($id_order);
+		if ($order->state ==  self::REGISTERED) return $order->setState(self::PREPARATION);
+	}
+	
 }

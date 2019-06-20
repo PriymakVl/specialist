@@ -14,7 +14,6 @@ class Controller_Order_Action extends Controller_Base {
 	{
 		$product = (new OrderProduct)->setData($this->get->id_prod)->getSpecificationAll();
 		(new OrderAction)->addForProductBase($product)->addForSpecification($product->specificationAll);
-		(new Order)->setData($product->id_order)->setState(OrderState::PREPARATION);
 		$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order.'&id_active='.$product->id);
 	}
 

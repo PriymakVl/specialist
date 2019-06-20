@@ -2,7 +2,7 @@
 
 class Order extends OrderBase {
 	
-	use OrderEdit, OrderDelete, OrderContentGet, OrderContentAdd, OrderGet, OrderModel, OrderCheck, OrderConvert, OrderTime;
+	use OrderEdit, OrderDelete, OrderContentGet, OrderContentAdd, OrderGet, OrderModel, OrderConvert, OrderTime;
 	
 	public function addData()
 	{

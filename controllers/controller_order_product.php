@@ -28,6 +28,7 @@ class Controller_Order_Product extends Controller_Base {
 			$order_product = (new OrderProduct)->addProductBase()->addSpecification()->setMessage('success', 'add');
 		}
 		else return $this->setMessage('error', 'type_error', 'product')->redirectPrevious();
+		(new OrderState)->setWhenAddProduct($this->session->id_order_active);
 		$this->redirect('order_action/add_base?id_prod='.$order_product->id);
 	}
 	//create order product from position if not created automat
