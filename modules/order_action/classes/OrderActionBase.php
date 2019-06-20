@@ -19,6 +19,7 @@ class OrderActionBase extends Model {
 	public $dateReady;
 	public $timePlan; //time preparation + time production
 	public $timeFact; //summa of states action
+	public $arrayTimesFact; //for same actions to all orders
 	public $timeAverage; //среднее время для одинаковых операций продукта изготовленого в разных заказах
 	public $timeFactDivision; // time fact in hour
 	public $timePlanDivision; // time plna in hour
