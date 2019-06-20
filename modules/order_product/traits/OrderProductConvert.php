@@ -40,7 +40,7 @@ trait OrderProductConvert {
 			$background = $product->getStateBackground();
 			$table .= '<tr><td style="background:'. $background .';"><a href="/order_product?id_prod='. $product->id .'">'.$product->symbol.'</a></td>';
 			$table .= '<td>'. $product->name .'</td>';
-			$table .= '<td>'.$product->qty.'шт.</td>';
+			$table .= '<td><a href="#" class="prod-qty" id_prod="'.$product->id.'">'.$product->qty.'шт.</a></td>';
 			$table .= '</tr>';
 		}
 		return $table .= '</table>';

@@ -51,8 +51,13 @@ class Controller_Order_Product extends Controller_Base {
 		$product = (new OrderProduct)->setData($this->get->id_prod);
 		if (!$this->post->save) return $this->setTitle('Редактирование продукта')->render('edit/main', compact('product'));
 		$product->edit()->setMessage('success', 'edit');
-		//->checkStateOrder();
-		$this->redirect('order?tab='.self::ORDER_TAB_PRODUCTS.'&id_order='.$product->id_order.'&id_active='.$product->id);
+		$this->redirect('order_product?id_prod='.$product->id);
+	}
+
+	public function action_edit_quantity()
+	{
+		$product = (new OrderProduct)->setData($this->get->id_prod)->editQuantity($this->get->qty)->setMessage('success', 'edit_qty');
+		$this->redirectPrevious();
 	}
 	
 	public function action_delete()

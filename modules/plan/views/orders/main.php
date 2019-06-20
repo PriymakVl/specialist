@@ -30,4 +30,5 @@
 <script src="/modules/plan/js/level_filters.js"></script>
 <script src="/modules/plan/js/edit_state_order.js"></script>
 <script src="/modules/plan/js/edit_rating.js"></script>
+<script src="/modules/plan/js/edit_qty_product.js"></script>
 

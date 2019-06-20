@@ -59,7 +59,7 @@ trait OrderProductParam {
 	
 	public function editModelParams()
 	{
-		$params = self::selectParams(['qty', 'id_prod', 'symbol', 'name', 'type', 'number', 'note', 'date_exec']);
+		$params = self::selectParams(['qty', 'id_prod', 'symbol', 'name', 'type', 'number', 'note', 'date_exec', 'id_parent']);
 		$params['date_exec'] = Date::convertStringToTime($params['date_exec']);
 		if (!self::getParam('id_parent')) $params['id_parent'] = 0;
 		return $params;

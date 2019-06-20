@@ -17,9 +17,10 @@
 					<input type="checkbox" disabled>
 				</th>
 				<th width="40">№</th>
-				<th width="200">Наименование</th>
-				<th width="150">План. время</th>
-				<th width="150">Факт. время</th>
+				<th width="240">Наименование</th>
+				<th width="60">Кол-во</th>
+				<th width="100">План. время</th>
+				<th width="100">Факт. время</th>
 				<th>Примечание</th>
 				<th width="100">Состояние</th>
 			</tr>
@@ -32,6 +33,8 @@
 					<td><?=$action->number?></td>
 					<!-- name -->
 					<td><?=$action->name?></td>
+					<!-- quantity -->
+					<td><?=$action->qty?></td>
 					<!-- time plan -->
 					<td>
 						<? if ($action->timePlan): ?>
