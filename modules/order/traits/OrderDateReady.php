@@ -9,7 +9,6 @@ trait OrderDateReady {
 		foreach ($orders as $order) {
 			$time_manufacturing_total += $this->calculateTimePlan($order);
 			$date_ready = Date::calculateDateReady($time_manufacturing_total, $time_start);
-			// debug(date('d.m.y', $date_ready));
 			$dayofweek = date('w', $date_ready);
         	if ($dayofweek == Date::SATURDAY_NUMBER) {
         		$date_ready += (2 * Date::DAY_SECOND);

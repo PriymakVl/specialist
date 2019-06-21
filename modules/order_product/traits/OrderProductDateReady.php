@@ -5,9 +5,20 @@ trait OrderProductDateReady {
 	private function setDateReady($products)
 	{
 		$time_manufacturing_total = 0;
+		$time_start = time();
 		foreach ($products as $product) {
 			$time_manufacturing_total += $this->calculateTimePlan($product);
-			$product->dateReady = Date::calculateDateReady($time_manufacturing_total);
+			$date_ready = Date::calculateDateReady($time_manufacturing_total, $time_start);
+			$dayofweek = date('w', $date_ready);
+        	if ($dayofweek == Date::SATURDAY_NUMBER) {
+        		$date_ready += (2 * Date::DAY_SECOND);
+        		$time_start += (2 * Date::DAY_SECOND);
+        	}
+        	else if ($dayofweek == Date::SUNDAY_NUMBER) {
+        		$date_ready += Date::DAY_SECOND;
+        		$time_start += Date::DAY_SECOND;
+        	} 
+			$product->dateReady = $date_ready;
 		}
 		return $products;
 	}
@@ -23,11 +34,11 @@ trait OrderProductDateReady {
 		return $time_manuf;
 	}
 	
-	private function calculateDateReady($time_manufacturing_total)
-	{
-		$workin_daty_minutes = 360; // 6 hour
-		$qty_work_days = round($time_manufacturing_total / $workin_daty_minutes);
-		if ($qty_work_days < 1) $qty_work_days = 1;
-		return time() + ($qty_work_days * 24 * 3600); 
-	}
+// 	private function calculateDateReady($time_manufacturing_total)
+// 	{
+// 		$workin_daty_minutes = 360; // 6 hour
+// 		$qty_work_days = round($time_manufacturing_total / $workin_daty_minutes);
+// 		if ($qty_work_days < 1) $qty_work_days = 1;
+// 		return time() + ($qty_work_days * 24 * 3600); 
+// 	}
 }

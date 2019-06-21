@@ -21,7 +21,7 @@
     <? include_once('orders.php'); ?>
 
 	<!-- orders plan menu -->
-    <? include_once('menu.php'); ?>
+    <? if ($user->position < User::POSITION_MANAGER) include_once('menu.php'); ?>
 
 </div><!-- id content -->
 

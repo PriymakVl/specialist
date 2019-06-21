@@ -23,6 +23,7 @@ class View extends Core {
 		$params = $this->params;
 		$session = $this->session;
         if ($data) extract($data);
+        if (empty($user) && $this->session->id_user) $user = (new User)->setData($this->session->id_user);
 		return require ($this->pathLayout);
 	}
 

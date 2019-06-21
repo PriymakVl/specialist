@@ -14,8 +14,7 @@
 			<!-- message -->
 			<? include './views/total/message.php'; ?>
 			
-			<!-- search product -->
-			<!-- файл подключен в specification/category -->
+			<!-- search product файл подключен в specification/category -->
 
             <!-- order  info -->
             <? include_once('info.php'); ?>
@@ -38,8 +37,8 @@
         </ul>
     </div>
 
-    <!-- order menu -->
-    <? include_once('menu.php'); ?>
+    <!-- product menu -->
+    <? if ($user->position < User::POSITION_MANAGER) include_once('menu.php'); ?>
 
 </div><!-- id content -->
 
