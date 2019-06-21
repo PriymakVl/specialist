@@ -7,6 +7,9 @@ class Date {
 	const DAY_WORKING_SECOND = 21600; //6 hours
 	const HOUR_MINUTES = 60;
 
+    const SATURDAY_NUMBER = 6;
+    const SUNDAY_NUMBER = 0;
+
     public static function convertStringToTime($str)
     {
         if (empty($str)) return '';
@@ -84,11 +87,11 @@ class Date {
 		return (object)['hours' => $hours, 'minutes' => $minutes];
 	}
 	
-	public static function calculateDateReady($time_manufacturing_total)
+	public static function calculateDateReady($time_manufacturing_total, $time_start)
 	{
 		$workin_daty_minutes = 360; // 6 hour
 		$qty_work_days = round($time_manufacturing_total / $workin_daty_minutes);
 		if ($qty_work_days < 1) $qty_work_days = 1;
-		return time() + ($qty_work_days * 24 * 3600); 
+        return $time_start + ($qty_work_days * 24 * 3600); 
 	}
 }
