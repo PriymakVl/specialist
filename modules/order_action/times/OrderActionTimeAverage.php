@@ -57,7 +57,7 @@ trait OrderActionTimeAverage {
 	private function selectArrayFactTimes()
 	{
 		$this->setTimePlan();
-		if (!$this->timePlan) return $times;
+		if (!$this->timePlan) return $this->arrayTimesFact;
 		$time_min = $this->timePlan / 2;
 		$time_max = $this->timePlan * 5;
 		$time_select = [];

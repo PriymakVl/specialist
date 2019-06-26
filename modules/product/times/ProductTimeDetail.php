@@ -33,7 +33,11 @@ trait ProductTimeDetail {
 	public function calculateTimeAverage()
 	{
 		if (!$this->actions) return $this;
-		$this->callMethods($this->actions, ['setTimeAverage']);
+		//$this->callMethods($this->actions, ['setTimeAverage']);
+		foreach ($this->actions as $action)
+		{
+			$action->setTime();
+		}
 		return $this;
 	}
 	

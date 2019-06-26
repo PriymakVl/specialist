@@ -6,6 +6,7 @@ class ProductAction extends Model {
 
 	public $timeAverage; //averate time order profuct
 	public $timeAverageDivision;
+	public $timePlan;
 	
 	public function __construct($id_action = false)
     {
