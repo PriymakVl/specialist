@@ -54,18 +54,12 @@ trait OrderActionTimeAverage {
 		return $times;
 	}
 
+	//select middle array times
 	private function selectArrayFactTimes()
 	{
-		$this->setTimePlan();
-		if (!$this->timePlan) return $this->arrayTimesFact;
-		$time_min = $this->timePlan / 2;
-		$time_max = $this->timePlan * 5;
-		$time_select = [];
-		foreach ($this->arrayTimesFact as $time)
-		{
-			if ($time <= $time_max && $time >= $time_min) $time_select[] = $time;
-		}
-		return $time_select;
+		$half_array = ceil(count($this->arrayTimesFact) / 2);
+		$start = $half_array - ceil($half_array / 2);
+		return array_slice($this->arrayTimesFact, $start, $half_array);
 	}
 	
 }
