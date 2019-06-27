@@ -57,6 +57,8 @@ trait OrderActionTimeAverage {
 	//select middle array times
 	private function selectArrayFactTimes()
 	{
+		$count_item = count($this->arrayTimesFact);
+		if ($count_item <= 4) return $this->arrayTimesFact;
 		$half_array = ceil(count($this->arrayTimesFact) / 2);
 		$start = $half_array - ceil($half_array / 2);
 		return array_slice($this->arrayTimesFact, $start, $half_array);
