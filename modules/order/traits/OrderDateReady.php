@@ -2,6 +2,8 @@
 
 trait OrderDateReady {
 
+	private $factorSimultaneousExecution = 1.5;
+
 	private function setDateReady($orders)
 	{
 		$time_manufacturing_total = 0;
@@ -30,7 +32,7 @@ trait OrderDateReady {
 		foreach ($order->actions as $action) {
 			if ($action->state != OrderActionState::ENDED) $time_manuf += (new OrderAction)->calculateTimePlan($action);
 		}
-		return $time_manuf;
+		return $time_manuf / $this->factorSimultaneousExecution;
 	}
 	
 
