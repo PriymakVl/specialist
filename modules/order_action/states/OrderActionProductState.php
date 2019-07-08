@@ -5,10 +5,9 @@ trait OrderActionProductState {
 	private function determineStateProductWhenChangeStateAction($product)
 	{
 		$state = $this->get->state ? $this->get->state : $this->post->state;
-		if ($this->state == $product->state) return false;
 		if (ObjectHelper::checkValuesProperty($product->actions, 'state', OrderActionState::ENDED)) return OrderProduct::STATE_ENDED;
 		if (ObjectHelper::checkValuesProperty($product->actions, 'state', OrderActionState::WAITING)) return OrderProduct::STATE_WAITING;
-		if ($product->state == OrderProduct::STATE_PLANED && $state == OrderActionState::PROGRESS) return OrderProduct::STATE_PROGRESS;
+		return OrderProduct::STATE_PROGRESS;
 	}
 	
 	private function editStateProduct($id_prod = false)

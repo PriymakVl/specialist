@@ -48,6 +48,15 @@ class Controller_Order_Action extends Controller_Base {
 		// ->editTime($params)->checkReadyOrder()
 		$this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$action->id_order);
 	}
+	//for form
+	public function action_edit_state_one()
+	{
+		$action = (new OrderAction)->setData($this->get->id_action);
+		if (!$this->post->save) return $this->render('edit_state/main', compact('action'));
+		if (!$this->post->state) return $this->setMessage('error', 'not_state', 'order_action')->redirectPrevious();
+		$action->editStateUp()->setMessage('success', 'edit_state');
+		$this->redirect('order_product?id_prod='.$action->id_prod);
+	}
 	
 	public function action_edit_state_group()
 	{

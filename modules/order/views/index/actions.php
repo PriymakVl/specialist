@@ -15,7 +15,9 @@
 					</tr>
 					<? foreach($order->actions as $action): ?>
 						<tr>
-							<td><input type="checkbox" id_action="<?=$action->id?>" name="actions"></td>
+							<td>
+								<input type="checkbox" id_action="<?=$action->id?>" name="actions">
+							</td>
 							<td>
 								<? if ($action->product): ?>
 									<?=$action->product->symbol?>

@@ -17,6 +17,10 @@
 			<li>
 				<a href="#" id="order-product-action-delete">Удалить операцию</a>
 			</li>
+			<br><hr>
+			<li>
+				<a href="#" id="order-action-edit-state" id_prod="<?=$product->id?>">Редак-ть состояние</a>
+			</li>
 		<? endif; ?>
     </ul>
 </div>
