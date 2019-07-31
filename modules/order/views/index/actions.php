@@ -33,7 +33,9 @@
 								<? endif; ?>
 							</td>
 							<td><?=$action->qty?></td>
-							<td><?=$action->name?></td>
+							<td >
+								<a data-toggle="tooltip" data-placement="right" title="<?=$action->note?$action->note:'Примечания нет'?>" href="#"><?=$action->name?></a>
+							</td>
 							<td style="background:<?=$action->stateBg?>">
 							<? if ($action->isStates): ?>
 								<a href="/order_action/state_list?id_action=<?=$action->id?>"><?=$action->stateString?></a>
