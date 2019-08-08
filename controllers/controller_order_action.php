@@ -83,6 +83,12 @@ class Controller_Order_Action extends Controller_Base {
 		else if ($this->get->sent == 'product') $this->redirect('order_product?id_prod='.$action->id_prod);
 		else $this->redirectPrevious();
 	}
+
+	public function action_delete_list()
+	{
+		(new OrderAction)->deleteList($this->get->ids)->setMessage('success', 'delete_list');
+		$this->redirect('order?tab='.self::ORDER_TAB_ACTIONS.'&id_order='.$this->get->id_order);;
+	}
 	
 	
 	public function action_state_list()

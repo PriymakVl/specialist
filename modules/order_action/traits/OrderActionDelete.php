@@ -10,11 +10,14 @@ trait OrderActionDelete {
 		}
 	}
 	
-	public function deleteActions($actions)
+	public function deleteList($ids)
 	{
-		foreach ($actions as $action) {
-			$action->delete();
+		$items = (new self)->selectByIds(substr($ids,0,-1));
+		if (!$items) return $this;
+		foreach ($items as $data) {
+			(new self)->setData($data)->deleteAndEditState();
 		}
+		return $this;
 	}
 	
 	public function deleteAndEditState()

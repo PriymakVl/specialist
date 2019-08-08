@@ -13,7 +13,7 @@
 		<a href="#" id="order-action-edit" id_order="<?=$order->id?>">Редакт-ть операцию</a>
 	</li>
 	<li>
-		<a href="#" id_order="<?=$order->id?>" id="order-action-delete">Удалить операцию</a>
+		<a href="#" id_order="<?=$order->id?>" id="order-action-list-delete">Удалить операции</a>
 	</li>
 	<br>
 	<li>

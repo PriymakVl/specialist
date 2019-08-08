@@ -52,6 +52,12 @@ trait OrderActionModelSelect {
 		$sql = 'SELECT * FROM `order_actions` WHERE `date_end` > :start AND `date_end` < :end AND `status` = :status ORDER BY `date_end`';
 		return self::perform($sql, $params)->fetchAll();
 	}
+
+	public function selectByIds($ids)
+	{
+		$sql = 'SELECT * FROM `order_actions` WHERE `id` IN('. $ids .')';
+		return self::perform($sql, [])->fetchAll();
+	}
 	
 
 }
