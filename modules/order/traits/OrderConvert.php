@@ -30,6 +30,13 @@ trait OrderConvert {
 		if ($this->productsMain) $this->productsTable = (new OrderProduct)->convertProductsToTable($this->productsMain);
 		return $this;
 	}
+
+	public function setTypeString()
+	{
+		if ($this->type == self::TYPE_CYLINDER) return 'Пневмо';
+		if ($this->type == self::TYPE_CAR_NUMBER) return 'Пресса и накатки';
+		return 'Не определен';
+	}
 	
 	
 

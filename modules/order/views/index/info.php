@@ -2,7 +2,7 @@
 	$tab_active_info = false;
 	if  ($this->get->tab == 1) $tab_active_info = true;
 	if (!$order->productsMain && !$this->get->tab) $tab_active_info = true;
-	if (!$order->productsMain && $this->get->tab = 2) $tab_active_info = true;
+	if (!$order->productsMain && $this->get->tab == 2) $tab_active_info = true;
 ?>
 <li>
     <input type="radio" name="tabs" id="tab-1" <? if ($tab_active_info) echo 'checked'; ?>>
@@ -48,6 +48,12 @@
 						<span class="red">Не указана</span>
 					<? endif; ?>
 				</td>
+            </tr>
+            <!-- type order -->
+            <tr>
+            	<td>4</td>
+            	<td>Тип заказа</td>
+            	<td><?=$order->setTypeString()?></td>
             </tr>
         </table>
 		
