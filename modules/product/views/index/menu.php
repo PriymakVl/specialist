@@ -21,8 +21,12 @@
 		
 		
 		<li>
-            <a href="#" id_prod="<?=$product->id?>" id="add-to-order">Добавить в заказ</a>
+            <a href="#" id_prod="<?=$product->id?>" id="add-to-order-all">Добавить в заказ (все)</a>
         </li>
+        <li>
+            <a href="#" id_prod="<?=$product->id?>" id="add-to-order-unit">Добавить в заказ (узел)</a>
+        </li>
+        <br>
 		<li>
             <a href="/product/copy?id_prod=<?=$product->id?>">Скопир. продукт</a>
         </li>

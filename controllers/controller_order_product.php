@@ -25,12 +25,15 @@ class Controller_Order_Product extends Controller_Base {
 		if (!$this->session->id_order_active) return $this->setMessage('error', 'not_active', 'order')->redirectPrevious();
 		$product = new Product($this->get->id_prod);
 		if ($product->type == Product::TYPE_DETAIL || $product->type == Product::TYPE_UNIT || $product->type == Product::TYPE_PRODUCT) {
-			$order_product = (new OrderProduct)->addProductBase()->addSpecification()->setMessage('success', 'add');
+			$order_product = (new OrderProduct)->addProductBase();
+			if (!$this->get->unit_flag) $order_product->addSpecification();
+			$order_product->setMessage('success', 'add');
 		}
 		else return $this->setMessage('error', 'type_error', 'product')->redirectPrevious();
 		(new OrderState)->setWhenAddProduct($this->session->id_order_active);
 		$this->redirect('order_action/add_base?id_prod='.$order_product->id);
 	}
+
 	//create order product from position if not created automat
 	public function action_add_position()
 	{
