@@ -19,6 +19,14 @@ trait OrderActionDelete {
 		}
 		return $this;
 	}
+
+	public function deleteActions($actions)
+	{
+		foreach ($actions as $action)
+		{
+			$action->delete();
+		}
+	}
 	
 	public function deleteAndEditState()
 	{

@@ -13,8 +13,9 @@ trait OrderActionProductState {
 	private function editStateProduct($id_prod = false)
 	{
 		$id_prod = $id_prod ? $id_prod : $this->id_prod;
-		if (!$id_prod) return $this;
-		$product = (new OrderProduct)->setData($id_prod)->getActions();
+		$product_data = (new OrderProduct)->getData($id_prod);
+		if (!$product_data) return $this;
+		$product = (new OrderProduct)->setData($product_data)->getActions();
 		$state_prod = $this->determineStateProductWheNChangeStateAction($product);
 		if ($state_prod) $product->setState($state_prod);
 		if ($product->id_parent) $this->editStateProduct($product->id_parent);//edit state recursive parents
